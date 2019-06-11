@@ -8,6 +8,7 @@ import Code from '../img/WANTED/Code.png';
 import Million from '../img/WANTED/81009.png';
 import Nuit from '../img/WANTED/laNuit.png';
 
+
 const produit = [
     {
 		brand: 'BOSS',
@@ -97,9 +98,17 @@ const content = [
 
 class Home extends React.Component {
 
+	onButtonClick = item =>{
+		console.log('ok')
+		if(this.props.onOpen){
+			this.props.onOpen(item);
+		}
+		console.log('no callback');
+	}
+
     render() {
         return (
-            <section className="stn-home">
+			<section className="stn-home">
                 {/* <Slider className="slider-wrapper">
                     {produit.map((item, index) => (
                         <div key={index} className="slider-content">
@@ -107,7 +116,6 @@ class Home extends React.Component {
                         </div>
                     ))}
                 </Slider> */}
-
 <Slider className="slider-wrapper">
 			{content.map((item, index) => (
 				<div
@@ -116,9 +124,10 @@ class Home extends React.Component {
 					// style={{ background: `url('${item.image}') no-repeat center center` }}
 				>
 					<div className="inner">
-						<h1 class="brand">{item.title}</h1>
+						<h1 className="brand">{item.title}</h1>
 						<p>{item.description}</p>
-						<button>{item.button}</button>
+						{/*TODO: handle onClick*/}
+						<button onClick={()=> this.onButtonClick(item)}>{item.button}</button>
 					</div>
 					<section>
 						<img src={item.userProfile} alt={item.user} />

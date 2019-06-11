@@ -3,7 +3,6 @@ import Menu from '../img/icon/icon-menu.png';
 import Logo from '../img/Utils-IMG/logo.png';
 import Account from '../img/icon/icon-user.png'
 import Cart from '../img/icon/icon-panier.png';
-
 import '../style/css/header.css';
 
 class Header extends React.Component {
