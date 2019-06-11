@@ -1,0 +1,15 @@
+.stn-home {
+  height: 100%;
+  padding-right: 6%;
+  width: 100%; }
+
+.track {
+  display: flex; }
+
+.img {
+  background-color: red;
+  height: 100px;
+  width: 100px;
+  margin: auto; }
+
+/*# sourceMappingURL=home.css.map */

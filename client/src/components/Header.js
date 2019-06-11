@@ -11,7 +11,7 @@ class Header extends React.Component {
     render() {
         return(
             <header id="header" className="d-flex justify-content-between">
-                <div className="col-1 d-flex">
+                <div className="ctn-menu d-flex">
                     <img className="icon-logo m-auto" src={ Menu } />
                 </div>
                 <div className="h-100 d-flex">
