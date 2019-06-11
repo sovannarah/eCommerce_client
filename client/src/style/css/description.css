@@ -1,0 +1,9 @@
+.desc {
+    width: 43%;
+    height: 109%;
+    top: -9%;
+    position:absolute;
+    z-index:3;
+    right:0;
+    background-color: white;
+}
