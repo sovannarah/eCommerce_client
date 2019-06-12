@@ -1,19 +1,18 @@
 .desc {
-    height: 109%;
-    top: -9%;
+    height: 100%;
+    top: 0%;
     position: absolute;
     z-index: 3;
-    right: 0;
     overflow: hidden;
     background-color: white;
     transition: 0.5s;
 }
 
-.opens {
+.desc-open {
     width: 43%;
 }
 
-.closed {
+.desc-closed {
     width: 0%;
 }
 

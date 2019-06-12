@@ -20,6 +20,21 @@ class Description extends React.Component {
             produit: null,
             isOpen: false
         }
+        this.containerDiv = React.createRef();
+    }
+
+    componentWillMount() {
+        document.addEventListener('mousedown', this.handleMouseDown);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleMouseDown);
+    }
+
+    handleMouseDown = e => {
+        if (this.containerDiv.current.contains(e.target))
+            return;
+        this.close();
     }
 
     open = item => {
@@ -31,9 +46,9 @@ class Description extends React.Component {
         })
     };
 
-    closed = () => {
+    close = () => {
         this.setState({
-            isOpen:  true
+            isOpen: true
         });
     };
 
@@ -41,15 +56,17 @@ class Description extends React.Component {
         const {brand, sndName, prix, description} = (this.state.produit || DEFAULT_PRODUIT);
         return (
 
-            <div className={"desc " + (this.state.isOpen ? "open" : "closed")}>
-                <h1 className={"title"}>{brand}</h1>
-                <h3 className={"model"}>&#8212; {sndName} &#8212;</h3>
-                <div className={"price_font"}>&euro; {prix}</div>
-                <div className={"cart_button"}>
-                    <button className="btn-default justify-content-center">ADD TO CART</button>
+            <div ref={this.containerDiv} className={"desc " + (this.state.isOpen ? "desc-open" : "desc-closed")}>
+                <div style={{width: '43vw'}}>
+                    <h1 className={"title"}>{brand}</h1>
+                    <h3 className={"model"}>&#8212; {sndName} &#8212;</h3>
+                    <div className={"price_font"}>&euro; {prix}</div>
+                    <div className={"cart_button"}>
+                        <button className="btn-default justify-content-center">ADD TO CART</button>
+                    </div>
+                    <p className={"descript"}><p className={"bold"}>DESCRIPTION</p>
+                        {description}</p>
                 </div>
-                <p className={"descript"}><p className={"bold"}>DESCRIPTION</p>
-                    {description}</p>
             </div>
 
         );

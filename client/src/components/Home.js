@@ -105,10 +105,10 @@ const content = [
 
 class Home extends React.Component {
 
-    onButtonClick (){
-        const wrapper = document.getElementById('Menu');
-        wrapper.classList.toggle('desc');
-        wrapper.classList.toggle('opens');
+    onButtonClick = item => {
+        if (this.props.onOpen)
+            return this.props.onOpen(item);
+        console.error('onOpen is undefined');
     };
 
     render() {
@@ -130,7 +130,7 @@ class Home extends React.Component {
                                     <span className="deco-barre"></span>
                                 </div>
                                 <p>{item.description}</p>
-                                <button onClick={this.onButtonClick.bind(this)}>
+                                <button onClick={() => this.onButtonClick(item)}>
 									<span className="details">
 										Details
 										<img className="arrowR" src={ArrowR}></img>
