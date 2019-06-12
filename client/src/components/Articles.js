@@ -67,7 +67,7 @@ class Articles extends React.Component {
             <section className="stn-articles">
                 <div className="row">
                     {content.map((item, index) => (
-                        <div className="col-3">
+                        <div  key={index} className="col-3 article">
                             <div key={index} className="ctn-img d-flex">
                                 <img className="mini-img m-auto" src={ item.image } />
                             </div>
@@ -77,7 +77,7 @@ class Articles extends React.Component {
                             <div className="ctn-sndName">
                                 <p>{ item.sndName }</p>
                             </div>
-                            <div className="ctn-price">
+                            <div className="ctn-pricee">
                                 <p>{ item.price }</p>
                             </div>
                         </div>
