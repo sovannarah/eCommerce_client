@@ -9,7 +9,7 @@ import '../style/css/header.css';
 class Register extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { isLoading: true }
+        this.state = {isLoading: true}
     }
 
     componentDidMount() {
@@ -24,11 +24,12 @@ class Register extends React.Component {
 
                 });
 
-            })  
+            })
             .catch((error) => {
                 console.error(error);
             });
     }
+
     render() {
         return (
             <div className="login">

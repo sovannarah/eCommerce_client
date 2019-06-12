@@ -10,7 +10,7 @@ import '../style/css/header.css';
 class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { isLoading: true }
+        this.state = {isLoading: true}
     }
 
     componentDidMount() {

@@ -1,0 +1,32 @@
+.article {
+    height: 400px;
+}
+
+.stn-articles {
+    margin-top: 10%;
+    height: 80%;
+    width: 100%;
+    margin-left: 6%;
+    margin-right: 6%;
+    display: block;
+}
+
+.mini-img {
+    height: 250px;
+}
+
+.ctn-brand {
+    display: flex;
+    p {
+        color: white;
+        margin: auto;
+    }
+}
+
+.ctn-sndName, .ctn-pricee {
+    display: flex;
+    p {
+        color: #b4b4b4;
+        margin: auto;
+    }
+}

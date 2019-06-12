@@ -2,6 +2,7 @@ import React from 'react';
 import Slider from 'react-animated-slider';
 import '../style/css/home.css';
 import '../style/css/slider.css'
+import '../style/css/description.css';
 import TheSent from '../img/WANTED/TheSentIntense.png';
 import Intense from '../img/WANTED/DHI.png';
 import Code from '../img/WANTED/Code.png';
@@ -104,13 +105,10 @@ const content = [
 
 class Home extends React.Component {
 
-    onButtonClick = item => {
-
-        if (this.props.onOpen) {
-            this.props.onOpen(item);
-            console.log('ok')
-        }
-        console.log('no callback');
+    onButtonClick (){
+        const wrapper = document.getElementById('Menu');
+        wrapper.classList.toggle('desc');
+        wrapper.classList.toggle('opens');
     };
 
     render() {
@@ -121,26 +119,25 @@ class Home extends React.Component {
                         <div
                             key={index}
                             className="slider-content"
-                            // style={{ background: `url('${item.image}') no-repeat center center` }}
                         >
                             <div className="inner">
                                 <h1 className="brand">{item.title}</h1>
                                 <div>
                                     <span className="deco-barre"></span>
-                                        <h3 className="sndName">
-                                        { item.sndName }
-                                        </h3>
+                                    <h3 className="sndName">
+                                        {item.sndName}
+                                    </h3>
                                     <span className="deco-barre"></span>
                                 </div>
                                 <p>{item.description}</p>
-								
-                                <button>
-                                    <span className="details">
-                                        Details
-                                        <img className="arrowR" src={ ArrowR }></img>
-                                    </span>
+                                <button onClick={this.onButtonClick.bind(this)}>
+									<span className="details">
+										Details
+										<img className="arrowR" src={ArrowR}></img>
+									</span>
                                 </button>
                             </div>
+
                             <div className="currImg">
                                 <img src={item.image}></img>
                             </div>
@@ -151,22 +148,13 @@ class Home extends React.Component {
                                 </div>
                                 <div className="ctn-ctrl d-flex justify-content-between">
                                     <p>previous fragrance</p>
-
                                     <img className="icon-circle" src={Circle}/>
                                     <p>next fragrance</p>
                                 </div>
                             </div>
                         </div>
-
                     ))}
-
                 </Slider>
-                <button onClick={() => this.onButtonClick(item)}>
-  <span className="details">
-                                        Details
-                                        <img className="arrowR" src={ArrowR}></img>
-                                    </span>
-                </button>
             </section>
         );
     }

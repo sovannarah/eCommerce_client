@@ -9,7 +9,7 @@
     transition: 0.5s;
 }
 
-.open {
+.opens {
     width: 43%;
 }
 
@@ -59,11 +59,18 @@
 .price_font {
     font-family: 'Tangerine', cursive;
     font-size: 55px;
-    margin-left:6%;
-    margin-bottom:10%;
+    margin-left: 6%;
+    margin-bottom: 10%;
 }
 
-.model{
-    font-family:"Abril Fatface";
+.model {
+    font-family: "Abril Fatface";
     font-size: 24px;
+    font-weight: lighter;
+    font-style: italic;
+}
+
+.title {
+    font-family: "Abril Fatface";
+    font-size: 100px;
 }

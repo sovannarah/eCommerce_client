@@ -33,7 +33,7 @@ class Description extends React.Component {
 
     closed = () => {
         this.setState({
-            isOpen: false
+            isOpen:  true
         });
     };
 
