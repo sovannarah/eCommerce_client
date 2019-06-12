@@ -120,7 +120,6 @@ class Home extends React.Component {
                         <div
                             key={index}
                             className="slider-content"
-                            // style={{ background: `url('${item.image}') no-repeat center center` }}
                         >
                             <div className="inner">
                                 <h1 className="brand">{item.title}</h1>
@@ -132,14 +131,14 @@ class Home extends React.Component {
                                     <span className="deco-barre"></span>
                                 </div>
                                 <p>{item.description}</p>
-								
-                                <button>
-                                    <span className="details">
-                                        Details
-                                        <img className="arrowR" src={ ArrowR }></img>
-                                    </span>
-                                </button>
+								<button>
+									<span className="details">
+										Details
+										<img className="arrowR" src={ ArrowR }></img>
+									</span>
+								</button>
                             </div>
+							
 							<div className="currImg">
                                 <img src={item.image}></img>
                             </div>
@@ -154,12 +153,8 @@ class Home extends React.Component {
 									<p>next fragrance</p>
 								</div>
 							</div>
-
-                            
-                            
-                            
                         </div>
-                    ))}
+					))}
                 </Slider>
             </section>
         );

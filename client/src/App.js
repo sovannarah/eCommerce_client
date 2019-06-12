@@ -1,21 +1,29 @@
 import React from 'react';
+import { Switch, Route } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
+
 import './App.css';
+
+
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
-import Description from './components/Description';
+import Articles from './components/Articles';
 
 function App() {
 
-    const descriptionComponent = <Description/>
 
     return (
         <div className="h-100">
             <Header/>
             <section className="stn-app d-flex">
-                {descriptionComponent}
                 <Footer/>
-                <Home onOpen={descriptionComponent.open}/>
+                <BrowserRouter>
+                    <Switch>
+                        <Route exact path="/" component={ Home } />
+                        <Route path="/articles" component={ Articles } />
+                    </Switch>
+                </BrowserRouter>
             </section>
         </div>
     );
