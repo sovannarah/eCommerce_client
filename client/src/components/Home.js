@@ -107,8 +107,8 @@ class Home extends React.Component {
 
     onButtonClick = item => {
         if (this.props.onOpen)
-            return this.props.onOpen(item);
-        console.error('onOpen is undefined');
+            return this.props.onOpen(item)
+        console.error('onOpen is undefined')
     };
 
     render() {
@@ -131,10 +131,10 @@ class Home extends React.Component {
                                 </div>
                                 <p>{item.description}</p>
                                 <button onClick={() => this.onButtonClick(item)}>
-									<span className="details">
-										Details
+                                    <span className="details">
+                                        Details
 										<img className="arrowR" src={ArrowR}></img>
-									</span>
+                                    </span>
                                 </button>
                             </div>
 
@@ -148,7 +148,7 @@ class Home extends React.Component {
                                 </div>
                                 <div className="ctn-ctrl d-flex justify-content-between">
                                     <p>previous fragrance</p>
-                                    <img className="icon-circle" src={Circle}/>
+                                    <img className="icon-circle" src={Circle} />
                                     <p>next fragrance</p>
                                 </div>
                             </div>
