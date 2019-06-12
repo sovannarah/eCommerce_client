@@ -9,6 +9,7 @@ import Million from '../img/WANTED/81009.png';
 import Nuit from '../img/WANTED/laNuit.png';
 import ArrowR from '../img/icon/arrow-RW.png';
 import Circle from '../img/icon/circle.png';
+
 const produit = [
     {
 		brand: 'BOSS',
@@ -117,12 +118,13 @@ class Home extends React.Component {
                                 <h1 className="brand">{item.title}</h1>
                                 <div>
                                     <span className="deco-barre"></span>
-                                        <h3 class="sndName">
+                                        <h3 className="sndName">
                                         { item.sndName }
                                         </h3>
                                     <span className="deco-barre"></span>
                                 </div>
                                 <p>{item.description}</p>
+								
                                 <button>
                                     <span className="details">
                                         Details

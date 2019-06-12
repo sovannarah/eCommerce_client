@@ -19,11 +19,9 @@
 
 .slide button {
   transition: all 0.3s ease;
-  -webkit-transform: translateY(0px);
-  transform: translateY(0px);
-  opacity: 1;
-  overflow: hidden;
-  top: 0; }
+  -webkit-transform: translateY(20px);
+  transform: translateY(20px);
+  opacity: 0; }
 
 .slide p {
   transition: all 0.3s ease;
@@ -58,6 +56,9 @@
 .slide.animateIn.previous h3,
 .slide.current h3,
 .slide.animateIn.next h3,
+.slide.animateIn.previous button,
+.slide.current button,
+.slide.animateIn.next button,
 .slide.animateIn.previous p,
 .slide.current p,
 .slide.animateIn.next p,
@@ -70,11 +71,6 @@
   transition-delay: .9s;
   opacity: 1; }
 
-.slide.animateIn.previous button,
-.slide.current button,
-.slide.animateIn.next button {
-  opacity: 1; }
-
 .slide.animateIn.previous p,
 .slide.animateIn.next p {
   -webkit-transition-delay: 1.1s;
@@ -83,9 +79,7 @@
 .slide.animateIn.previous button,
 .slide.animateIn.next button {
   -webkit-transition-delay: 1.3s;
-  transition-delay: 1.3s;
-  opacity: 0;
-  overflow: hidden; }
+  transition-delay: 1.3s; }
 
 .slide.animateIn.previous section img,
 .slide.animateIn.next section img {
@@ -145,8 +139,7 @@ button {
   color: #828282;
   display: flex;
   justify-content: flex-end;
-  width: 100%;
-  overflow: hidden; }
+  width: 100%; }
   button img {
     height: 30px;
     margin-left: 10px; }
@@ -154,8 +147,7 @@ button {
 button:hover {
   color: #FFFFFF;
   -webkit-filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
-  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
-  overflow: hidden; }
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2)); }
 
 .wrapper {
   max-width: 1335px;
@@ -203,23 +195,23 @@ button:hover {
   background: url("http://svgshare.com/i/41_.svg") no-repeat center center/16px; }
 
 .previousButton {
-  top: 66vh;
+  top: 65vh;
   right: 20%;
   -webkit-transform: rotate(180deg) translateY(calc(50% + 0px));
   transform: rotate(180deg) translateY(calc(50% + 0px)); }
 
 .nextButton {
-  top: 66vh;
+  top: 65vh;
   right: 13%; }
 
 .ctn-ctrl {
   min-width: 400px;
-  width: 24%;
+  width: 25%;
   position: absolute;
-  bottom: 22vh;
+  bottom: 23vh;
   right: 6%; }
   .ctn-ctrl p {
-    top: 1%;
+    margin: auto;
     white-space: nowrap;
     color: #b4b4b4;
     font-family: 'Italianno', cursive;
@@ -229,7 +221,6 @@ button:hover {
     width: 70px;
     margin-right: 0.5vw;
     margin-left: 0.5vw;
-    bottom: 0vh;
     left: 44vw;
     width: 4vw; }
 
@@ -265,8 +256,7 @@ button:hover {
 
 .slider-content .inner button {
   -webkit-transition-delay: 0s;
-  transition-delay: 0s;
-  overflow: hidden; }
+  transition-delay: 0s; }
 
 .slide .currImg {
   position: absolute;
