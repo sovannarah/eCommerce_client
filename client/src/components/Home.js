@@ -145,21 +145,22 @@ class Home extends React.Component {
                                 </div>
                                 <div className="ctn-ctrl d-flex justify-content-between">
                                     <p>previous fragrance</p>
-                                    <button onClick={() => this.onButtonClick(item)}>
-                                    <span className="details">
-                                        Details
-                                        <img className="arrowR" src={ArrowR}></img>
-                                    </span>
-                                    </button>
+
                                     <img className="icon-circle" src={Circle}/>
                                     <p>next fragrance</p>
                                 </div>
                             </div>
-
-
                         </div>
+
                     ))}
+
                 </Slider>
+                <button onClick={() => this.onButtonClick()}>
+  <span className="details">
+                                        Details
+                                        <img className="arrowR" src={ArrowR}></img>
+                                    </span>
+                </button>
             </section>
         );
     }

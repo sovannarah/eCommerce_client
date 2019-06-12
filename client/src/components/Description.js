@@ -18,7 +18,7 @@ class Description extends React.Component {
         super(props);
         this.state = {
             produit: null,
-            isOpen: true
+            isOpen: false
         }
     }
 
@@ -43,7 +43,7 @@ class Description extends React.Component {
 
             <div className={"desc " + (this.state.isOpen ? "open" : "closed")}>
                 <h1 className={"title"}>{brand}</h1>
-                <h3 className={"model"}>{sndName}</h3>
+                <h3 className={"model"}>&#8212; {sndName} &#8212;</h3>
                 <div className={"price_font"}>&euro; {prix}</div>
                 <div className={"cart_button"}>
                     <button className="btn-default justify-content-center">ADD TO CART</button>
