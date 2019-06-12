@@ -5,6 +5,8 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import Description from './components/Description';
 
+
+
 function App() {
 
     const descriptionComponent = <Description/>

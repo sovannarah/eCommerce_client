@@ -127,13 +127,19 @@ class Home extends React.Component {
                                 <h1 className="brand">{item.title}</h1>
                                 <div>
                                     <span className="deco-barre"></span>
-                                    <h3 class="sndName">
-                                        {item.sndName}
-                                    </h3>
+                                        <h3 className="sndName">
+                                        { item.sndName }
+                                        </h3>
                                     <span className="deco-barre"></span>
                                 </div>
                                 <p>{item.description}</p>
-
+								
+                                <button>
+                                    <span className="details">
+                                        Details
+                                        <img className="arrowR" src={ ArrowR }></img>
+                                    </span>
+                                </button>
                             </div>
                             <div className="currImg">
                                 <img src={item.image}></img>
@@ -155,7 +161,7 @@ class Home extends React.Component {
                     ))}
 
                 </Slider>
-                <button onClick={() => this.onButtonClick()}>
+                <button onClick={() => this.onButtonClick(item)}>
   <span className="details">
                                         Details
                                         <img className="arrowR" src={ArrowR}></img>
