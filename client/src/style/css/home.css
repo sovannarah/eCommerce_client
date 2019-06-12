@@ -6,6 +6,16 @@
 .track {
   display: flex; }
 
+.brand {
+  bottom: 0;
+  margin: 0; }
+  .brand p {
+    font-family: Candara,Calibri,Segoe,Segoe UI,Optima,Arial,sans-serif; }
+
+.sndName {
+  color: white;
+  font-size: 20px; }
+
 .img {
   background-color: red;
   height: 100px;

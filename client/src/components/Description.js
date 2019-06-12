@@ -5,12 +5,12 @@ import '../style/css/header.css';
 import '../style/css/description.css';
 
 const DEFAULT_PRODUIT = {
-    brand: '',
-    sndName: '',
-    description: '',
-    prix: '0',
+    brand: 'BOSS',
+    sndName: 'Mike',
+    description: 'The best of the best that exists in the world <3 I LOVE AMALIA',
+    prix: '15,23',
     image: ''
-}
+};
 
 class Description extends React.Component {
     constructor(props){
