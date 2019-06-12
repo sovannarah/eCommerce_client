@@ -14,7 +14,7 @@ class Header extends React.Component {
 
     handleClick() {
         const wrapper = document.getElementById('Menu');
-        wrapper.classList.toggle('open');
+        wrapper.classList.remove('close')
     }
 
     render() {

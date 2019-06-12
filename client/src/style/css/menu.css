@@ -6,11 +6,10 @@
   top: 0;
   background-color: white; }
 
-.open {
+.close {
   left: -22%; }
 
-.menu {
-  height: 8%;
-  width: 100%; }
+.open {
+  left: 0; }
 
 /*# sourceMappingURL=menu.css.map */
