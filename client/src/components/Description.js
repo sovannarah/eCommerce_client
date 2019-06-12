@@ -58,7 +58,7 @@ class Description extends React.Component {
 
             <div ref={this.containerDiv} className={"desc " + (this.state.isOpen ? "desc-open" : "desc-closed")}>
                 <div style={{ width: '43vw' }}>
-                    <h1 className={"title"}>{brand}</h1>
+                    <h3 className={"title"}>{brand}</h3>
                     <h3 className={"model"}>&#8212; {sndName} &#8212;</h3>
                     <div className={"price_font"}>&euro; {price}</div>
                     <div className={"cart_button"}>
