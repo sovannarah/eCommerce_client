@@ -3,8 +3,8 @@ import Menui from '../img/icon/icon-menu.png';
 import Logo from '../img/Utils-IMG/logo.png';
 import Account from '../img/icon/icon-user.png'
 import Cart from '../img/icon/icon-panier.png';
-import Login from './components/Login';
-import Register from './components/Register';
+// import Login from './components/Login';
+// import Register from './components/Register';
 import Menu from './Menu';
 import '../style/css/header.css';
 
