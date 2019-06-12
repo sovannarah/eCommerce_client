@@ -1,0 +1,18 @@
+.desc {
+    height: 109%;
+    top: -9%;
+    position:absolute;
+    z-index:3;
+    right:0;
+    overflow: hidden;
+    background-color: white;
+    transition: 0.5s;
+}
+
+.open {
+    width: 43%;
+}
+
+.closed {
+    width: 0%;
+}

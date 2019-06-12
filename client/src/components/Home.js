@@ -104,6 +104,14 @@ const content = [
 
 class Home extends React.Component {
 
+	onButtonClick = item =>{
+		console.log('ok')
+		if(this.props.onOpen){
+			this.props.onOpen(item);
+		}
+		console.log('no callback');
+	}
+
     render() {
         return (
             <section className="stn-home">
