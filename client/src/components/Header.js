@@ -12,9 +12,9 @@ class Header extends React.Component {
         return(
             <header id="header" className="d-flex justify-content-between">
                 <div className="ctn-menu d-flex">
-                    <img className="icon-logo m-auto" src={ Menu } />
+                    <img className="icon-menu m-auto" src={ Menu } />
                 </div>
-                <div className="h-100 d-flex">
+                <div className="h-100 ctn-logo d-flex">
                     <img className="h-75 m-auto" src={ Logo } />
                 </div>
                 <div className="ctn-acnt justify-content-between d-flex">

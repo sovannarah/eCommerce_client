@@ -7,7 +7,8 @@ import Intense from '../img/WANTED/DHI.png';
 import Code from '../img/WANTED/Code.png';
 import Million from '../img/WANTED/81009.png';
 import Nuit from '../img/WANTED/laNuit.png';
-
+import ArrowR from '../img/icon/arrow-RW.png';
+import Circle from '../img/icon/circle.png';
 const produit = [
     {
 		brand: 'BOSS',
@@ -48,47 +49,52 @@ const produit = [
 
 const content = [
 	{
-		title: 'BOSS',
+        title: 'BOSS',
+        sndName: 'The Sent Intense',
 		description:
 		'Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cras justo odio, dapibus ac facilisis.',
-		button: 'Read More',
-		image: 'https://i.imgur.com/ZXBtVw7.jpg',
+		price: '79,-',
+		image: TheSent,
 		user: 'Luan Gjokaj',
 		userProfile: 'https://i.imgur.com/JSW6mEk.png'
 	},
 	{
-		title: 'DIOR',
+        title: 'DIOR',
+        sndName: 'Intense',
 		description:
 		'Nullam id dolor id nibh ultricies vehicula ut id elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec sed odio dui.',
-		button: 'Discover',
-		image: 'https://i.imgur.com/DCdBXcq.jpg',
+		price: '108,-',
+		image: Intense,
 		user: 'Erich Behrens',
 		userProfile: 'https://i.imgur.com/0Clfnu7.png'
 	},
 	{
 		title: 'ARMANI',
+		sndName: 'Code',
 		description:
 		'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Duis mollis, est non commodo luctus, nisi erat porttitor ligula.',
-		button: 'Buy now',
-		image: 'https://i.imgur.com/DvmN8Hx.jpg',
+		price: '121,-',
+		image: Code,
 		user: 'Bruno Vizovskyy',
 		userProfile: 'https://i.imgur.com/4KeKvtH.png'
     },
     {
 		title: 'PACO RABANNE',
+		sndName: '1Million',
 		description:
 		'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Duis mollis, est non commodo luctus, nisi erat porttitor ligula.',
-		button: 'Buy now',
-		image: 'https://i.imgur.com/DvmN8Hx.jpg',
+		price: '68,-',
+		image: Million,
 		user: 'Bruno Vizovskyy',
 		userProfile: 'https://i.imgur.com/4KeKvtH.png'
     },
     {
 		title: 'YVES SAINT LAURENT',
+		sndName: 'La Nuit de L\'Homme',
 		description:
 		'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Duis mollis, est non commodo luctus, nisi erat porttitor ligula.',
-		button: 'Buy now',
-		image: 'https://i.imgur.com/DvmN8Hx.jpg',
+		price: '81,-',
+		image: Nuit,
 		user: 'Bruno Vizovskyy',
 		userProfile: 'https://i.imgur.com/4KeKvtH.png'
 	}
@@ -100,35 +106,51 @@ class Home extends React.Component {
     render() {
         return (
             <section className="stn-home">
-                {/* <Slider className="slider-wrapper">
-                    {produit.map((item, index) => (
-                        <div key={index} className="slider-content">
-                            <img className="m-auto" src={item.image}></img>
+                <Slider className="slider-wrapper">
+                    {content.map((item, index) => (
+                        <div
+                            key={index}
+                            className="slider-content"
+                            // style={{ background: `url('${item.image}') no-repeat center center` }}
+                        >
+                            <div className="inner">
+                                <h1 className="brand">{item.title}</h1>
+                                <div>
+                                    <span className="deco-barre"></span>
+                                        <h3 class="sndName">
+                                        { item.sndName }
+                                        </h3>
+                                    <span className="deco-barre"></span>
+                                </div>
+                                <p>{item.description}</p>
+                                <button>
+                                    <span className="details">
+                                        Details
+                                        <img className="arrowR" src={ ArrowR }></img>
+                                    </span>
+                                </button>
+                            </div>
+							<div className="currImg">
+                                <img src={item.image}></img>
+                            </div>
+							<div className="ctn-1">
+								<div className="ctn-price d-flex">
+									<p>dollars</p>
+									<h1>{ item.price }</h1>
+								</div>
+								<div className="ctn-ctrl d-flex justify-content-between">
+									<p>previous fragrance</p>
+									<img className="icon-circle" src={ Circle } /> 
+									<p>next fragrance</p>
+								</div>
+							</div>
+
+                            
+                            
+                            
                         </div>
                     ))}
-                </Slider> */}
-
-<Slider className="slider-wrapper">
-			{content.map((item, index) => (
-				<div
-					key={index}
-					className="slider-content"
-					// style={{ background: `url('${item.image}') no-repeat center center` }}
-				>
-					<div className="inner">
-						<h1 class="brand">{item.title}</h1>
-						<p>{item.description}</p>
-						<button>{item.button}</button>
-					</div>
-					<section>
-						<img src={item.userProfile} alt={item.user} />
-						<span>
-							Posted by <strong>{item.user}</strong>
-						</span>
-					</section>
-				</div>
-			))}
-		</Slider>
+                </Slider>
             </section>
         );
     }

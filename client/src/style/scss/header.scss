@@ -1,18 +1,19 @@
 #header { 
   height: 8%;
   width: 100%;
+  position: relative;
 }
 
 .ctn-menu {
-  width: 6%;
+  width: 120px;
 }
 
 .ctn-acnt {
-  width: 6%;
+  width: 120px;
   margin-right: 4%;
 }
 
-.icon-logo {
+.icon-menu {
   height: 30px;
   width: 30px;
 }
@@ -20,4 +21,9 @@
 .icon-cart {
   height: 30px;
   width: 30px;
+}
+
+.ctn-logo {
+   position: relative;
+   left: 1%;
 }
