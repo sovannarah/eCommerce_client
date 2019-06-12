@@ -2,7 +2,6 @@ import React from 'react';
 import Slider from 'react-animated-slider';
 import '../style/css/home.css';
 import '../style/css/slider.css'
-import '../style/css/description.css';
 import TheSent from '../img/WANTED/TheSentIntense.png';
 import Intense from '../img/WANTED/DHI.png';
 import Code from '../img/WANTED/Code.png';
@@ -106,9 +105,11 @@ const content = [
 class Home extends React.Component {
 
 	onButtonClick = item =>{
-		const wrapper = document.getElementById('Menu');
-		wrapper.classList.toggle('desc');
-		wrapper.classList.toggle('opens');
+		console.log('ok')
+		if(this.props.onOpen){
+			this.props.onOpen(item);
+		}
+		console.log('no callback');
 	}
 
     render() {
@@ -130,7 +131,7 @@ class Home extends React.Component {
                                     <span className="deco-barre"></span>
                                 </div>
                                 <p>{item.description}</p>
-								<button onClick={()=>this.onButtonClick(item)}>
+								<button>
 									<span className="details">
 										Details
 										<img className="arrowR" src={ ArrowR }></img>
