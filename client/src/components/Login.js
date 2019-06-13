@@ -10,7 +10,7 @@ import '../style/css/login.css';
 class Login extends React.Component {
 	constructor(props) {
 		super(props);
-		this.addr = "http:\//127.0.0.1:8000";
+		this.addr = "http:\//10.34.7.0:8001";
 		this.state = { isLoading: true };
 		this.loginFunc = this.loginFunc.bind(this);
 		this.change = this.change.bind(this);
