@@ -10,7 +10,7 @@ class Register extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { isLoading: true };
-		this.addr = "http:\/\/127.0.0.1:8000";
+		this.addr = "http:/\/10.34.7.0:8001";
 		this.change = this.change.bind(this);
 		this.subscribef = this.subscribef.bind(this);
 	}
@@ -38,7 +38,7 @@ class Register extends React.Component {
 	subscribef(event)
 	{
 		event.preventDefault();
-		axios.post("http:/\/127.0.0.1:8000/register", {email: this.state.email,
+		axios.post(this.addr + "/register", {email: this.state.email,
 			password: this.state.password}).then(
 			(response) =>
 			{
