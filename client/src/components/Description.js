@@ -4,21 +4,30 @@ import React from 'react';
 import '../style/css/header.css';
 import '../style/css/description.css';
 
-const DEFAULT_PRODUIT = {
-    brand: 'BOSS',
-    sndName: 'Mike',
-    description: 'The best of the best that exists in the world <3 I LOVE AMALIA',
-    prix: '15,23',
-    image: ''
-};
+
 
 class Description extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             produit: null,
             isOpen: false
         }
+        this.containerDiv = React.createRef();
+    }
+
+    componentWillMount() {
+        document.addEventListener('mousedown', this.handleMouseDown);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleMouseDown);
+    }
+
+    handleMouseDown = e => {
+        if (this.containerDiv.current.contains(e.target))
+            return;
+        this.close();
     }
 
     open = item => {
@@ -28,24 +37,39 @@ class Description extends React.Component {
             produit: item,
             isOpen: true
         })
-    }
+    };
 
     close = () => {
         this.setState({
             isOpen: false
         });
-    }
+    };
 
     render() {
-        const {brand, sndName, prix, description} = (this.state.produit || DEFAULT_PRODUIT);
+        var brand= this.props.brand;
+        var sndName = this.props.sndName;
+        var price = this.props.price;
+        var description = this.props.description;
+
         return (
 
-                <div className={"desc " + (this.state.isOpen ? "open" : "closed")}>
-                    <h2>{brand}</h2>
-                    <span>{sndName}</span>
-                    <div>{prix}</div>
-                    <p>{description}</p>
+            <div ref={this.containerDiv} id='desc' className='desc'>
+                <div style={{ width: '43vw' }}>
+                    <div className='ctn-brand d-flex flex-column'>
+                    <h3 className={"title"}>{brand}</h3>
+                    <h3 className={"model"}>&#8212; {sndName} &#8212;</h3>
+                    </div>
+                    <div className={"price_font"}>&euro; {price}</div>
+                    
+                        <button className="justify-content-center">ADD TO CART</button>
+                    
+                    <div className={"descript"}>
+                        <p className={"bold"}>DESCRIPTION</p>
+                        <p>{description}</p>
+                        </div>
+
                 </div>
+            </div>
 
         );
     }

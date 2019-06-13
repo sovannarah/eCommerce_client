@@ -1,6 +1,6 @@
 import React from 'react';
 import '../style/css/menu.css';
-import { Link, BrowserRouter } from 'react-router-dom';
+import {Link, BrowserRouter} from 'react-router-dom';
 import Menui from '../img/icon/icon-menu-black.png';
 
 class Menu extends React.Component {
@@ -10,15 +10,14 @@ class Menu extends React.Component {
         wrapper.classList.toggle('close');
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div id="Menu" className="close">
                 <div className="ctn-menu d-flex">
                     <button onClick={this.handleClick}>
-                        <img className="icon-menu m-auto" src={ Menui } />
+                        <img className="icon-menu m-auto" src={Menui}/>
                     </button>
                 </div>
-                <BrowserRouter>
                     <ul>
                         <li>
                             <Link to="/articles">
@@ -26,9 +25,8 @@ class Menu extends React.Component {
                             </Link>
                         </li>
                     </ul>
-                </BrowserRouter>
                 <div className="">
-                
+
                 </div>
             </div>
         );

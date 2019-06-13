@@ -2,7 +2,7 @@
   height: 400px; }
 
 .stn-articles {
-  margin-top: 6%;
+  margin-top: 10%;
   height: 80%;
   width: 100%;
   margin-left: 6%;
@@ -10,10 +10,9 @@
   display: block; }
 
 .mini-img {
-  height: 270px; }
+  height: 250px; }
 
 .ctn-brand {
-  margin-top: 4%;
   display: flex; }
   .ctn-brand p {
     color: white;
