@@ -6,9 +6,11 @@ import Cart from '../img/icon/icon-panier.png';
 import Cartt from '../img/icon/icon-black-panier.png';
 import account from '../img/icon/icon.png';
 import Smoke from '../img/icon/smoke.png';
+import OktaAuth from '@okta/okta-auth-js';
+import { withAuth } from '@okta/okta-react';
 // import axios from 'axios';
 
-import '../style/css/header.css';
+import '../style/css/login.css';
 
 class Login extends React.Component {
     constructor(props) {
