@@ -7,7 +7,7 @@ import Cartt from '../img/icon/icon-black-panier.png';
 import account from '../img/icon/icon.png';
 import Smoke from '../img/icon/smoke.png';
 
-import '../style/css/header.css';
+import '../style/css/login.css';
 
 class Register extends React.Component {
     constructor(props) {
@@ -28,7 +28,7 @@ class Register extends React.Component {
             }
         }).then((response) => response.json()).then((responseJson) => {
             console.log(responseJson);
-            // Actions.home();
+            //home();
         })
     }
 
