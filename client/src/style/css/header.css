@@ -16,8 +16,8 @@
 
 .login{
   background-color: #ffffff;
-  height: 860px;
-  width: 50%;
+  height: 935px;
+  width: 45%;
   position: absolute;
 	bottom: 0;
 	right: 0;
@@ -34,4 +34,23 @@
   margin-left: 30%;
 }
 
+.icon-login{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+.icon-login img{
+  margin-right: 40px;
+}
+.login-img{
+  margin-top: -75px;
+  width: 55%;
+  height: 935px;
+  background-color: black;
+}
+.login-img img{
+  width: 100%;
+  height: 100%;
+
+}
 /*# sourceMappingURL=header.css.map */
