@@ -10,6 +10,8 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import Articles from './components/Articles';
 import Description from './components/Description';
+import Register from './components/Register';
+import Login from './components/Login';
 
 class App extends React.Component {
 
@@ -28,7 +30,10 @@ class App extends React.Component {
                     <BrowserRouter>
                         <Switch>
                             <Route exact path="/" render={props => <Home {...props} onOpen={item => this.description.current.open(item)} />} />
-                            <Route path="/articles" component={Articles} />
+                            <Route path="/articles" component={ Articles } />
+                            <Route exact path="/login" component={ Login } />
+                            <Route exact path="/register" component={ Register } />
+
                         </Switch>
                     </BrowserRouter>
                 </section>
