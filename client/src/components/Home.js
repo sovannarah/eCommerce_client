@@ -1,16 +1,6 @@
 import React from 'react';
-import Slider from 'react-animated-slider';
-// import Description from './Description';
-// import '../style/css/home.css';
-// import '../style/css/slider.css'
-// import '../style/css/description.css';
-import TheSent from '../img/WANTED/TheSentIntense.png';
-import Intense from '../img/WANTED/DHI.png';
-import Code from '../img/WANTED/Code.png';
-import Million from '../img/WANTED/81009.png';
-import Nuit from '../img/WANTED/laNuit.png';
-import ArrowR from '../img/icon/arrow-RW.png';
-import Circle from '../img/icon/circle.png';
+
+
 
 
 const content = [

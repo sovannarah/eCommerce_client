@@ -1,7 +1,6 @@
 import React from 'react';
 import '../style/css/menu.css';
 import {Link} from 'react-router-dom';
-import Menui from '../img/icon/icon-menu-black.png';
 
 class Menu extends React.Component {
 

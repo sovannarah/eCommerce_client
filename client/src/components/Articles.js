@@ -1,11 +1,5 @@
 import React from 'react';
-// import '../style/css/articles.css';
 
-import TheSent from '../img/WANTED/TheSentIntense.png';
-import Intense from '../img/WANTED/DHI.png';
-import Code from '../img/WANTED/Code.png';
-import Million from '../img/WANTED/81009.png';
-import Nuit from '../img/WANTED/laNuit.png';
 
 const content = [
 	{

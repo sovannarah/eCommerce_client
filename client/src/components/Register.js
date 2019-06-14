@@ -1,8 +1,5 @@
 import React from 'react';
-import Menu from '../img/icon/icon-menu.png';
-import Logo from '../img/Utils-IMG/logo.png';
-import Account from '../img/icon/icon-user.png'
-import Cart from '../img/icon/icon-panier.png';
+
 import axios from 'axios';
 import '../style/css/login.css';
 

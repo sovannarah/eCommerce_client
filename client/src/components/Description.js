@@ -1,8 +1,6 @@
 import React from 'react';
 
 
-import '../style/css/header.css';
-import '../style/css/description.css';
 
 
 

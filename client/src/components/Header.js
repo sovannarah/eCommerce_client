@@ -1,11 +1,5 @@
 import React from 'react';
-import Menui from '../img/icon/icon-menu.png';
-import Logo from '../img/Utils-IMG/logo.png';
-import Account from '../img/icon/icon-user.png'
-import Cart from '../img/icon/icon-panier.png';
-import { Link } from 'react-router-dom'; 
-import Login from './Login';
-import Register from './Register';
+
 import Menu from './Menu';
 import '../style/css/header.css';
 
