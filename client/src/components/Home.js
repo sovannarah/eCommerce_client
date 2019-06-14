@@ -1,9 +1,9 @@
 import React from 'react';
 import Slider from 'react-animated-slider';
-import Description from './Description';
-import '../style/css/home.css';
-import '../style/css/slider.css'
-import '../style/css/description.css';
+// import Description from './Description';
+// import '../style/css/home.css';
+// import '../style/css/slider.css'
+// import '../style/css/description.css';
 import TheSent from '../img/WANTED/TheSentIntense.png';
 import Intense from '../img/WANTED/DHI.png';
 import Code from '../img/WANTED/Code.png';
@@ -12,43 +12,6 @@ import Nuit from '../img/WANTED/laNuit.png';
 import ArrowR from '../img/icon/arrow-RW.png';
 import Circle from '../img/icon/circle.png';
 
-const produit = [
-    {
-        brand: 'BOSS',
-        sndName: 'The Sent Intense',
-        description: 'Decouvrez une seduction si intense qu\'elle vous embrase : mettew vos sens en emoi avec BOSS THE SCENT INTENSE, un jus aphrodisiaque dans un flacon de parfum....',
-        prix: '72,-',
-        image: TheSent
-    },
-    {
-        brand: 'DIOR',
-        sndName: 'Intense',
-        description: 'Decouvrez une seduction si intense qu\'elle vous embrase : mettew vos sens en emoi avec BOSS THE SCENT INTENSE, un jus aphrodisiaque dans un flacon de parfum....',
-        prix: '84,-',
-        image: Intense
-    },
-    {
-        brand: 'ARMANI',
-        sndName: 'Code',
-        description: 'Decouvrez une seduction si intense qu\'elle vous embrase : mettew vos sens en emoi avec BOSS THE SCENT INTENSE, un jus aphrodisiaque dans un flacon de parfum....',
-        prix: '67,-',
-        image: Code
-    },
-    {
-        brand: 'PACO RABANNE',
-        sndName: '1Million',
-        description: 'Decouvrez une seduction si intense qu\'elle vous embrase : mettew vos sens en emoi avec BOSS THE SCENT INTENSE, un jus aphrodisiaque dans un flacon de parfum....',
-        prix: '79,-',
-        image: Million
-    },
-    {
-        brand: 'YVES SAINT LAURENT',
-        sndName: 'La Nuit de L\'Homme',
-        description: 'Decouvrez une seduction si intense qu\'elle vous embrase : mettew vos sens en emoi avec BOSS THE SCENT INTENSE, un jus aphrodisiaque dans un flacon de parfum....',
-        prix: '108,-',
-        image: Nuit
-    },
-]
 
 const content = [
     {
@@ -106,63 +69,17 @@ const content = [
 
 class Home extends React.Component {
 
-    onButtonClick() {
-        //if (this.props.onOpen)
-          //  return this.props.onOpen(item)
-        //console.error('onOpen is undefined')
-        document.getElementById('desc').classList.toggle('descopen')
-    };
+   
 
     render() {
         return (
-            <section className="stn-home">
-                <Slider className="slider-wrapper">
+            <section className=" container ">     
                     {content.map((item, index) => (
-                        <div
-                            key={index}
-                            className="slider-content"
-                        >
-                            <div className="inner">
-                                <h1 className="brand">{item.title}</h1>
-                                <div>
-                                    <span className="deco-barre"></span>
-                                    <h3 className="sndName">
-                                        {item.sndName}
-                                    </h3>
-                                    <span className="deco-barre"></span>
-                                </div>
-                                <p>{item.description}</p>
-                                <button onClick={this.onButtonClick}>
-                                    <span className="details">
-                                        Details
-										<img className="arrowR" src={ArrowR}></img>
-                                    </span>
-                                </button>
-                            </div>
-                            
-                            <div className="currImg">
-                                <img src={item.image}></img>
-                            </div>
-                            <div className="ctn-1">
-                                <div className="ctn-price d-flex">
-                                    <p>dollars</p>
-                                    <h1>{item.price}</h1>
-                                </div>
-                                <div className="ctn-ctrl d-flex justify-content-between">
-                                    <p>previous fragrance</p>
-                                    <img className="icon-circle" src={Circle} />
-                                    <p>next fragrance</p>
-                                </div>
-                            </div>
-                            <Description 
-                            brand={item.title}
-                            sndName={item.sndName}
-                            price={item.price}
-                            description={item.description}/>
-                        </div>
-                        
+                        <div key={ index } className="m-auto">
+                            <p>{ item.title }</p>
+                        </div> 
+
                     ))}
-                </Slider>
             </section>
         );
     }

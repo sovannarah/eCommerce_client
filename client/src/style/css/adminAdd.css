@@ -1,10 +1,30 @@
 .adminAdd {
-  position: absolute;
+  position: relative;
   z-index: 5;
-  height: 1250%;
-  width: 40%;
+  height: 100%;
+  width: 100%;
   top: 0;
   right: 0;
   background-color: white; }
+
+.upload {
+  height: 33.333%;
+  width: 50%;
+  position: relative;
+  visibility: hidden; }
+
+.presti {
+  position: absolute;
+  height: 300px;
+  width: 300px;
+  background-color: red; }
+
+.upload .browse input[type='file'] {
+  position: absolute;
+  margin-top: 3px;
+  margin-left: 3px;
+  height: 1px;
+  width: 1px;
+  z-index: -5; }
 
 /*# sourceMappingURL=adminAdd.css.map */

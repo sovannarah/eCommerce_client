@@ -1,5 +1,5 @@
 import React from 'react';
-import '../style/css/articles.css';
+// import '../style/css/articles.css';
 
 import TheSent from '../img/WANTED/TheSentIntense.png';
 import Intense from '../img/WANTED/DHI.png';
@@ -69,7 +69,6 @@ class Articles extends React.Component {
                     {content.map((item, index) => (
                         <div  key={index} className="col-3 article">
                             <div key={index} className="ctn-img d-flex">
-                                <img className="mini-img m-auto" src={ item.image } />
                             </div>
                             <div className="ctn-brand">
                                 <p>{ item.title }</p>

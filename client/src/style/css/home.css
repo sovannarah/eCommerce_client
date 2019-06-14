@@ -3,22 +3,4 @@
   padding-right: 6%;
   width: 100%; }
 
-.track {
-  display: flex; }
-
-.brand {
-  bottom: 0;
-  margin: 0; }
-  .brand p {
-    font-family: Candara,Calibri,Segoe,Segoe UI,Optima,Arial,sans-serif; }
-
-.sndName {
-  color: white;
-  font-size: 20px; }
-
-.img {
-  height: 100px;
-  width: 100px;
-  margin: auto; }
-
 /*# sourceMappingURL=home.css.map */

@@ -10,7 +10,7 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import Articles from './components/Articles';
 import Description from './components/Description';
-import Routeur from './routeur';
+import Routeur from './Routeur';
 
 class App extends React.Component {
 
@@ -22,7 +22,7 @@ class App extends React.Component {
             <div className="h-100" >
                 < Header />
                 <section className="stn-app d-flex">
-                    <Footer />
+                    {/* <Footer /> */}
                     <Routeur />
                 </section>
             </div>
