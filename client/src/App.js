@@ -10,21 +10,24 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import Articles from './components/Articles';
 import Description from './components/Description';
+<<<<<<< HEAD
 import Register from './components/Register';
 import Login from './components/Login';
+=======
+import Routeur from './Routeur';
+>>>>>>> 98919a965b2cdd750b2d8e5dc9e4a15637725d61
 
 class App extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.description = React.createRef();
-    }
+  
 
     render() {
         return (
+            <BrowserRouter>
             <div className="h-100" >
                 < Header />
                 <section className="stn-app d-flex">
+<<<<<<< HEAD
                     <Description ref={this.description} />
                     <Footer />
                     <BrowserRouter>
@@ -36,8 +39,13 @@ class App extends React.Component {
 
                         </Switch>
                     </BrowserRouter>
+=======
+                    {/* <Footer /> */}
+                    <Routeur />
+>>>>>>> 98919a965b2cdd750b2d8e5dc9e4a15637725d61
                 </section>
             </div>
+            </BrowserRouter>
         );
     }
 }

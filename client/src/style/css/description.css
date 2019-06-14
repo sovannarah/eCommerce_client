@@ -1,21 +1,23 @@
 .desc {
     height: 100%;
     top: 0;
-    right: 0;
     position: absolute;
-    z-index: 3;
-    overflow: hidden;
+    z-index: 5;
     background-color: white;
     transition: 0.5s;
+    /* right: -100%; */
 }
 
-.desc-open {
-    width: 43%;
+.descopen {
+    height: 100%;
+    top: 0;
+    position: absolute;
+    z-index: 5;
+    background-color: white;
+    transition: 0.5s;
+    right: 0 !important;
 }
 
-.desc-closed {
-    width: 0%;
-}
 
 
 .descript {
@@ -52,13 +54,12 @@
 }
 
 .cart_button {
-    margin-top: 20%;
-    margin-bottom: 10%;
+    background-color: red;
 }
 
 .price_font {
     font-family: 'Tangerine', cursive;
-    font-size: 55px;
+    font-size: 90px;
     margin-left: 6%;
     margin-bottom: 10%;
 }
@@ -68,11 +69,14 @@
     font-size: 24px;
     font-weight: lighter;
     font-style: italic;
+    text-align: right;
 }
 
+.ctn-brand {
+    margin-left: 4%;
+    width: 50%;
+}
 .title {
     font-family: "Abril Fatface";
-    font-size: 10px;
-    margin-right: auto;
-    margin-left: auto;
+    font-size: 100px;
 }
