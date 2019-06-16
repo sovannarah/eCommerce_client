@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,cAAe;EACZ,aAAa,EAAE,IAAI",
-"sources": ["../scss/register.scss"],
-"names": [],
-"file": "register.css"
-}
