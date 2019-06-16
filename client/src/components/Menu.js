@@ -1,33 +1,28 @@
 import React from 'react';
+import IconMenu from '../images/icone/icone-menu.png';
+import { Link } from 'react-router-dom';
 import '../style/css/menu.css';
-import {Link} from 'react-router-dom';
 
 class Menu extends React.Component {
 
-    handleClick() {
-        const wrapper = document.getElementById('Menu');
-        wrapper.classList.toggle('close');
+    closeMenu() {
+        document.getElementById('menu').classList.toggle('exit-menu');
     }
 
     render() {
         return (
-            <div id="Menu" className="close">
-                <div className="ctn-menu d-flex">
-                    <button onClick={this.handleClick}>
-                        <img className="icon-menu m-auto" src={Menui}/>
+            <menu id="menu" className="col-lg-3">
+                <div id="ctn-logo-menu" className="bg-primary d-flex justify-content-between">
+                    <button id="button-menu" onClick={this.closeMenu}>
+                        <img id="icone-menu" className="mt-auto mb-auto" src={IconMenu}></img>
                     </button>
                 </div>
-                    <ul>
-                        <li>
-                            <Link to="/articles">
-                                All Articles
-                            </Link>
-                        </li>
-                    </ul>
-                <div className="">
-
-                </div>
-            </div>
+                <ul>
+                    <li>
+                        <Link to="/articles">All Articles</Link>
+                    </li>
+                </ul>
+            </menu>
         );
     }
 }
