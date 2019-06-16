@@ -30,8 +30,7 @@ class Description extends React.Component {
                     <div>&euro; {price}</div>
                     <div>
                         <div> stock: {stock}</div>
-                        <button>TO CART</button>
-                    </div>
+\                    </div>
                     <div>
                         <div>DESCRIPTION</div>
                         {description}</div>
