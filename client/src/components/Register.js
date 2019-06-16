@@ -1,98 +1,72 @@
 import React from 'react';
-
 import axios from 'axios';
-import '../style/css/login.css';
+import TextField from '@material-ui/core/TextField';
+import Fab from '@material-ui/core/Fab';
+import '../style/css/register.css';
 
 class Register extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = { isLoading: true };
-		this.addr = "http:/\/10.34.7.0:8001";
-		this.change = this.change.bind(this);
-		this.subscribef = this.subscribef.bind(this);
-	}
 
-	/**
-	 * save the user info email, username, password
-	 * @param event
-	 */
-	change(event)
-	{
-		if (event.target.name === 'email')
-			this.setState({email: event.target.value});
-		else if (event.target.name === 'username')
-			this.setState({username: event.target.value});
-		else if (event.target.name === 'password')
-			this.setState({password: event.target.value});
-	}
+    constructor(props) {
+        super(props);
 
-	/**
-	 * send post request to th api
-	 * @success: redirect to /login
-	 * @error: say bad no redirect
-	 * @param event
-	 */
-	subscribef(event)
-	{
-		event.preventDefault();
-		axios.post(this.addr + "/register", {email: this.state.email,
-			password: this.state.password}).then(
-			(response) =>
-			{
-				if (response.data.errors)
-				{
-					console.log(response.data.errors)
-					this.state.error = response.data.errors;
-				}
-				else
-					window.location.replace('/login');
-			},
-			(error) =>
-			{
-				console.log(error);
-			}
-		);
-	}
+        this.state = {
+            email: '',
+            password: ''
+        }
 
-	render() {
-		return (
-			<div className="login">
-				<div className="title">
-					<h1>Register</h1>
-				</div>
-				<div className="form">
-					<form action="" method="post">
-						<div className="form-group">
-							<label htmlFor="email">Email:</label>
-							<input
-								type="email"
-								className="form-control"
-								name="email"
-							onChange={this.change}/>
-						</div>
-						<div className="form-group">
-							<label htmlFor="password">Password:</label>
-							<input
-								type="password"
-								className="form-control"
-								name="password"
-								onChange={this.change}/>
-						</div>
-						<div className="form-group">
-							<label htmlFor="username">User name:</label>
-							<input
-								type="text"
-								className="form-control"
-								name="username"
-								onChange={this.change}/>
-						</div>
-						<button className="btn btn-dark" onClick={this.subscribef.bind(this)}>Subscribe</button>
-					</form>
-				</div>
-			</div>
-		);
-	}
+        this.changeMail = this.changeMail.bind(this);
+        this.changePassword = this.changePassword.bind(this);
+        this.register = this.register.bind(this);
+    }
 
+    changeMail(e) {
+        this.setState({email : e.target.value}) 
+    }
+
+    changePassword(e) {
+        this.setState({password : e.target.value})
+    }
+
+
+    register(e) {
+        e.preventDefault();
+        axios.post('http://127.0.0.1:8000/register', this.state)
+        .then(res=> {
+            console.log(res.data)
+        })
+    }
+
+    render() {
+        return(
+            <section className="d-flex h-100">
+                <form id="form-register" method="post" className="bg-light d-flex justify-content-around flex-column col-md-6 h-50 m-auto">
+                    <TextField
+                        id="outlined-name"
+                        label="Email"
+                        name="email"
+                        type="email"
+                        value={this.state.mail}
+                        onChange={this.changeMail}
+                        margin="normal"
+                        variant="outlined"
+                    />
+                    <TextField
+                        id="outlined-name"
+                        label="Password"
+                        name="password"
+                        type="password"
+                        value={this.state.password}
+                        onChange={this.changePassword}
+                        margin="normal"
+                        variant="outlined"
+                    />
+                    <Fab id="button-register" onClick={this.register} type="submit" className="w-50 ml-auto mr-auto" variant="extended" color="secondary">
+                        Sign In
+                    </Fab>
+                </form>
+            </section>
+        );
+    }
 }
 
 export default Register;
