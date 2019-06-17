@@ -1,7 +1,12 @@
 {
 "version": 3,
+<<<<<<< HEAD
 "mappings": "AAAA,KAAM;EACF,gBAAgB,EAAE,GAAG;EACrB,MAAM,EAAE,IAAI;EACZ,MAAM,EAAE,CAAC;EACT,QAAQ,EAAE,KAAK;EACf,OAAO,EAAE,EAAE;EACX,IAAI,EAAE,MAAM;EACZ,GAAG,EAAE,CAAC;EACN,UAAU,EAAE,aAAa;;AAG7B,cAAe;EACX,MAAM,EAAE,GAAG;EACX,UAAU,EAAE,IAAI;;AAGpB,UAAW;EACP,IAAI,EAAE,YAAY;EAClB,UAAU,EAAE,kBAAkB",
 "sources": ["../scss/menu.scss"],
+=======
+"mappings": "",
+"sources": [],
+>>>>>>> menu
 "names": [],
 "file": "menu.css"
 }

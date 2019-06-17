@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #menu {
   background-color: red;
   height: 100%;
@@ -15,5 +16,15 @@
 .exit-menu {
   left: 0 !important;
   transition: left 500ms ease-in; }
+=======
+
+.menu img{
+    width: 20px;
+}
+.wrapper{
+    width: 40%;
+    height: 100%;
+}
+>>>>>>> menu
 
 /*# sourceMappingURL=menu.css.map */
