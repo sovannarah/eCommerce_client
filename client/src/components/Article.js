@@ -27,6 +27,7 @@ class Article extends React.Component {
             this.setState({ article : res.data })
         })
     }
+    
     render() {
         const article = this.state.article;
         console.log(article)
