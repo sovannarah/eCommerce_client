@@ -1,28 +1,86 @@
 import React from 'react';
-import IconMenu from '../images/icone/icone-menu.png';
+import Menui from '../img/icon.png';
 import { Link } from 'react-router-dom';
 import '../style/css/menu.css';
+import axios from 'axios';
 
 class Menu extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            id: '',
+            data: {},
+            showMenu: false
+        }
+        this.showMenu = this.showMenu.bind(this);
+        this.closeMenu = this.closeMenu.bind(this);
+    }
+    async componentDidMount() {
+        /**
+         * @param get all the categories
+         */
+        await axios.get('http://10.34.7.0:8001/category')
+            .then(
+                (res) => {
+                    this.state.data = res.data[0];
 
+                    // console.log(this.state.data);
+                },
+                (err) => {
+                    console.log(err);
+                })
+    }
+    showMenu(event) {
+        /**
+         * @param show menu on click
+         */
+        event.preventDefault();
+        this.setState({ showMenu: true }, () => {
+            document.addEventListener('click', this.closeMenu);
+        });
+    }
     closeMenu() {
-        document.getElementById('menu').classList.toggle('exit-menu');
+        /**
+         * @param close the menu
+         */
+        this.setState({ showMenu: false }, () => {
+            document.removeEventListener('click', this.closeMenu);
+        });
+    }
+
+    recursive() {
+
     }
 
     render() {
+        console.log(this.state.data);
         return (
-            <menu id="menu" className="col-lg-3">
-                <div id="ctn-logo-menu" className="bg-primary d-flex justify-content-between">
-                    <button id="button-menu" onClick={this.closeMenu}>
-                        <img id="icone-menu" className="mt-auto mb-auto" src={IconMenu}></img>
-                    </button>
-                </div>
-                <ul>
-                    <li>
-                        <Link to="/articles">All Articles</Link>
-                    </li>
-                </ul>
-            </menu>
+            <div id="menu" className="wrapper">
+                <button className="menu" onClick={this.showMenu}>
+                    <img src={Menui} />
+                </button>
+
+                {
+                    this.state.showMenu
+                        ? (
+                            <div className="wrapper">
+                                {Object.keys(this.state.data).map((elem) => (
+                                    <ul key={elem}>
+                                        <Link to="AllArticles">
+                                            <li>{this.state.data[elem].name}
+                                                <ul key={elem.id}>
+                                                    <li>{elem.name}</li>
+
+                                                </ul>
+                                            </li>
+                                        </Link>
+                                    </ul>
+                                ))}
+                            </div>
+                        )
+                        : (null)
+                }
+            </div>
         );
     }
 }

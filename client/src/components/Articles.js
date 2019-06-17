@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import '../style/css/articles.css';
 
-const ip = 'http://10.34.7.0:8001'
+const ip = 'http://10.34.7.0:8001';
 
 class Articles extends React.Component {
 
@@ -12,7 +12,7 @@ class Articles extends React.Component {
         super(props);
         this.state = {
             articles: []
-        }
+        };
 
         axios.get( ip + '/article')
         .then(res => {
