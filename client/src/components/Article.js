@@ -2,7 +2,7 @@ import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Img1 from '../images/slider/stl-apx.jpg';
 import Img2 from '../images/slider/apx.png';
-
+import axios from 'axios';
 import '../style/css/article.css'; 
 
 const images = [
