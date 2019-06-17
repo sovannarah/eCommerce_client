@@ -13,7 +13,7 @@ class Routeur extends React.Component {
                 <Switch>
                     <Route exact path="/" component={ Home } />
                     <Route path="/articles" component={ Articles } />
-                    <Route path="/article" component={ Article } />
+                    <Route path="/article/:id" component={ Article } />
                     <Route path="/register" component={ Register } />
                     <Route path="/admin" component={ Admin } />
                 </Switch>
