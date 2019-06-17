@@ -24,7 +24,7 @@ class Menu extends React.Component {
                 (res) => {
                     this.state.data = res.data[0];
 
-                    console.log(this.state.data);
+                    // console.log(this.state.data);
                 },
                 (err) => {
                     console.log(err);
@@ -48,8 +48,13 @@ class Menu extends React.Component {
         });
     }
 
+    recursive(){
+
+    }
+
     render() {
         console.log(this.state.data);
+        const level = this.props.level || 0;
         return (
             <div className="wrapper">
                 <button className="menu" onClick={this.showMenu}>
@@ -62,14 +67,19 @@ class Menu extends React.Component {
                             <div className="wrapper">
                                 {Object.keys(this.state.data).map((elem) => (
                                     <ul key={elem}>
-                                        <Link to="AllArticles/{id}">
+                                        <Link to="AllArticles">
                                             <li>{this.state.data[elem].name}
-                                                <ul>
-                                                    
+                                                <ul key={elem.id}>
+                                                    <li>{elem.name}</li>
+                                                    {console.log(this.state.data[elem].sub)}
+                                                    {this.state.data[elem].sub.map((index) => (
+                                                        <li key={index}>
+                                                            {this.state.data[elem].sub[0][0].name}
+                                                        </li>
+                                                    ))}
                                                 </ul>
                                             </li>
                                         </Link>
-                                        {/* elem.children */}
                                     </ul>
                                 ))}
                             </div>
