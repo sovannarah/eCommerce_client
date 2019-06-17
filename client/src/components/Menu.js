@@ -19,7 +19,7 @@ class Menu extends React.Component {
         /**
          * @param get all the categories
          */
-        await axios.get('http://10.34.7.0:8001/categories')
+        await axios.get('http://10.34.7.0:8001/category')
             .then(
                 (res) => {
                     this.state.data = res.data[0];
@@ -48,13 +48,12 @@ class Menu extends React.Component {
         });
     }
 
-    recursive(){
+    recursive() {
 
     }
 
     render() {
         console.log(this.state.data);
-        const level = this.props.level || 0;
         return (
             <div className="wrapper">
                 <button className="menu" onClick={this.showMenu}>
@@ -74,7 +73,7 @@ class Menu extends React.Component {
                                                     {console.log(this.state.data[elem].sub)}
                                                     {this.state.data[elem].sub.map((index) => (
                                                         <li key={index}>
-                                                            {this.state.data[elem].sub[0][0].name}
+                                                            {this.state.data[elem].sub}
                                                         </li>
                                                     ))}
                                                 </ul>
