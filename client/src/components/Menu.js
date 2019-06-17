@@ -55,7 +55,7 @@ class Menu extends React.Component {
     render() {
         console.log(this.state.data);
         return (
-            <div className="wrapper">
+            <div id="menu" className="wrapper">
                 <button className="menu" onClick={this.showMenu}>
                     <img src={Menui} />
                 </button>
