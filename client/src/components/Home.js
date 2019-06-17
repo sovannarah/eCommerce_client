@@ -24,21 +24,20 @@ class Home extends React.Component {
     render() {
         console.log(this.state.articles)
         return(
-            <section id="home-stn" className="bg-dark">
-                <Slider />
-                <section className="bg-info mt-4 container">
+            <section id="home-stn" className="">
+                {/* <Slider /> */}
+                <section className="mt-4 container">
                     <div id="ctn-popular">
                         <h1 className="row d-flex justify-content-center">
                             the most
                         </h1>
-                        {this.state.articles.map((item, index) => (
-                            <Link to={`/article/${ item.id }`} key={index}>
-                                <p>{ item.title }</p>
-                                <p>{ item.price }</p>
-                            </Link>
-                        ))}
-                        <ul className="ul">
-
+                        <ul className="d-flex row justify-content-center col-12">
+                            {this.state.articles.map((item, index) => (
+                                 <Link id="popular-article" key={index} className="col-md-3 m-2" to={`/article/${ item.id }`} >
+                                    <p>{ item.title }</p>
+                                    <p>{ item.price }</p>
+                                </Link>
+                            ))}
                         </ul> 
                     </div>
                 </section>
