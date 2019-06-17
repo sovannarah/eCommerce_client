@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
-import axios from 'axios';
 import UserCtrl from './userCtrl';
 import IconMenu from '../images/icone/icone-menu.png';
 import Logo from '../images/icon/logo.png';
@@ -49,6 +48,8 @@ class Header extends React.Component {
     openMenu() {
         document.getElementById("menu").classList.toggle("exit-menu")
     }
+
+    
 
     render() {
         const userToken = localStorage.getItem('token');

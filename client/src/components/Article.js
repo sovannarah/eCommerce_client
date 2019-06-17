@@ -24,6 +24,7 @@ class Article extends React.Component {
         var id = this.props.match.params.id;
         axios.get(ip + '/article/' +id)
         .then(res => {
+            console.log(res.data)
             this.setState({ article : res.data })
         })
     }

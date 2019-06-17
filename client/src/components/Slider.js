@@ -10,15 +10,12 @@ import '../style/css/article.css';
 const produit = [
     {
         image: Rtx,
-        text: '1'
     },
     {
         image: Chg90,
-        text: '2'
     },
     {
         image: Apex,
-        text: '3'
     }
 ]
 
