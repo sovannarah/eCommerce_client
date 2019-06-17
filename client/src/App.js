@@ -14,7 +14,6 @@ class App extends React.Component {
     return (
       <div id="main-div" className="h-100">
         <BrowserRouter>
-          <Menu />
           <Header />
           <div id="margin"></div>
           <Routeur />

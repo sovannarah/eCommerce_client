@@ -70,12 +70,7 @@ class Menu extends React.Component {
                                             <li>{this.state.data[elem].name}
                                                 <ul key={elem.id}>
                                                     <li>{elem.name}</li>
-                                                    {console.log(this.state.data[elem].sub)}
-                                                    {this.state.data[elem].sub.map((index) => (
-                                                        <li key={index}>
-                                                            {this.state.data[elem].sub}
-                                                        </li>
-                                                    ))}
+
                                                 </ul>
                                             </li>
                                         </Link>
