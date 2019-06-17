@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Fab from '@material-ui/core/Fab';
 import '../style/css/register.css';
 const ip = 'http://10.34.7.0:8001';
+
 class Register extends React.Component {
 
     constructor(props) {

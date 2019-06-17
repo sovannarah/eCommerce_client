@@ -4,6 +4,7 @@ import Img1 from '../images/slider/stl-apx.jpg';
 import Img2 from '../images/slider/apx.png';
 import axios from 'axios';
 import '../style/css/article.css'; 
+const ip = 'http://10.34.7.0:8001';
 
 const images = [
     {
@@ -14,6 +15,15 @@ const images = [
     },
 ]
 class Article extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            article : []
+        }
+        var idArticle = this.props.match.params.id;
+        // axios.get(ip + '/article/')
+    }
     render() {
         return (
             <section className="d-flex h-100">      
