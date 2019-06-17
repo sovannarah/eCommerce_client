@@ -2,8 +2,9 @@ import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Img1 from '../images/slider/stl-apx.jpg';
 import Img2 from '../images/slider/apx.png';
-
+import axios from 'axios';
 import '../style/css/article.css'; 
+const ip = 'http://10.34.7.0:8001';
 
 const images = [
     {
@@ -14,7 +15,22 @@ const images = [
     },
 ]
 class Article extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            article : {}
+        }
+        var id = this.props.match.params.id;
+        axios.get(ip + '/article/' +id)
+        .then(res => {
+            this.setState({ article : res.data })
+        })
+    }
+    
     render() {
+        const article = this.state.article;
+        console.log(article)
         return (
             <section className="d-flex h-100">      
                 <div id="ctn-carousel" className="d-flex col-sm-7 h-100 w-100">
@@ -28,18 +44,14 @@ class Article extends React.Component {
                 </div>
                 <div className="col-sm-5 h-100 d-flex flex-column">
                     <div className="margin-art ml-auto mr-auto w-75">
-                        <h1>SteelSeries</h1>
-                        <h2>$210</h2>
+                        <h1>{ article.title }</h1>
+                        <p>stock : { article.stock }</p>
+                        <h2>$ { article.price }</h2>
                         <button>
                             <p>ADD TO CARD</p>
                         </button>
-                        <h3>Apex Pro</h3>
-                        <p>
-                        La nouvelle génération de claviers mécaniques
-                        L’Apex Pro représente le plus grand bond en avant en matière de claviers mécaniques depuis l’invention du 
-                        switch mécanique il y a 35 ans. Chaque touche peut être réglée en fonction de votre niveau de sensibilité 
-                        préféré, que ce soit pour le gaming, le travail ou autre chose. 
-                        </p>
+                        <h5>DESCRIPTION</h5>
+                        <p>{article.description}</p>
                     </div>
                 </div>
             </section>
