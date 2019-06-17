@@ -29,49 +29,52 @@ class Admin extends React.Component {
     render() {
         return (
             <section className="col-12 h-10 d-flex">
-                    <form id="form-add" method="post"
-                          className="bg-light d-flex justify-content-around flex-column col-md-6 h-50 m-auto">
-                        <TextField
-                            id="outlined-name"
-                            label="title"
-                            name="title"
-                            type="string"
-                        />
-                        <TextField
-                            id="outlined-name"
-                            label="description"
-                            name="description"
-                            type="string"
-                        />
-                        <TextField
-                            id="outlined-name"
-                            label="price"
-                            name="price"
-                            type="integer"
-                        />
-                        <TextField
-                            id="outlined-name"
-                            label="image"
-                            name="image"
-                            type="file"
-                        />
-                        <TextField
-                            id="outlined-name"
-                            label="stock"
-                            name="stock"
-                            type="integer"
-                        />
-                        <TextField
-                            id="outlined-name"
-                            label="category"
-                            name="category"
-                            type="string"
-                        />
-                        <Fab id="button-add" onClick={this.addItem} type="submit" className="w-50 ml-auto mr-auto"
-                             variant="extended" color="secondary">
-                            Add Item
-                        </Fab>
-                    </form>
+
+                <form id="form-add" method="post"
+                      className="bg-light d-flex justify-content-around flex-column col-md-6 h-50 m-auto">
+                    <p></p>
+                    <p></p>
+                    <TextField
+                        id="outlined-name"
+                        label="title"
+                        name="title"
+                        type="string"
+                    />
+                    <TextField
+                        id="outlined-name"
+                        label="description"
+                        name="description"
+                        type="string"
+                    />
+                    <TextField
+                        id="outlined-name"
+                        label="price"
+                        name="price"
+                        type="integer"
+                    />
+                    <TextField
+                        id="outlined-name"
+                        label="image"
+                        name="image"
+                        type="file"
+                    />
+                    <TextField
+                        id="outlined-name"
+                        label="stock"
+                        name="stock"
+                        type="integer"
+                    />
+                    <TextField
+                        id="outlined-name"
+                        label="category"
+                        name="category"
+                        type="string"
+                    />
+                    <Fab id="button-add" onClick={this.addItem} type="submit" className="w-50 ml-auto mr-auto"
+                         variant="extended" color="secondary">
+                        Add Item
+                    </Fab>
+                </form>
             </section>
         );
     }

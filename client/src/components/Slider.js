@@ -28,8 +28,8 @@ class Slider extends React.Component {
             <Carousel className="col-12">
                 {produit.map((item, index) => (
                     <Carousel.Item key={index}
-                    className="h-100"
-                    style={{ background: `url('${item.image}') no-repeat center center` }}>
+                                   className="h-100"
+                                   style={{ background: `url('${item.image}') no-repeat center center` }}>
                         {item.text}
                     </Carousel.Item>
                 ))}
