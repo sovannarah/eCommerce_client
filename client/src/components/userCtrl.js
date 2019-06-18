@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-const ip = 'http://10.34.7.0:8001';
+let ip='http://10.34.7.68:8000';
 
 class UserCtrl extends React.Component {
 
@@ -31,6 +31,7 @@ class UserCtrl extends React.Component {
         axios.post(ip + '/login', {email: this.state.email, password: this.state.password})
             .then(res=> {
                 const user = res.data;
+                console.log(res.data);
                 if(user.token) {
                     localStorage.setItem('token' , user.token);
                     localStorage.setItem('email', user.email);

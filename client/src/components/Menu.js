@@ -19,7 +19,8 @@ class Menu extends React.Component {
         /**
          * @param get all the categories
          */
-        await axios.get('http://10.34.7.0:8001/category')
+        let ip='http://10.34.7.68:8000/';
+        await axios.get(ip+'category')
             .then(
                 (res) => {
                     this.state.data = res.data[0];
