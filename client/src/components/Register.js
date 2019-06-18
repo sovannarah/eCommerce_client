@@ -3,8 +3,7 @@ import axios from 'axios';
 import TextField from '@material-ui/core/TextField';
 import Fab from '@material-ui/core/Fab';
 import '../style/css/register.css';
-const ip = 'http://10.34.7.0:8001';
-
+let ip='http://10.34.7.68:8000';
 class Register extends React.Component {
 
     constructor(props) {
@@ -21,7 +20,7 @@ class Register extends React.Component {
     }
 
     changeMail(e) {
-        this.setState({email : e.target.value}) 
+        this.setState({email : e.target.value})
     }
 
     changePassword(e) {
@@ -32,9 +31,9 @@ class Register extends React.Component {
     register(e) {
         e.preventDefault();
         axios.post(ip + '/register', this.state)
-        .then(res=> {
-            console.log(res.data)
-        })
+            .then(res=> {
+                console.log(res.data)
+            })
     }
 
     render() {

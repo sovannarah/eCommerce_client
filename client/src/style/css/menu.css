@@ -1,19 +1,29 @@
 #menu {
-  background-color: red;
-  height: 100%;
-  margin: 0;
-  position: fixed;
-  z-index: 17;
-  left: -992px;
-  top: 0;
-  transition: 500ms ease-in; }
+    background-color: red;
+    height: 100%;
+    margin: 0;
+    position: fixed;
+    z-index: 17;
+    left: -992px;
+    top: 0;
+    transition: 500ms ease-in;
+}
 
 #ctn-logo-menu {
-  height: 8vh;
-  min-height: 60px; }
+    height: 8vh;
+    min-height: 60px;
+}
 
 .exit-menu {
-  left: 0 !important;
-  transition: left 500ms ease-in; }
+    left: 0 !important;
+    transition: left 500ms ease-in;
+}
 
-/*# sourceMappingURL=menu.css.map */
+.menu img {
+    width: 20px;
+}
+
+.wrapper {
+    width: 40%;
+    height: 100%;
+}

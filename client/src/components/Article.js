@@ -1,9 +1,9 @@
-import React from 'react'; 
+import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Img1 from '../images/slider/stl-apx.jpg';
 import Img2 from '../images/slider/apx.png';
 import axios from 'axios';
-import '../style/css/article.css'; 
+import '../style/css/article.css';
 const ip = 'http://10.34.7.0:8001';
 
 const images = [
@@ -23,16 +23,16 @@ class Article extends React.Component {
         }
         var id = this.props.match.params.id;
         axios.get(ip + '/article/' +id)
-        .then(res => {
-            this.setState({ article : res.data })
-        })
+            .then(res => {
+                this.setState({ article : res.data })
+            })
     }
     
     render() {
         const article = this.state.article;
         console.log(article)
         return (
-            <section className="d-flex h-100">      
+            <section className="d-flex h-100">
                 <div id="ctn-carousel" className="d-flex col-sm-7 h-100 w-100">
                     <Carousel className="w-100 mt-auto mb-auto">
                         {images.map((item, index) => (
