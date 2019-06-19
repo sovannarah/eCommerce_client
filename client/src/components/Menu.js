@@ -19,10 +19,10 @@ class Menu extends React.Component {
         /**
          * @param get all the categories
          */
-        axios.get('http://10.34.7.68:8000/category')
+        axios.get('http://10.34.6.23:8000/category')
             .then(
                 (res) => {
-                    console.log(this.state.data);
+                    // console.log(this.state.data);
                     this.state.data = res.data[0];
                 },
                 (err) => {
