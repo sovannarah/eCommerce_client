@@ -1,19 +1,21 @@
-.carousel-inner {
+#home-stn .carousel-inner {
   height: 500px;
   background-size: 100% 100%; }
-
-#car-img {
+#home-stn #car-img {
   max-height: 90%;
   max-width: 90%; }
-
-.carousel {
+#home-stn .carousel {
   background: url("/src/images/slider/black-bg.png");
   background-color: black; }
-
-.text {
+#home-stn .text {
   color: #f0f0f0; }
-
-.carousel-control-next, .carousel-control-prev {
+#home-stn .carousel-control-next, #home-stn .carousel-control-prev {
   display: none; }
+
+#stn-article .carousel-inner {
+  height: 500px; }
+#stn-article #car-img {
+  max-height: 90%;
+  max-width: 90%; }
 
 /*# sourceMappingURL=slider.css.map */

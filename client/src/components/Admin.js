@@ -49,7 +49,7 @@ class Admin extends React.Component {
             'token': localStorage.getItem('token'),
             'Access-Control-Allow-Credentials': true
         };
-         const ip='http://10.34.7.68:8000';
+         const ip='http://10.34.7.92:8000';
         e.preventDefault();
         console.log(this.state.title);
         const formData = new FormData();

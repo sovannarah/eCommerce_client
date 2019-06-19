@@ -33,18 +33,21 @@ class Header extends React.Component {
         this.setState({user: true})
         this.setState({search: !this.state.search})
         this.setState({cart: true})
+        // document.getElementById("ctn-search-barre").classList.toggle("open");
     }
 
     displayUser() {
         this.setState({user: !this.state.user})
         this.setState({search: true})
         this.setState({cart: true})
+        // document.getElementById("menu-user").classList.toggle("open");
     }
 
     displayCart() {
         this.setState({user: true})
         this.setState({search: true})
         this.setState({cart: !this.state.cart})
+        // document.getElementById("menu-cart").classList.toggle("open");
     }
 
     toggleDrawer = (side, open) => event => {
@@ -89,15 +92,7 @@ class Header extends React.Component {
                             <button onClick={this.displayCart}>
                                 <img src={ IconeCart }></img>
                             </button>
-                            <CSSTransition
-                                in = {this.state.cart}
-                                timeout={500}
-                                classNames="display-cart"
-                            >
-                                <div id="menu-cart" className="d-flex bg-dark open">
-
-                                </div>
-                            </CSSTransition>
+                           
                         </li>
                     </ul>
                 </div>
@@ -117,6 +112,15 @@ class Header extends React.Component {
                 >
                     <UserCtrl user={userToken}/>
                 </CSSTransition>
+                 <CSSTransition
+                 in = {this.state.cart}
+                 timeout={500}
+                 classNames="display-cart"
+             >
+                 <div id="menu-cart" className="d-flex bg-dark open">
+
+                 </div>
+             </CSSTransition>
             </header>
         );
     }
