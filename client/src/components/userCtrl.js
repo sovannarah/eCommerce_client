@@ -54,9 +54,23 @@ class UserCtrl extends React.Component {
         } else {
             return (
                 <div id="menu-user" className="d-flex flex-column justify-content-around bg-light open">
-                    <input id="input-username" className="col-12" onChange={this.changeEmail} type="text"></input>
-                    <input id="input-password" className="col-12" onChange={this.changePassword} type="password"></input>
-                    <input id="connect-button" onClick={this.login} value="Connection" className="btn-default" type="submit" />
+                    <input id="input-username" 
+                    className="col-12" 
+                    onChange={this.changeEmail} 
+                    placeholder="Email  " 
+                    type="text" />
+                    <input id="input-password" 
+                    className="col-12" 
+                    onChange={this.changePassword} 
+                    type="password" 
+                    placeholder="password"
+                    />
+                    <input id="connect-button" 
+                    onClick={this.login} 
+                    value="Connection" 
+                    className="btn-default bg-mainly" 
+                    type="submit" 
+                    />
                     <p>Not registered? <Link to="/register">Sign In</Link></p>
                 </div>
             );
