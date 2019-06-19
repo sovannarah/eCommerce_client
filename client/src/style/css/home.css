@@ -69,5 +69,7 @@
   font-family: 'Kaushan Script', cursive;
   font-size: 45px;
   color: white; }
+#ctn-popular a {
+  text-decoration: none; }
 
 /*# sourceMappingURL=home.css.map */

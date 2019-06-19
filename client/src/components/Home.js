@@ -101,20 +101,22 @@ class Home extends React.Component {
                         <div className=" d-flex row justify-content-around ">
                             {product.map((item, index) => (
                                 <Card key={index} className="ctn-popular m-3 col-md-4">
-                                    <CardActionArea>
-                                        <CardHeader
-                                            title={item.title}
-                                            subheader={`$${item.price}`}
-                                        />
-                                        <div className="ctn-img d-flex">
-                                            <img id="popular-img" className="m-auto" src={item.image} />
-                                        </div>
-                                        <CardContent>
-                                            <Typography variant="body2" color="textSecondary" component="p">
-                                                { item.description }
-                                            </Typography>
-                                        </CardContent>
-                                    </CardActionArea>
+                                    <Link to="">
+                                        <CardActionArea>
+                                            <CardHeader
+                                                title={item.title}
+                                                subheader={`$${item.price}`}
+                                            />
+                                            <div className="ctn-img d-flex">
+                                                <img id="popular-img" className="m-auto" src={item.image} />
+                                            </div>
+                                            <CardContent>
+                                                <Typography variant="body2" color="textSecondary" component="p">
+                                                    { item.description }
+                                                </Typography>
+                                            </CardContent>
+                                        </CardActionArea>
+                                    </Link>
                                 </Card>
                             ))}
                         </div> 
