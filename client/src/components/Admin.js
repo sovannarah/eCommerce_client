@@ -49,10 +49,12 @@ class Admin extends React.Component {
             'token': localStorage.getItem('token'),
             'Access-Control-Allow-Credentials': true
         };
-         let ip='http://10.34.7.68:8000';
+         const ip='http://10.34.7.68:8000';
         e.preventDefault();
         console.log(this.state.title);
-        axios.post(ip+'/article', this.state,{headers:headers})
+        const formData = new FormData();
+        Object.keys(this.state).forEach((v) => formData.append(v, this.state[v]));
+        axios.post(ip+'/article', formData,{headers:headers})
             .then(res => {
                 console.log(res.data)
             })
