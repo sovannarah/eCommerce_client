@@ -10,13 +10,13 @@ import Home from './components/Home';
 class Routeur extends React.Component {
     render() {
         return (
-                <Switch>
-                    <Route exact path="/" component={ Home } />
-                    <Route path="/articles" component={ Articles } />
-                    <Route path="/article/:id" component={ Article } />
-                    <Route path="/register" component={ Register } />
-                    <Route path="/admin" component={ Admin } />
-                </Switch>
+            <Switch>
+                <Route exact path="/" component={ Home } />
+                <Route path="/articles" component={ Articles } />
+                <Route path="/article/:id" component={ Article } />
+                <Route path="/register" component={ Register } />
+                <Route path="/admin" component={ Admin } />
+            </Switch>
         )
     }
 }
