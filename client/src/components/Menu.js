@@ -1,5 +1,5 @@
 import React from 'react';
-import Menui from '../img/icon.png';
+import Menui from '../images/icon/icon-menu-black.png';
 import { Link } from 'react-router-dom';
 import '../style/css/menu.css';
 import axios from 'axios';
@@ -56,11 +56,7 @@ class Menu extends React.Component {
     render() {
         console.log(this.state.data);
         return (
-            <div id="menu" className="wrapper">
-                <button className="menu" onClick={this.showMenu}>
-                    <img src={Menui} />
-                </button>
-
+            <div id="menu" className="wrapper col-12">
                 {
                     this.state.showMenu
                         ? (

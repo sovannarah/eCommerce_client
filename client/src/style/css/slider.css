@@ -13,4 +13,7 @@
 .text {
   color: #f0f0f0; }
 
+.carousel-control-next, .carousel-control-prev {
+  display: none; }
+
 /*# sourceMappingURL=slider.css.map */
