@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
+import Drawer from '@material-ui/core/Drawer';
+import Menu from '../components/Menu';
 import UserCtrl from './userCtrl';
 import IconMenu from '../images/icon/icon-menu.png';
 import Logo from '../images/icon/logo2.png';
-import IconeSearch from '../images/icon/icon-search.png';
+import IconeSearch from '../images/icon/icon-loupe.png';
 import IconeUser from '../images/icon/icon-user.png';
 import IconeCart from '../images/icon/icon-panier.png';
 import '../style/css/header.css';
@@ -17,7 +19,7 @@ class Header extends React.Component {
             search: true,
             user: true,
             cart: true,
-
+            left: false
         }
 
         this.displaySearch = this.displaySearch.bind(this);
@@ -45,17 +47,25 @@ class Header extends React.Component {
         this.setState({cart: !this.state.cart})
     }
 
-    openMenu() {
-        document.getElementById("menu").classList.toggle("exit-menu")
-    }
+    toggleDrawer = (side, open) => event => {
+        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+          return;
+        }
+    
+        this.setState({ ...this.state, [side]: open });
+      };
 
     render() {
+
         const userToken = localStorage.getItem('token');
         return (
             <header className="container-fluid">
+                <Drawer className="" open={this.state.left} onClose={this.toggleDrawer('left', false)}>
+                    <Menu />
+                </Drawer>
                 <div id="ctn-header" className="h-100 d-flex justify-content-between">
                     <div id="ctn-icon-menu"className="d-flex justify-content-between">
-                        <button id="button-menu" onClick={this.openMenu}>
+                        <button id="button-menu" onClick={this.toggleDrawer('left', true)}>
                             <img id="icone-menu" className="mt-auto mb-auto" src={ IconMenu } />
                         </button>
                     </div>
