@@ -1,13 +1,18 @@
 #menu {
-    background-color: red;
-    height: 100%;
-    margin: 0;
-    position: fixed;
-    z-index: 17;
-    left: -992px;
-    top: 0;
-    transition: 500ms ease-in;
-}
+  height: 100%;
+  width: 100%; }
+
+.MuiDrawer-paper {
+  width: 100%; }
+  @media (min-width: 1200px) {
+    .MuiDrawer-paper {
+      width: 19%; } }
+  @media (min-width: 768px) and (max-width: 1200px) {
+    .MuiDrawer-paper {
+      width: 22.5%; } }
+  @media (min-width: 576px) and (max-width: 768px) {
+    .MuiDrawer-paper {
+      width: 40%; } }
 
 #ctn-logo-menu {
     height: 8vh;

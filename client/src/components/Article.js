@@ -32,8 +32,8 @@ class Article extends React.Component {
         const article = this.state.article;
         console.log(article)
         return (
-            <section className="d-flex h-100">
-                <div id="ctn-carousel" className="d-flex col-sm-7 h-100 w-100">
+            <section className="d-flex h-100">      
+                <div id="ctn-carousel" className="d-flex col-sm-6 h-100 w-100">
                     <Carousel className="w-100 mt-auto mb-auto">
                         {images.map((item, index) => (
                             <Carousel.Item key={index}>
@@ -42,7 +42,7 @@ class Article extends React.Component {
                         ))}
                     </Carousel>
                 </div>
-                <div className="col-sm-5 h-100 d-flex flex-column">
+                <div className="col-sm-6 h-100 d-flex flex-column">
                     <div className="margin-art ml-auto mr-auto w-75">
                         <h1>{ article.title }</h1>
                         <p>stock : { article.stock }</p>
