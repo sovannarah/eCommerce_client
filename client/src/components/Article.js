@@ -58,7 +58,7 @@ class Article extends React.Component {
                         ))}
                     </Carousel>
                 </div>
-                <div id="ctn-infoArticle" className="col-lg-6 h-100 bg-light m-auto d-flex flex-column">
+                <div id="ctn-infoArticle" className="col-lg-6 bg-light m-auto d-flex flex-column">
                     <div className="margin-art ml-auto d-flex flex-column mr-auto w-75">
                         <div className="mt-5 mb-5">
                             <h1>{ art.title }</h1>

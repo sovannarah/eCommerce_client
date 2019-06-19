@@ -1,11 +1,13 @@
 #stn-article {
     height: 92%;
     background-color: black;
-    max-width: 100%;;
-
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
     #ctn-infoArticle {
         padding-top: 4%;
-        
+        margin: 0;
+        min-height: 100%;
     }
 
 
@@ -21,7 +23,7 @@
 
     #ctn-carousel {
         background-image: url("../../images/slider/black-bg.png");
-    background-size: 100% 100%;
+        background-size: 100% 100%;
         margin: 0;
         width: 100% !important;
     }
