@@ -2,3 +2,21 @@
     height: 500px;
     background-size: 100% 100%;
 }
+
+#car-img {
+    max-height: 90%;
+    max-width: 90%;
+}
+
+.carousel {
+    background: url("/src/images/slider/black-bg.png");
+    background-color: black;
+}
+
+.text {
+    color: #f0f0f0;
+}
+
+.carousel-control-next, .carousel-control-prev {
+    display: none;
+}

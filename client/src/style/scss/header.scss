@@ -3,13 +3,14 @@ header {
     min-height: 60px;
     height: 8vh;
     top: 0;
-    z-index: 10;
-    background-color: #212529;
+    z-index: 20;
+    background-color: #181818;
 }
 
 #ctn-header {
-    border-bottom : 2px solid #00c5b1;
-    background-color: #212529;
+    // border-bottom : 1px solid #f0f0f0;
+    background-color: white;
+    background-color: #181818;
 }
 
 #button-menu {
@@ -18,8 +19,8 @@ header {
 }
 
 #icone-menu {
-    height: 35px;
-    width: 40px;
+    height: 30px;
+    width: 35px;
     min-width: 30px;
 }
 
@@ -52,8 +53,9 @@ li{
 
     img {
         margin: auto; 
-        height: 35px;
-        width: 35px;
+        min-width: 30px;
+        height: 30px;
+        width: 30px;
     }
 }
 

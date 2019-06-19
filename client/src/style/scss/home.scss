@@ -1,9 +1,105 @@
-#home-stn {
-    background-color: black;
-    min-height: 90vh;
-    color: white;
+.bg-grey {
+    background-color: #282828;
 }
 
-#popular-article {
-    color: #717171;
+.bg-mainly {
+    background-color: #ef464b;
+}
+
+.bg-milk {
+    background-color: #f7f7f7;
+}
+
+#home-stn {
+}
+
+#case-categorie {
+    height: 417px;
+
+    h1 {
+        color: #282828;
+        font-size: 4vw;
+        font-family: 'Kaushan Script', cursive;
+    }
+}
+
+#ctn-iconCat {
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
+}
+
+.ctn-categorie {
+    width: 180px;
+    height: 180px;
+    display: flex;
+    color: white;
+    text-align: center;
+    position: relative;
+
+
+    img{
+        position: absolute;
+        margin: auto;
+        height: 130%;;
+        width: 234px;
+    }
+
+    .align-r {
+        top: -36%;
+    }
+
+    .align-l {
+        left: 0;
+    }
+}
+
+.bg-blackgrey {
+    background-color: #181818;
+}
+
+.bg-black {
+    background-color: black;
+}
+
+.ctn-popular {
+    height: 300px;
+    margin: 0;
+    padding: 0;
+}
+
+.ctn-img{
+    height: 130px;
+    width: 100%;
+    margin: 0;
+    background: whitesmoke;
+}
+
+#popular-img {
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.ctn-popular {
+    max-width: 300px;
+}
+
+.MuiPaper-root { 
+    // height: 350px;
+    .MuiCardContent-root {
+        // max-height: 130px;
+        .MuiTypography-root {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            max-height: 100px;
+        }
+    }
+}
+
+#ctn-popular {
+    h2 {
+        font-family: 'Kaushan Script', cursive;
+        font-size: 45px;
+        color: white;
+    }
 }
