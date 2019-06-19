@@ -19,20 +19,20 @@ class Menu extends React.Component {
         /**
          * @param get all the categories
          */
-        let ip='http://10.34.7.68:8000/';
-        await axios.get(ip+'category')
+        axios.get('http://10.34.7.68:8000/category')
             .then(
                 (res) => {
+                    console.log(this.state.data);
                     this.state.data = res.data[0];
-
-                    // console.log(this.state.data);
                 },
                 (err) => {
                     console.log(err);
                 })
     }
+
+
     showMenu(event) {
-        /**
+        /**     
          * @param show menu on click
          */
         event.preventDefault();
@@ -49,34 +49,26 @@ class Menu extends React.Component {
         });
     }
 
-    recursive() {
-
-    }
-
     render() {
-        console.log(this.state.data);
+        // console.log(this.state.data);
         return (
             <div id="menu" className="wrapper">
                 <button className="menu" onClick={this.showMenu}>
                     <img src={Menui} />
                 </button>
-
                 {
                     this.state.showMenu
                         ? (
                             <div className="wrapper">
-                                {Object.keys(this.state.data).map((elem) => (
-                                    <ul key={elem}>
-                                        <Link to="AllArticles">
-                                            <li>{this.state.data[elem].name}
-                                                <ul key={elem.id}>
-                                                    <li>{elem.name}</li>
-
-                                                </ul>
-                                            </li>
-                                        </Link>
-                                    </ul>
-                                ))}
+                                <ul>
+                                    {Object.keys(this.state.data).map((elem, i) => (
+                                        <li key={i}>
+                                            <Link to={"/category/" + this.state.data[elem].id}>
+                                                {this.state.data[elem].name}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
                         )
                         : (null)

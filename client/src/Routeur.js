@@ -4,6 +4,8 @@ import Article from './components/Article';
 import Register from './components/Register';
 import Admin from './components/Admin';
 import { Switch, Route } from 'react-router';
+import Category from './components/Menu/AllMenu';
+
 
 import Home from './components/Home';
 
@@ -16,6 +18,8 @@ class Routeur extends React.Component {
                 <Route path="/article/:id" component={ Article } />
                 <Route path="/register" component={ Register } />
                 <Route path="/admin" component={ Admin } />
+                <Route path="/category" component={ Category } />
+
             </Switch>
         )
     }
