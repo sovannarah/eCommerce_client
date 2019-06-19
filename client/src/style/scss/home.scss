@@ -14,8 +14,7 @@
 }
 
 #case-categorie {
-    height: 417px;
-
+    min-height: 100px;
     h1 {
         color: #282828;
         font-size: 4vw;
@@ -40,8 +39,12 @@
     img{
         position: absolute;
         margin: auto;
-        height: 130%;;
+        height: 130%;
         width: 234px;
+        transition: 0.3s all ease;
+        &:hover {
+            transform: scale(1.1);
+        }
     }
 
     .align-r {

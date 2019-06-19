@@ -8,7 +8,7 @@
   background-color: #f7f7f7; }
 
 #case-categorie {
-  height: 417px; }
+  min-height: 100px; }
   #case-categorie h1 {
     color: #282828;
     font-size: 4vw;
@@ -29,7 +29,10 @@
     position: absolute;
     margin: auto;
     height: 130%;
-    width: 234px; }
+    width: 234px;
+    transition: 0.3s all ease; }
+    .ctn-categorie img:hover {
+      transform: scale(1.1); }
   .ctn-categorie .align-r {
     top: -36%; }
   .ctn-categorie .align-l {
