@@ -113,30 +113,16 @@ class Articles extends React.Component {
     render() {
         return(
             <section id="ctn-articles" className="container-fluid d-flex">
-                {/* <div id="ctn-filter" className="col-md-2 bg-mainly">
-                </div> */}
-                <ul className="col-md-12 row d-flex justify-content-center">
-                {product.map((item, index) => (
-                                <Card key={index} className="ctn-popular m-3 col-md-4">
-                                    <Link to={`/article/${ item.index }`}>
-                                        <CardActionArea>
-                                            <CardHeader
-                                                title={item.title}
-                                                subheader={`$${item.price}`}
-                                            />
-                                            <div className="ctn-img d-flex">
-                                                <img id="popular-img" className="m-auto" src={item.image} />
-                                            </div>
-                                            <CardContent>
-                                                <Typography variant="body2" color="textSecondary" component="p">
-                                                    { item.description }
-                                                </Typography>
-                                            </CardContent>
-                                            <p className="detail d-flex justify-content-end">Detail<span><img src={ Arrow } /></span></p>
-                                        </CardActionArea>
-                                    </Link>
-                                </Card>
-                            ))}
+                <div id="ctn-filter">
+                </div>
+                <ul className="col-12 row d-flex justify-content-center">
+                    {this.state.articles.map((item, index) => (
+                        <Link className="col-md-3 m-2 bg-light" to={`/article/${item.id}`} key={index}>
+                            <h3>{item.title}</h3>
+                            <p>{item.price}</p>
+                            <p></p>
+                        </Link>
+                    ))}
                 </ul>
             </section> 
         );

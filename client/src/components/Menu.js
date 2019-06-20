@@ -10,73 +10,40 @@ class Menu extends React.Component {
         this.state = {
             id: '',
             data: {},
-            showMenu: false
         }
-        this.showMenu = this.showMenu.bind(this);
-        this.closeMenu = this.closeMenu.bind(this);
+       
     }
     async componentDidMount() {
         /**
          * @param get all the categories
          */
-        let ip='http://10.34.7.68:8000/';
-        await axios.get(ip+'category')
-            .then(
-                (res) => {
-                    this.state.data = res.data[0];
+        axios.get('http://10.34.6.23:8000/category')
+                .then(
+                    (res) => {
+                        this.setState({ data: res.data[0] });
+                    },
+                    (err) => {
+                        console.log(err);
+                    })
+        }
 
-                    // console.log(this.state.data);
-                },
-                (err) => {
-                    console.log(err);
-                })
-    }
-    showMenu(event) {
-        /**
-         * @param show menu on click
-         */
-        event.preventDefault();
-        this.setState({ showMenu: true }, () => {
-            document.addEventListener('click', this.closeMenu);
-        });
-    }
-    closeMenu() {
-        /**
-         * @param close the menu
-         */
-        this.setState({ showMenu: false }, () => {
-            document.removeEventListener('click', this.closeMenu);
-        });
-    }
 
-    recursive() {
-
-    }
 
     render() {
         console.log(this.state.data);
         return (
-            <div id="menu" className="wrapper col-12">
-                {
-                    this.state.showMenu
-                        ? (
-                            <div className="wrapper">
-                                {Object.keys(this.state.data).map((elem) => (
-                                    <ul key={elem}>
-                                        <Link to="AllArticles">
-                                            <li>{this.state.data[elem].name}
-                                                <ul key={elem.id}>
-                                                    <li>{elem.name}</li>
-
-                                                </ul>
-                                            </li>
-                                        </Link>
-                                    </ul>
-                                ))}
-                            </div>
-                        )
-                        : (null)
-                }
+            <div id="menu" className="wrapper">
+                <div className="wrapper">
+                    <ul>
+                        {Object.keys(this.state.data).map((elem, i) => (
+                            <li key={i}>
+                                <Link to={"/category/" + this.state.data[elem].id}>
+                                    {this.state.data[elem].name}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
         );
     }

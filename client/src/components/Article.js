@@ -43,9 +43,9 @@ class Article extends React.Component {
     render() {
         const article = this.state.article;
         return (
-            <section id="stn-article" className="d-flex row">      
-                <div id="ctn-carousel" className="d-flex col-lg-6 h-100 w-100">
-                    <Carousel className="w-100 h-100 m-auto">
+            <section className="d-flex h-100">      
+                <div id="ctn-carousel" className="d-flex col-sm-6 h-100 w-100">
+                    <Carousel className="w-100 mt-auto mb-auto">
                         {images.map((item, index) => (
                             <Carousel.Item key={index}
                             className="h-100 w-100">
@@ -58,22 +58,16 @@ class Article extends React.Component {
                         ))}
                     </Carousel>
                 </div>
-                <div id="ctn-infoArticle" className="col-lg-6 bg-light m-auto d-flex flex-column">
-                    <div className="margin-art ml-auto d-flex flex-column mr-auto w-75">
-                        <div className="mt-5 mb-5">
-                            <h1>{ art.title }</h1>
-                            <h2>$ { art.price }</h2>
-                        </div>
-                        <div >
-                            <p>stock : { art.stock }</p>
-                            <button className="d-flex">
-                                <p className="m-auto">ADD TO CARD</p>
-                            </button>
-                        </div>
-                        <div className="mt-5 mb-5">
-                            <h5 className="mt-5">DESCRIPTION</h5>
-                            <p className="col-8">{art.description}</p>
-                        </div>
+                <div className="col-sm-6 h-100 d-flex flex-column">
+                    <div className="margin-art ml-auto mr-auto w-75">
+                        <h1>{ article.title }</h1>
+                        <p>stock : { article.stock }</p>
+                        <h2>$ { article.price }</h2>
+                        <button>
+                            <p>ADD TO CARD</p>
+                        </button>
+                        <h5>DESCRIPTION</h5>
+                        <p>{article.description}</p>
                     </div>
                 </div>
             </section>

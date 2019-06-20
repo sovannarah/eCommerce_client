@@ -4,7 +4,10 @@ import Article from './components/Article';
 import Register from './components/Register';
 import Admin from './components/AdminUpdate';
 import AdminCreate from './components/Admin';
+import Search from './components/Search';
 import { Switch, Route } from 'react-router';
+import Category from './components/Menu/AllMenu';
+
 
 import Home from './components/Home';
 
@@ -18,6 +21,9 @@ class Routeur extends React.Component {
                 <Route path="/register" component={ Register } />
                 <Route exact path="/admin" component={ Admin } />
                 <Route exact path="/admin/create" component={ AdminCreate } />
+                <Route path="/category" component={ Category } />
+                <Route path="/search" component={ Search } />
+
             </Switch>
         )
     }

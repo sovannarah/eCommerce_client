@@ -18,4 +18,7 @@
   max-height: 90%;
   max-width: 90%; }
 
+.carousel-control-next, .carousel-control-prev {
+  display: none; }
+
 /*# sourceMappingURL=slider.css.map */
