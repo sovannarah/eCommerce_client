@@ -70,7 +70,8 @@
 
 .detail {
   margin-right: 20px;
-  font-size: 14px; }
+  font-size: 14px;
+  color: #696969; }
   .detail img {
     margin-left: 5px;
     height: 15px;
