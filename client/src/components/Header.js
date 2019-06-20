@@ -14,9 +14,6 @@ import Suggestions from '../components/Menu/Suggestions';
 import '../style/css/header.css';
 
 
-const { API_KEY } = process.env
-const API_URL = 'http://10.34.7.92:8000/search';
-
 
 class Header extends React.Component {
 
