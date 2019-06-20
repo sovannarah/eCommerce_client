@@ -6,7 +6,7 @@ import Admin from './components/AdminUpdate';
 import AdminCreate from './components/Admin';
 import Search from './components/Search';
 import { Switch, Route } from 'react-router';
-import Category from './components/Menu/AllMenu';
+import Category from './components/Menu/AllMenu';   
 
 
 import Home from './components/Home';

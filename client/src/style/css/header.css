@@ -171,4 +171,9 @@ li {
 #input-username, #input-password {
   max-height: 30px; }
 
+.results-search{
+  display: flex;
+  float: left;
+}
+
 /*# sourceMappingURL=header.css.map */
