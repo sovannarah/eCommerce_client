@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-let ip='http://10.34.7.68:8000';
 
 class UserCtrl extends React.Component {
 
@@ -16,6 +15,7 @@ class UserCtrl extends React.Component {
         this.changePassword = this.changePassword.bind(this);
         this.login = this.login.bind(this);
         this.disconnect = this.disconnect.bind(this);
+        this.ip = 'http://127.0.0.1:8000'
     }
 
     changeEmail(e) {
@@ -28,19 +28,21 @@ class UserCtrl extends React.Component {
 
     login(e) {
         e.preventDefault();
-        axios.post(ip + '/login', {email: this.state.email, password: this.state.password})
+        axios.post(this.ip + '/login', {email: this.state.email, password: this.state.password})
             .then(res=> {
                 const user = res.data;
                 console.log(res.data);
                 if(user.token) {
                     localStorage.setItem('token' , user.token);
                     localStorage.setItem('email', user.email);
+                    window.location.replace('/');
                 }
             })
     }
 
     disconnect() {
         localStorage.clear();
+        window.location.replace('/')
     }
 
     render() {

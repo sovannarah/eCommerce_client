@@ -2,7 +2,7 @@
   width: 70%;
   height: 33.33333%;
   color: grey; }
-  #stn-adminCreate label #outlined-name {
+  #stn-adminCreate label .outlined-name {
     color: black;
     background-color: #e6eaed;
     width: 100%;
