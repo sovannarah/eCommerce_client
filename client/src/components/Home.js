@@ -21,18 +21,21 @@ const ip = 'http://10.34.7.0:8001';
 
 const product = [
     {
+        id: '1',
         image: Rtx,
         title: 'Asus Rog',
         price: '13',
         description: 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum'
     },
     {
+        id: '2',
         image: Chg90,
         title: 'nVidia GTX',
         price: '13',
         description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a'
     },
     {
+        id: '3',
         image: Apex,
         title: 'MSI x570',
         price: '13',

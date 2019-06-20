@@ -96,9 +96,21 @@
             overflow: hidden;
             max-height: 100px;
         }
+        
     }
 }
 
+.detail 
+{
+    margin-right: 20px;
+    font-size: 14px;
+
+    img {
+        margin-left: 5px;
+        height: 15px;
+        width: 15px;
+    }
+}
 #ctn-popular {
     h2 {
         font-family: 'Kaushan Script', cursive;
