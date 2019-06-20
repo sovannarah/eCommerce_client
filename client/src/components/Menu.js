@@ -10,42 +10,51 @@ class Menu extends React.Component {
         this.state = {
             id: '',
             data: {},
+            check: false
         }
-       
+
     }
-    async componentDidMount() {
+    componentDidMount() {
         /**
          * @param get all the categories
          */
         axios.get('http://10.34.6.23:8000/category')
-                .then(
-                    (res) => {
-                        this.setState({ data: res.data[0] });
-                    },
-                    (err) => {
-                        console.log(err);
-                    })
-        }
+            .then(
+                (res) => {
+                    console.log('==========')
+                    console.log(res.data);
+
+                    this.setState({ data: res.data });
+                    this.setState({ check: true });
+                },
+                (err) => {
+                    console.log(err);
+                })
+    }
 
 
 
     render() {
         console.log(this.state.data);
-        return (
-            <div id="menu" className="wrapper">
-                <div className="wrapper">
-                    <ul>
-                        {Object.keys(this.state.data).map((elem, i) => (
-                            <li key={i}>
-                                <Link to={"/category/" + this.state.data[elem].id}>
-                                    {this.state.data[elem].name}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
+        if (this.state.check) {
+            return (
+                <div id="menu" className="wrapper">
+                    <div className="wrapper">
+                        <ul>
+                            {this.state.data.map((elem, i) => (
+                                <li key={i}>
+                                    <Link to={"/category/" + elem.id}>
+                                        {elem.name}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        } else {
+            return <div></div>
+        }
     }
 }
 

@@ -15,18 +15,20 @@ class AllMenu extends React.Component {
         this.state = {
             id: '',
             data: {},
+            check: false
         }
     }
     async componentDidMount() {
         /**
          * @param show category user click on
          */
-        axios.get('http://10.34.6.23:8000/category/' + url)
+        axios.get(`http://10.34.6.23:8000/category/${url}/article`)
             .then(
                 (res) => {
                     console.log(this.state.data);
 
-                    this.state.data = res.data[0];
+                    this.setState({ data: res.data })
+                    this.setState({ check: true })
 
                 },
                 (err) => {
@@ -37,25 +39,35 @@ class AllMenu extends React.Component {
 
     render() {
         console.log(this.state.data);
-        return (
-            < div >
-                <div className="mini-menu">
-                    <h1>Menu</h1>
-                    <ul>
-                        {Object.keys(this.state.data).map((elem) => (
+        if (this.state.check) {
+            return (
+                < div >
+                    <div className="mini-menu">
+                        <h1>Menu</h1>
+                        <ul>
+                            {this.state.data.map((elem) => (
+                                <li>
+                                    <Link to={`/article/${elem.id}`}>
+                                        {elem.title}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+
+                    </div>
+                    <div className="result-menu">
+                        <h1>Item</h1>
+                        {this.state.data.map((elem) => (
                             <li>
-                                {console.log(this.state.data[elem])
-                                }
+                                {elem.description}
                             </li>
                         ))}
-                    </ul>
-
+                    </div>
                 </div>
-                <div className="result-menu">
-                    <h1>Item</h1>
-                </div>
-            </div>
-        );
+            );
+        } else {
+            return <div></div>
+        }
     }
 }
 

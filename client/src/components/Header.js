@@ -10,7 +10,13 @@ import Logo from '../images/icon/logo2.png';
 import IconeSearch from '../images/icon/icon-loupe.png';
 import IconeUser from '../images/icon/icon-user.png';
 import IconeCart from '../images/icon/icon-panier.png';
+import Suggestions from '../components/Menu/Suggestions';
 import '../style/css/header.css';
+
+
+const { API_KEY } = process.env
+const API_URL = 'http://10.34.7.92:8000/search';
+
 
 class Header extends React.Component {
 
@@ -21,7 +27,7 @@ class Header extends React.Component {
             user: true,
             cart: true,
             left: false,
-            data: {},
+            results: {},
             put: '',
         }
 
@@ -31,38 +37,31 @@ class Header extends React.Component {
 
     }
 
-    handleChange = (event) => {
-       this.setState({
-           put: event.target.value           
-       }, () => {
-        // console.log(this.state.put);
-        this.filterArray();
-       });
-       
+    handleChange = () => {
+        this.setState({
+            put: this.search.value
+        }, () => {
+            if (this.state.put && this.state.put.length > 1) {
+                if (this.state.put.length % 2 === 0) {
+                    this.displaySearchBar()
+                } else if (!this.state.put) {
+
+                }
+            }
+        })
     }
 
     displaySearchBar = () => {
-        axios.post('http://10.34.6.23:8000/search')
-            .then(
-                (res) => {
-                    // console.log(res.data[0]);
-                    this.setState({ data: res.data });
-                },
-                (err) => {
-                    console.log(err);
-                });
+        axios.get(`http://10.34.7.92:8000/search?title=` + this.state.put)
+            .then(({ data }) => {
+                console.log(data)
+                this.setState({ results: data })
+            })
     }
 
-    filterArray = () =>{
-        let userSearch = this.state.put;
-        let Api = this.state.data;
-
-    
-
-    }
 
     componentWillMount() {
-        this.displaySearchBar();
+        // this.displaySearchBar();
     }
 
     displaySearch() {
@@ -92,7 +91,7 @@ class Header extends React.Component {
     };
 
     render() {
-        console.log(this.state.data);
+        // console.log(this.state.results);
 
         const userToken = localStorage.getItem('token');
         return (
@@ -129,8 +128,7 @@ class Header extends React.Component {
                             <CSSTransition
                                 in={this.state.cart}
                                 timeout={500}
-                                classNames="display-cart"
-                            >
+                                classNames="display-cart">
                                 <div id="menu-cart" className="d-flex bg-dark open">
 
                                 </div>
@@ -141,26 +139,24 @@ class Header extends React.Component {
                 <CSSTransition
                     in={this.state.search}
                     timeout={500}
-                    classNames="display-search"
-                >
+                    classNames="display-search">
                     <div id="ctn-search-barre" className="d-flex justify-content-end w-100 open">
-                        <input id="search-barre" className="mt-auto mb-auto mr-5" input={this.state.put} onChange={this.handleChange} type="text" placeholder="Search" />
-                        <div>
-                            {Object.keys(this.state.data).map((elem, i) => (
+                        <input id="search-barre" className="mt-auto mb-auto mr-5" ref={input => this.search = input} onChange={this.handleChange} type="text" placeholder="Search" />
+                        <div className="results-search">
+                            {this.state.results.length >= 1 ? this.state.results.map((elem, i) => (
                                 <li key={i}>
                                     <Link to="">
-                                        {this.state.data[elem].title}
+                                        {elem.title}
                                     </Link>
                                 </li>
-                            ))}
+                            )) : ""}
                         </div>
                     </div>
                 </CSSTransition>
                 <CSSTransition
                     in={this.state.user}
                     timeout={500}
-                    classNames="display-user"
-                >
+                    classNames="display-user">
                     <UserCtrl user={userToken} />
                 </CSSTransition>
             </header>
