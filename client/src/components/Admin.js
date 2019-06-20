@@ -17,10 +17,15 @@ class Admin extends React.Component {
 			category : [],
 		};
 		this.ip = 'http://127.0.0.1:8000';
-		this.parseCategory = this.parseCategory.bind(this)
+		this.parseCategory = this.parseCategory.bind(this);
 		this.change = this.change.bind(this);
 		this.Getcategory = this.Getcategory.bind(this);
 		this.addItem = this.addItem.bind(this);
+	}
+
+	componentDidMount()
+	{
+
 	}
 
 	parseCategory (data)

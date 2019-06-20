@@ -1,12 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import MaterialTable from 'material-table';
-import  { Redirect } from 'react-router-dom'
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import '../style/css/adminupdate.css';
+import {MenuList} from "@material-ui/core";
 
 class Admin extends React.Component {
 	constructor(props) {
@@ -32,13 +32,30 @@ class Admin extends React.Component {
 			},
 			category : [],
 			category_id: '',
-			category_name : ''
+			category_name : '',
+			parent_name: 'None'
 		};
 		this.ip = 'http://127.0.0.1:8000';
+		this.handleChange = this.handleChange.bind(this);
 		this.parseCategory = this.parseCategory.bind(this)
 	}
 
 	async componentDidMount () {
+		if (!localStorage.getItem('token'))
+			window.location.replace('/');
+		else
+		{
+			await axios.get(this.ip + '/user/' + localStorage.getItem('token') +
+				'/check').then(
+				() =>
+				{
+					console.log("===== Welcome ========");
+				},
+				() =>
+				{
+					window.location.replace('/');
+				})
+		}
 		axios.get(this.ip + '/article')
 			.then(res => {
 				console.log('======= get article ========');
@@ -85,19 +102,26 @@ class Admin extends React.Component {
 	}
 
 	handleChange(event) {
-		this.setState({category_id: event.target.value})
+		console.log(event);
+		this.setState({ parent_name: event._targetInst.stateNode.innerText});
+		this.setState({category_id: event._targetInst.stateNode.id})
 	}
 
-	newCat () {
-		const data = {parent_id: this.state.category_id, name: this.state.category_name};
-		axios.post(this.ip + '/category', data,{headers:this.state.headers})
-			.then(res => {
+	async newCat () {
+		const data = {
+			parentId: this.state.category_id,
+			name: this.state.category_name
+		};
+		await axios.post(this.ip + '/category', data,{headers: { 'token': this.state.headers['token']}})
+			.then(async (res)=> {
 				console.log("======== get category ===========");
-				console.log(res.data)
+				console.log(res.data);
 				console.log("===============================");
+				let data2 = await this.Getcategory();
+				this.parseCategory(data2);
 			})
 			.catch(err => {
-				console.log(err);
+				this.setState({'errorCat': err.response.data})
 			})
 	}
 
@@ -162,21 +186,24 @@ class Admin extends React.Component {
 				<section className="col-12 h-10 d-flex mt-5 mb-5">
 					<Select
 						value={this.state.category_id}
-						onChange={this.handleChange.bind(this)}
+						onChange={this.handleChange}
 						inputProps={{
 							name: 'Category',
-							id: 'category_id',
+							id: 'id'
 						}}
 					>
 						<MenuItem value="">
 							<em>None</em>
 						</MenuItem>
-						{this.state.category.map((value, i) =>
+						{this.state.category.map((data, i) =>
 							<ul key={i}>
-							<MenuItem value={value.id}>{value.name}</MenuItem>
+							<MenuItem id={ data.id } value={data.id}>
+								{ data.name }
+							</MenuItem>
 							</ul>
 						)}
 					</Select>
+					<p>{ this.state.parent_name }</p>
 					<TextField
 						id="standard-name"
 						label="Name"
@@ -185,7 +212,7 @@ class Admin extends React.Component {
 						margin="normal"
 					/>
 					<Button variant="contained" color="primary" onClick={this.newCat.bind(this)}>
-						Primary
+						Create Category
 					</Button>
 				</section>
 			</div>
