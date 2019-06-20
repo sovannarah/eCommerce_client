@@ -9,18 +9,6 @@ import Alert from 'react-bootstrap/Alert';
 const apiArticleURI = 'http://10.34.7.68:8000/article/';
 const storageKey = 'cart';
 
-function readCart() {
-	const json = sessionStorage.getItem(storageKey);
-	return json ? JSON.parse(json) : [];
-}
-
-
-function addToCart(article) {
-	const cart = readCart();
-	cart.push(article);
-	sessionStorage.setItem(storageKey, JSON.stringify(cart));
-}
-
 class Cart extends Component {
 
 	constructor(props, context) {
@@ -33,11 +21,10 @@ class Cart extends Component {
 
 
 	componentDidMount() {
-		const debugUri = 'http://localhost:8000/article/'; //TODO replace with real uri
 		readCart().forEach(
 			(article, index) => {
 				let allUpdated = true;
-				Axios.get(debugUri + article.id)
+				Axios.get(apiArticleURI + article.id)
 					.then(res => this.updateArticle(index, res.data))
 					.catch((error) => {
 						if (error.response && error.response.status === 404) {
@@ -65,6 +52,7 @@ class Cart extends Component {
 		this.setState((state) => {
 			return {articles: state.articles.filter(article => article.id !== id)};
 		});
+		sessionStorage.setItem(storageKey, JSON.stringify(this.state.articles));
 	};
 
 	render() {
@@ -96,7 +84,6 @@ class Cart extends Component {
 		);
 	}
 }
-
 
 function Article(props) {
 	const {id, stock, title, erased} = props.article;
@@ -132,15 +119,17 @@ function Article(props) {
 	);
 }
 
-export {Cart as default, addToCart};
 
-
-// TODO remove debug
-if (!sessionStorage.getItem(storageKey)) {
-	Axios.get('http://localhost:8000/article')
-		.then((res) => {
-			for (let i = 0; i < 3; ++i) {
-				addToCart(res.data[i]);
-			}
-		});
+function readCart() {
+	const json = sessionStorage.getItem(storageKey);
+	return json ? JSON.parse(json) : [];
 }
+
+
+function addToCart(article) {
+	const cart = readCart();
+	cart.push(article);
+	sessionStorage.setItem(storageKey, JSON.stringify(cart));
+}
+
+export {Cart as default, addToCart};
