@@ -104,7 +104,7 @@ class Home extends React.Component {
                         <div className=" d-flex row justify-content-around ">
                             {product.map((item, index) => (
                                 <Card key={index} className="ctn-popular m-3 col-md-4">
-                                    <Link to="">
+                                    <Link to={`/article/${ item.id }`}>
                                         <CardActionArea>
                                             <CardHeader
                                                 title={item.title}

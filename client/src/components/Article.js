@@ -70,7 +70,7 @@ class Article extends React.Component {
                                 <p className="m-auto">ADD TO CARD</p>
                             </button>
                         </div>
-                        <div className="mt-5 mb-5">
+                        <div className="mt-5 mb-4">
                             <h5 className="mt-5">DESCRIPTION</h5>
                             <p className="col-8">{art.description}</p>
                         </div>
