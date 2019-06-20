@@ -1,14 +1,21 @@
 import React from 'react';
 import Slider from './Slider';
 import axios from 'axios';
-import IconPc from '../images/icon/icone-pc-wi.png';
-import IconCG from '../images/icon/icone-cgi.png';
-import IconMouse from '../images/icon/icone-mouse-wi.png';
+import IconPc from '../images/icon/icone-pc-wi-he.png';
+import IconCG from '../images/icon/icone-cgi-he.png';
+import IconMouse from '../images/icon/icone-mouse-wi-he.png';
 import Rtx from '../images/slider/asus-mouse.png';
 import Chg90 from '../images/slider/apex.png';
 import Apex from '../images/slider/cask-corsair.png';
 import { Link } from 'react-router-dom';
 import '../style/css/home.css';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import CardActions from '@material-ui/core/CardActions';
+import CardActionArea from '@material-ui/core/CardActionArea';
 
 const ip = 'http://10.34.7.0:8001';
 
@@ -54,39 +61,65 @@ class Home extends React.Component {
             <section id="home-stn" className="">
                 <Slider />
                 <section className="container-fluid">
-                    <div id="ctn-categorie" className="row bg-blackgrey d-flex justify-content-center">
-                        <Link to="/" className="d-flex flex-column ctn-categorie m-1 bg-info">
-                            <img src={ IconCG } />
-                            <p>Composants</p>
-                        </Link>
-                        <Link to="/" className="d-flex flex-column ctn-categorie m-1 bg-info">
-                            <img src={ IconMouse } />
-                            <p>Peripheriques</p>
-                        </Link>
-                        <Link to="/" className="d-flex flex-column ctn-categorie m-1 bg-info">
-                            <img src={ IconPc } />
-                            <p>PC et Ordinateurs</p>
-                        </Link>
-                        <Link to="/" className="d-flex flex-column ctn-categorie m-1 bg-info">
-                            <img src={ IconCG } />
-                            <p>Composants</p>
-                        </Link>
+                    <div id="ctn-categorie" className="row">
+                        <div id="case-categorie" className="col-lg-3 d-flex bg-mainly row">
+                            <h1 className="m-auto">Categories</h1>
+                        </div>
+                        <div id="ctn-iconCat" className="row d-flex col-md-9 justify-content-center">
+                            <div>
+                                <Link to="/" className="d-flex flex-column ctn-categorie">
+                                    <img src={ IconCG } />
+                                </Link>
+                                <span className="d-flex flex-column ctn-categorie">
+                                </span>
+                            </div>
+                            <div>
+                                <span className="d-flex flex-column ctn-categorie ">
+                                </span>
+                                <Link to="/" className="d-flex flex-column ctn-categorie">
+                                    <img className="align-r" src={ IconMouse } />
+                                </Link>
+                            </div>
+                            <div>
+                                <Link to="/" className="d-flex flex-column ctn-categorie">
+                                    <img src={ IconPc } />
+                                </Link>
+                                <span className="d-flex flex-column ctn-categorie ">
+                                </span>
+                            </div>
+                            <div>
+                                <span className="d-flex flex-column ctn-categorie">
+                                </span>
+                                <Link to="/" className="d-flex flex-column ctn-categorie">
+                                    <img className="align-r" src={ IconCG } />
+                                </Link>
+                            </div>
+                        </div>
                     </div>
-                    <div className="bg-black">
-                        <h3 className="row d-flex justify-content-center">Most popular</h3>
-                        <div className="d-flex justify-content-center">
-                        <div className="container d-flex justify-content-center row">
+                    <div id="ctn-popular" className="row bg-grey justify-content-center">
+                        <h2 className="d-flex justify-content-center w-100 m-5">Most Popular</h2>
+                        <div className=" d-flex row justify-content-around ">
                             {product.map((item, index) => (
-                                <div className="ctn-popular col-md-4">
-                                    <h3 className=" bg-light">{item.title}</h3>
-                                    <div className="ctn-img d-flex">
-                                        <img id="popular-img" className="m-auto" src={item.image} />
-                                    </div>
-                                    <p>{item.price}</p>
-                                </div>
+                                <Card key={index} className="ctn-popular m-3 col-md-4">
+                                    <Link to="">
+                                        <CardActionArea>
+                                            <CardHeader
+                                                title={item.title}
+                                                subheader={`$${item.price}`}
+                                            />
+                                            <div className="ctn-img d-flex">
+                                                <img id="popular-img" className="m-auto" src={item.image} />
+                                            </div>
+                                            <CardContent>
+                                                <Typography variant="body2" color="textSecondary" component="p">
+                                                    { item.description }
+                                                </Typography>
+                                            </CardContent>
+                                        </CardActionArea>
+                                    </Link>
+                                </Card>
                             ))}
                         </div> 
-                        </div>
                     </div>
                 </section>
             </section>

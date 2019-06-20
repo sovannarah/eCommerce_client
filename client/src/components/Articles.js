@@ -27,7 +27,7 @@ class Articles extends React.Component {
             <section id="ctn-articles" className="container-fluid d-flex">
                 <div id="ctn-filter">
                 </div>
-                <div className="row d-flex justify-content-center">
+                <ul className="col-12 row d-flex justify-content-center">
                     {this.state.articles.map((item, index) => (
                         <Link className="col-md-3 m-2 bg-light" to={`/article/${item.id}`} key={index}>
                             <h3>{item.title}</h3>
@@ -35,8 +35,8 @@ class Articles extends React.Component {
                             <p></p>
                         </Link>
                     ))}
-                </div>
-            </section>
+                </ul>
+            </section> 
         );
     }
 }
