@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table';
 import Axios from 'axios';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 
@@ -19,19 +19,6 @@ class Cart extends Component {
 		};
 	}
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            article: {},
-            add: ''
-        }
-        var id = this.props.match.params.id;
-        axios.get(ip + '/article/' + id)
-            .then(res => {
-                this.setState({ article: res.data })
-            })
-    }
-
 	componentDidMount() {
 		readCart().forEach(
 			(article, index) => {
@@ -47,7 +34,7 @@ class Cart extends Component {
 						}
 						this.updateArticle(index, article);
 					});
-				this.setState({updated: allUpdated});
+				this.setState({ updated: allUpdated });
 			});
 	}
 
@@ -56,13 +43,13 @@ class Cart extends Component {
 		this.setState((state) => {
 			const copy = state.articles.slice();
 			copy[index] = newArticle;
-			return {articles: copy};
+			return { articles: copy };
 		});
 	};
 
 	removeArticle = (id) => {
 		this.setState((state) => {
-			return {articles: state.articles.filter(article => article.id !== id)};
+			return { articles: state.articles.filter(article => article.id !== id) };
 		});
 		sessionStorage.setItem(storageKey, JSON.stringify(this.state.articles));
 	};
@@ -79,17 +66,17 @@ class Cart extends Component {
 				}
 				<Table variant='dark'>
 					<thead>
-					<tr>
-						<th>Name</th>
-						<th>stock</th>
-					</tr>
+						<tr>
+							<th>Name</th>
+							<th>stock</th>
+						</tr>
 					</thead>
 					<tbody>
-					{this.state
-						.articles
-						.map(article => <Article article={article}
-												 delete={this.removeArticle}/>,
-						)}
+						{this.state
+							.articles
+							.map(article => <Article article={article}
+								delete={this.removeArticle} />,
+							)}
 					</tbody>
 				</Table>
 			</div>
@@ -98,7 +85,7 @@ class Cart extends Component {
 }
 
 function Article(props) {
-	const {id, stock, title, erased} = props.article;
+	const { id, stock, title, erased } = props.article;
 	const outOfStock = stock === 0;
 	const stockStr = erased ?
 		'NaN' :
@@ -110,7 +97,7 @@ function Article(props) {
 			<td>
 				{!erased ?
 					<Link to={`/article/${id}`}
-						  disabled={outOfStock}
+						disabled={outOfStock}
 					>
 						{title}
 					</Link> :
@@ -122,7 +109,7 @@ function Article(props) {
 			<td>{stockStr}</td>
 			<td>
 				<Button variant='danger'
-						onClick={() => props.delete(id)}
+					onClick={() => props.delete(id)}
 				>
 					Del
 				</Button>
@@ -144,4 +131,4 @@ function addToCart(article) {
 	sessionStorage.setItem(storageKey, JSON.stringify(cart));
 }
 
-export {Cart as default, addToCart};
+export { Cart as default, addToCart };
