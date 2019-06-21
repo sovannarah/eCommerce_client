@@ -158,11 +158,11 @@ class Header extends React.Component {
                 <CSSTransition
                     in={this.state.cart}
                     timeout={500}
-                    classNames="display-cart"
-                >
-                    <div id="menu-cart" className="d-flex bg-dark open">
-
+                    classNames="display-cart">
+                   <div id="menu-cart" className="d-flex bg-dark open">
+                                <p className="testtt">okkkkk</p>
                     </div>
+            
                 </CSSTransition>
             </header>
         );

@@ -35,9 +35,8 @@ class Article extends React.Component {
     }
 
     addCart = (event) => {
-
-        console.log(event);
-
+        console.log(this.state.article.title);
+        
     }
 
     render() {
