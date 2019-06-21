@@ -16,6 +16,7 @@ class UserCtrl extends React.Component {
         this.changePassword = this.changePassword.bind(this);
         this.login = this.login.bind(this);
         this.disconnect = this.disconnect.bind(this);
+        this.ip = 'http://127.0.0.1:8000'
     }
 
     changeEmail(e) {
@@ -35,12 +36,14 @@ class UserCtrl extends React.Component {
                 if (user.token) {
                     localStorage.setItem('token', user.token);
                     localStorage.setItem('email', user.email);
+                    window.location.replace('/');
                 }
             })
     }
 
     disconnect() {
         localStorage.clear();
+        window.location.replace('/')
     }
 
     render() {
