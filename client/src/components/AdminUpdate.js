@@ -190,8 +190,7 @@ class Admin extends React.Component {
 						inputProps={{
 							name: 'Category',
 							id: 'id'
-						}}
-					>
+						}}>
 						<MenuItem value="">
 							<em>None</em>
 						</MenuItem>

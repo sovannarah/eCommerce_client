@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Header from './components/Header';
 import Menu from './components/Menu';
-import AllMenu from './components/Menu/AllMenu';
+import Category from './components/Category';
 import Routeur from './Routeur';
 import './App.css';
 

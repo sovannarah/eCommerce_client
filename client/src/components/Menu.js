@@ -11,19 +11,19 @@ class Menu extends React.Component {
             id: '',
             data: {},
             check: false
-        }
+        };
+        this.ip = 'http://127.0.0.1:8000';
 
     }
     componentDidMount() {
         /**
          * @param get all the categories
          */
-        axios.get('http://10.34.6.23:8000/category')
+        axios.get(this.ip + '/category')
             .then(
                 (res) => {
-                    console.log('==========')
+                    console.log('========== Get category menu ===========')
                     console.log(res.data);
-
                     this.setState({ data: res.data });
                     this.setState({ check: true });
                 },
@@ -31,7 +31,6 @@ class Menu extends React.Component {
                     console.log(err);
                 })
     }
-
 
 
     render() {
@@ -43,9 +42,9 @@ class Menu extends React.Component {
                         <ul>
                             {this.state.data.map((elem, i) => (
                                 <li key={i}>
-                                    <Link to={"/category/" + elem.id}>
+                                    <a href={"/category/" + elem.id}>
                                         {elem.name}
-                                    </Link>
+                                    </a>
                                 </li>
                             ))}
                         </ul>
