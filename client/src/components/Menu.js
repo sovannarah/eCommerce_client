@@ -1,5 +1,5 @@
 import React from 'react';
-import Menui from '../img/icon.png';
+import Menui from '../images/icon/icon-menu-black.png';
 import { Link } from 'react-router-dom';
 import '../style/css/menu.css';
 import axios from 'axios';
@@ -10,79 +10,50 @@ class Menu extends React.Component {
         this.state = {
             id: '',
             data: {},
-            showMenu: false
-        }
-        this.showMenu = this.showMenu.bind(this);
-        this.closeMenu = this.closeMenu.bind(this);
+            check: false
+        };
+        this.ip = 'http://127.0.0.1:8000';
+
     }
-    async componentDidMount() {
+    componentDidMount() {
         /**
          * @param get all the categories
          */
-        let ip='http://10.34.7.68:8000/';
-        await axios.get(ip+'category')
+        axios.get(this.ip + '/category')
             .then(
                 (res) => {
-                    this.state.data = res.data[0];
-
-                    // console.log(this.state.data);
+                    console.log('========== Get category menu ===========')
+                    console.log(res.data);
+                    this.setState({ data: res.data });
+                    this.setState({ check: true });
                 },
                 (err) => {
                     console.log(err);
                 })
     }
-    showMenu(event) {
-        /**
-         * @param show menu on click
-         */
-        event.preventDefault();
-        this.setState({ showMenu: true }, () => {
-            document.addEventListener('click', this.closeMenu);
-        });
-    }
-    closeMenu() {
-        /**
-         * @param close the menu
-         */
-        this.setState({ showMenu: false }, () => {
-            document.removeEventListener('click', this.closeMenu);
-        });
-    }
 
-    recursive() {
-
-    }
 
     render() {
         console.log(this.state.data);
-        return (
-            <div id="menu" className="wrapper">
-                <button className="menu" onClick={this.showMenu}>
-                    <img src={Menui} />
-                </button>
-
-                {
-                    this.state.showMenu
-                        ? (
-                            <div className="wrapper">
-                                {Object.keys(this.state.data).map((elem) => (
-                                    <ul key={elem}>
-                                        <Link to="AllArticles">
-                                            <li>{this.state.data[elem].name}
-                                                <ul key={elem.id}>
-                                                    <li>{elem.name}</li>
-
-                                                </ul>
-                                            </li>
-                                        </Link>
-                                    </ul>
-                                ))}
-                            </div>
-                        )
-                        : (null)
-                }
-            </div>
-        );
+        if (this.state.check) {
+            return (
+                <div id="menu" className="wrapper">
+                    <div className="wrapper">
+                        <ul>
+                            {this.state.data.map((elem, i) => (
+                                <li key={i}>
+                                    <a href={"/category/" + elem.id}>
+                                        {elem.name}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            );
+        } else {
+            return <div></div>
+        }
     }
 }
 
