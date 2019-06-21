@@ -4,6 +4,7 @@ import Img1 from '../images/slider/asus-mouse.png';
 import Img2 from '../images/slider/m-spartha.png';
 import Img3 from '../images/slider/spartha-m.png';
 import axios from 'axios';
+// import {addToCart} from './Cart';
 import '../style/css/article.css';
 const ip = 'http://10.34.6.23:8000';
 
@@ -34,11 +35,6 @@ class Article extends React.Component {
             })
     }
 
-    addCart = (event) => {
-        console.log(this.state.article.title);
-        
-    }
-
     render() {
         const article = this.state.article;
         return (
@@ -62,7 +58,7 @@ class Article extends React.Component {
                         <h1>{article.title}</h1>
                         <p>stock : {article.stock}</p>
                         <h2>$ {article.price}</h2>
-                        <button onClick={this.addCart}>
+                        <button>
                             <p>ADD TO CARD</p>
                         </button>
                         <h5>DESCRIPTION</h5>
