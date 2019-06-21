@@ -10,7 +10,6 @@ import Logo from '../images/icon/logo2.png';
 import IconeSearch from '../images/icon/icon-loupe.png';
 import IconeUser from '../images/icon/icon-user.png';
 import IconeCart from '../images/icon/icon-panier.png';
-import Suggestions from '../components/Menu/Suggestions';
 import '../style/css/header.css';
 
 
@@ -49,7 +48,7 @@ class Header extends React.Component {
     }
 
     displaySearchBar = () => {
-        axios.get(`http://10.34.7.92:8000/search?title=` + this.state.put)
+        axios.get(`http://10.34.6.23:8000/search?title=` + this.state.put)
             .then(({ data }) => {
                 console.log(data)
                 this.setState({ results: data })
@@ -142,7 +141,7 @@ class Header extends React.Component {
                         <div className="results-search">
                             {this.state.results.length >= 1 ? this.state.results.map((elem, i) => (
                                 <li key={i}>
-                                    <Link to="">
+                                    <Link to={"/article/" + elem.id}>
                                         {elem.title}
                                     </Link>
                                 </li>
@@ -156,15 +155,15 @@ class Header extends React.Component {
                     classNames="display-user">
                     <UserCtrl user={userToken} />
                 </CSSTransition>
-                 <CSSTransition
-                 in = {this.state.cart}
-                 timeout={500}
-                 classNames="display-cart"
-             >
-                 <div id="menu-cart" className="d-flex bg-dark open">
+                <CSSTransition
+                    in={this.state.cart}
+                    timeout={500}
+                    classNames="display-cart"
+                >
+                    <div id="menu-cart" className="d-flex bg-dark open">
 
-                 </div>
-             </CSSTransition>
+                    </div>
+                </CSSTransition>
             </header>
         );
     }
