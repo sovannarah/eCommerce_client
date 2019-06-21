@@ -19,19 +19,6 @@ class Cart extends Component {
 		};
 	}
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            article: {},
-            add: ''
-        }
-        var id = this.props.match.params.id;
-        axios.get(ip + '/article/' + id)
-            .then(res => {
-                this.setState({ article: res.data })
-            })
-    }
-
 	componentDidMount() {
 		readCart().forEach(
 			(article, index) => {
