@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 
 
-const apiArticleURI = 'http://10.34.7.68:8000/article/';
+const apiArticleURI = 'http://127.0.0.1:8000/article/';
 const storageKey = 'cart';
 
 class Cart extends Component {
@@ -69,6 +69,7 @@ class Cart extends Component {
 					<thead>
 					<tr>
 						<th>Name</th>
+						<th>Price</th>
 						<th>stock</th>
 					</tr>
 					</thead>
@@ -86,7 +87,7 @@ class Cart extends Component {
 }
 
 function Article(props) {
-	const {id, stock, title, erased} = props.article;
+	const {id, stock, title, price, erased} = props.article;
 	const outOfStock = stock === 0;
 	const stockStr = erased ?
 		'NaN' :
@@ -107,6 +108,7 @@ function Article(props) {
 					</span>
 				}
 			</td>
+			<td> {price}</td>
 			<td>{stockStr}</td>
 			<td>
 				<Button variant='danger'

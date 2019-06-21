@@ -17,7 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import CardActions from '@material-ui/core/CardActions';
 import CardActionArea from '@material-ui/core/CardActionArea';
 
-const ip = 'http://10.34.7.0:8001';
+const ip = 'http://127.0.0.1:8000';
 
 const product = [
     {

@@ -13,7 +13,7 @@ class Search extends React.Component {
             search: []
         }
 
-        axios.get('http://10.34.6.23:8000/search')
+        axios.get('http://127.0.0.1:8000/search')
             .then(res => {
                 const search = res.data;
                 console.log(search);

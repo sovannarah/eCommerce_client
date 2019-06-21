@@ -3,6 +3,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import Img1 from '../images/slider/asus-mouse.png';
 import Img2 from '../images/slider/m-spartha.png';
 import Img3 from '../images/slider/spartha-m.png';
+import {addToCart } from './Cart'
 import axios from 'axios';
 import '../style/css/article.css';
 const ip = 'http://127.0.0.1:8000';
@@ -24,8 +25,8 @@ class Article extends React.Component {
     }
 
     addCart = (event) => {
-
-        console.log(event);
+    	addToCart(this.state.article);
+        console.log(this.state.article);
 
     }
 
