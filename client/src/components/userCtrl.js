@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-let ip = 'http://10.34.6.23:8000';
+let ip = 'http://127.0.0.1:8000';
 
 class UserCtrl extends React.Component {
 

@@ -15,7 +15,7 @@ import Rtx from '../images/slider/asus-mouse.png';
 import Chg90 from '../images/slider/apex.png';
 import Apex from '../images/slider/cask-corsair.png';
 
-const ip = 'http://10.34.7.0:8001';
+const ip = 'http://127.0.0.1:8000';
 
 
 const product = [

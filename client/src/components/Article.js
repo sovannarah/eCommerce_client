@@ -3,22 +3,12 @@ import Carousel from 'react-bootstrap/Carousel';
 import Img1 from '../images/slider/asus-mouse.png';
 import Img2 from '../images/slider/m-spartha.png';
 import Img3 from '../images/slider/spartha-m.png';
+import {addToCart } from './Cart'
 import axios from 'axios';
 // import {addToCart} from './Cart';
 import '../style/css/article.css';
-const ip = 'http://10.34.6.23:8000';
+const ip = 'http://127.0.0.1:8000';
 
-const images = [
-    {
-        img: Img1
-    },
-    {
-        img: Img2
-    },
-    {
-        img: Img3
-    },
-]
 
 class Article extends React.Component {
 
@@ -35,22 +25,28 @@ class Article extends React.Component {
             })
     }
 
+    addCart = (event) => {
+    	addToCart(this.state.article);
+        console.log(this.state.article);
+
+    }
+
     render() {
         const article = this.state.article;
         return (
             <section className="d-flex h-100">
                 <div id="ctn-carousel" className="d-flex col-sm-6 h-100 w-100">
                     <Carousel className="w-100 mt-auto mb-auto">
-                        {images.map((item, index) => (
-                            <Carousel.Item key={index}
-                                className="h-100 w-100">
-                                <div className="d-flex row w-100 h-100">
-                                    <div id="ctn-img-car" className="col-md-12 m-auto  h-100 w-100 d-flex">
-                                        <img id="car-img" className="m-auto" src={item.img} />
-                                    </div>
-                                </div>
-                            </Carousel.Item>
-                        ))}
+                        {/*{images.map((item, index) => (*/}
+                        {/*    <Carousel.Item key={index}*/}
+                        {/*        className="h-100 w-100">*/}
+                        {/*        <div className="d-flex row w-100 h-100">*/}
+                        {/*            <div id="ctn-img-car" className="col-md-12 m-auto  h-100 w-100 d-flex">*/}
+                        {/*                <img id="car-img" className="m-auto" src={item.img} />*/}
+                        {/*            </div>*/}
+                        {/*        </div>*/}
+                        {/*    </Carousel.Item>*/}
+                        {/*))}*/}
                     </Carousel>
                 </div>
                 <div className="col-sm-6 h-100 d-flex flex-column">
@@ -63,6 +59,7 @@ class Article extends React.Component {
                         </button>
                         <h5>DESCRIPTION</h5>
                         <p>{article.description}</p>
+	                    <img alt="articleimg" src={ article.img }/>
                     </div>
                 </div>
             </section>
