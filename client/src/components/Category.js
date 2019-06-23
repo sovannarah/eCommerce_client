@@ -58,7 +58,7 @@ class Category extends React.Component {
 						{this.state.data.map((elem, i) => (
 							<ul key={i}>
 								<li>
-									<a href="/"><h5>{elem.title}</h5></a>
+									<a href={'/article/' + elem.id}><h5>{elem.title}</h5></a>
 								</li>
 								<li>
 									<h5>Description: </h5>

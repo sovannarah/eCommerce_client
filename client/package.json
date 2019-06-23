@@ -27,7 +27,9 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-	"plugins": ["react"],
+    "plugins": [
+      "react"
+    ],
     "extends": [
       "eslint:recommended",
       "react-app"
@@ -128,11 +130,19 @@
         2,
         "always"
       ],
-	  "no-unneeded-ternary": [2, { "defaultAssignment": false }]
+      "no-unneeded-ternary": [
+        2,
+        {
+          "defaultAssignment": false
+        }
+      ]
     }
   },
   "stylelint": {
-    "extends": ["stylelint-config-recommended","stylelint-config-sass-guidelines"]
+    "extends": [
+      "stylelint-config-recommended",
+      "stylelint-config-sass-guidelines"
+    ]
   },
   "browserslist": {
     "production": [

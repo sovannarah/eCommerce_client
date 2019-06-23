@@ -59,12 +59,12 @@ class Cart extends Component {
 		return (
 			<div className='cart'>
 				<h3>My Cart</h3>
-				{
-					!this.state.updated
-					&& <Alert variant='warning'>
-						Server unavailable: some info may be outdated
-					</Alert>
-				}
+				{/*{*/}
+				{/*	// !this.state.updated*/}
+				{/*	// && <Alert variant='warning'>*/}
+				{/*	// 	Server unavailable: some info may be outdated*/}
+				{/*	// </Alert>*/}
+				{/*}*/}
 				<Table variant='dark'>
 					<thead>
 					<tr>
