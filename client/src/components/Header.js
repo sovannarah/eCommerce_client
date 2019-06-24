@@ -12,6 +12,7 @@ import IconeSearch from '../images/icon/icon-loupe.png';
 import IconeUser from '../images/icon/icon-user.png';
 import IconeCart from '../images/icon/icon-panier.png';
 import '../style/css/header.css';
+import { addToCart } from './Cart';
 
 
 
@@ -165,6 +166,7 @@ class Header extends React.Component {
                     <div id="menu-cart" className="d-flex bg-dark open">
 	                    <Cart></Cart>
                     </div>
+            
                 </CSSTransition>
             </header>
         );

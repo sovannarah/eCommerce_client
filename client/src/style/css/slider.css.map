@@ -1,7 +1,1 @@
-{
-"version": 3,
-"mappings": "AAAA,eAAgB;EACZ,MAAM,EAAE,KAAK;EACb,eAAe,EAAE,SAAS;;AAG9B,QAAS;EACL,UAAU,EAAE,GAAG;EACf,SAAS,EAAE,GAAG;;AAGlB,SAAU;EACN,UAAU,EAAE,sCAAsC;EAClD,gBAAgB,EAAE,KAAK;;AAG3B,KAAM;EACF,KAAK,EAAE,OAAO;;AAGlB,8CAA+C;EAC3C,OAAO,EAAE,IAAI",
-"sources": ["../scss/slider.scss"],
-"names": [],
-"file": "slider.css"
-}
+{"version":3,"sourceRoot":"","sources":["../scss/slider.scss"],"names":[],"mappings":"AACI;EACI;EACA;;AAGJ;EACI;EACA;;AAIA;EACI;EACA;;AAGR;EACI;;AAGJ;EACI;;;AAKJ;EACI;;AAGJ;EACI;EACA;;;AAKR;EACI","file":"slider.css"}

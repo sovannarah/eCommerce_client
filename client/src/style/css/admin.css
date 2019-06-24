@@ -1,12 +1,14 @@
 #stn-adminCreate label {
   width: 70%;
   height: 33.33333%;
-  color: grey; }
-  #stn-adminCreate label .outlined-name {
-    color: black;
-    background-color: #e6eaed;
-    width: 100%;
-    height: 50%;
-    border-radius: 20px; }
+  color: grey;
+}
+#stn-adminCreate label .outlined-name {
+  color: black;
+  background-color: #e6eaed;
+  width: 100%;
+  height: 50%;
+  border-radius: 20px;
+}
 
 /*# sourceMappingURL=admin.css.map */
