@@ -14,7 +14,7 @@ class Admin extends React.Component {
 			images: '',
 			nb_views: '',
 			stock: '',
-			category : [],
+			category: [],
 		};
 		this.ip = 'http://127.0.0.1:8000';
 		this.parseCategory = this.parseCategory.bind(this);
@@ -23,24 +23,34 @@ class Admin extends React.Component {
 		this.addItem = this.addItem.bind(this);
 	}
 
-	componentDidMount()
-	{
-
+	async componentDidMount() {
+		if (!localStorage.getItem('token'))
+			window.location.replace('/');
+		else {
+			await axios.get(this.ip + '/user/' + localStorage.getItem('token') +
+				'/check').then(
+				() => {
+					console.log("===== Welcome ========");
+				},
+				() => {
+					window.location.replace('/');
+				})
+		}
 	}
 
-	parseCategory (data)
+	parseCategory(data)
 	{
 		let c = -1;
-		while (data[++c])
-		{
-		  this.state.category.push(data[c]);
-		  if (data[c].sub && data[c].sub.length > 0)
-		  	this.parseCategory(data[c].sub);
+		while (data[++c]) {
+			this.state.category.push(data[c]);
+			if (data[c].sub && data[c].sub.length > 0)
+				this.parseCategory(data[c].sub);
 		}
 
 	}
 
-	Getcategory () {
+	Getcategory()
+	{
 		return axios.get(this.ip + '/category')
 			.then(res => {
 				return (res.data)
@@ -50,7 +60,8 @@ class Admin extends React.Component {
 			})
 	}
 
-	change(e) {
+	change(e)
+	{
 		if (e.target.name === "title") {
 			this.state.title = e.target.value;
 
@@ -72,7 +83,8 @@ class Admin extends React.Component {
 		}
 	}
 
-	addItem(e) {
+	addItem(e)
+	{
 		const headers = {
 			'Content-Type': 'multipart/form-data',
 			'token': localStorage.getItem('token'),
@@ -82,17 +94,19 @@ class Admin extends React.Component {
 		console.log(this.state.title);
 		const formData = new FormData();
 		Object.keys(this.state).forEach((v) => formData.append(v, this.state[v]));
-		axios.post(this.ip+'/article', formData,{headers:headers})
+		axios.post(this.ip + '/article', formData, {headers: headers})
 			.then(res => {
 				console.log(res.data)
 			})
 	}
 
-	render() {
+	render()
+	{
 		return (
 			<section id="stn-adminCreate" className="col-12 h-100 d-flex">
+				<p>okok</p>
 				<form id="form-add" method="post"
-				      className="d-flex col-md-12 h-50 m-auto">
+					className="d-flex col-md-12 h-50 m-auto">
 					<div className="d-flex flex-column mh-100 col-12">
 						<div className="d-flex h-75 m-5">
 							<div className="col-6 d-flex flex-column ">
@@ -123,7 +137,8 @@ class Admin extends React.Component {
 									/>
 								</label>
 							</div>
-							<div className="col-6 d-flex justify-content-around flex-column">
+							<div
+								className="col-6 d-flex justify-content-around flex-column">
 								<label className="d-flex flex-column">Images
 									<input
 										name="image"
@@ -148,7 +163,8 @@ class Admin extends React.Component {
 								</label>
 							</div>
 						</div>
-						<Fab id="button-add" onClick={this.addItem} type="submit" className="w-25 ml-auto "
+						<Fab id="button-add" onClick={this.addItem}
+						     type="submit" className="w-25 ml-auto "
 						     variant="extended" color="secondary">
 							Add Item
 						</Fab>
