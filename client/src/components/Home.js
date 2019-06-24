@@ -11,10 +11,8 @@ import { Link } from 'react-router-dom';
 import '../style/css/home.css';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import CardActions from '@material-ui/core/CardActions';
 import CardActionArea from '@material-ui/core/CardActionArea';
 
 const ip = 'http://127.0.0.1:8000';
@@ -32,16 +30,16 @@ const product = [
         image: Chg90,
         title: 'nVidia GTX',
         price: '13',
-        description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a'
+        description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a',
     },
     {
         id: '3',
         image: Apex,
         title: 'MSI x570',
         price: '13',
-        description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a'
-    }
-]
+        description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a',
+    },
+];
 
 class Home extends React.Component {
 
@@ -49,18 +47,18 @@ class Home extends React.Component {
         super(props);
 
         this.state = {
-            articles: []
-        }
+            articles: [],
+        };
 
         axios.get(ip + '/article')
-        .then(res=> {
-            this.setState({ articles: res.data })
-        })
+        .then((res) => {
+            this.setState({ articles: res.data});
+        });
     }
 
     render() {
-        console.log(this.state.articles)
-        return(
+        console.log(this.state.articles);
+        return (
             <section id="home-stn" className="">
                 <Slider />
                 <section className="container-fluid">
@@ -126,7 +124,7 @@ class Home extends React.Component {
                     </div>
                 </section>
             </section>
-        )
+        );
     }
 }
 
