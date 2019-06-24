@@ -5,12 +5,14 @@ import Drawer from '@material-ui/core/Drawer';
 import Menu from '../components/Menu';
 import axios from 'axios';
 import UserCtrl from './userCtrl';
+import Cart from './Cart'
 import IconMenu from '../images/icon/icon-menu.png';
 import Logo from '../images/icon/logo2.png';
 import IconeSearch from '../images/icon/icon-loupe.png';
 import IconeUser from '../images/icon/icon-user.png';
 import IconeCart from '../images/icon/icon-panier.png';
 import '../style/css/header.css';
+import { addToCart } from './Cart';
 
 
 
@@ -26,6 +28,7 @@ class Header extends React.Component {
             results: {},
             put: '',
         }
+        this.ip = 'http://127.0.0.1:8000'
 
         this.displaySearch = this.displaySearch.bind(this);
         this.displayUser = this.displayUser.bind(this);
@@ -48,7 +51,7 @@ class Header extends React.Component {
     }
 
     displaySearchBar = () => {
-        axios.get(`http://10.34.6.23:8000/search?title=` + this.state.put)
+        axios.get(this.ip + '/search?title=' + this.state.put)
             .then(({ data }) => {
                 console.log(data)
                 this.setState({ results: data })
@@ -161,8 +164,9 @@ class Header extends React.Component {
                     classNames="display-cart"
                 >
                     <div id="menu-cart" className="d-flex bg-dark open">
-
+	                    <Cart></Cart>
                     </div>
+            
                 </CSSTransition>
             </header>
         );
