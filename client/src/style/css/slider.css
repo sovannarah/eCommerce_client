@@ -1,24 +1,32 @@
 #home-stn .carousel-inner {
   height: 500px;
-  background-size: 100% 100%; }
+  background-size: 100% 100%;
+}
 #home-stn #car-img {
   max-height: 90%;
-  max-width: 90%; }
+  max-width: 90%;
+}
 #home-stn .carousel {
   background: url("/src/images/slider/black-bg.png");
-  background-color: black; }
+  background-color: black;
+}
 #home-stn .text {
-  color: #f0f0f0; }
+  color: #f0f0f0;
+}
 #home-stn .carousel-control-next, #home-stn .carousel-control-prev {
-  display: none; }
+  display: none;
+}
 
 #stn-article .carousel-inner {
-  height: 500px; }
+  height: 500px;
+}
 #stn-article #car-img {
   max-height: 90%;
-  max-width: 90%; }
+  max-width: 90%;
+}
 
 .carousel-control-next, .carousel-control-prev {
-  display: none; }
+  display: none;
+}
 
 /*# sourceMappingURL=slider.css.map */
