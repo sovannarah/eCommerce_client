@@ -29,10 +29,14 @@
     position: absolute;
     margin: auto;
     height: 130%;
-    width: 234px; }
+    width: 234px;
+    transition: 0.3s all ease; }
+    .ctn-categorie img:hover {
+      transform: scale(1.1); }
+  .ctn-categorie .align-r {
+    top: -36%; }
   .ctn-categorie .align-l {
-    left: 0;
-   }
+    left: 0; }
 
 .bg-blackgrey {
   background-color: #181818; }
