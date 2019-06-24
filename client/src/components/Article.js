@@ -15,7 +15,8 @@ class Article extends React.Component {
 		super(props);
 		this.state = {
 			article: {},
-			add: ''
+			add: '',
+			quantity: 0
 		};
 		var id = this.props.match.params.id;
 		axios.get(ip + '/article/' + id)
@@ -23,13 +24,19 @@ class Article extends React.Component {
 				this.setState({ article: res.data })
 			});
 		axios.put(ip + '/article/' + id + '/increment');
+		this.setQuantity = this.setQuantity.bind(this);
 	}
 
 	addCart = (event) => {
-		addToCart(this.state.article);
+		addToCart(this.state.article, this.state.quantity);
 		console.log(this.state.article);
-
 	};
+
+	async setQuantity(event)
+	{
+		if (event.target.name === 'quantity')
+			await this.setState({quantity: event.target.valueAsNumber});
+	}
 
 	render() {
 		const article = this.state.article;
@@ -57,6 +64,7 @@ class Article extends React.Component {
 						<button onClick={this.addCart}>
 							<p>ADD TO CARD</p>
 						</button>
+						<input type="number" name="quantity" max={article.stock} onChange={this.setQuantity}/>
 						<h5>DESCRIPTION</h5>
 						<p>{article.description}</p>
 						<img alt="articleimg" src={ article.img }/>
