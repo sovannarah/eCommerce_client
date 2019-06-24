@@ -172,12 +172,8 @@ li {
   max-height: 30px; }
 
 .results-search{
-  display: flex;
-  float: left;
+  background-color: white;
 }
-.testtt{
-  margin-top: 50%;
-  color: white;
-}
+
 
 /*# sourceMappingURL=header.css.map */
