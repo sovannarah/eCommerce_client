@@ -4,9 +4,10 @@ import Axios from 'axios';
 import {Link} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
+import {FormControl} from 'react-bootstrap';
 
 
-const apiArticleURI = 'http://10.34.7.68:8000/article/';
+const apiArticleURI = 'http://localhost:8000/article/'; // TODO 'http://10.34.7.68:8000/article/';
 const storageKey = 'cart';
 
 class Cart extends Component {
@@ -19,11 +20,10 @@ class Cart extends Component {
 		};
 	}
 
-
 	componentDidMount() {
+		let allUpdated = true;
 		getCart().forEach(
 			(article) => {
-				let allUpdated = true;
 				Axios.get(apiArticleURI + article.id)
 					.then((res) => {
 						const updatedArticle = {...article, erased: false, ...res.data};
@@ -38,8 +38,8 @@ class Cart extends Component {
 						}
 						this.updateArticle(article);
 					});
-				this.setState({updated: allUpdated});
 			});
+		this.setState({updated: allUpdated});
 	}
 
 
@@ -56,6 +56,7 @@ class Cart extends Component {
 			} else {
 				copy.push(newArticle);
 			}
+			sessionStorage.setItem(storageKey, JSON.stringify(copy));
 			return {articles: copy};
 		});
 	};
@@ -65,10 +66,11 @@ class Cart extends Component {
 	 * @param id
 	 */
 	removeArticle = (id) => {
-		this.setState((state) => {
-			return {articles: state.articles.filter(article => article.id !== id)};
+		this.setState((prevState) => {
+			const articles = prevState.articles.filter(article => article.id !== id);
+			sessionStorage.setItem(storageKey, JSON.stringify(articles));
+			return {articles};
 		});
-		sessionStorage.setItem(storageKey, JSON.stringify(this.state.articles));
 	};
 
 	render() {
@@ -85,14 +87,17 @@ class Cart extends Component {
 					<thead>
 					<tr>
 						<th>Name</th>
-						<th>stock</th>
+						<th>Unit Price</th>
+						<th>Qt.</th>
+						<th>Stock</th>
 					</tr>
 					</thead>
 					<tbody>
 					{this.state
 						.articles
 						.map(article => <Article article={article}
-												 delete={this.removeArticle}/>,
+												 delete={this.removeArticle}
+												 update={this.updateArticle}/>,
 						)}
 					</tbody>
 				</Table>
@@ -102,7 +107,7 @@ class Cart extends Component {
 }
 
 function Article(props) {
-	const {id, stock, title, erased} = props.article;
+	const {id, stock, title, price, erased, quantity} = props.article;
 	const outOfStock = stock === 0;
 	const stockStr = erased ?
 		'NaN' :
@@ -110,7 +115,7 @@ function Article(props) {
 			stock :
 			'unknown';
 	return (
-		<tr className={outOfStock ? 'disabled' : ''}>
+		<tr className={outOfStock ? 'disabled text-muted' : ''}>
 			<td>
 				{!erased ?
 					<Link to={`/article/${id}`}
@@ -123,12 +128,22 @@ function Article(props) {
 					</span>
 				}
 			</td>
+			<td>{price}</td>
+			<td>
+				<FormControl type='number' min='0' max={stock}
+							 disabled={outOfStock || erased}
+							 onChange={(ev) => {
+								 props.update({...props.article, quantity: ev.target.value});
+							 }}
+							 value={quantity}/>
+			</td>
 			<td>{stockStr}</td>
 			<td>
 				<Button variant='danger'
+						className='material-icons'
 						onClick={() => props.delete(id)}
 				>
-					Del
+					delete
 				</Button>
 			</td>
 		</tr>
