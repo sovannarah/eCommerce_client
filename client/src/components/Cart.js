@@ -21,11 +21,14 @@ class Cart extends Component {
 
 
 	componentDidMount() {
-		readCart().forEach(
-			(article, index) => {
+		getCart().forEach(
+			(article) => {
 				let allUpdated = true;
 				Axios.get(apiArticleURI + article.id)
-					.then(res => this.updateArticle(index, res.data))
+					.then((res) => {
+						const updatedArticle = {...article, erased: false, ...res.data};
+						this.updateArticle(updatedArticle);
+					})
 					.catch((error) => {
 						if (error.response && error.response.status === 404) {
 							article.erased = true;
@@ -33,21 +36,34 @@ class Cart extends Component {
 							console.error(error);
 							allUpdated = false;
 						}
-						this.updateArticle(index, article);
+						this.updateArticle(article);
 					});
 				this.setState({updated: allUpdated});
 			});
 	}
 
 
-	updateArticle = (index, newArticle) => {
+	/**
+	 * Replaces article in state with newArticle (by id), or adds if doesn't exist yet
+	 * @param newArticle
+	 */
+	updateArticle = (newArticle) => {
 		this.setState((state) => {
 			const copy = state.articles.slice();
-			copy[index] = newArticle;
+			const idx = copy.findIndex(old => old.id === newArticle.id);
+			if (idx !== -1) {
+				copy[idx] = newArticle;
+			} else {
+				copy.push(newArticle);
+			}
 			return {articles: copy};
 		});
 	};
 
+	/**
+	 * Removes article from state by id, and updates sessionStorage
+	 * @param id
+	 */
 	removeArticle = (id) => {
 		this.setState((state) => {
 			return {articles: state.articles.filter(article => article.id !== id)};
@@ -120,15 +136,28 @@ function Article(props) {
 }
 
 
-function readCart() {
+/**
+ * @returns {Array}
+ */
+function getCart() {
 	const json = sessionStorage.getItem(storageKey);
 	return json ? JSON.parse(json) : [];
 }
 
-
-function addToCart(article) {
-	const cart = readCart();
-	cart.push(article);
+/**
+ * Adds article to cart storage, or adds the quantity if it already exists
+ * @param article
+ * @param quantity
+ */
+function addToCart(article, quantity) {
+	const cart = getCart();
+	let existing = cart.find(oldArticle => oldArticle.id === article.id);
+	if (!existing) {
+		existing = article;
+		existing.quantity = 0;
+		cart.push(existing);
+	}
+	existing.quantity += quantity;
 	sessionStorage.setItem(storageKey, JSON.stringify(cart));
 }
 
