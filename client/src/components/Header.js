@@ -146,6 +146,7 @@ class Header extends React.Component {
                                 <li key={i}>
                                     <Link to={"/article/" + elem.id}>
                                         {elem.title}
+                                        {console.log("ok    ")}
                                     </Link>
                                 </li>
                             )) : ""}
