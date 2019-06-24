@@ -204,11 +204,11 @@ li img {
 }
 
 #input-username, #input-password {
-  max-height: 30px;
+  max-height: 30px; }
+
+.results-search{
+  background-color: white;
 }
-.testtt{
-  margin-top: 50%;
-  color: white;
-}
+
 
 /*# sourceMappingURL=header.css.map */
