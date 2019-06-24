@@ -8,7 +8,6 @@ import Search from './components/Search';
 import { Switch, Route } from 'react-router';
 import Category from './components/Category';
 
-import Cart from './components/Cart'; //TODO remove testsing
 
 import Home from './components/Home';
 
@@ -24,7 +23,6 @@ class Routeur extends React.Component {
                 <Route exact path="/admin/create" component={ AdminCreate } />
                 <Route path="/category/:id" component={ Category } />
                 <Route path="/search" component={ Search } />
-                <Route path='/cart_test' component={Cart} />
             </Switch>
         )
     }

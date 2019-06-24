@@ -7,7 +7,7 @@ import Alert from 'react-bootstrap/Alert';
 import {FormControl} from 'react-bootstrap';
 
 
-const apiArticleURI = 'http://localhost:8000/article/'; // TODO 'http://10.34.7.68:8000/article/';
+const apiArticleURI = 'http://10.34.7.68:8000/article/';
 const storageKey = 'cart';
 
 class Cart extends Component {
