@@ -163,12 +163,10 @@ class Header extends React.Component {
                                 <li key={i}>
                                     <Link to={"/article/" + elem.id}>
                                         {elem.title}
-<<<<<<< HEAD
                                         {console.log("ok    ")}
-=======
+
                                         {this.state.value == "title" ? elem.title : this.state.value == "description" ? elem.description : ''}
 
->>>>>>> css2
                                     </Link>
                                 </li>
                             )) : ""}

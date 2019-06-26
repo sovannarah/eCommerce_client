@@ -52,7 +52,7 @@ class Category extends React.Component {
                         <Link to={`/article/${ item.id }`}>
                             <CardActionArea>
 								<div className="ctn-img d-flex">
-									<img id="popular-img" className="m-auto" src={require('../ecommerce_api/Api/public/uploads/images/' + item.images[0])} />
+									<img id="popular-img" className="m-auto" src={require('../API/Api/public/uploads/images/' + item.images[0])} />
 									 
                                 </div>
                                 <CardHeader
