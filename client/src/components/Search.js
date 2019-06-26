@@ -11,9 +11,9 @@ class Search extends React.Component {
         super(props);
         this.state = {
             search: []
-        }
-
-        axios.get('http://127.0.0.1:8000/search')
+        };
+ const ip='http://10.34.6.23:8000';
+        axios.get(ip+'/search')
             .then(res => {
                 const search = res.data;
                 console.log(search);

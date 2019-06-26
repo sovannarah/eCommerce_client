@@ -177,4 +177,14 @@ li {
 #input-username, #input-password {
   max-height: 30px; }
 
+.results-search{
+  background-color: white;
+}
+
+.category-box{
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
 /*# sourceMappingURL=header.css.map */

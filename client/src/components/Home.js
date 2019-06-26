@@ -57,8 +57,8 @@ class Home extends React.Component {
     }
 
     render() {
-        console.log(this.state.articles);
-        return (
+        // console.log(this.state.articles)
+        return(
             <section id="home-stn" className="">
                 <Slider />
                 <section className="container-fluid">

@@ -14,7 +14,7 @@ import IconeCart from '../images/icon/icon-panier.png';
 import '../style/css/header.css';
 import { addToCart } from './Cart';
 
-
+//TODO set default to select to title;
 
 class Header extends React.Component {
 
@@ -26,50 +26,80 @@ class Header extends React.Component {
             cart: true,
             left: false,
             results: {},
-            put: '',
-            value: ''
-        }
-        this.ip = 'http://127.0.0.1:8000'
+            input: '',
+            select: '',
+            category: [],
+            getCategory: []
+        };
+        this.ip = 'http://10.34.6.23:8000';
 
         this.displaySearch = this.displaySearch.bind(this);
         this.displayUser = this.displayUser.bind(this);
         this.displayCart = this.displayCart.bind(this);
+        this.parseCategory = this.parseCategory.bind(this);
+    }
+    
+    
+    parseCategory(data)
+    {
+        let c = -1;
+        while (data[++c]) {
+            this.state.getCategory.push(data[c]);
+            if (data[c].sub && data[c].sub.length > 0)
+                this.parseCategory(data[c].sub);
+        }
 
     }
 
-    handleChange = () => {
-        this.setState({
-            put: this.search.value
-        }, () => {
-            if (this.state.put && this.state.put.length > 1) {
-                if (this.state.put.length % 2 === 0) {
-                    this.displaySearchBar()
-                } else if (!this.state.put) {
 
+
+
+    filterSearch = () => {
+        this.setState({
+            input: this.search.select
+        }, () => {
+            if (this.state.input && this.state.input.length > 1) {
+                if (this.state.input.length % 2 === 0) {
+                    this.itemSearch()
+                } else if (!this.state.input) {
+                    console.log('not ok');
                 }
             }
         })
-
-    }
-    handleValue = (event) => {
+    };
+    handleSelect = (event) => {
         this.setState({
-            value: event.target.value
+            select: event.target.select
         })
+    };
 
-    }
-
-    displaySearchBar = () => {
-        axios.get(this.ip + '/search?' + this.state.value + '=' + this.state.put)
+    itemSearch = () => {
+        // title=....&category[]=1&category[]=2&category[]=3....
+        axios.get(this.ip + '/search?' + this.state.select + '=' + this.state.input+'&')
             .then(({ data }) => {
-                console.log(data)
                 this.setState({ results: data })
             })
+    };
+
+    componentDidMount() {
+        /**
+         * @param get all the categories
+         */
+        axios.get(this.ip + '/category')
+            .then(
+                (res) => {
+                    this.parseCategory(res.data);
+                },
+                (err) => {
+                    console.log(err);
+                })
     }
 
+onChange = (e) =>{
+    this.setState(e.target.checked())
+};
 
-    componentWillMount() {
-        // this.displaySearchBar();
-    }
+
 
     displaySearch() {
         this.setState({ user: true })
@@ -84,9 +114,9 @@ class Header extends React.Component {
     }
 
     displayCart() {
-        this.setState({ user: true })
-        this.setState({ search: true })
-        this.setState({ cart: !this.state.cart })
+        this.setState({ user: true });
+        this.setState({ search: true });
+        this.setState({ cart: !this.state.cart });
     }
 
     toggleDrawer = (side, open) => event => {
@@ -98,7 +128,7 @@ class Header extends React.Component {
     };
 
     render() {
-        // console.log(this.state.results);
+        // console.log(this.state.categories);
 
         const userToken = localStorage.getItem('token');
         return (
@@ -148,16 +178,26 @@ class Header extends React.Component {
                     timeout={500}
                     classNames="display-search">
                     <div id="ctn-search-barre" className="d-flex justify-content-end w-100 open">
-                        <select  className="mt-auto mb-auto" value={this.state.value} onChange={this.handleValue}>
+                        <select  className="mt-auto mb-auto" select={this.state.select} onChange={this.handleSelect}>
                             <option>Select</option>
-                            <option value="title">Title</option>
-                            <option value="description">Description</option>
-                            <option value="category">category</option>
-
-                            {console.log(this.state.value)
-                            }
+                            <option select="title">Title</option>
+                            <option select="description">Description</option>
                         </select>
-                        <input id="search-barre" className="mt-auto mb-auto mr-5" ref={input => this.search = input} onChange={this.handleChange} type="text" placeholder="Search" />
+                        <div className="category-box">
+                            {this.state.getCategory.map(category => (
+                                <ul >
+                                    <label for={category.id}>{category.name}</label>
+                                    <input
+                                        type="checkbox"
+                                        name={category.name}
+                                        select={category.id}
+                                        id={category.id}
+                                        onChange={this.onChange}
+                                    />
+                                </ul>
+                            ))}
+                        </div>
+                        <input id="search-barre" className="mt-auto mb-auto mr-5" ref={input => this.search = input} onChange={this.filterSearch} type="text" placeholder="Search" />
                         <div className="results-search">
                             {this.state.results.length >= 1 ? this.state.results.map((elem, i) => (
                                 <li key={i}>
@@ -165,8 +205,7 @@ class Header extends React.Component {
                                         {elem.title}
                                         {console.log("ok    ")}
 
-                                        {this.state.value == "title" ? elem.title : this.state.value == "description" ? elem.description : ''}
-
+                                        {this.state.select == "title" ? elem.title : this.state.select == "description" ? elem.description : ''}
                                     </Link>
                                 </li>
                             )) : ""}
