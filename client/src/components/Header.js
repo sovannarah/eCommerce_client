@@ -148,7 +148,7 @@ class Header extends React.Component {
                     timeout={500}
                     classNames="display-search">
                     <div id="ctn-search-barre" className="d-flex justify-content-end w-100 open">
-                        <select value={this.state.value} onChange={this.handleValue}>
+                        <select  className="mt-auto mb-auto" value={this.state.value} onChange={this.handleValue}>
                             <option>Select</option>
                             <option value="title">Title</option>
                             <option value="description">Description</option>
@@ -163,7 +163,12 @@ class Header extends React.Component {
                                 <li key={i}>
                                     <Link to={"/article/" + elem.id}>
                                         {elem.title}
+<<<<<<< HEAD
                                         {console.log("ok    ")}
+=======
+                                        {this.state.value == "title" ? elem.title : this.state.value == "description" ? elem.description : ''}
+
+>>>>>>> css2
                                     </Link>
                                 </li>
                             )) : ""}

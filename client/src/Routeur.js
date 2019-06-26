@@ -24,7 +24,7 @@ class Routeur extends React.Component {
                 <Route path="/category/:id" component={ Category } />
                 <Route path="/search" component={ Search } />
             </Switch>
-        )
+        );
     }
 }
 
