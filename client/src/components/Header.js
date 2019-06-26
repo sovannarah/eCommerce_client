@@ -26,7 +26,7 @@ class Header extends React.Component {
             cart: true,
             left: false,
             results: {},
-            input: '',
+            put: '',
             select: '',
             category: [],
             getCategory: []
@@ -39,10 +39,9 @@ class Header extends React.Component {
         this.parseCategory = this.parseCategory.bind(this);
         this.makeStr = this.makeStr.bind(this);
     }
-    
-    
-    parseCategory(data)
-    {
+
+
+    parseCategory(data) {
         let c = -1;
         while (data[++c]) {
             this.state.getCategory.push(data[c]);
@@ -57,14 +56,16 @@ class Header extends React.Component {
 
     filterSearch = () => {
         this.setState({
-            input: this.search.select
+            put: this.search.select
         }, () => {
-            if (this.state.input && this.state.input.length > 1) {
-                if (this.state.input.length % 2 === 0) {
+            console.log(this.state.put);
+            if (this.state.put && this.state.put.length > 1) {
+                if (this.state.put.length % 2 === 0) {
                     this.itemSearch()
-                } else if (!this.state.input) {
+                } else if (!this.state.put) {
                     console.log('not ok');
                 }
+
             }
         })
     };
@@ -74,23 +75,22 @@ class Header extends React.Component {
         })
     };
 
-    itemSearch = async () => {
+    itemSearch = () => {
         // title=....&category[]=1&category[]=2&category[]=3....
-        let str = await this.makeStr(this.state.category);
-        axios.get(this.ip + '/search?' + this.state.select + '=' + this.state.input + str)
+        let str = this.makeStr(this.state.category);
+        axios.get(this.ip + '/search?' + this.state.select + '=' + this.state.put + str)
             .then(({ data }) => {
                 this.setState({ results: data })
             })
     };
 
-    makeStr (table)
-    {
+    makeStr(table) {
         let c = -1;
         let str = "";
-        while (table[++c])
-        {
-                str = str + "&category[]=" + table[c];
+        while (table[++c]) {
+            str = str + "&category[]=" + table[c];
         }
+        return (str);
     }
 
     componentDidMount() {
@@ -107,19 +107,18 @@ class Header extends React.Component {
                 })
     }
 
-onChange = (e) =>{
+    onChange = (e) => {
         let sCategory = this.state.category;
         if (e.target.checked === true)
             sCategory.push(e.target.id);
-        else if (e.target.checked === false)
-        {
-           let tIndex = sCategory.indexOf(e.target.id);
-           if (tIndex !== -1)
-               sCategory.splice(tIndex, 1);
+        else if (e.target.checked === false) {
+            let tIndex = sCategory.indexOf(e.target.id);
+            if (tIndex !== -1)
+                sCategory.splice(tIndex, 1);
         }
-        this.setState({category: sCategory});
+        this.setState({ category: sCategory });
         console.log(this.state.category);
-};
+    };
 
 
 
@@ -200,7 +199,7 @@ onChange = (e) =>{
                     timeout={500}
                     classNames="display-search">
                     <div id="ctn-search-barre" className="d-flex justify-content-end w-100 open">
-                        <select  className="mt-auto mb-auto" select={this.state.select} onChange={this.handleSelect}>
+                        <select className="mt-auto mb-auto" select={this.state.select} onChange={this.handleSelect}>
                             <option>Select</option>
                             <option select="title">Title</option>
                             <option select="description">Description</option>
@@ -219,7 +218,7 @@ onChange = (e) =>{
                                 </ul>
                             ))}
                         </div>
-                        <input id="search-barre" className="mt-auto mb-auto mr-5" ref={input => this.search = input} onChange={this.filterSearch} type="text" placeholder="Search" />
+                        <input id="search-barre" className="mt-auto mb-auto mr-5" ref={put => this.search = put} onChange={this.filterSearch} type="text" placeholder="Search" />
                         <div className="results-search">
                             {this.state.results.length >= 1 ? this.state.results.map((elem, i) => (
                                 <li key={i}>
