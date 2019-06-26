@@ -27,13 +27,16 @@ class Header extends React.Component {
             left: false,
             results: {},
             put: '',
-            value: ''
+            value: '',
+            categories: [],
+            catsearch: []
         }
         this.ip = 'http://10.34.6.23:8000'
 
         this.displaySearch = this.displaySearch.bind(this);
         this.displayUser = this.displayUser.bind(this);
         this.displayCart = this.displayCart.bind(this);
+        this.handleSearchCheckbox = this.handleSearchCheckbox.bind(this);
 
     }
 
@@ -69,8 +72,41 @@ class Header extends React.Component {
 
     }
 
+    componentDidMount() {
+        /**
+         * @param get all the categories
+         */
+        axios.get(this.ip + '/category')
+            .then(
+                (res) => {
+                    // console.log('========== Get category menu ===========')
+                    // console.log(res.data);
+                    this.setState({ categories: res.data });
+                },
+                (err) => {
+                    console.log(err);
+                })
+    }
+
     componentWillMount() {
         // this.displaySearchBar();
+    }
+
+    handleSearchCheckbox(event) {
+        console.log(event.target.id);
+        if (this.state.catsearch.indexOf(event.target.id) !== -1) {
+            console.log(`unset ${event.target.id}`);
+            let copy = this.state.catsearch;
+            copy = copy.slice(this.state.catsearch.indexOf(event.target.id), 1);
+            this.setState({ catsearch: copy });
+        }
+        else {
+            console.log(`set ${event.target.id}`);
+            let copy = this.state.catsearch;
+            copy.push(event.target.id);
+            this.setState({ catsearch: copy });
+        }
+        console.log(this.state.catsearch);
     }
 
     displaySearch() {
@@ -100,7 +136,7 @@ class Header extends React.Component {
     };
 
     render() {
-        // console.log(this.state.results);
+        // console.log(this.state.categories);
 
         const userToken = localStorage.getItem('token');
         return (
@@ -156,7 +192,18 @@ class Header extends React.Component {
                             <option value="description">Description</option>
                         </select>
                         <div className="category-box">
-                            <input type="checkbox" />Name:
+                            {this.state.categories.map(category => (
+                                <>
+                                    <label for={category.id}>{category.name}</label>
+                                    <input 
+                                        type="checkbox"
+                                        name={category.name}
+                                        value={category.id}
+                                        id={category.id}
+                                        onChange={this.handleSearchCheckbox}
+                                    />
+                                </>
+                            ))}
                         </div>
                         <input id="search-barre" className="mt-auto mb-auto mr-5" ref={input => this.search = input} onChange={this.handleChange} type="text" placeholder="Search" />
                         <div className="results-search">
