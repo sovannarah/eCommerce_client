@@ -21,8 +21,10 @@ class Cart extends Component {
 	}
 
 	componentDidMount() {
+		const articles = getArticles();
+		this.setState({articles});
 		let allUpdated = true;
-		getCart().forEach(
+		articles.forEach(
 			(article) => {
 				Axios.get(apiArticleURI + article.id)
 					.then((res) => {
@@ -154,7 +156,7 @@ function Article(props) {
 /**
  * @returns {Array}
  */
-function getCart() {
+function getArticles() {
 	const json = sessionStorage.getItem(storageKey);
 	return json ? JSON.parse(json) : [];
 }
@@ -165,7 +167,7 @@ function getCart() {
  * @param quantity
  */
 function addToCart(article, quantity) {
-	const cart = getCart();
+	const cart = getArticles();
 	let existing = cart.find(oldArticle => oldArticle.id === article.id);
 	if (!existing) {
 		existing = article;
