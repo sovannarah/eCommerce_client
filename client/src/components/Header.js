@@ -37,6 +37,7 @@ class Header extends React.Component {
         this.displayUser = this.displayUser.bind(this);
         this.displayCart = this.displayCart.bind(this);
         this.parseCategory = this.parseCategory.bind(this);
+        this.makeStr = this.makeStr.bind(this);
     }
     
     
@@ -73,13 +74,24 @@ class Header extends React.Component {
         })
     };
 
-    itemSearch = () => {
+    itemSearch = async () => {
         // title=....&category[]=1&category[]=2&category[]=3....
-        axios.get(this.ip + '/search?' + this.state.select + '=' + this.state.input+'&')
+        let str = await this.makeStr(this.state.category);
+        axios.get(this.ip + '/search?' + this.state.select + '=' + this.state.input + str)
             .then(({ data }) => {
                 this.setState({ results: data })
             })
     };
+
+    makeStr (table)
+    {
+        let c = -1;
+        let str = "";
+        while (table[++c])
+        {
+                str = str + "&category[]=" + table[c];
+        }
+    }
 
     componentDidMount() {
         /**
@@ -96,7 +108,17 @@ class Header extends React.Component {
     }
 
 onChange = (e) =>{
-    this.setState(e.target.checked())
+        let sCategory = this.state.category;
+        if (e.target.checked === true)
+            sCategory.push(e.target.id);
+        else if (e.target.checked === false)
+        {
+           let tIndex = sCategory.indexOf(e.target.id);
+           if (tIndex !== -1)
+               sCategory.splice(tIndex, 1);
+        }
+        this.setState({category: sCategory});
+        console.log(this.state.category);
 };
 
 
