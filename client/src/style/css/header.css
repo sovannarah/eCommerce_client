@@ -175,5 +175,10 @@ li {
   background-color: white;
 }
 
+.category-box{
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
 
 /*# sourceMappingURL=header.css.map */

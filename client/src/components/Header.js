@@ -29,7 +29,7 @@ class Header extends React.Component {
             put: '',
             value: ''
         }
-        this.ip = 'http://127.0.0.1:8000'
+        this.ip = 'http://10.34.6.23:8000'
 
         this.displaySearch = this.displaySearch.bind(this);
         this.displayUser = this.displayUser.bind(this);
@@ -55,17 +55,19 @@ class Header extends React.Component {
         this.setState({
             value: event.target.value
         })
-
     }
 
     displaySearchBar = () => {
+        // title=....&category[]=1&category[]=2&category[]=3....
         axios.get(this.ip + '/search?' + this.state.value + '=' + this.state.put)
             .then(({ data }) => {
-                console.log(data)
                 this.setState({ results: data })
             })
     }
 
+    displayCheckbox = () => {
+
+    }
 
     componentWillMount() {
         // this.displaySearchBar();
@@ -152,19 +154,16 @@ class Header extends React.Component {
                             <option>Select</option>
                             <option value="title">Title</option>
                             <option value="description">Description</option>
-                            <option value="category">category</option>
-
-                            {console.log(this.state.value)
-                            }
                         </select>
+                        <div className="category-box">
+                            <input type="checkbox" />Name:
+                        </div>
                         <input id="search-barre" className="mt-auto mb-auto mr-5" ref={input => this.search = input} onChange={this.handleChange} type="text" placeholder="Search" />
                         <div className="results-search">
                             {this.state.results.length >= 1 ? this.state.results.map((elem, i) => (
                                 <li key={i}>
                                     <Link to={"/article/" + elem.id}>
-                                        {elem.title}
                                         {this.state.value == "title" ? elem.title : this.state.value == "description" ? elem.description : ''}
-
                                     </Link>
                                 </li>
                             )) : ""}
