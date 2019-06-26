@@ -1,6 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import Arrow from '../images/icon/arow-r.png';
 
 /**
  * @param split url to get the last value
@@ -25,8 +31,6 @@ class Category extends React.Component {
 		axios.get(this.ip + '/category/'+ url +'/article')
 			.then(
 				(res) => {
-					console.log(this.state.data);
-
 					this.setState({ data: res.data })
 					this.setState({ check: true })
 
@@ -40,34 +44,36 @@ class Category extends React.Component {
 	render() {
 		if (this.state.check) {
 			return (
-				<div>
-					{/*<div className="mini-menu">*/}
-					{/*	<h1>Menu</h1>*/}
-					{/*	<ul>*/}
-					{/*		{this.state.data.map((elem) => (*/}
-					{/*			<li>*/}
-					{/*				<Link to={`/article/${elem.id}`}>*/}
-					{/*					{elem.title}*/}
-					{/*				</Link>*/}
-					{/*			</li>*/}
-					{/*		))}*/}
-					{/*	</ul>*/}
-					{/*</div>*/}
-					<div className="mini-menu">
-						<h1>Item</h1>
-						{this.state.data.map((elem, i) => (
-							<ul key={i}>
-								<li>
-									<a href={'/article/' + elem.id}><h5>{elem.title}</h5></a>
-								</li>
-								<li>
-									<h5>Description: </h5>
-									<p> {elem.description} </p>
-								</li>
-							</ul>
-						))}
-					</div>
-				</div>
+				
+				<section id="ctn-articles" className="container-fluid d-flex">
+                <ul className="col-md-12 row d-flex justify-content-center">
+                {this.state.data.map((item, index) => (
+                    <Card key={index} className="ctn-popular m-3 col-md-4">
+                        <Link to={`/article/${ item.id }`}>
+                            <CardActionArea>
+								<div className="ctn-img d-flex">
+									<img id="popular-img" className="m-auto" src={require('../ecommerce_api/Api/public/uploads/images/' + item.images[0])} />
+									 
+                                </div>
+                                <CardHeader
+                                    title={`${item.title} $${item.price}`}
+                                    subheader={`${item.description}`}
+                                    
+                                />
+                                
+                                {/* <CardContent>
+                                    <Typography variant="body2" color="textSecondary" component="p">
+                                        { item.description }
+                                    </Typography>
+                                </CardContent> */}
+                                
+                                <p className="detail d-flex justify-content-end">Detail<span><img src={ Arrow } /></span></p>
+                            </CardActionArea>
+                        </Link>
+                    </Card>
+                ))}
+                </ul>
+            </section> 
 			);
 		} else {
 			return <div></div>

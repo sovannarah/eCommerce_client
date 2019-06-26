@@ -75,7 +75,7 @@ class Cart extends Component {
 
 	render() {
 		return (
-			<div className='cart'>
+			<div className='cart w-100'>
 				<h3>My Cart</h3>
 				{
 					!this.state.updated

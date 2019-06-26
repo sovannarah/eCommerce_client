@@ -27,6 +27,7 @@ class Header extends React.Component {
             left: false,
             results: {},
             put: '',
+            value: ''
         }
         this.ip = 'http://127.0.0.1:8000'
 
@@ -48,10 +49,17 @@ class Header extends React.Component {
                 }
             }
         })
+
+    }
+    handleValue = (event) => {
+        this.setState({
+            value: event.target.value
+        })
+
     }
 
     displaySearchBar = () => {
-        axios.get(this.ip + '/search?title=' + this.state.put)
+        axios.get(this.ip + '/search?' + this.state.value + '=' + this.state.put)
             .then(({ data }) => {
                 console.log(data)
                 this.setState({ results: data })
@@ -140,13 +148,23 @@ class Header extends React.Component {
                     timeout={500}
                     classNames="display-search">
                     <div id="ctn-search-barre" className="d-flex justify-content-end w-100 open">
+                        <select  className="mt-auto mb-auto" value={this.state.value} onChange={this.handleValue}>
+                            <option>Select</option>
+                            <option value="title">Title</option>
+                            <option value="description">Description</option>
+                            <option value="category">category</option>
+
+                            {console.log(this.state.value)
+                            }
+                        </select>
                         <input id="search-barre" className="mt-auto mb-auto mr-5" ref={input => this.search = input} onChange={this.handleChange} type="text" placeholder="Search" />
                         <div className="results-search">
                             {this.state.results.length >= 1 ? this.state.results.map((elem, i) => (
                                 <li key={i}>
                                     <Link to={"/article/" + elem.id}>
                                         {elem.title}
-                                        {console.log("ok    ")}
+                                        {this.state.value == "title" ? elem.title : this.state.value == "description" ? elem.description : ''}
+
                                     </Link>
                                 </li>
                             )) : ""}
@@ -165,9 +183,9 @@ class Header extends React.Component {
                     classNames="display-cart"
                 >
                     <div id="menu-cart" className="d-flex bg-dark open">
-	                    <Cart></Cart>
+                        <Cart></Cart>
                     </div>
-            
+
                 </CSSTransition>
             </header>
         );

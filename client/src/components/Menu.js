@@ -22,28 +22,28 @@ class Menu extends React.Component {
         axios.get(this.ip + '/category')
             .then(
                 (res) => {
-                    console.log('========== Get category menu ===========')
-                    console.log(res.data);
+                    // console.log('========== Get category menu ===========')
+                    // console.log(res.data);
                     this.setState({ data: res.data });
                     this.setState({ check: true });
                 },
                 (err) => {
-                    console.log(err);
+                    // console.log(err);
                 })
     }
 
 
     render() {
-        console.log(this.state.data);
+        // console.log(this.state.data);
         if (this.state.check) {
             return (
                 <div id="menu" className="wrapper">
                     <div className="wrapper">
-                        <ul>
+                        <ul className="w-100">
                             {this.state.data.map((elem, i) => (
-                                <li key={i}>
-                                    <a href={"/category/" + elem.id}>
-                                        {elem.name}
+                                <li className="list-menu d-flex justify-content-center" key={i}>
+                                    <a className="m-auto" href={"/category/" + elem.id}>
+                                        {elem.name[0].toUpperCase() + elem.name.substr(1)}
                                     </a>
                                 </li>
                             ))}
