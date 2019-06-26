@@ -7,7 +7,7 @@ import '../style/css/admin.css';
 class Admin extends React.Component {
 	constructor(props) {
 		super(props);
-		this.ip = 'http://127.0.0.1:8000';
+		this.ip = 'http://10.34.6.23:8000';
 		this.parseCategory = this.parseCategory.bind(this);
 		this.Getcategory = this.Getcategory.bind(this);
 		this.addItem = this.addItem.bind(this);

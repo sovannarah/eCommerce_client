@@ -26,8 +26,8 @@ class Header extends React.Component {
             cart: true,
             left: false,
             results: {},
-            input: '',
-            select: '',
+            put: '',
+            value: '',
             category: [],
             getCategory: []
         };
@@ -57,12 +57,12 @@ class Header extends React.Component {
 
     filterSearch = () => {
         this.setState({
-            input: this.search.select
+            put: this.search.value
         }, () => {
-            if (this.state.input && this.state.input.length > 1) {
-                if (this.state.input.length % 2 === 0) {
+            if (this.state.put && this.state.put.length > 1) {
+                if (this.state.put.length % 2 === 0) {
                     this.itemSearch()
-                } else if (!this.state.input) {
+                } else if (!this.state.put) {
                     console.log('not ok');
                 }
             }
@@ -70,14 +70,15 @@ class Header extends React.Component {
     };
     handleSelect = (event) => {
         this.setState({
-            select: event.target.select
+            value: event.target.value
         })
     };
 
-    itemSearch = async () => {
+    itemSearch =  () => {
         // title=....&category[]=1&category[]=2&category[]=3....
-        let str = await this.makeStr(this.state.category);
-        axios.get(this.ip + '/search?' + this.state.select + '=' + this.state.input + str)
+        let str = this.makeStr(this.state.category);
+        console.log(str);
+        axios.get(this.ip + '/search?' + this.state.value + '=' + this.state.put + str)
             .then(({ data }) => {
                 this.setState({ results: data })
             })
@@ -85,12 +86,14 @@ class Header extends React.Component {
 
     makeStr (table)
     {
-        let c = -1;
-        let str = "";
-        while (table[++c])
+        return (new Promise((resolve) =>
         {
+            let c = -1;
+            let str = "";
+            while (table[++c])
                 str = str + "&category[]=" + table[c];
-        }
+            resolve(str);
+        }));
     }
 
     componentDidMount() {
@@ -200,7 +203,7 @@ onChange = (e) =>{
                     timeout={500}
                     classNames="display-search">
                     <div id="ctn-search-barre" className="d-flex justify-content-end w-100 open">
-                        <select  className="mt-auto mb-auto" select={this.state.select} onChange={this.handleSelect}>
+                        <select  className="mt-auto mb-auto" select={this.state.value} onChange={this.handleSelect}>
                             <option>Select</option>
                             <option select="title">Title</option>
                             <option select="description">Description</option>
@@ -227,7 +230,7 @@ onChange = (e) =>{
                                         {elem.title}
                                         {console.log("ok    ")}
 
-                                        {this.state.select == "title" ? elem.title : this.state.select == "description" ? elem.description : ''}
+                                        {this.state.value == "title" ? elem.title : this.state.value == "description" ? elem.description : ''}
                                     </Link>
                                 </li>
                             )) : ""}
