@@ -1,28 +1,22 @@
 .bg-grey {
-  background-color: #282828;
-}
+  background-color: #282828; }
 
 .bg-mainly {
-  background-color: #ef464b;
-}
+  background-color: #ef464b; }
 
 .bg-milk {
-  background-color: #f7f7f7;
-}
+  background-color: #f7f7f7; }
 
 #case-categorie {
-  min-height: 100px;
-}
-#case-categorie h1 {
-  color: #282828;
-  font-size: 4vw;
-  font-family: "Kaushan Script", cursive;
-}
+  min-height: 100px; }
+  #case-categorie h1 {
+    color: #282828;
+    font-size: 4vw;
+    font-family: 'Kaushan Script', cursive; }
 
 #ctn-iconCat {
   margin-top: 1.5%;
-  margin-bottom: 1.5%;
-}
+  margin-bottom: 1.5%; }
 
 .ctn-categorie {
   width: 180px;
@@ -30,80 +24,64 @@
   display: flex;
   color: white;
   text-align: center;
-  position: relative;
-}
-.ctn-categorie img {
-  position: absolute;
-  margin: auto;
-  height: 130%;
-  width: 234px;
-  transition: 0.3s all ease;
-}
-.ctn-categorie img:hover {
-  transform: scale(1.1);
-}
-.ctn-categorie .align-r {
-  top: -36%;
-}
-.ctn-categorie .align-l {
-  left: 0;
-}
+  position: relative; }
+  .ctn-categorie img {
+    position: absolute;
+    margin: auto;
+    height: 130%;
+    width: 234px;
+    transition: 0.3s all ease; }
+    .ctn-categorie img:hover {
+      transform: scale(1.1); }
+  .ctn-categorie .align-r {
+    top: -36%; }
+  .ctn-categorie .align-l {
+    left: 0; }
 
 .bg-blackgrey {
-  background-color: #181818;
-}
+  background-color: #181818; }
 
 .bg-black {
-  background-color: black;
-}
+  background-color: black; }
 
 .ctn-popular {
   height: 300px;
   margin: 0;
-  padding: 0;
-}
+  padding: 0; }
 
 .ctn-img {
   height: 130px;
   width: 100%;
   margin: 0;
-  background: whitesmoke;
-}
+  background: whitesmoke; }
 
 #popular-img {
   max-width: 90%;
-  max-height: 90%;
-}
+  max-height: 90%; }
 
 .ctn-popular {
-  max-width: 300px;
-}
+  max-width: 300px; }
 
 .MuiPaper-root .MuiCardContent-root .MuiTypography-root {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  max-height: 100px;
-}
+  max-height: 100px; }
 
 .detail {
   margin-right: 20px;
   font-size: 14px;
-  color: #696969;
-}
-.detail img {
-  margin-left: 5px;
-  height: 15px;
-  width: 15px;
-}
+  color: #696969; }
+  .detail img {
+    margin-left: 5px;
+    height: 15px;
+    width: 15px; }
 
 #ctn-popular h2 {
-  font-family: "Kaushan Script", cursive;
+  font-family: 'Kaushan Script', cursive;
   font-size: 45px;
-  color: white;
-}
+  color: white; }
 #ctn-popular a {
-  text-decoration: none;
-}
+  text-decoration: none; }
 
 /*# sourceMappingURL=home.css.map */
