@@ -32,7 +32,9 @@ class Register extends React.Component {
         e.preventDefault();
         axios.post(ip + '/register', this.state)
             .then(res=> {
-                console.log(res.data)
+                if (res.data) {
+                        window.location.replace('/');
+                }
             })
     }
 
