@@ -56,7 +56,7 @@ class Category extends React.Component {
 								subheader={`$${item.price}`}
 							/>
 							<div className="ctn-img d-flex">
-								<img id="popular-img" className="m-auto" src={require('../API/Api/public/uploads/images/' + item.images[0])} />
+								<img id="popular-img" className="m-auto" src={this.ip + "/uploads/images" + item.images[0]}/>
 							</div>
 							<CardContent>
 								<Typography variant="body2" color="textSecondary" component="p">

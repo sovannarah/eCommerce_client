@@ -65,7 +65,7 @@ class Article extends React.Component {
                             className="h-100 w-100">
                                 <div className="d-flex row w-100 h-100">
                                     <div id="ctn-img-car" className="col-md-12 m-auto mh-100 mw-100 d-flex">
-                                        <img id="car-img" className="m-auto mw-100 mh-100" src={require('../API/Api/public/uploads/images/' + item)} />
+                                        <img id="car-img" className="m-auto mw-100 mh-100" src={ip + "/uploads/images/" + article.images[0]} />
                                     </div>
                                 </div>
                             </Carousel.Item>
