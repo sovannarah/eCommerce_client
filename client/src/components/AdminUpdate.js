@@ -266,7 +266,7 @@ class Admin extends React.Component {
 									{data.stock}
 								</td>
 								<td>
-									<input type="number" defaultValue={0} id={i} onChange={this.addStock.bind(this, i, data.price)}/>
+									<input type="number" defaultValue="0" id={i} onChange={this.addStock.bind(this, i, data.price)}/>
 								</td>
 								<td>
 									<button variant="contained" color="primary"

@@ -49,28 +49,23 @@ class Category extends React.Component {
                 <ul className="col-md-12 row d-flex justify-content-center">
                 {this.state.data.map((item, index) => (
                     <Card key={index} className="ctn-popular m-3 col-md-4">
-                        <Link to={`/article/${ item.id }`}>
-                            <CardActionArea>
-								<div className="ctn-img d-flex">
-									<img id="popular-img" className="m-auto" src={require('../API/Api/public/uploads/images/' + item.images[0])} />
-									 
-                                </div>
-                                <CardHeader
-                                    title={`${item.title} $${item.price}`}
-                                    subheader={`${item.description}`}
-                                    
-                                />
-                                
-                                {/* <CardContent>
-                                    <Typography variant="body2" color="textSecondary" component="p">
-                                        { item.description }
-                                    </Typography>
-                                </CardContent> */}
-                                
-                                <p className="detail d-flex justify-content-end">Detail<span><img src={ Arrow } /></span></p>
-                            </CardActionArea>
-                        </Link>
-                    </Card>
+					<Link to={`/article/${ item.id }`}>
+						<CardActionArea>
+							<CardHeader
+								title={item.title}
+								subheader={`$${item.price}`}
+							/>
+							<div className="ctn-img d-flex">
+								<img id="popular-img" className="m-auto" src={require('../API/Api/public/uploads/images/' + item.images[0])} />
+							</div>
+							<CardContent>
+								<Typography variant="body2" color="textSecondary" component="p">
+									{ item.description }
+								</Typography>
+							</CardContent>
+						</CardActionArea>
+					</Link>
+				</Card>
                 ))}
                 </ul>
             </section> 
