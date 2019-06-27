@@ -39,10 +39,9 @@ class Header extends React.Component {
         this.parseCategory = this.parseCategory.bind(this);
         this.makeStr = this.makeStr.bind(this);
     }
-    
-    
-    parseCategory(data)
-    {
+
+
+    parseCategory(data) {
         let c = -1;
         while (data[++c]) {
             this.state.getCategory.push(data[c]);
@@ -65,6 +64,7 @@ class Header extends React.Component {
                 } else if (!this.state.put) {
                     console.log('not ok');
                 }
+
             }
         })
     };
@@ -110,19 +110,18 @@ class Header extends React.Component {
                 })
     }
 
-onChange = (e) =>{
+    onChange = (e) => {
         let sCategory = this.state.category;
         if (e.target.checked === true)
             sCategory.push(e.target.id);
-        else if (e.target.checked === false)
-        {
-           let tIndex = sCategory.indexOf(e.target.id);
-           if (tIndex !== -1)
-               sCategory.splice(tIndex, 1);
+        else if (e.target.checked === false) {
+            let tIndex = sCategory.indexOf(e.target.id);
+            if (tIndex !== -1)
+                sCategory.splice(tIndex, 1);
         }
-        this.setState({category: sCategory});
+        this.setState({ category: sCategory });
         console.log(this.state.category);
-};
+    };
 
 
 
@@ -222,7 +221,7 @@ onChange = (e) =>{
                                 </ul>
                             ))}
                         </div>
-                        <input id="search-barre" className="mt-auto mb-auto mr-5" ref={input => this.search = input} onChange={this.filterSearch} type="text" placeholder="Search" />
+                        <input id="search-barre" className="mt-auto mb-auto mr-5" ref={put => this.search = put} onChange={this.filterSearch} type="text" placeholder="Search" />
                         <div className="results-search">
                             {this.state.results.length >= 1 ? this.state.results.map((elem, i) => (
                                 <li key={i}>
