@@ -12,7 +12,7 @@ class Menu extends React.Component {
             data: {},
             check: false
         };
-        this.ip = 'http://127.0.0.1:8000';
+        this.ip = 'http://10.34.6.23:8000';
 
     }
     componentDidMount() {

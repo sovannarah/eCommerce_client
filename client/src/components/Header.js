@@ -31,7 +31,7 @@ class Header extends React.Component {
             category: [],
             getCategory: []
         };
-        this.ip = 'http://127.0.0.1:8000';
+        this.ip = 'http://10.34.6.23:8000';
 
         this.displaySearch = this.displaySearch.bind(this);
         this.displayUser = this.displayUser.bind(this);
@@ -51,9 +51,6 @@ class Header extends React.Component {
 
     }
 
-
-
-
     filterSearch = () => {
         this.setState({
             put: this.search.value
@@ -64,30 +61,30 @@ class Header extends React.Component {
                 } else if (!this.state.put) {
                     console.log('not ok');
                 }
-
             }
         })
+
     };
     handleSelect = (event) => {
         this.setState({
             value: event.target.value
         })
+
     };
 
     itemSearch =  () => {
         // title=....&category[]=1&category[]=2&category[]=3....
-        let str = this.makeStr(this.state.category);
-        console.log(str);
-        axios.get(this.ip + '/search?' + this.state.value + '=' + this.state.put + str)
-            .then(({ data }) => {
-                this.setState({ results: data })
-            })
+        this.makeStr(this.state.category).then(res => {
+            console.log(res);
+            axios.get(this.ip + '/search?' + this.state.value + '=' + this.state.put + res)
+                .then(({ data }) => {
+                    this.setState({ results: data })
+                })
+        });
     };
 
-    makeStr (table)
-    {
-        return (new Promise((resolve) =>
-        {
+    makeStr(table) {
+        return (new Promise((resolve) => {
             let c = -1;
             let str = "";
             while (table[++c])
@@ -120,7 +117,6 @@ class Header extends React.Component {
                 sCategory.splice(tIndex, 1);
         }
         this.setState({ category: sCategory });
-        console.log(this.state.category);
     };
 
 
@@ -202,14 +198,14 @@ class Header extends React.Component {
                     timeout={500}
                     classNames="display-search">
                     <div id="ctn-search-barre" className="d-flex justify-content-end w-100 open">
-                        <select  className="mt-auto mb-auto" select={this.state.value} onChange={this.handleSelect}>
+                        <select className="mt-auto mb-auto" select={this.state.value} onChange={this.handleSelect}>
                             <option>Select</option>
                             <option select="title">Title</option>
                             <option select="description">Description</option>
                         </select>
                         <div className="category-box">
                             {this.state.getCategory.map(category => (
-                                <ul >
+                                <ul>
                                     <label for={category.id}>{category.name}</label>
                                     <input
                                         type="checkbox"
@@ -221,14 +217,12 @@ class Header extends React.Component {
                                 </ul>
                             ))}
                         </div>
-                        <input id="search-barre" className="mt-auto mb-auto mr-5" ref={put => this.search = put} onChange={this.filterSearch} type="text" placeholder="Search" />
+                        <input id="search-barre" className="mt-auto mb-auto mr-5" ref={input => this.search = input} onChange={this.filterSearch} type="text" placeholder="Search" />
                         <div className="results-search">
                             {this.state.results.length >= 1 ? this.state.results.map((elem, i) => (
                                 <li key={i}>
                                     <Link to={"/article/" + elem.id}>
                                         {elem.title}
-                                        {console.log("ok    ")}
-
                                         {this.state.value == "title" ? elem.title : this.state.value == "description" ? elem.description : ''}
                                     </Link>
                                 </li>
