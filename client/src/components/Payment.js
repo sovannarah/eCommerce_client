@@ -31,14 +31,14 @@ class Payment extends React.Component {
     render() { 
         return (
             <section id="ctn-cartPage" className=" min-vh-100 flex-column container-fluid d-flex">
-                <form method="post" onSubmit={this.checkout} id="ctn-cart" className="rounded min-vh-50 col-lg-6 d-flex flex-column bg-light m-auto">
-                    <div className="w-50 h-50 d-flex flex-column justify-content-around m-auto">
+                <form method="post" onSubmit={this.checkout} id="ctn-cart" className="rounded min-vh-50 col-lg-6 d-flex flex-column bg-grey m-auto">
+                    <div className="w-50 h-75 d-flex flex-column justify-content-around m-auto">
                         <h1 className="text-secondary border-bottom">Payment</h1>
-                        <label className="d-flex flex-column">Card Number
-                            <input type="text" name="" />
+                        <label className="d-flex flex-column text-light">Card Number
+                            <input id="outlined-name" className="mt-3" type="text" name="" />
                         </label>
-                        <label>Expiration date
-                            <div className="d-flex">
+                        <label className="text-light">Expiration date
+                            <div className="d-flex mt-3">
                                 <select className="d-flex flex-column" name="">
                                     <option>MM</option>
                                     {this.state.month.map((month, i) => (
@@ -56,8 +56,8 @@ class Payment extends React.Component {
                                 </select>
                             </div>
                         </label>
-                        <label className="d-flex flex-column">Card Name
-                            <input type="text" name="" />
+                        <label className="d-flex flex-column text-light">Card Name
+                            <input id="outlined-name" className="mt-3" type="text" name="" />
                         </label>
                         <button type="submit" className="btn-mainly ml-auto mr-auto">Pay</button>
                     </div>
