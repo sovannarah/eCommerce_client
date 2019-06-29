@@ -7,7 +7,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Arrow from '../images/icon/arow-r.png';
-
 /**
  * @param split url to get the last value
  */
@@ -86,28 +85,22 @@ class Category extends React.Component {
 	render() {
 		if (this.state.check) {
 			return (
-				
-				<section id="ctn-articles" className="container-fluid d-flex">
-                <ul className="col-md-12 row d-flex justify-content-center">
+			
+				<section id="ctn-articles" className="container-fluid justify-content-center d-flex">
+                <ul className="container-fluid col-lg-8">
                 {this.state.data.map((item, index) => (
-                    <Card key={index} className="ctn-popular m-3 col-md-4">
-					<Link to={`/article/${ item.id }`}>
-						<CardActionArea>
-							<CardHeader
-								title={item.title}
-								subheader={`$${item.price}`}
-							/>
-							<div className="ctn-img d-flex">
+					<div key={index} className=" ctn-art bg-light mt-4 mb-4 w-100">
+					<Link className="d-flex h-100" to={`/article/${ item.id }`}>
+							<div className="ctn-image h-100 mt-auto mb-auto col-3 d-flex">
 								<img id="popular-img" className="m-auto" src={this.ip + "/uploads/images/" + item.images[0]}/>
 							</div>
-							<CardContent>
-								<Typography variant="body2" color="textSecondary" component="p">
-									{ item.description }
-								</Typography>
-							</CardContent>
-						</CardActionArea>
+							<div className="p-3">
+								<h5>{item.title}</h5>
+								<p>${item.price}</p>
+								<p>{item.description}</p>
+							</div>
 					</Link>
-				</Card>
+				</div>
                 ))}
                 </ul>
             </section> 

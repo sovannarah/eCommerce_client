@@ -77,7 +77,7 @@ class Cart extends Component {
 		console.log(this.state.articles)
 		return (
 			<div className='cart w-100'>
-				<h3>My Cart</h3>
+				<h3 className="text-secondary">My Cart</h3>
 				{
 					!this.state.updated
 					&& <Alert variant='warning'>

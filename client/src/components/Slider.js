@@ -39,7 +39,7 @@ class Slider extends React.Component {
                             </div>
                             <div className="col-md-6 h-100 d-flex">
                                 <div className="col-10 mh-75 m-auto">
-                                    <h1>{ item.title }</h1>
+                                    <h1 className="text-secondary">{ item.title }</h1>
                                     <p className="text m-auto">{item.description}</p>
                                     <Link to="/">
                                         Detail
