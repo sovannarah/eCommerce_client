@@ -16,14 +16,9 @@ class Menu extends React.Component {
             category: [],
 			currCategorie : []
         };
-<<<<<<< HEAD
         this.ip = 'http://127.0.0.1:8000';
         this.parseCategory = this.parseCategory.bind(this);
 		this.Getcategory = this.Getcategory.bind(this);
-=======
-        this.ip = 'http://192.168.1.9:8000';
-
->>>>>>> categ
     }
 
     
