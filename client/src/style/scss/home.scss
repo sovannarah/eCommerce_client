@@ -27,6 +27,16 @@
 #ctn-iconCat {
     margin-top: 1.5%;
     margin-bottom: 1.5%;
+
+    @media screen and (max-width: 390px){
+        .span-none {
+            display: none !important;
+        }
+
+        .align-r {
+            top: -46%;
+        }
+    }
 }
 
 .ctn-categorie {

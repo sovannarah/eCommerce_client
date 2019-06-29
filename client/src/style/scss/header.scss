@@ -19,6 +19,15 @@ header {
     background-color: #181818;
 }
 
+.sroll {
+    overflow: hidden;
+    height: 60% !important;
+}
+
+.dis {
+    overflow: visible !important;
+}
+
 #button-menu {
     background-color: transparent;
     border: none;
@@ -119,7 +128,7 @@ li{
 
 #search-barre {
     height: 60%;
-    width: 40%;
+    width: 20%;
     z-index: 0;
     padding-left: 15px;
     padding-right: 10px;

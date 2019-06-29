@@ -9,7 +9,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <div id="main-div" className="h-100">
+            <div id="main-div" className="">
                 <BrowserRouter>
                     <Header />
                     <div id="margin"></div>

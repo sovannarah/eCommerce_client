@@ -12,7 +12,6 @@ import IconeSearch from '../images/icon/icon-loupe.png';
 import IconeUser from '../images/icon/icon-user.png';
 import IconeCart from '../images/icon/icon-panier.png';
 import '../style/css/header.css';
-import { addToCart } from './Cart';
 
 //TODO set default to select to title;
 
@@ -33,6 +32,7 @@ class Header extends React.Component {
         };
     this.ip = 'http://127.0.0.1:8000';
 
+        this.displayScroll = this.displayScroll.bind(this);     
         this.displaySearch = this.displaySearch.bind(this);
         this.displayUser = this.displayUser.bind(this);
         this.displayCart = this.displayCart.bind(this);
@@ -125,6 +125,10 @@ class Header extends React.Component {
     };
 
 
+    displayScroll(e) {
+        e.preventDefault();
+        document.getElementById('cho-cat').classList.toggle('dis')
+    }
 
     displaySearch() {
         this.setState({ user: true })
@@ -208,19 +212,26 @@ class Header extends React.Component {
                             <option select="title">Title</option>
                             <option select="description">Description</option>
                         </select>
-                        <div className="category-box">
-                            {this.state.getCategory.map((category, index) => (
-                                <ul key={index}>
-                                    <label htmlFor={category.id}>{category.name}</label>
-                                    <input
-                                        type="checkbox"
-                                        name={category.name}
-                                        select={category.id}
-                                        id={category.id}
-                                        onChange={this.onChange}
-                                    />
-                                </ul>
-                            ))}
+                        <div className="category-box h-100 d-flex">
+                            <div id="cho-cat" className="sroll  bg-light mt-auto mb-auto">
+                                <div className="p-2 bg-light d-flex justify-content-between">
+                                    <p>Categorie</p>
+                                    <button onClick={this.displayScroll}>v</button>
+                                </div>
+                                {this.state.getCategory.map((category, index) => (
+                                    <ul className="bg-light p-2 d-flex justify-content-between" key={index}>
+                                        <label className="bg-light mt-auto mb-auto" htmlFor={category.id}>{category.name}</label>
+                                        <input
+                                            type="checkbox"
+                                            className="mt-auto mb-auto"
+                                            name={category.name}
+                                            select={category.id}
+                                            id={category.id}
+                                            onChange={this.onChange}
+                                        />
+                                    </ul>
+                                ))}
+                            </div>
                         </div>
                         <input id="search-barre" className="mt-auto mb-auto mr-5" ref={put => this.search = put} onChange={this.filterSearch} type="text" placeholder="Search" />
                         <div className="results-search">

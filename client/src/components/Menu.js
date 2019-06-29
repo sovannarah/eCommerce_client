@@ -91,7 +91,7 @@ class Menu extends React.Component {
                             </li>
                         </a>
                         {this.state.data.map((elem, i) => (
-                            <a className="m-auto" href={"/category/" + elem.id}>
+                            <a key={i} className="m-auto" href={"/category/" + elem.id}>
                                 <li className="list-menu d-flex justify-content-center" key={i}>
                                     <p className="m-auto">{elem.name[0].toUpperCase() + elem.name.substr(1)}</p>
                                 </li>
