@@ -7,6 +7,12 @@ header {
     background-color: #181818;
 }
 
+@for $i from 1 through 50 {
+    .h-#{$i} {
+        height: 1%*$i !important;
+    }
+}
+
 #ctn-header {
     // border-bottom : 1px solid #f0f0f0;
     background-color: white;

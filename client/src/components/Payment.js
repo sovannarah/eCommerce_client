@@ -62,7 +62,6 @@ class Payment extends React.Component {
                         <button type="submit" className="btn-mainly ml-auto mr-auto">Pay</button>
                     </div>
                 </form>
-                
             </section>
         );
     }

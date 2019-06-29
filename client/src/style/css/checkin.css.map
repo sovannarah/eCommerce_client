@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,YAAa;EACT,MAAM,EAAE,eAAe;EACvB,KAAK,EAAE,GAAG",
+"sources": ["../scss/checkin.scss"],
+"names": [],
+"file": "checkin.css"
+}
