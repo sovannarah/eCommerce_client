@@ -20,7 +20,7 @@ class Footer extends React.Component {
                         <Link to="/">Contact</Link>
                         <Link to="/">Help</Link>
                     </div> 
-                    <p className="mt-4 text-secondary">
+                    <p className=" mt-4 ml-auto mr-auto text-secondary">
                     &copy;LeGitans / All rights reserved / Tips for use / Privacy / Author credit / Conditions 
                     </p>
                 </div>
