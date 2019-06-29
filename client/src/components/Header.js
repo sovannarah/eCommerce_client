@@ -31,7 +31,7 @@ class Header extends React.Component {
             category: [],
             getCategory: []
         };
-        this.ip = 'http://10.34.6.23:8000';
+        this.ip = 'http://192.168.1.9:8000';
 
         this.displaySearch = this.displaySearch.bind(this);
         this.displayUser = this.displayUser.bind(this);
