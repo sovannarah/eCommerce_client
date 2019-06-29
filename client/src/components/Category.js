@@ -85,7 +85,7 @@ class Category extends React.Component {
 	render() {
 		if (this.state.check) {
 			return (
-			
+		
 				<section id="ctn-articles" className="container-fluid justify-content-center d-flex">
                 <ul className="container-fluid col-lg-8">
                 {this.state.data.map((item, index) => (

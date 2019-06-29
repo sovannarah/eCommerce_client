@@ -13,12 +13,12 @@ class Footer extends React.Component {
                         <button className="col-4 ml-2 bg-mainly" type="submit">Sign up !</button>
                     </form>
                     <div id="weshalors" className="d-flex justify-content-between">
-                        <Link To="/">About</Link>
-                        <Link To="/">Blog</Link>
-                        <Link To="/">Delivery</Link>
-                        <Link To="/">Return</Link>
-                        <Link To="/">Contact</Link>
-                        <Link To="/">Help</Link>
+                        <Link to="/">About</Link>
+                        <Link to="/">Blog</Link>
+                        <Link to="/">Delivery</Link>
+                        <Link to="/">Return</Link>
+                        <Link to="/">Contact</Link>
+                        <Link to="/">Help</Link>
                     </div> 
                     <p className="mt-4 text-secondary">
                     &copy;LeGitans / All rights reserved / Tips for use / Privacy / Author credit / Conditions 
