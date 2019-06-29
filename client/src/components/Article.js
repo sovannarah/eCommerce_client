@@ -2,7 +2,7 @@ import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import {addToCart } from './Cart';
 import axios from 'axios';
-// import '../style/css/article.css';
+import '../style/css/article.css';
 const ip = 'http://127.0.0.1:8000';
 
 

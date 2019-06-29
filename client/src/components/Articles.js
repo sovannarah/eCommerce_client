@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-// import '../style/css/articles.css';
+import '../style/css/articles.css';
 const ip = 'http://127.0.0.1:8000';
 
 class Articles extends React.Component {

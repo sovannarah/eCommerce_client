@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Fab from '@material-ui/core/Fab';
-// import '../style/css/register.css'; 
+import '../style/css/register.css'; 
 let ip='http://127.0.0.1:8000';
 class Register extends React.Component {
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Fab from "@material-ui/core/Fab";
-// import '../style/css/admin.css';
+import '../style/css/admin.css';
 
 class Admin extends React.Component {
 	constructor(props) {
