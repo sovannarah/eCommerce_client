@@ -31,7 +31,7 @@ class Header extends React.Component {
             category: [],
             getCategory: []
         };
-        this.ip = 'http://192.168.1.9:8000';
+        this.ip = 'http://127.0.0.1:8000';
 
         this.displaySearch = this.displaySearch.bind(this);
         this.displayUser = this.displayUser.bind(this);
@@ -51,6 +51,9 @@ class Header extends React.Component {
 
     }
 
+
+
+
     filterSearch = () => {
         this.setState({
             put: this.search.value
@@ -61,15 +64,14 @@ class Header extends React.Component {
                 } else if (!this.state.put) {
                     console.log('not ok');
                 }
+
             }
         })
-
     };
     handleSelect = (event) => {
         this.setState({
             value: event.target.value
         })
-
     };
 
     itemSearch = () => {
@@ -83,8 +85,10 @@ class Header extends React.Component {
         });
     };
 
-    makeStr(table) {
-        return (new Promise((resolve) => {
+    makeStr (table)
+    {
+        return (new Promise((resolve) =>
+        {
             let c = -1;
             let str = "";
             while (table[++c])
@@ -117,6 +121,7 @@ class Header extends React.Component {
                 sCategory.splice(tIndex, 1);
         }
         this.setState({ category: sCategory });
+        console.log(this.state.category);
     };
 
 
@@ -198,15 +203,15 @@ class Header extends React.Component {
                     timeout={500}
                     classNames="display-search">
                     <div id="ctn-search-barre" className="d-flex justify-content-end w-100 open">
-                        <select className="mt-auto mb-auto" select={this.state.value} onChange={this.handleSelect}>
+                        <select  className="mt-auto mb-auto" select={this.state.value} onChange={this.handleSelect}>
                             <option>Select</option>
                             <option select="title">Title</option>
                             <option select="description">Description</option>
                         </select>
                         <div className="category-box">
-                            {this.state.getCategory.map(category => (
-                                <ul>
-                                    <label for={category.id}>{category.name}</label>
+                            {this.state.getCategory.map((category, index) => (
+                                <ul key={index}>
+                                    <label htmlFor={category.id}>{category.name}</label>
                                     <input
                                         type="checkbox"
                                         name={category.name}
@@ -217,13 +222,13 @@ class Header extends React.Component {
                                 </ul>
                             ))}
                         </div>
-                        <input id="search-barre" className="mt-auto mb-auto mr-5" ref={input => this.search = input} onChange={this.filterSearch} type="text" placeholder="Search" />
+                        <input id="search-barre" className="mt-auto mb-auto mr-5" ref={put => this.search = put} onChange={this.filterSearch} type="text" placeholder="Search" />
                         <div className="results-search">
                             {this.state.results.length >= 1 ? this.state.results.map((elem, i) => (
                                 <li key={i}>
                                     <Link to={"/article/" + elem.id}>
                                         {elem.title}
-                                        {this.state.value == "title" ? elem.title : this.state.value == "description" ? elem.description : ''}
+                                        {this.state.value === "title" ? elem.title : this.state.value === "description" ? elem.description : ''}
                                     </Link>
                                 </li>
                             )) : ""}
@@ -241,8 +246,11 @@ class Header extends React.Component {
                     timeout={500}
                     classNames="display-cart"
                 >
-                    <div id="menu-cart" className="d-flex bg-dark open">
+                    <div id="menu-cart" className="d-flex flex-column bg-dark open">
                         <Cart></Cart>
+                        <Link className="mt-auto ml-auto mr-auto" to="/cartPage">
+                            <button className="btn-mainly">Access to cart</button>
+                        </Link>
                     </div>
 
                 </CSSTransition>
