@@ -208,9 +208,9 @@ class Header extends React.Component {
                             <option select="description">Description</option>
                         </select>
                         <div className="category-box">
-                            {this.state.getCategory.map(category => (
-                                <ul >
-                                    <label for={category.id}>{category.name}</label>
+                            {this.state.getCategory.map((category, index) => (
+                                <ul key={index}>
+                                    <label htmlFor={category.id}>{category.name}</label>
                                     <input
                                         type="checkbox"
                                         name={category.name}
@@ -227,9 +227,7 @@ class Header extends React.Component {
                                 <li key={i}>
                                     <Link to={"/article/" + elem.id}>
                                         {elem.title}
-                                        {console.log("ok    ")}
-
-                                        {this.state.value == "title" ? elem.title : this.state.value == "description" ? elem.description : ''}
+                                        {this.state.value === "title" ? elem.title : this.state.value === "description" ? elem.description : ''}
                                     </Link>
                                 </li>
                             )) : ""}
@@ -247,8 +245,11 @@ class Header extends React.Component {
                     timeout={500}
                     classNames="display-cart"
                 >
-                    <div id="menu-cart" className="d-flex bg-dark open">
+                    <div id="menu-cart" className="d-flex flex-column bg-dark open">
                         <Cart></Cart>
+                        <Link className="mt-auto ml-auto mr-auto" to="/cartPage">
+                            <button className="btn-mainly">Access to cart</button>
+                        </Link>
                     </div>
 
                 </CSSTransition>

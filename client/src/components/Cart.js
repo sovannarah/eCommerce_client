@@ -7,7 +7,7 @@ import Alert from 'react-bootstrap/Alert';
 import {FormControl} from 'react-bootstrap';
 
 
-const apiArticleURI = 'http://10.34.7.68:8000/article/';
+const apiArticleURI = 'http://127.0.0.1:8000/article/';
 const storageKey = 'cart';
 
 class Cart extends Component {
@@ -74,6 +74,7 @@ class Cart extends Component {
 	};
 
 	render() {
+		console.log(this.state.articles)
 		return (
 			<div className='cart w-100'>
 				<h3>My Cart</h3>
@@ -95,7 +96,7 @@ class Cart extends Component {
 					<tbody>
 					{this.state
 						.articles
-						.map(article => <Article article={article}
+						.map((article, index) => <Article key={index} article={article}
 												 delete={this.removeArticle}
 												 update={this.updateArticle}/>,
 						)}
@@ -118,7 +119,7 @@ function Article(props) {
 		<tr className={outOfStock ? 'disabled text-muted' : ''}>
 			<td>
 				{!erased ?
-					<Link to={`/article/${id}`}
+					<Link className="text-light" to={`/article/${id}`}
 						  disabled={outOfStock}
 					>
 						{title}
@@ -130,7 +131,10 @@ function Article(props) {
 			</td>
 			<td>{price}</td>
 			<td>
-				<FormControl type='number' min='0' max={stock}
+				<FormControl type='number'
+							 className="text-dark" 
+					      	 placeholder={quantity} 
+							 min='0' max={stock}
 							 disabled={outOfStock || erased}
 							 onChange={(ev) => {
 								 props.update({...props.article, quantity: ev.target.value});

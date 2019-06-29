@@ -48,16 +48,23 @@ class Home extends React.Component {
 
         this.state = {
             articles: [],
+            category: []
         };
 
         axios.get(ip + '/article')
         .then((res) => {
             this.setState({ articles: res.data});
         });
+
+        axios.get(ip + '/category')
+        .then((res) => {
+            for(let i = 0; i < res.data.length; i++) {
+                this.state.category.push(res.data[i].id)
+            }
+        })
     }
 
     render() {
-        // console.log(this.state.articles)
         return(
             <section id="home-stn" className="">
                 <Slider />
@@ -68,7 +75,7 @@ class Home extends React.Component {
                         </div>
                         <div id="ctn-iconCat" className="row d-flex col-md-9 justify-content-center">
                             <div>
-                                <Link to="/" className="d-flex flex-column ctn-categorie">
+                                <Link to={`/category/1`} className="d-flex flex-column ctn-categorie">
                                     <img src={ IconCG } />
                                 </Link>
                                 <span className="d-flex flex-column ctn-categorie">
@@ -77,12 +84,12 @@ class Home extends React.Component {
                             <div>
                                 <span className="d-flex flex-column ctn-categorie ">
                                 </span>
-                                <Link to="/" className="d-flex flex-column ctn-categorie">
+                                <Link to={`/category/2`} className="d-flex flex-column ctn-categorie">
                                     <img className="align-r" src={ IconMouse } />
                                 </Link>
                             </div>
                             <div>
-                                <Link to="/" className="d-flex flex-column ctn-categorie">
+                                <Link to={`/category/3`} className="d-flex flex-column ctn-categorie">
                                     <img src={ IconPc } />
                                 </Link>
                                 <span className="d-flex flex-column ctn-categorie ">
@@ -91,7 +98,7 @@ class Home extends React.Component {
                             <div>
                                 <span className="d-flex flex-column ctn-categorie">
                                 </span>
-                                <Link to="/" className="d-flex flex-column ctn-categorie">
+                                <Link to={`/category/4`} className="d-flex flex-column ctn-categorie">
                                     <img className="align-r" src={ IconCG } />
                                 </Link>
                             </div>
@@ -100,16 +107,16 @@ class Home extends React.Component {
                     <div id="ctn-popular" className="row bg-grey justify-content-center">
                         <h2 className="d-flex justify-content-center w-100 m-5">Most Popular</h2>
                         <div className=" d-flex row justify-content-around ">
-                            {product.map((item, index) => (
+                            {this.state.articles.slice(0, 10).map((item, index) => (
                                 <Card key={index} className="ctn-popular m-3 col-md-4">
-                                    <Link to="">
+                                    <Link to={`/article/${ item.id }`}>
                                         <CardActionArea>
                                             <CardHeader
                                                 title={item.title}
                                                 subheader={`$${item.price}`}
                                             />
                                             <div className="ctn-img d-flex">
-                                                <img id="popular-img" className="m-auto" src={item.image} />
+                                                <img id="popular-img" className="m-auto" src={ip + "/uploads/images/" + item.images[0]} />
                                             </div>
                                             <CardContent>
                                                 <Typography variant="body2" color="textSecondary" component="p">

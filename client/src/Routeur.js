@@ -5,6 +5,7 @@ import Register from './components/Register';
 import Admin from './components/AdminUpdate';
 import AdminCreate from './components/Admin';
 import Search from './components/Search';
+import CartPage from './components/CartPage';
 import { Switch, Route } from 'react-router';
 import Category from './components/Category';
 
@@ -23,6 +24,7 @@ class Routeur extends React.Component {
                 <Route exact path="/admin/create" component={ AdminCreate } />
                 <Route path="/category/:id" component={ Category } />
                 <Route path="/search" component={ Search } />
+                <Route path="/cartPage" component={ CartPage } />
             </Switch>
         );
     }

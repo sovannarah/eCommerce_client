@@ -165,8 +165,8 @@ li {
   transition: 300ms ease-in; }
 
 #menu-cart {
-  height: 200px;
-  width: 350px;
+  min-height: 400px;
+  width: 400px;
   padding: 15px;
   border-radius: 10px;
   position: absolute;
@@ -177,14 +177,13 @@ li {
 #input-username, #input-password {
   max-height: 30px; }
 
-.results-search{
-  background-color: white;
-}
-
-.category-box{
+.btn-mainly {
+  border: 1px solid #ef464b;
+  background-color: #ef464b;
   color: white;
-  display: flex;
-  flex-direction: column;
-}
+  font-weight: bold;
+  border-radius: 25px;
+  height: 50px;
+  width: 200px; }
 
 /*# sourceMappingURL=header.css.map */

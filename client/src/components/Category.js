@@ -15,30 +15,72 @@ let FullUrl = window.location.pathname;
 const url = FullUrl.split("/")[2];
 
 class Category extends React.Component {
+	
 	constructor(props) {
 		super(props);
 		this.state = {
 			id: '',
-			data: {},
-			check: false
+			data: [],
+			check: false,
+			category: [],
+			currCategorie : []
 		};
 		this.ip = 'http://127.0.0.1:8000';
+		this.parseCategory = this.parseCategory.bind(this);
+		this.Getcategory = this.Getcategory.bind(this);
 	}
+
 	async componentDidMount() {
+		let data2 = await this.Getcategory();
+		this.setState({currCategorie: [data2]})
+		this.parseCategory(this.state.currCategorie);
+		this.forceUpdate()
+
+		
+		let cat = this.state.category;
 		/**
 		 * @param show category user click on
 		 */
-		axios.get(this.ip + '/category/'+ url +'/article')
+		for(let i=0; i < cat.length; i++) {
+			axios.get(this.ip + '/category/'+ cat[i].id +'/article')
 			.then(
 				(res) => {
-					this.setState({ data: res.data })
+					
+					for(let y = 0; y < res.data.length; y++) {
+						this.state.data.push(res.data[y])
+					}
 					this.setState({ check: true })
 
 				},
 				(err) => {
 					console.log(err);
 				})
+		}
 	}
+
+	parseCategory(data)
+	{
+		let c = -1;
+		while (data[++c]) {
+			this.state.category.push(data[c])
+			if (data[c].children && data[c].children.length > 0){
+				this.parseCategory(data[c].children);
+			}
+		}
+
+	}
+
+	Getcategory()
+	{
+		return axios.get(this.ip + '/category/' + url)
+			.then(res => {
+				return (res.data)
+			})
+			.catch(err => {
+				console.log(err);
+			})
+	}
+
 
 
 	render() {
@@ -56,7 +98,7 @@ class Category extends React.Component {
 								subheader={`$${item.price}`}
 							/>
 							<div className="ctn-img d-flex">
-								<img id="popular-img" className="m-auto" src={this.ip + "/uploads/images" + item.images[0]}/>
+								<img id="popular-img" className="m-auto" src={this.ip + "/uploads/images/" + item.images[0]}/>
 							</div>
 							<CardContent>
 								<Typography variant="body2" color="textSecondary" component="p">

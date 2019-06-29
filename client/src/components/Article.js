@@ -1,24 +1,10 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import Img1 from '../images/slider/asus-mouse.png';
-import Img2 from '../images/slider/m-spartha.png';
-import Img3 from '../images/slider/spartha-m.png';
 import {addToCart } from './Cart';
 import axios from 'axios';
 import '../style/css/article.css';
 const ip = 'http://127.0.0.1:8000';
 
-const images = [
-    {
-        img: Img1
-    },
-    {
-        img: Img2
-    },
-    {
-        img: Img3
-    },
-]
 
 class Article extends React.Component {
 
@@ -65,7 +51,7 @@ class Article extends React.Component {
                             className="h-100 w-100">
                                 <div className="d-flex row w-100 h-100">
                                     <div id="ctn-img-car" className="col-md-12 m-auto mh-100 mw-100 d-flex">
-                                        <img id="car-img" className="m-auto mw-100 mh-100" src={ip + "/uploads/images/" + article.images[0]} />
+                                        <img id="car-img" className="m-auto mw-100 mh-100" src={ip + "/uploads/images/" + article.images[index]} />
                                     </div>
                                 </div>
                             </Carousel.Item>
@@ -80,7 +66,7 @@ class Article extends React.Component {
                         </div>
                         <div >
                             <p>stock : { article.stock }</p>
-                            <button className="d-flex">
+                            <button className="d-flex" onClick={this.addCart}>
                                 <p className="m-auto">ADD TO CARD</p>
                             </button>
                         </div>

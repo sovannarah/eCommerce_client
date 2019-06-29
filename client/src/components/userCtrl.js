@@ -52,7 +52,7 @@ class UserCtrl extends React.Component {
             return (
                 <div id="menu-user" className="d-flex flex-column justify-content-around bg-light open">
                     <Link to="/admin">My Account</Link>
-                    <button onClick={this.disconnect}>Disconnect</button>
+                    <button className="btn-mainly ml-auto mr-auto" onClick={this.disconnect}>Disconnect</button>
                 </div>
             )
         } else {
