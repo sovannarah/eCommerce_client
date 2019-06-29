@@ -106,7 +106,7 @@ class Home extends React.Component {
                     </div>
                     <div id="ctn-popular" className="row bg-grey justify-content-center">
                         <h2 className="d-flex justify-content-center w-100 m-5">Most Popular</h2>
-                        <div className=" d-flex row justify-content-around ">
+                        <div className="mb-5 d-flex row justify-content-around ">
                             {this.state.articles.slice(0, 10).map((item, index) => (
                                 <Card key={index} className="ctn-popular m-3 col-md-4">
                                     <Link to={`/article/${ item.id }`}>
