@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Header from './components/Header';
-// import Menu from './components/Menu';
 import Routeur from './Routeur';
+import Footer from './components/Footer';
 import './App.css';
 
 class App extends React.Component {
@@ -11,10 +11,10 @@ class App extends React.Component {
         return (
             <div id="main-div" className="h-100">
                 <BrowserRouter>
-                    {/* <Menu /> */}
                     <Header />
                     <div id="margin"></div>
                     <Routeur />
+                    <Footer /> 
                 </BrowserRouter>
             </div>
         );

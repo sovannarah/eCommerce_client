@@ -1,0 +1,37 @@
+footer {
+    border-top: 1px solid grey;
+    padding: 4%;
+    margin: 0;
+    background-color: #181818;
+
+    
+}
+
+#form-footer {
+    input {
+        height: 50px;
+        color: grey;
+        background-color: transparent;
+        border: 2px solid white;
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+    }
+    
+    button {
+        height: 51px;
+        border: 10px solid #ef464b;
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;  
+        color: white;
+        font-weight: bold;
+    }
+}
+
+#weshalors {
+    a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+
+    }
+}

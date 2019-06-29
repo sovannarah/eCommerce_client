@@ -3,13 +3,18 @@ import { Link } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import Drawer from '@material-ui/core/Drawer';
 import Menu from '../components/Menu';
+import axios from 'axios';
 import UserCtrl from './userCtrl';
+import Cart from './Cart'
 import IconMenu from '../images/icon/icon-menu.png';
 import Logo from '../images/icon/logo2.png';
 import IconeSearch from '../images/icon/icon-loupe.png';
 import IconeUser from '../images/icon/icon-user.png';
 import IconeCart from '../images/icon/icon-panier.png';
 import '../style/css/header.css';
+import { addToCart } from './Cart';
+
+//TODO set default to select to title;
 
 class Header extends React.Component {
 
@@ -19,46 +24,135 @@ class Header extends React.Component {
             search: true,
             user: true,
             cart: true,
-            left: false
-        }
+            left: false,
+            results: {},
+            put: '',
+            value: '',
+            category: [],
+            getCategory: []
+        };
+        this.ip = 'http://127.0.0.1:8000';
 
         this.displaySearch = this.displaySearch.bind(this);
         this.displayUser = this.displayUser.bind(this);
         this.displayCart = this.displayCart.bind(this);
+        this.parseCategory = this.parseCategory.bind(this);
+        this.makeStr = this.makeStr.bind(this);
+    }
+
+
+    parseCategory(data) {
+        let c = -1;
+        while (data[++c]) {
+            this.state.getCategory.push(data[c]);
+            if (data[c].sub && data[c].sub.length > 0)
+                this.parseCategory(data[c].sub);
+        }
 
     }
+
+
+
+
+    filterSearch = () => {
+        this.setState({
+            put: this.search.value
+        }, () => {
+            if (this.state.put && this.state.put.length > 1) {
+                if (this.state.put.length % 2 === 0) {
+                    this.itemSearch()
+                } else if (!this.state.put) {
+                    console.log('not ok');
+                }
+
+            }
+        })
+    };
+    handleSelect = (event) => {
+        this.setState({
+            value: event.target.value
+        })
+    };
+
+    itemSearch =  () => {
+        // title=....&category[]=1&category[]=2&category[]=3....
+        let str = this.makeStr(this.state.category);
+        console.log(str);
+        axios.get(this.ip + '/search?' + this.state.value + '=' + this.state.put + str)
+            .then(({ data }) => {
+                this.setState({ results: data })
+            })
+    };
+
+    makeStr (table)
+    {
+        return (new Promise((resolve) =>
+        {
+            let c = -1;
+            let str = "";
+            while (table[++c])
+                str = str + "&category[]=" + table[c];
+            resolve(str);
+        }));
+    }
+
+    componentDidMount() {
+        /**
+         * @param get all the categories
+         */
+        axios.get(this.ip + '/category')
+            .then(
+                (res) => {
+                    this.parseCategory(res.data);
+                },
+                (err) => {
+                    console.log(err);
+                })
+    }
+
+    onChange = (e) => {
+        let sCategory = this.state.category;
+        if (e.target.checked === true)
+            sCategory.push(e.target.id);
+        else if (e.target.checked === false) {
+            let tIndex = sCategory.indexOf(e.target.id);
+            if (tIndex !== -1)
+                sCategory.splice(tIndex, 1);
+        }
+        this.setState({ category: sCategory });
+        console.log(this.state.category);
+    };
+
 
 
     displaySearch() {
-        this.setState({user: true})
-        this.setState({search: !this.state.search})
-        this.setState({cart: true})
-        // document.getElementById("ctn-search-barre").classList.toggle("open");
+        this.setState({ user: true })
+        this.setState({ search: !this.state.search })
+        this.setState({ cart: true })
     }
 
     displayUser() {
-        this.setState({user: !this.state.user})
-        this.setState({search: true})
-        this.setState({cart: true})
-        // document.getElementById("menu-user").classList.toggle("open");
+        this.setState({ user: !this.state.user })
+        this.setState({ search: true })
+        this.setState({ cart: true })
     }
 
     displayCart() {
-        this.setState({user: true})
-        this.setState({search: true})
-        this.setState({cart: !this.state.cart})
-        // document.getElementById("menu-cart").classList.toggle("open");
+        this.setState({ user: true });
+        this.setState({ search: true });
+        this.setState({ cart: !this.state.cart });
     }
 
     toggleDrawer = (side, open) => event => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-          return;
+            return;
         }
-    
+
         this.setState({ ...this.state, [side]: open });
-      };
+    };
 
     render() {
+        // console.log(this.state.categories);
 
         const userToken = localStorage.getItem('token');
         return (
@@ -67,60 +161,98 @@ class Header extends React.Component {
                     <Menu />
                 </Drawer>
                 <div id="ctn-header" className="h-100 d-flex justify-content-between">
-                    <div id="ctn-icon-menu"className="d-flex justify-content-between">
+                    <div id="ctn-icon-menu" className="d-flex justify-content-between">
                         <button id="button-menu" onClick={this.toggleDrawer('left', true)}>
-                            <img id="icone-menu" className="mt-auto mb-auto" src={ IconMenu } />
+                            <img id="icone-menu" className="mt-auto mb-auto" src={IconMenu} />
                         </button>
                     </div>
                     <Link to="/" id="ctn-logo" className="d-flex mt-2">
-                        <img src={ Logo } />
+                        <img src={Logo} />
                     </Link>
                     <ul className="d-flex justify-content-between mt-auto h-100">
                         <li>
                             <button onClick={this.displaySearch}>
-                                <img src={ IconeSearch }></img>
+                                <img src={IconeSearch}></img>
                             </button>
                         </li>
                         <li >
                             <button onClick={this.displayUser}>
-                                <img src={ IconeUser }></img>
+                                <img src={IconeUser}></img>
                             </button >
 
 
                         </li>
                         <li>
                             <button onClick={this.displayCart}>
-                                <img src={ IconeCart }></img>
+                                <img src={IconeCart}></img>
                             </button>
-                           
+                            <CSSTransition
+                                in={this.state.cart}
+                                timeout={500}
+                                classNames="display-cart">
+                                <div id="menu-cart" className="d-flex bg-dark open">
+
+                                </div>
+                            </CSSTransition>
                         </li>
                     </ul>
                 </div>
                 <CSSTransition
-                    in = {this.state.search}
+                    in={this.state.search}
                     timeout={500}
-                    classNames="display-search"
-                >
+                    classNames="display-search">
                     <div id="ctn-search-barre" className="d-flex justify-content-end w-100 open">
-                        <input id="search-barre" className="mt-auto mb-auto mr-5" type="text"  placeholder="Search"/>
+                        <select  className="mt-auto mb-auto" select={this.state.value} onChange={this.handleSelect}>
+                            <option>Select</option>
+                            <option select="title">Title</option>
+                            <option select="description">Description</option>
+                        </select>
+                        <div className="category-box">
+                            {this.state.getCategory.map((category, index) => (
+                                <ul key={index}>
+                                    <label htmlFor={category.id}>{category.name}</label>
+                                    <input
+                                        type="checkbox"
+                                        name={category.name}
+                                        select={category.id}
+                                        id={category.id}
+                                        onChange={this.onChange}
+                                    />
+                                </ul>
+                            ))}
+                        </div>
+                        <input id="search-barre" className="mt-auto mb-auto mr-5" ref={put => this.search = put} onChange={this.filterSearch} type="text" placeholder="Search" />
+                        <div className="results-search">
+                            {this.state.results.length >= 1 ? this.state.results.map((elem, i) => (
+                                <li key={i}>
+                                    <Link to={"/article/" + elem.id}>
+                                        {elem.title}
+                                        {this.state.value === "title" ? elem.title : this.state.value === "description" ? elem.description : ''}
+                                    </Link>
+                                </li>
+                            )) : ""}
+                        </div>
                     </div>
                 </CSSTransition>
                 <CSSTransition
-                    in = {this.state.user}
+                    in={this.state.user}
                     timeout={500}
-                    classNames="display-user"
-                >
-                    <UserCtrl user={userToken}/>
+                    classNames="display-user">
+                    <UserCtrl user={userToken} />
                 </CSSTransition>
-                 <CSSTransition
-                 in = {this.state.cart}
-                 timeout={500}
-                 classNames="display-cart"
-             >
-                 <div id="menu-cart" className="d-flex bg-dark open">
+                <CSSTransition
+                    in={this.state.cart}
+                    timeout={500}
+                    classNames="display-cart"
+                >
+                    <div id="menu-cart" className="d-flex flex-column bg-dark open">
+                        <Cart></Cart>
+                        <Link className="mt-auto ml-auto mr-auto" to="/cartPage">
+                            <button className="btn-mainly">Access to cart</button>
+                        </Link>
+                    </div>
 
-                 </div>
-             </CSSTransition>
+                </CSSTransition>
             </header>
         );
     }

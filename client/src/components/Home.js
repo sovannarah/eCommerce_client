@@ -11,13 +11,11 @@ import { Link } from 'react-router-dom';
 import '../style/css/home.css';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import CardActions from '@material-ui/core/CardActions';
 import CardActionArea from '@material-ui/core/CardActionArea';
 
-const ip = 'http://10.34.7.0:8001';
+const ip = 'http://127.0.0.1:8000';
 
 const product = [
     {
@@ -32,16 +30,16 @@ const product = [
         image: Chg90,
         title: 'nVidia GTX',
         price: '13',
-        description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a'
+        description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a',
     },
     {
         id: '3',
         image: Apex,
         title: 'MSI x570',
         price: '13',
-        description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a'
-    }
-]
+        description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a',
+    },
+];
 
 class Home extends React.Component {
 
@@ -49,17 +47,24 @@ class Home extends React.Component {
         super(props);
 
         this.state = {
-            articles: []
-        }
+            articles: [],
+            category: []
+        };
 
         axios.get(ip + '/article')
-        .then(res=> {
-            this.setState({ articles: res.data })
+        .then((res) => {
+            this.setState({ articles: res.data});
+        });
+
+        axios.get(ip + '/category')
+        .then((res) => {
+            for(let i = 0; i < res.data.length; i++) {
+                this.state.category.push(res.data[i].id)
+            }
         })
     }
 
     render() {
-        console.log(this.state.articles)
         return(
             <section id="home-stn" className="">
                 <Slider />
@@ -70,7 +75,7 @@ class Home extends React.Component {
                         </div>
                         <div id="ctn-iconCat" className="row d-flex col-md-9 justify-content-center">
                             <div>
-                                <Link to="/" className="d-flex flex-column ctn-categorie">
+                                <Link to={`/category/1`} className="d-flex flex-column ctn-categorie">
                                     <img src={ IconCG } />
                                 </Link>
                                 <span className="d-flex flex-column ctn-categorie">
@@ -79,12 +84,12 @@ class Home extends React.Component {
                             <div>
                                 <span className="d-flex flex-column ctn-categorie ">
                                 </span>
-                                <Link to="/" className="d-flex flex-column ctn-categorie">
+                                <Link to={`/category/2`} className="d-flex flex-column ctn-categorie">
                                     <img className="align-r" src={ IconMouse } />
                                 </Link>
                             </div>
                             <div>
-                                <Link to="/" className="d-flex flex-column ctn-categorie">
+                                <Link to={`/category/3`} className="d-flex flex-column ctn-categorie">
                                     <img src={ IconPc } />
                                 </Link>
                                 <span className="d-flex flex-column ctn-categorie ">
@@ -93,7 +98,7 @@ class Home extends React.Component {
                             <div>
                                 <span className="d-flex flex-column ctn-categorie">
                                 </span>
-                                <Link to="/" className="d-flex flex-column ctn-categorie">
+                                <Link to={`/category/4`} className="d-flex flex-column ctn-categorie">
                                     <img className="align-r" src={ IconCG } />
                                 </Link>
                             </div>
@@ -101,8 +106,8 @@ class Home extends React.Component {
                     </div>
                     <div id="ctn-popular" className="row bg-grey justify-content-center">
                         <h2 className="d-flex justify-content-center w-100 m-5">Most Popular</h2>
-                        <div className=" d-flex row justify-content-around ">
-                            {product.map((item, index) => (
+                        <div className="mb-5 d-flex row justify-content-around ">
+                            {this.state.articles.slice(0, 10).map((item, index) => (
                                 <Card key={index} className="ctn-popular m-3 col-md-4">
                                     <Link to={`/article/${ item.id }`}>
                                         <CardActionArea>
@@ -111,7 +116,7 @@ class Home extends React.Component {
                                                 subheader={`$${item.price}`}
                                             />
                                             <div className="ctn-img d-flex">
-                                                <img id="popular-img" className="m-auto" src={item.image} />
+                                                <img id="popular-img" className="m-auto" src={ip + "/uploads/images/" + item.images[0]} />
                                             </div>
                                             <CardContent>
                                                 <Typography variant="body2" color="textSecondary" component="p">
@@ -126,7 +131,7 @@ class Home extends React.Component {
                     </div>
                 </section>
             </section>
-        )
+        );
     }
 }
 
