@@ -85,18 +85,18 @@ class Menu extends React.Component {
                 <div id="menu" className="wrapper">
                     <div className="wrapper">
                         <ul className="w-100">
-                        <li className="list-menu d-flex justify-content-center">
-                                    <a className="m-auto" href={"/"}>
-                                       Menu
-                                    </a>
-                                </li>
-                            {this.state.data.map((elem, i) => (
-                                <a className="m-auto" href={"/category/" + elem.id}>
+                        <a className="m-auto" href={"/"}>
+                            <li className="list-menu d-flex justify-content-center">     
+                                <p className="m-auto">Menu</p>   
+                            </li>
+                        </a>
+                        {this.state.data.map((elem, i) => (
+                            <a className="m-auto" href={"/category/" + elem.id}>
                                 <li className="list-menu d-flex justify-content-center" key={i}>
-                                        <p className="m-auto">{elem.name[0].toUpperCase() + elem.name.substr(1)}</p>
+                                    <p className="m-auto">{elem.name[0].toUpperCase() + elem.name.substr(1)}</p>
                                 </li>
-                                </a>
-                            ))}
+                            </a>
+                        ))}
                         </ul>
                     </div>
                 </div>
