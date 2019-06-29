@@ -31,7 +31,7 @@ class Header extends React.Component {
             category: [],
             getCategory: []
         };
-        this.ip = 'http://127.0.0.1:8000';
+    this.ip = 'http://127.0.0.1:8000';
 
         this.displaySearch = this.displaySearch.bind(this);
         this.displayUser = this.displayUser.bind(this);
@@ -74,14 +74,15 @@ class Header extends React.Component {
         })
     };
 
-    itemSearch =  () => {
+    itemSearch = () => {
         // title=....&category[]=1&category[]=2&category[]=3....
-        let str = this.makeStr(this.state.category);
-        console.log(str);
-        axios.get(this.ip + '/search?' + this.state.value + '=' + this.state.put + str)
-            .then(({ data }) => {
-                this.setState({ results: data })
-            })
+        this.makeStr(this.state.category).then(res => {
+            console.log(res);
+            axios.get(this.ip + '/search?' + this.state.value + '=' + this.state.put + res)
+                .then(({ data }) => {
+                    this.setState({ results: data })
+                })
+        });
     };
 
     makeStr (table)
