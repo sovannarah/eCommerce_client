@@ -37,6 +37,7 @@ class Menu extends React.Component {
                     let cat = this.state.category;
                     if(urlPos === "category") {
                         for(let i = 0; i < cat.length; i++) {
+                            console.log(res.data)
                             this.state.data.push(cat[i])
                         }
                     
@@ -66,6 +67,7 @@ class Menu extends React.Component {
 
 	Getcategory()
 	{
+        
 		return axios.get(this.ip + '/category/' + url)
 			.then(res => {
                 console.log(res.data)
@@ -73,12 +75,11 @@ class Menu extends React.Component {
 			})
 			.catch(err => {
 				console.log(err);
-			})
+            })
 	}
 
-
-
     render() {
+        console.log(this.state.category)
         if (this.state.check) {
             return (
                 <div id="menu" className="wrapper">

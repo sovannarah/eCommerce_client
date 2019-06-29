@@ -1,0 +1,18 @@
+.min-vh-50 {
+    min-height: 50vh;
+}
+
+@for $i from 1 through 50 {
+    .h-#{$i} {
+        height: 1%*$i !important;
+    }
+}
+
+.input-style { 
+    border-bottom: 1px solid white;
+    color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: transparent;
+}

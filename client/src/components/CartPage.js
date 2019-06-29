@@ -101,7 +101,7 @@ class Cart extends Component {
 						</Table>
                         <div className="d-flex bg-grey2 justify-content-between w-100">
                             <h5 className="text-light mt-auto mb-auto ml-3">TOTAL PRICE :</h5>
-                            <Link to="/">
+                            <Link to="/checkin">
                                 <button className="btn-mainly mr-2 mt-2 mb-2">PAY</button>
                             </Link>
                         </div>
