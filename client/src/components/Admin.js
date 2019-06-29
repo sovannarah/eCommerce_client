@@ -1,13 +1,15 @@
 import React from 'react';
 import axios from 'axios';
-import TextField from "@material-ui/core/TextField";
 import Fab from "@material-ui/core/Fab";
-import '../style/css/admin.css';
+// import '../style/css/admin.css';
 
 class Admin extends React.Component {
 	constructor(props) {
 		super(props);
-		this.ip = 'http://10.34.6.23:8000';
+		this.state = {
+			category : []
+		}
+		this.ip = 'http://127.0.0.1:8000';
 		this.parseCategory = this.parseCategory.bind(this);
 		this.Getcategory = this.Getcategory.bind(this);
 		this.addItem = this.addItem.bind(this);
@@ -20,19 +22,24 @@ class Admin extends React.Component {
 			await axios.get(this.ip + '/user/' + localStorage.getItem('token') +
 				'/check').then(
 				() => {
-					console.log("===== Welcome ========");
+					// console.log("===== Welcome ========");
 				},
 				() => {
 					window.location.replace('/');
 				})
 		}
+		
+		let data2 = await this.Getcategory();
+		this.parseCategory(data2);
+		this.forceUpdate()
 	}
 
 	parseCategory(data)
 	{
 		let c = -1;
+		console.log(data)
 		while (data[++c]) {
-			this.state.category.push(data[c]);
+			this.state.category.push(data[c])
 			if (data[c].sub && data[c].sub.length > 0)
 				this.parseCategory(data[c].sub);
 		}
@@ -58,10 +65,7 @@ class Admin extends React.Component {
 			'Content-Type': 'multipart/form-data',
 			'token': localStorage.getItem('token'),
 			'Access-Control-Allow-Credentials': true};
-		// console.log(this.state.images);
 		const formData = new FormData(e.target);
-		// Object.keys(this.state).forEach((v) => formData.append(v, this.state[v]));
-		// console.log(formData.getAll('images'));
 		axios.post(this.ip + '/article', formData, {headers: headers})
 			.then((res) => {
 				console.log(res.data);
@@ -69,7 +73,7 @@ class Admin extends React.Component {
 	}
 
 	render()
-	{
+	{	
 		return (
 			<section id="stn-adminCreate" className="col-12 h-100 d-flex">
 				<form id="form-add" method="post" onSubmit={this.addItem}
@@ -119,10 +123,13 @@ class Admin extends React.Component {
 									/>
 								</label>
 								<label className="d-flex flex-column">Category
-									<input
-										className="outlined-name"
-										name="category"
-										type="number"/>
+									<select name="category" className="outlined-name">
+									{this.state.category.map((item, index) =>
+										<option key={index} id={ item.id } value={item.id}>
+											{ item.name }
+										</option>
+									)}
+									</select>
 								</label>
 							</div>
 						</div>

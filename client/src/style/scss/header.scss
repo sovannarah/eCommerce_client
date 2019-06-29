@@ -7,6 +7,12 @@ header {
     background-color: #181818;
 }
 
+@for $i from 1 through 50 {
+    .h-#{$i} {
+        height: 1%*$i !important;
+    }
+}
+
 #ctn-header {
     // border-bottom : 1px solid #f0f0f0;
     background-color: white;
@@ -205,8 +211,8 @@ li{
 }
 
 #menu-cart {
-    height: 200px;
-    width: 350px;
+    min-height: 400px;
+    width: 400px;
     padding: 15px;
     border-radius: 10px;
     position: absolute;
@@ -217,4 +223,14 @@ li{
 
 #input-username, #input-password {
     max-height: 30px;
+}
+
+.btn-mainly {
+    border: 1px solid #ef464b;
+    background-color: #ef464b;
+    color: white;
+    font-weight: bold;
+    border-radius: 25px;
+    height: 50px;
+    width: 200px;
 }

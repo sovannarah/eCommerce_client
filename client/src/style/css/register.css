@@ -1,17 +1,3 @@
-#stn-register {
-  background-color: #282828; }
 
-#form-register {
-  border-radius: 20px; }
-  #form-register label {
-    color: white; }
-
-.outlined-name {
-  color: white;
-  background-color: #282828;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: 1px solid white; }
 
 /*# sourceMappingURL=register.css.map */

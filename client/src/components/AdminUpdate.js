@@ -5,7 +5,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import '../style/css/adminupdate.css';
+// import '../style/css/adminupdate.css';
 import {MenuList} from "@material-ui/core";
 
 class Admin extends React.Component {
@@ -56,7 +56,7 @@ class Admin extends React.Component {
 				'/check').then(
 				() =>
 				{
-					console.log("===== Welcome ========");
+					// console.log("===== Welcome ========");
 				},
 				() =>
 				{
@@ -65,22 +65,18 @@ class Admin extends React.Component {
 		}
 		axios.get(this.ip + '/article')
 			.then(res => {
-				console.log('======= get article ========');
-				console.log(res.data);
-				console.log("=============================");
-				// for(let oui in res.data) {
-				//   res.data[oui]['category_name'] = res.data[oui].category.name
-				//   res.data[oui]['category_id'] = res.data[oui].category.id
-				// }
+				// console.log('======= get article ========');
+				// console.log(res.data);
+				// console.log("=============================");
 				this.setState({data : res.data})
 			})
 			.catch(err => {
 				console.log(err);
 			})
 		let data2 = await this.Getcategory();
-		console.log('===== get rec category ======');
-		console.log(data2);
-		console.log("=============================");
+		// console.log('===== get rec category ======');
+		// console.log(data2);
+		// console.log("=============================");
 		this.parseCategory(data2);
 		this.forceUpdate()
 	}
@@ -124,12 +120,12 @@ class Admin extends React.Component {
 				return (res.data)
 			})
 			.catch(err => {
-				console.log(err);
+				// console.log(err);
 			})
 	}
 
 	handleChange(event) {
-		console.log(event);
+		// console.log(event);
 		this.setState({ parent_name: event._targetInst.stateNode.innerText});
 		this.setState({category_id: event._targetInst.stateNode.id})
 	}
@@ -142,9 +138,9 @@ class Admin extends React.Component {
 		};
 		await axios.post(this.ip + '/category', data,{headers: { 'token': this.state.headers['token']}})
 			.then(async (res)=> {
-				console.log("======== get category ===========");
-				console.log(res.data);
-				console.log("===============================");
+				// console.log("======== get category ===========");
+				// console.log(res.data);
+				// console.log("===============================");
 				let data2 = await this.Getcategory();
 				this.parseCategory(data2);
 			})
@@ -176,7 +172,7 @@ class Admin extends React.Component {
 			if (tDisplay[c] === event.target.id)
 			{
 				flagChange = true;
-				console.log(event.target.id);
+				// console.log(event.target.id);
 			}
 		}
 		if (flagChange === true)
@@ -192,7 +188,7 @@ class Admin extends React.Component {
 
 	addItem (id, itemPrice, name, nb)
 	{
-		console.log(parseInt(document.getElementById(nb).value));
+		// console.log(parseInt(document.getElementById(nb).value));
 		let items = this.state.addArticle;
 		let price = parseInt(document.getElementById(nb).value);
 		let c = -1;
@@ -220,13 +216,13 @@ class Admin extends React.Component {
 	updatePrice ()
 	{
 		let data = this.state.addArticle;
-		console.log(data);
+		// console.log(data);
 		let c = -1;
 		let total = 0;
 		while (data[++c])
 		{
 			total = total + data[c].price;
-			console.log(data[c].price);
+			// console.log(data[c].price);
 		}
 		this.setState({commandPrice: total});
 	}
@@ -241,7 +237,6 @@ class Admin extends React.Component {
 	{
 		return (
 			<div>
-				<button id="command" onClick={this.changeDisplay}>make command</button>
 				<div id="displaycommand" hidden={true}>
 					<h2>{"Total:  " + this.state.commandPrice}</h2>
 					<table>
@@ -306,17 +301,17 @@ class Admin extends React.Component {
 								new Promise(resolve => {
 									setTimeout(() => {
 										resolve();
-										console.log(newData)
+										// console.log(newData)
 										const data = this.state.data;
 										data[data.indexOf(oldData)] = newData;
-										console.log(data[data.indexOf(oldData)] = newData);
+										// console.log(data[data.indexOf(oldData)] = newData);
 										const formData = new FormData();
 										Object.keys(this.state.data[data.indexOf(newData)]).forEach((v) => formData.append(v, this.state.data[data.indexOf(newData)][v]));
 										this.setState({ data });
 										formData.append('category', this.state.data[data.indexOf(newData)].category.id)
 										axios.post(this.ip + '/article/' + data[data.indexOf(newData)].id, formData,{headers:this.state.headers})
 											.then(res => {
-												console.log(res.data)
+												// console.log(res.data)
 											})
 											.catch(console.log)
 									}, 600);
@@ -329,18 +324,19 @@ class Admin extends React.Component {
 										const remain = data.splice(data.indexOf(oldData), 1);
 										axios.delete(this.ip + '/article/'+ remain[0].id,{headers:this.state.headers})
 											.then(res => {
-												console.log("======= delete article =======");
-												console.log(res);
-												console.log("==============================");
+												// console.log("======= delete article =======");
+												// console.log(res);
+												// console.log("==============================");
 											})
 											.catch(console.log)
 										this.setState({ data });
-										console.log(this.state.category);
+										// console.log(this.state.category);
 									}, 600);
 								}),
 						}}
 					/>
-					<section className="col-12 h-10 d-flex mt-5 mb-5">
+					<section className="col-12 h-10 d-flex justify-content-between mt-5 mb-5">
+						<div className="d-flex">
 						<Select
 							value={this.state.category_id}
 							onChange={this.handleChange}
@@ -370,6 +366,8 @@ class Admin extends React.Component {
 						<Button variant="contained" color="primary" onClick={this.newCat.bind(this)}>
 							Create Category
 						</Button>
+						</div>
+						<button id="command" onClick={this.changeDisplay}>make command</button>
 					</section>
 				</div>
 			</div>
