@@ -18,8 +18,9 @@
   border: 3px solid white;
   width: 100%;
   height: 70px;
-  background-color: whitesmoke; }
-  .list-menu a {
+  background-color: whitesmoke;
+  vertical-align: center; }
+  .list-menu p, .list-menu a {
     font-weight: bold; }
 
 ul {
