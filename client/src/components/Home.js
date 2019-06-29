@@ -86,7 +86,7 @@ class Home extends React.Component {
                             {this.state.articles.slice(0, 10).map((item, index) => (
                                 <Card key={index} className="ctn-popular m-3 col-md-4">
                                     <Link to={`/article/${ item.id }`}>
-                                        <CardActionArea>
+                                        <CardActionArea className="h-100">
                                             <CardHeader
                                                 title={item.title}
                                                 subheader={`$${item.price}`}
@@ -94,7 +94,7 @@ class Home extends React.Component {
                                             <div className="ctn-img d-flex">
                                                 <img id="popular-img" className="m-auto" src={ip + "/uploads/images/" + item.images[0]} />
                                             </div>
-                                            <CardContent>
+                                            <CardContent className="mt-auto">
                                                 <Typography variant="body2" color="textSecondary" component="p">
                                                     { item.description }
                                                 </Typography>

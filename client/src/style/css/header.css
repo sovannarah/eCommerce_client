@@ -176,6 +176,14 @@ header {
   width: 35px;
   min-width: 30px; }
 
+.btn-none {
+  background-color: transparent;
+  border: none; }
+
+.size-icn {
+  height: 20px;
+  width: 20px; }
+
 #ctn-icon-menu {
   width: 300px; }
 

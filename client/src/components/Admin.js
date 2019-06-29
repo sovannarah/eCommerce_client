@@ -69,6 +69,9 @@ class Admin extends React.Component {
 		axios.post(this.ip + '/article', formData, {headers: headers})
 			.then((res) => {
 				console.log(res.data);
+				if(res.data) {
+					window.location.replace('/admin/create');
+				}
 			});
 	}
 

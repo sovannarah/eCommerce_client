@@ -216,7 +216,9 @@ class Header extends React.Component {
                             <div id="cho-cat" className="sroll  bg-light mt-auto mb-auto">
                                 <div className="p-2 bg-light d-flex justify-content-between">
                                     <p>Categorie</p>
-                                    <button onClick={this.displayScroll}>v</button>
+                                    <button className="btn-none mb-auto" onClick={this.displayScroll}>
+                                        <img className="size-icn" src={require('../images/icon/chevron.png')} />
+                                    </button>
                                 </div>
                                 {this.state.getCategory.map((category, index) => (
                                     <ul className="bg-light p-2 d-flex justify-content-between" key={index}>
