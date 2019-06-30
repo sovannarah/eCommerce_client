@@ -20,11 +20,14 @@ class Cart extends Component {
 		this.state = {
 			articles: [],
 			updated: false,
+			HT: 0,
+			TTC: 0
 		};
 	}
 
 	componentDidMount() {
 		let allUpdated = true;
+		let copyPrice = this.state.HT;
 		getCart().forEach(
 			(article) => {
 				Axios.get(apiArticleURI + article.id)
@@ -41,8 +44,11 @@ class Cart extends Component {
 						}
 						this.updateArticle(article);
 					});
-			});
+				copyPrice += (article.price*article.quantity)
+			}
+		);
 		this.setState({updated: allUpdated});
+		this.setState({HT: copyPrice});
 	}
 
 
@@ -76,41 +82,56 @@ class Cart extends Component {
 		});
 	};
 
+	/**
+	 * TODO: understand how transport fee will work
+	 */
+	calculateTranFee = () => {
+		return (20);
+	}
+
 	render() {
-			return (
-				<section id="ctn-cartPage" className=" min-vh-100 flex-column container-fluid d-flex">
-					<div id="ctn-cart" className="col-md-9 m-auto ">
-						<Table variant='dark'>
-							<thead>
+		return (
+			<section id="ctn-cartPage" className=" min-vh-100 flex-column container-fluid d-flex">
+				<div id="ctn-cart" className="col-md-9 m-auto ">
+					<Table variant='dark'>
+						<thead>
 							<tr>
 								<th>Name</th>
 								<th>Unit Price</th>
 								<th>Qt.</th>
 								<th>Stock</th>
 							</tr>
-							</thead>
-							<tbody>
-							{this.state
-								.articles
-								.map((article, index) => <Article key={index} article={article}
-														delete={this.removeArticle}
-														update={this.updateArticle}/>,
-								)}
-							</tbody>
-                            
-						</Table>
-                        <div className="d-flex bg-grey2 justify-content-between w-100">
-                            <h5 className="text-light mt-auto mb-auto ml-3">TOTAL PRICE :</h5>
-                            <Link to="/checkin">
-                                <button className="btn-mainly mr-2 mt-2 mb-2">PAY</button>
-                            </Link>
-                        </div>
+						</thead>
+						<tbody>
+						{this.state.articles.map((article, index) => 
+						<>
+							<Article key={index} article={article}
+								delete={this.removeArticle}
+								update={this.updateArticle}
+							/>
+						</>
+						)}
+						</tbody>
+						
+					</Table>
+					<div className="d-flex bg-grey2 justify-content-between w-100">
+						<h5 className="text-light mt-auto mb-auto ml-3">SOUS TOTAL : {this.state.HT}</h5>
 					</div>
-                    
-				</section>
-			);
-		}
+					<div className="d-flex bg-grey2 justify-content-between w-100">
+						<h5 className="text-light mt-auto mb-auto ml-3">TRANSPORT FEE : </h5>
+					</div>
+					<div className="d-flex bg-grey2 justify-content-between w-100">
+						<h5 className="text-light mt-auto mb-auto ml-3">TOTAL PRICE : {this.state.ht}</h5>
+						<Link to="/checkin">
+							<button className="btn-mainly mr-2 mt-2 mb-2">PAY</button>
+						</Link>
+					</div>
+				</div>
+				
+			</section>
+		);
 	}
+}
 
 
 function Article(props) {
@@ -139,7 +160,7 @@ function Article(props) {
 			<td>
 				<FormControl type='number'
 							 className="text-dark" 
-					      	 placeholder={quantity} 
+						  	 placeholder={quantity} 
 							 min='0' max={stock}
 							 disabled={outOfStock || erased}
 							 onChange={(ev) => {
