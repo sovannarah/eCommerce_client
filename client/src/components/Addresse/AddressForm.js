@@ -167,7 +167,7 @@ class AddressForm extends Component {
           <AddressSuggest
             query={this.state.query}
             onChange={this.onQuery}
-            />
+             />
           <AddressInput
             street={this.state.address.street}
             city={this.state.address.city}

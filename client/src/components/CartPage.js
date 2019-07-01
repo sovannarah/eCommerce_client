@@ -83,10 +83,10 @@ class Cart extends Component {
 	 * Removes article from state by id, and updates sessionStorage
 	 * @param id
 	 */
-	removeArticle = (id) => {
+	removeArticle = (id) => { 
 		this.setState((prevState) => {
 			const articles = prevState.articles.filter(article => article.id !== id);
-			sessionStorage.setItem(storageKey, JSON.stringify(articles));
+			 sessionStorage.setItem(storageKey, JSON.stringify(articles));
 			return {articles};
 		});
 	};
