@@ -21,7 +21,8 @@ class Cart extends Component {
 			articles: [],
 			updated: false,
 			HT: 0,
-			TTC: 0
+			TTC: 0,
+			fee: 0
 		};
 	}
 
@@ -86,6 +87,7 @@ class Cart extends Component {
 	 * TODO: understand how transport fee will work
 	 */
 	calculateTranFee = () => {
+		// $this.setState({fee: 20});
 		return (20);
 	}
 
