@@ -11,9 +11,9 @@ import '../style/css/cartPage.css';
 
 const apiArticleURI = 'http://127.0.0.1:8000/article/';
 const storageKey = 'cart';
-let FullUrl = window.location.pathname;
-const url = FullUrl.split("/")[2];
-const urlPos = FullUrl.split("/")[1];
+// let FullUrl = window.location.pathname;
+// const url = FullUrl.split("/")[2];
+// const urlPos = FullUrl.split("/")[1];
 
 class Cart extends Component {
 
