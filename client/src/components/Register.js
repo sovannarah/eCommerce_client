@@ -1,8 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 import Fab from '@material-ui/core/Fab';
-import '../style/css/register.css'; 
-let ip='http://127.0.0.1:8000';
+
+import '../style/css/register.css';
+
+let ip = 'http://127.0.0.1:8000';
+
 class Register extends React.Component {
 
     constructor(props) {
@@ -12,7 +15,7 @@ class Register extends React.Component {
             email: '',
             password: '',
             roles: ["ROLE_USER"]
-        }
+        };
 
         this.changeMail = this.changeMail.bind(this);
         this.changePassword = this.changePassword.bind(this);
@@ -20,20 +23,20 @@ class Register extends React.Component {
     }
 
     changeMail(e) {
-        this.setState({email : e.target.value})
+        this.setState({email: e.target.value})
     }
 
     changePassword(e) {
-        this.setState({password : e.target.value})
+        this.setState({password: e.target.value})
     }
 
 
     register(e) {
         e.preventDefault();
         axios.post(ip + '/register', this.state)
-            .then(res=> {
+            .then(res => {
                 if (res.data) {
-                        window.location.replace('/');
+                    window.location.replace('/');
                 }
             })
             .catch(err => {
@@ -42,24 +45,24 @@ class Register extends React.Component {
     }
 
     render() {
-        return(
+        return (
             <section id="stn-register" className="d-flex h-100">
-                <form id="form-register" 
-                method="post" 
-                className="d-flex justify-content-around flex-column col-md-4 h-50 m-auto">
-                    <label>Email<br />
+                <form id="form-register"
+                      method="post"
+                      className="d-flex justify-content-around flex-column col-md-4 h-50 m-auto">
+                    <label>Email<br/>
                         <input
                             id="outlined-name"
                             className="w-100"
                             name="email"
                             type="email"
-                            value={this.state.mail}
+                            value={this.state.email}
                             onChange={this.changeMail}
                             margin="normal"
                             variant="outlined"
                         />
                     </label>
-                    <label>Password<br />
+                    <label>Password<br/>
                         <input
                             id="outlined-name"
                             name="password"
@@ -71,12 +74,12 @@ class Register extends React.Component {
                             variant="outlined"
                         />
                     </label>
-                    <Fab id="button-register" 
-                    onClick={this.register} 
-                    type="submit" 
-                    className="w-50 ml-auto mr-auto" 
-                    variant="extended" 
-                    color="secondary">
+                    <Fab id="button-register"
+                         onClick={this.register}
+                         type="submit"
+                         className="w-50 ml-auto mr-auto"
+                         variant="extended"
+                         color="secondary">
                         Sign In
                     </Fab>
                 </form>

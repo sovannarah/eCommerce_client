@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import '../style/css/articles.css';
+
 const ip = 'http://127.0.0.1:8000';
 
 class Articles extends React.Component {
@@ -10,19 +11,19 @@ class Articles extends React.Component {
         super(props);
         this.state = {
             articles: []
-        }
+        };
 
-        axios.get( ip + '/article')
+        axios.get(ip + '/article')
             .then(res => {
                 const article = res.data;
                 console.log(article);
-                this.setState({articles : article})
+                this.setState({articles: article})
             })
     }
 
     render() {
         console.log(this.state.articles);
-        return(
+        return (
             <section id="ctn-articles" className="container-fluid d-flex">
                 <div id="ctn-filter">
                 </div>
@@ -35,7 +36,7 @@ class Articles extends React.Component {
                         </Link>
                     ))}
                 </ul>
-            </section> 
+            </section>
         );
     }
 }

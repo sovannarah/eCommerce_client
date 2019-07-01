@@ -14,19 +14,19 @@ class Menu extends React.Component {
             data: [],
             check: false,
             category: [],
-			currCategorie : []
+            curr_category: []
         };
         this.ip = 'http://127.0.0.1:8000';
         this.parseCategory = this.parseCategory.bind(this);
-		this.Getcategory = this.Getcategory.bind(this);
+        this.getCategory = this.getCategory.bind(this);
     }
 
-    
+
     async componentDidMount() {
-        let data2 = await this.Getcategory();
-            this.setState({currCategorie: [data2]})
-            this.parseCategory(this.state.currCategorie);
-            this.forceUpdate()
+        let data2 = await this.getCategory();
+        this.setState({curr_category: [data2]})
+        this.parseCategory(this.state.curr_category);
+        this.forceUpdate()
 
         /**
          * @param get all the categories
@@ -35,48 +35,46 @@ class Menu extends React.Component {
             .then(
                 (res) => {
                     let cat = this.state.category;
-                    if(urlPos === "category") {
-                        for(let i = 0; i < cat.length; i++) {
+                    if (urlPos === "category") {
+                        for (let i = 0; i < cat.length; i++) {
                             console.log(res.data)
                             this.state.data.push(cat[i])
                         }
-                    
+
                     } else {
-                        this.setState({ data: res.data });
+                        this.setState({data: res.data});
                     }
-                    this.setState({ check: true });
+                    this.setState({check: true});
                 },
                 (err) => {
                     // console.log(err);
                 })
-            
-            
+
+
     }
 
-    parseCategory(data)
-	{
-		let c = -1;
-		while (data[++c]) {
-			this.state.category.push(data[c])
-			if (data[c].children && data[c].children.length > 0){
-				this.parseCategory(data[c].children);
-			}
-		}
+    parseCategory(data) {
+        let c = -1;
+        while (data[++c]) {
+            this.state.category.push(data[c])
+            if (data[c].children && data[c].children.length > 0) {
+                this.parseCategory(data[c].children);
+            }
+        }
 
-	}
+    }
 
-	Getcategory()
-	{
-        
-		return axios.get(this.ip + '/category/' + url)
-			.then(res => {
+    getCategory() {
+
+        return axios.get(this.ip + '/category/' + url)
+            .then(res => {
                 console.log(res.data)
-				return (res.data)
-			})
-			.catch(err => {
-				console.log(err);
+                return (res.data)
             })
-	}
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
     render() {
         console.log(this.state.category)
@@ -85,18 +83,18 @@ class Menu extends React.Component {
                 <div id="menu" className="wrapper">
                     <div className="wrapper">
                         <ul className="w-100">
-                        <a className="m-auto" href={"/"}>
-                            <li className="list-menu d-flex justify-content-center">     
-                                <p className="m-auto">Menu</p>   
-                            </li>
-                        </a>
-                        {this.state.data.map((elem, i) => (
-                            <a key={i} className="m-auto" href={"/category/" + elem.id}>
-                                <li className="list-menu d-flex justify-content-center" key={i}>
-                                    <p className="m-auto">{elem.name[0].toUpperCase() + elem.name.substr(1)}</p>
+                            <a className="m-auto" href={"/"}>
+                                <li className="list-menu d-flex justify-content-center">
+                                    <p className="m-auto">Menu</p>
                                 </li>
                             </a>
-                        ))}
+                            {this.state.data.map((elem, i) => (
+                                <a key={i} className="m-auto" href={"/category/" + elem.id}>
+                                    <li className="list-menu d-flex justify-content-center" key={i}>
+                                        <p className="m-auto">{elem.name[0].toUpperCase() + elem.name.substr(1)}</p>
+                                    </li>
+                                </a>
+                            ))}
                         </ul>
                     </div>
                 </div>

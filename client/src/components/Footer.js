@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import '../style/css/foort.css';
 
 class Footer extends React.Component {
@@ -19,9 +19,9 @@ class Footer extends React.Component {
                         <Link to="/">Return</Link>
                         <Link to="/">Contact</Link>
                         <Link to="/">Help</Link>
-                    </div> 
+                    </div>
                     <p className=" mt-4 ml-auto mr-auto text-secondary">
-                    &copy;LeGitans / All rights reserved / Tips for use / Privacy / Author credit / Conditions 
+                        &copy;LeGitans / All rights reserved / Tips for use / Privacy / Author credit / Conditions
                     </p>
                 </div>
             </footer>

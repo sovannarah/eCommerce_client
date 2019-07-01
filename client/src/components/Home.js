@@ -5,13 +5,9 @@ import IconPc from '../images/icon/icone-pc-wi-hee.png';
 import IconCG from '../images/icon/icone-cgi-hee.png';
 import IconACC from '../images/icon/icone-acc-wi-hee.png';
 import IconMouse from '../images/icon/icone-mouse-wi-hee.png';
-import Rtx from '../images/slider/asus-mouse.png';
-import Chg90 from '../images/slider/apex.png';
-import Apex from '../images/slider/cask-corsair.png';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import '../style/css/home.css';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -29,22 +25,22 @@ class Home extends React.Component {
         };
 
         axios.get(ip + '/article')
-        .then((res) => {
-            this.setState({ articles: res.data});
-        });
+            .then((res) => {
+                this.setState({articles: res.data});
+            });
 
         axios.get(ip + '/category')
-        .then((res) => {
-            for(let i = 0; i < res.data.length; i++) {
-                this.state.category.push(res.data[i].id)
-            }
-        })
+            .then((res) => {
+                for (let i = 0; i < res.data.length; i++) {
+                    this.state.category.push(res.data[i].id)
+                }
+            })
     }
 
     render() {
-        return(
+        return (
             <section id="home-stn" className="">
-                <Slider />
+                <Slider/>
                 <section className="container-fluid">
                     <div id="ctn-categorie" className="row">
                         <div id="case-categorie" className="col-lg-3 d-flex bg-mainly row">
@@ -53,7 +49,7 @@ class Home extends React.Component {
                         <div id="ctn-iconCat" className="row d-flex col-md-9 justify-content-center">
                             <div>
                                 <Link to={`/category/1`} className="d-flex flex-column ctn-categorie">
-                                    <img src={ IconCG } />
+                                    <img src={IconCG}/>
                                 </Link>
                                 <span className="span-none d-flex flex-column ctn-categorie">
                                 </span>
@@ -62,12 +58,12 @@ class Home extends React.Component {
                                 <span className="d-flex flex-column ctn-categorie ">
                                 </span>
                                 <Link to={`/category/2`} className="d-flex flex-column ctn-categorie">
-                                    <img className="align-r" src={ IconMouse } />
+                                    <img className="align-r" src={IconMouse}/>
                                 </Link>
                             </div>
                             <div>
                                 <Link to={`/category/3`} className="d-flex flex-column ctn-categorie">
-                                    <img src={ IconPc } />
+                                    <img src={IconPc}/>
                                 </Link>
                                 <span className="d-flex flex-column ctn-categorie ">
                                 </span>
@@ -76,7 +72,7 @@ class Home extends React.Component {
                                 <span className=" span-none d-flex flex-column ctn-categorie">
                                 </span>
                                 <Link to={`/category/4`} className="d-flex flex-column ctn-categorie">
-                                    <img className="align-r" src={ IconACC } />
+                                    <img className="align-r" src={IconACC}/>
                                 </Link>
                             </div>
                         </div>
@@ -86,27 +82,28 @@ class Home extends React.Component {
                         <div className="mb-5 d-flex row justify-content-around ">
                             {this.state.articles.slice(0, 10).map((item, index) => (
                                 <Card key={index} className="ctn-popular m-3 col-md-4">
-                                    <Link to={`/article/${ item.id }`}>
+                                    <Link to={`/article/${item.id}`}>
                                         <CardActionArea className="h-100">
                                             <div className="ctn-img d-flex">
-                                                <img id="popular-img" className="m-auto" src={ip + "/uploads/images/" + item.images[0]} />
+                                                <img id="popular-img" className="m-auto"
+                                                     src={ip + "/uploads/images/" + item.images[0]}/>
                                             </div>
                                             <CardContent className="mt-auto">
                                                 <Typography>
-                                                    { item.title }
+                                                    {item.title}
                                                 </Typography>
                                                 <Typography variant="body2" color="textSecondary" component="p">
-                                                    { item.description }
+                                                    {item.description}
                                                 </Typography>
                                                 <Typography>
-                                                    { `$${item.price}` }
+                                                    {`$${item.price}`}
                                                 </Typography>
                                             </CardContent>
                                         </CardActionArea>
                                     </Link>
                                 </Card>
                             ))}
-                        </div> 
+                        </div>
                     </div>
                 </section>
             </section>
