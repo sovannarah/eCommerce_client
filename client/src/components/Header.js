@@ -275,7 +275,7 @@ class Header extends React.Component {
                     <div id="menu-cart" className="d-flex flex-column bg-dark open">
                         <Cart></Cart>
                         {/* <Link className="mt-auto ml-auto mr-auto" to="/cartPage"> */}
-                            <button className="btn-mainly" onClick={this.handleShowCart.bind(this)}>Access to cart</button>
+                            <button className="btn-mainly mt-auto mr-auto ml-auto" onClick={this.handleShowCart.bind(this)}>Access to cart</button>
                         {/* </Link> */}
                     </div>
 

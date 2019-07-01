@@ -1,9 +1,10 @@
 import React from 'react';
 import Slider from './Slider';
 import axios from 'axios';
-import IconPc from '../images/icon/icone-pc-wi-he.png';
-import IconCG from '../images/icon/icone-cgi-he.png';
-import IconMouse from '../images/icon/icone-mouse-wi-he.png';
+import IconPc from '../images/icon/icone-pc-wi-hee.png';
+import IconCG from '../images/icon/icone-cgi-hee.png';
+import IconACC from '../images/icon/icone-acc-wi-hee.png';
+import IconMouse from '../images/icon/icone-mouse-wi-hee.png';
 import Rtx from '../images/slider/asus-mouse.png';
 import Chg90 from '../images/slider/apex.png';
 import Apex from '../images/slider/cask-corsair.png';
@@ -75,7 +76,7 @@ class Home extends React.Component {
                                 <span className=" span-none d-flex flex-column ctn-categorie">
                                 </span>
                                 <Link to={`/category/4`} className="d-flex flex-column ctn-categorie">
-                                    <img className="align-r" src={ IconCG } />
+                                    <img className="align-r" src={ IconACC } />
                                 </Link>
                             </div>
                         </div>
@@ -87,16 +88,18 @@ class Home extends React.Component {
                                 <Card key={index} className="ctn-popular m-3 col-md-4">
                                     <Link to={`/article/${ item.id }`}>
                                         <CardActionArea className="h-100">
-                                            <CardHeader
-                                                title={item.title}
-                                                subheader={`$${item.price}`}
-                                            />
                                             <div className="ctn-img d-flex">
                                                 <img id="popular-img" className="m-auto" src={ip + "/uploads/images/" + item.images[0]} />
                                             </div>
                                             <CardContent className="mt-auto">
+                                                <Typography>
+                                                    { item.title }
+                                                </Typography>
                                                 <Typography variant="body2" color="textSecondary" component="p">
                                                     { item.description }
+                                                </Typography>
+                                                <Typography>
+                                                    { `$${item.price}` }
                                                 </Typography>
                                             </CardContent>
                                         </CardActionArea>
