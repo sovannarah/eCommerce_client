@@ -1,12 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import Arrow from '../images/icon/arow-r.png';
+
 /**
  * @param split url to get the last value
  */
@@ -92,7 +87,7 @@ class Category extends React.Component {
 					<div key={index} className=" ctn-art bg-light mt-4 mb-4 w-100">
 					<Link className="d-flex h-100" to={`/article/${ item.id }`}>
 							<div className="ctn-image h-100 mt-auto mb-auto col-3 d-flex">
-								<img id="popular-img" className="m-auto" src={this.ip + "/uploads/images/" + item.images[0]}/>
+								<img id="popular-img" className="m-auto" src={this.ip + "/uploads/images/" + item.images[0]} alt=""/>
 							</div>
 							<div className="p-3">
 								<h5>{item.title}</h5>

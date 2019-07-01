@@ -160,6 +160,13 @@ header {
   background-color: white;
   background-color: #181818; }
 
+.sroll {
+  overflow: hidden;
+  height: 60% !important; }
+
+.dis {
+  overflow: visible !important; }
+
 #button-menu {
   background-color: transparent;
   border: none; }
@@ -168,6 +175,14 @@ header {
   height: 30px;
   width: 35px;
   min-width: 30px; }
+
+.btn-none {
+  background-color: transparent;
+  border: none; }
+
+.size-icn {
+  height: 20px;
+  width: 20px; }
 
 #ctn-icon-menu {
   width: 300px; }
@@ -238,7 +253,7 @@ li {
 
 #search-barre {
   height: 60%;
-  width: 40%;
+  width: 20%;
   z-index: 0;
   padding-left: 15px;
   padding-right: 10px; }

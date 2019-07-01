@@ -6,10 +6,18 @@
     margin: 0;
     #ctn-infoArticle {
         padding-top: 4%;
+        padding-left: 2%;
         margin: 0;
         min-height: 100%;
+        max-height: 100%;
+        width:100%;
+        overflow: hidden;
     }
 
+    .scroll {
+        overflow-y: scroll;
+        width: 104%;
+    }
 
     .carousel-inner {
         width: 100%;
@@ -36,7 +44,7 @@
     .margin-art {
 
         h1 {
-            font-size: 90px;
+            font-size: 65px;
             font-family: 'Abril Fatface', cursive;
         }
 

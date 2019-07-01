@@ -4,9 +4,6 @@ import axios from 'axios';
 import IconPc from '../images/icon/icone-pc-wi-he.png';
 import IconCG from '../images/icon/icone-cgi-he.png';
 import IconMouse from '../images/icon/icone-mouse-wi-he.png';
-import Rtx from '../images/slider/asus-mouse.png';
-import Chg90 from '../images/slider/apex.png';
-import Apex from '../images/slider/cask-corsair.png';
 import { Link } from 'react-router-dom';
 import '../style/css/home.css';
 import Card from '@material-ui/core/Card';
@@ -16,30 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
 
 const ip = 'http://127.0.0.1:8000';
-
-const product = [
-    {
-        id: '1',
-        image: Rtx,
-        title: 'Asus Rog',
-        price: '13',
-        description: 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum'
-    },
-    {
-        id: '2',
-        image: Chg90,
-        title: 'nVidia GTX',
-        price: '13',
-        description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a',
-    },
-    {
-        id: '3',
-        image: Apex,
-        title: 'MSI x570',
-        price: '13',
-        description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a',
-    },
-];
 
 class Home extends React.Component {
 
@@ -76,30 +49,30 @@ class Home extends React.Component {
                         <div id="ctn-iconCat" className="row d-flex col-md-9 justify-content-center">
                             <div>
                                 <Link to={`/category/1`} className="d-flex flex-column ctn-categorie">
-                                    <img src={ IconCG } />
+                                    <img src={ IconCG } alt=""/>
                                 </Link>
-                                <span className="d-flex flex-column ctn-categorie">
+                                <span className="span-none d-flex flex-column ctn-categorie">
                                 </span>
                             </div>
                             <div>
                                 <span className="d-flex flex-column ctn-categorie ">
                                 </span>
                                 <Link to={`/category/2`} className="d-flex flex-column ctn-categorie">
-                                    <img className="align-r" src={ IconMouse } />
+                                    <img className="align-r" src={ IconMouse } alt=""/>
                                 </Link>
                             </div>
                             <div>
                                 <Link to={`/category/3`} className="d-flex flex-column ctn-categorie">
-                                    <img src={ IconPc } />
+                                    <img src={ IconPc } alt=""/>
                                 </Link>
                                 <span className="d-flex flex-column ctn-categorie ">
                                 </span>
                             </div>
                             <div>
-                                <span className="d-flex flex-column ctn-categorie">
+                                <span className=" span-none d-flex flex-column ctn-categorie">
                                 </span>
                                 <Link to={`/category/4`} className="d-flex flex-column ctn-categorie">
-                                    <img className="align-r" src={ IconCG } />
+                                    <img className="align-r" src={ IconCG } alt=""/>
                                 </Link>
                             </div>
                         </div>
@@ -110,15 +83,15 @@ class Home extends React.Component {
                             {this.state.articles.slice(0, 10).map((item, index) => (
                                 <Card key={index} className="ctn-popular m-3 col-md-4">
                                     <Link to={`/article/${ item.id }`}>
-                                        <CardActionArea>
+                                        <CardActionArea className="h-100">
                                             <CardHeader
                                                 title={item.title}
                                                 subheader={`$${item.price}`}
                                             />
                                             <div className="ctn-img d-flex">
-                                                <img id="popular-img" className="m-auto" src={ip + "/uploads/images/" + item.images[0]} />
+                                                <img id="popular-img" className="m-auto" src={ip + "/uploads/images/" + item.images[0]} alt=""/>
                                             </div>
-                                            <CardContent>
+                                            <CardContent className="mt-auto">
                                                 <Typography variant="body2" color="textSecondary" component="p">
                                                     { item.description }
                                                 </Typography>

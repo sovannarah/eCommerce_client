@@ -51,7 +51,7 @@ class Article extends React.Component {
                             className="h-100 w-100">
                                 <div className="d-flex row w-100 h-100">
                                     <div id="ctn-img-car" className="col-md-12 m-auto mh-100 mw-100 d-flex">
-                                        <img id="car-img" className="m-auto mw-100 mh-100" src={ip + "/uploads/images/" + article.images[index]} />
+                                        <img id="car-img" className="m-auto mw-100 mh-100" src={ip + "/uploads/images/" + article.images[index]} alt=""/>
                                     </div>
                                 </div>
                             </Carousel.Item>
@@ -59,7 +59,7 @@ class Article extends React.Component {
                     </Carousel>
                 </div>
                 <div id="ctn-infoArticle" className="col-lg-6 bg-light m-auto d-flex flex-column">
-                    <div className="margin-art ml-auto d-flex flex-column mr-auto w-75">
+                    <div className="scroll margin-art ml-auto d-flex flex-column mr-auto">
                         <div className="mt-5 mb-5">
                             <h1>{ article.title }</h1>
                             <h2>$ { article.price }</h2>

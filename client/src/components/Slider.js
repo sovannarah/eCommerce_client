@@ -35,7 +35,7 @@ class Slider extends React.Component {
                     className="h-100">
                         <div className="d-flex row h-100">
                             <div className="col-md-6 h-100 d-flex">
-                                <img id="car-img" className="m-auto" src={item.image} />
+                                <img id="car-img" className="m-auto" src={item.image} alt=""/>
                             </div>
                             <div className="col-md-6 h-100 d-flex">
                                 <div className="col-10 mh-75 m-auto">
