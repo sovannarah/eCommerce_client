@@ -51,9 +51,6 @@ class Header extends React.Component {
 
     }
 
-
-
-
     filterSearch = () => {
         this.setState({
             put: this.search.value
@@ -68,6 +65,7 @@ class Header extends React.Component {
             }
         })
     };
+
     handleSelect = (event) => {
         this.setState({
             value: event.target.value
@@ -85,8 +83,7 @@ class Header extends React.Component {
         });
     };
 
-    makeStr (table)
-    {
+    makeStr (table) {
         return (new Promise((resolve) =>
         {
             let c = -1;
@@ -146,6 +143,22 @@ class Header extends React.Component {
         this.setState({ user: true });
         this.setState({ search: true });
         this.setState({ cart: !this.state.cart });
+    }
+
+    /**
+     * TODO:
+     *  - add function to check if user is log or not
+     *  - create login route instead of register
+     */
+    handleShowCart() {
+        let isLog = false;
+        if (isLog || window.confirm(
+            "Vous n'etes pas connectes, voulez vous commander sans compte?\n"+
+            "[OK] pour continuer\n[Cancel] pour annuler")
+        )
+            window.location.replace("/cartPage");
+        else
+            window.location.replace("/register");
     }
 
     toggleDrawer = (side, open) => event => {
@@ -261,9 +274,9 @@ class Header extends React.Component {
                 >
                     <div id="menu-cart" className="d-flex flex-column bg-dark open">
                         <Cart></Cart>
-                        <Link className="mt-auto ml-auto mr-auto" to="/cartPage">
-                            <button className="btn-mainly">Access to cart</button>
-                        </Link>
+                        {/* <Link className="mt-auto ml-auto mr-auto" to="/cartPage"> */}
+                            <button className="btn-mainly" onClick={this.handleShowCart.bind(this)}>Access to cart</button>
+                        {/* </Link> */}
                     </div>
 
                 </CSSTransition>

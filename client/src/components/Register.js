@@ -10,7 +10,8 @@ class Register extends React.Component {
 
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            roles: ["ROLE_USER"]
         }
 
         this.changeMail = this.changeMail.bind(this);
@@ -34,6 +35,9 @@ class Register extends React.Component {
                 if (res.data) {
                         window.location.replace('/');
                 }
+            })
+            .catch(err => {
+                console.log(err);
             })
     }
 
