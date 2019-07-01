@@ -2,6 +2,8 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
+import FacebookLogin from 'react-facebook-login';
+
 let ip = 'http://127.0.0.1:8000';
 
 class UserCtrl extends React.Component {
@@ -49,6 +51,11 @@ class UserCtrl extends React.Component {
 
     render() {
 
+        const responseFacebook = (response) => {
+            console.log(response);
+        }
+
+
         if (this.props.user) {
             return (
                 <div id="menu-user" className="d-flex flex-column justify-content-around bg-light open">
@@ -75,6 +82,11 @@ class UserCtrl extends React.Component {
                            value="Connection"
                            className="btn-default bg-mainly"
                            type="submit"
+                    />
+                    <FacebookLogin
+                        appId="1117381818464159" //APP ID NOT CREATED YET
+                        fields="name,email,picture"
+                        callback={responseFacebook}
                     />
                     <p>Not registered? <Link to="/register">Sign In</Link></p>
                 </div>
