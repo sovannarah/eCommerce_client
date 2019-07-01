@@ -6,9 +6,9 @@ const Suggestions = (props) => {
     <li key={r.id}>
       {r.title}
     </li>
-  ))
+  ));
   return <ul>{options}</ul>
-}
+};
 
 
 export default Suggestions;

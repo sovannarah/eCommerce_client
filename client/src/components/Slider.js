@@ -1,14 +1,15 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import '../style/css/slider.css';
 import { Link } from 'react-router-dom';
 import Rtx from '../images/slider/dims.png';
 import Chg90 from '../images/slider/GTX.png';
 import Apex from '../images/slider/x570.png';
 
 import '../style/css/article.css';
+import '../style/css/slider.css';
 
-const produit = [
+
+const product = [
     {
         image: Rtx,
         title: 'Asus Rog',
@@ -30,7 +31,7 @@ class Slider extends React.Component {
     render() {
         return (
             <Carousel className="col-12">
-                {produit.map((item, index) => (
+                {product.map((item, index) => (
                     <Carousel.Item key={index}
                     className="h-100">
                         <div className="d-flex row h-100">

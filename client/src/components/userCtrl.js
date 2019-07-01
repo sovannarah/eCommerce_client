@@ -11,12 +11,12 @@ class UserCtrl extends React.Component {
         this.state = {
             email: '',
             password: ''
-        }
+        };
         this.changeEmail = this.changeEmail.bind(this);
         this.changePassword = this.changePassword.bind(this);
         this.login = this.login.bind(this);
         this.disconnect = this.disconnect.bind(this);
-        this.ip = 'http://127.0.0.1:8000'
+        this.ip = 'http://127.0.0.1:8000';
     }
 
     changeEmail(e) {

@@ -23,7 +23,6 @@ class Search extends React.Component {
 
     render() {
         console.log(this.state.search);
-        
         return(
             <section id="ctn-articles" className="container-fluid d-flex">
                 <div id="ctn-filter">
@@ -31,7 +30,6 @@ class Search extends React.Component {
                 <ul className="col-12 row d-flex justify-content-center">
                     {this.state.search.map((item, index) => (
                         <Link className="col-md-3 m-2 bg-light" to='' key={index}>
-                           
                         </Link>
                     ))}
                 </ul>
@@ -39,5 +37,4 @@ class Search extends React.Component {
         );
     }
 }
-
 export default Search;
