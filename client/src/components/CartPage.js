@@ -26,6 +26,8 @@ class Cart extends Component {
 			TTC: 0,
 			fee: 0
 		};
+
+		this.displayAdress = this.displayAdress.bind(this);
 	}
 
 	componentDidMount() {
@@ -55,6 +57,10 @@ class Cart extends Component {
 	}
 
 
+
+	displayAdress() {
+		document.getElementById("ctn-adress").classList.toggle('display-adress');
+	}
 	/**
 	 * Replaces article in state with newArticle (by id), or adds if doesn't exist yet
 	 * @param newArticle
@@ -120,9 +126,10 @@ class Cart extends Component {
 
 						
 					</Table>
-					<div className="container">
-						<div className="row">
-							<h2>HERE Geocoder Autocomplete Validation</h2>
+					<div className="col-md-12 mb-3 text-light bg-grey2 p-3">
+						<div className="d-flex justify-content-between pl-2 pr-2 border-bottom">
+							<h2>Localisation</h2>
+							<h4 onClick={this.displayAdress}>Add Adress</h4>
 						</div>
 
 						<AddressForm />

@@ -163,7 +163,7 @@ class AddressForm extends Component {
   render() {
     let result = this.alert();
     return (
-        <div className="container">
+        <div id="ctn-adress" className="container pt-5 display-adress">
           <AddressSuggest
             query={this.state.query}
             onChange={this.onQuery}
