@@ -16,16 +16,18 @@ const urlPos = FullUrl.split("/")[1];
 
 class Cart extends Component {
 
-    constructor(props, context) {
-        super(props, context);
-        this.state = {
-            articles: [],
-            updated: false,
-            HT: 0,
-            TTC: 0,
-            fee: 0
-        };
-    }
+	constructor(props, context) {
+		super(props, context);
+		this.state = {
+			articles: [],
+			updated: false,
+			HT: 0,
+			TTC: 0,
+			fee: 0
+		};
+
+		this.displayAdress = this.displayAdress.bind(this);
+	}
 
     componentDidMount() {
         let allUpdated = true;
@@ -54,23 +56,27 @@ class Cart extends Component {
     }
 
 
-    /**
-     * Replaces article in state with newArticle (by id), or adds if doesn't exist yet
-     * @param newArticle
-     */
-    updateArticle = (newArticle) => {
-        this.setState((state) => {
-            const copy = state.articles.slice();
-            const idx = copy.findIndex(old => old.id === newArticle.id);
-            if (idx !== -1) {
-                copy[idx] = newArticle;
-            } else {
-                copy.push(newArticle);
-            }
-            sessionStorage.setItem(storageKey, JSON.stringify(copy));
-            return {articles: copy};
-        });
-    };
+
+	displayAdress() {
+		document.getElementById("ctn-adress").classList.toggle('display-adress');
+	}
+	/**
+	 * Replaces article in state with newArticle (by id), or adds if doesn't exist yet
+	 * @param newArticle
+	 */
+	updateArticle = (newArticle) => {
+		this.setState((state) => {
+			const copy = state.articles.slice();
+			const idx = copy.findIndex(old => old.id === newArticle.id);
+			if (idx !== -1) {
+				copy[idx] = newArticle;
+			} else {
+				copy.push(newArticle);
+			}
+			sessionStorage.setItem(storageKey, JSON.stringify(copy));
+			return {articles: copy};
+		});
+	};
 
     /**
      * Removes article from state by id, and updates sessionStorage
@@ -117,8 +123,14 @@ class Cart extends Component {
                         )}
                         </tbody>
 
-
-                    </Table>
+						
+					</Table>
+					<div className="col-md-12 mb-3 text-light bg-grey2 p-3">
+						<div className="d-flex justify-content-between pl-2 pr-2 border-bottom">
+							<h2>Localisation</h2>
+							<h4 onClick={this.displayAdress}>Add Adress</h4>
+						</div>
+					</div>
                     <div className="container">
                         <AddressForm/>
                     </div>

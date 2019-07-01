@@ -262,6 +262,7 @@ class Header extends React.Component {
                             )) : ""}
                         </div>
                     </div>
+                    </div>
                 </CSSTransition>
                 <CSSTransition
                     in={this.state.user}
