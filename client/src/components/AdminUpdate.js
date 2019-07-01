@@ -103,16 +103,20 @@ class Admin extends React.Component {
 	parseCategory (data)
 	{
 		let c = -1;
+		let copy;
 		while (data[++c])
 		{
-			this.state.columns[0].lookup[data[c].id] = data[c].name;
+			copy = this.state.columns;
+			copy[0].lookup[data[c].id] = data[c].name;
+			this.setState({columns: copy});
+			// this.state.columns[0].lookup[data[c].id] = data[c].name;
 			this.state.category.push(data[c])
 			if (data[c].sub && data[c].sub.length > 0)
 				this.parseCategory(data[c].sub);
 		}
 	}
 
-	Getcategory ()
+/* 	Getcategory ()
 	{
 		return axios.get(this.ip + '/category')
 			.then(res => {
@@ -121,7 +125,7 @@ class Admin extends React.Component {
 			.catch(err => {
 				// console.log(err);
 			})
-	}
+	} */
 
 	handleChange(event) {
 		// console.log(event);
