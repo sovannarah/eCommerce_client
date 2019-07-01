@@ -27,15 +27,28 @@ class Articles extends React.Component {
             <section id="ctn-articles" className="container-fluid d-flex">
                 <div id="ctn-filter">
                 </div>
-                <ul className="col-12 row d-flex justify-content-center">
-                    {this.state.articles.map((item, index) => (
-                        <Link className="col-md-3 m-2 bg-light" to={`/article/${item.id}`} key={index}>
-                            <h3>{item.title}</h3>
-                            <p>{item.price}</p>
-                            <p></p>
-                        </Link>
-                    ))}
-                </ul>
+                <ul className="container-fluid ml-auto mr-auto col-lg-8">
+                        {this.state.articles.map((item, index) => (
+                            <div key={index} className=" ctn-art bg-light mt-4 mb-4 w-100">
+                                <Link className="d-flex h-100" to={`/article/${item.id}`}>
+                                    <div className="ctn-image h-100 mt-auto mb-auto col-3 d-flex">
+                                        {item.images.length > 0 ? 
+                                            <img id="popular-img" className="m-auto"
+                                                src={ip + "/uploads/images/" + item.images[0]}/>
+                                        : 
+                                            <img id="popular-img" className="m-auto"
+                                            src={require("../images/icon/none.png")} /> 
+                                        }
+                                    </div>
+                                    <div className="p-3">
+                                        <h5>{item.title}</h5>
+                                        <p>${item.price}</p>
+                                        <p>{item.description}</p>
+                                    </div>
+                                </Link>
+                            </div>
+                        ))}
+                    </ul>
             </section>
         );
     }

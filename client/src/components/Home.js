@@ -85,8 +85,13 @@ class Home extends React.Component {
                                     <Link to={`/article/${item.id}`}>
                                         <CardActionArea className="h-100">
                                             <div className="ctn-img d-flex">
+                                            {item.images.length > 0 ? 
                                                 <img id="popular-img" className="m-auto"
-                                                     src={ip + "/uploads/images/" + item.images[0]}/>
+                                                src={ip + "/uploads/images/" + item.images[0]}/>
+                                            :
+                                                <img id="popular-img" className="m-auto"
+                                                src={require("../images/icon/none.png")} />    
+                                            }
                                             </div>
                                             <CardContent className="mt-auto">
                                                 <Typography>
