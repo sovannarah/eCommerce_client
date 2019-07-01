@@ -31,7 +31,7 @@ class Header extends React.Component {
             category: [],
             getCategory: []
         };
-        this.ip = 'http://127.0.0.1:8000';
+        this.ip = 'http://10.34.6.23:8000';
 
         this.displaySearch = this.displaySearch.bind(this);
         this.displayUser = this.displayUser.bind(this);
@@ -85,10 +85,8 @@ class Header extends React.Component {
         });
     };
 
-    makeStr (table)
-    {
-        return (new Promise((resolve) =>
-        {
+    makeStr(table) {
+        return (new Promise((resolve) => {
             let c = -1;
             let str = "";
             while (table[++c])
@@ -203,7 +201,7 @@ class Header extends React.Component {
                     timeout={500}
                     classNames="display-search">
                     <div id="ctn-search-barre" className="d-flex justify-content-end w-100 open">
-                        <select  className="mt-auto mb-auto" select={this.state.value} onChange={this.handleSelect}>
+                        <select className="mt-auto mb-auto" select={this.state.value} onChange={this.handleSelect}>
                             <option>Select</option>
                             <option select="title">Title</option>
                             <option select="description">Description</option>
