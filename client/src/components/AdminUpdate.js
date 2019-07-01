@@ -202,7 +202,7 @@ class Admin extends React.Component {
     render() {
         return (
             <div>
-                <div id="displaycommand" hidden={true}>
+                <div id="displaycommand" className="mt-5 mb-5" hidden={true}>
                     <h2>{"Total:  " + this.state.commandPrice}</h2>
                     <table>
                         <thead>

@@ -76,6 +76,8 @@ class Header extends React.Component {
         // title=....&category[]=1&category[]=2&category[]=3....
         this.makeStr(this.state.category).then(res => {
             console.log(res);
+            console.log("===== request =====");
+            console.log(this.state.value);
             axios.get(this.ip + '/search?' + this.state.value + '=' + this.state.put + res)
                 .then(({ data }) => {
                     this.setState({ results: data })
@@ -117,7 +119,8 @@ class Header extends React.Component {
             if (tIndex !== -1)
                 sCategory.splice(tIndex, 1);
         }
-        this.setState({ category: sCategory });
+        this.setState({category: sCategory});
+        this.itemSearch();
         console.log(this.state.category);
     };
 
@@ -246,33 +249,38 @@ class Header extends React.Component {
                     timeout={500}
                     classNames="display-search">
                     <div id="ctn-search-barre" className="d-flex justify-content-end w-100 open">
-                        <select className="mt-auto mb-auto" select={this.state.value} onChange={this.handleSelect}>
-                            <option>Select</option>
-                            <option select="title">Title</option>
-                            <option select="description">Description</option>
-                        </select>
-                        <div className="category-box h-100 d-flex">
-                            <div id="cho-cat" className="sroll  bg-light mt-auto mb-auto">
-                                <div className="p-2 bg-light d-flex justify-content-between">
+                        <div className="d-flex">
+                            <select  className="mt-auto mb-auto" select={this.state.value} onChange={this.handleSelect}>
+                                <option>Select</option>
+                                <option select="title">title</option>
+                                <option select="description">description</option>
+                            </select>
+                            <div className="category-box h-100 d-flex">
+                            <ul id="cho-cat" className="sroll border bg-light mt-auto mb-auto">
+                                
+                                <li className="p-2 bg-light d-flex justify-content-between">
                                     <p>Categorie</p>
                                     <button className="btn-none mb-auto" onClick={this.displayScroll}>
                                         <img className="size-icn" src={require('../images/icon/chevron.png')} />
                                     </button>
+                                </li>
+                                <div className="cach">
+                                    {this.state.getCategory.map((category, index) => (
+                                        <li className="bg-light p-2 d-flex justify-content-between" key={index}>
+                                            <label className="bg-light mt-auto mb-auto"
+                                                htmlFor={category.id}>{category.name}</label>
+                                            <input
+                                                type="checkbox"
+                                                className="mt-auto mb-auto"
+                                                name={category.name}
+                                                select={category.id}
+                                                id={category.id}
+                                                onChange={this.onChange}
+                                            />
+                                        </li>
+                                    ))}
                                 </div>
-                                {this.state.getCategory.map((category, index) => (
-                                    <ul className="bg-light p-2 d-flex justify-content-between" key={index}>
-                                        <label className="bg-light mt-auto mb-auto" htmlFor={category.id}>{category.name}</label>
-                                        <input
-                                            type="checkbox"
-                                            className="mt-auto mb-auto"
-                                            name={category.name}
-                                            select={category.id}
-                                            id={category.id}
-                                            onChange={this.onChange}
-                                        />
-                                    </ul>
-                                ))}
-                            </div>
+                            </ul>
                         </div>
                         <input id="search-barre" className="mt-auto mb-auto mr-5" ref={put => this.search = put} onChange={this.filterSearch} type="text" placeholder="Search" />
                         <div className="results-search">
