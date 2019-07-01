@@ -164,7 +164,7 @@ header {
   width: 100%; }
   #cho-cat .cach {
     height: 1020%;
-    overflow: scroll; }
+    overflow-y: scroll; }
   #cho-cat li {
     width: 100%; }
 

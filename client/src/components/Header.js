@@ -76,6 +76,8 @@ class Header extends React.Component {
         // title=....&category[]=1&category[]=2&category[]=3....
         this.makeStr(this.state.category).then(res => {
             console.log(res);
+            console.log("===== request =====");
+            console.log(this.state.value);
             axios.get(this.ip + '/search?' + this.state.value + '=' + this.state.put + res)
                 .then(({data}) => {
                     this.setState({results: data})
@@ -117,6 +119,7 @@ class Header extends React.Component {
                 sCategory.splice(tIndex, 1);
         }
         this.setState({category: sCategory});
+        this.itemSearch();
         console.log(this.state.category);
     };
 
@@ -222,8 +225,8 @@ class Header extends React.Component {
                         <div className="d-flex">
                             <select  className="mt-auto mb-auto" select={this.state.value} onChange={this.handleSelect}>
                                 <option>Select</option>
-                                <option select="title">Title</option>
-                                <option select="description">Description</option>
+                                <option select="title">title</option>
+                                <option select="description">description</option>
                             </select>
                             <div className="category-box h-100 d-flex">
                             <ul id="cho-cat" className="sroll border bg-light mt-auto mb-auto">
