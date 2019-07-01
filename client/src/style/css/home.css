@@ -37,7 +37,8 @@
     width: 234px;
     transition: 0.3s all ease; }
     .ctn-categorie img:hover {
-      transform: scale(1.1); }
+      transform: scale(1.1);
+      z-index: 20; }
   .ctn-categorie .align-r {
     top: -36%; }
   .ctn-categorie .align-l {
