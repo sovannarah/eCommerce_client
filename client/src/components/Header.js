@@ -189,7 +189,7 @@ class Header extends React.Component {
                     <ul className="d-flex justify-content-between mt-auto h-100">
                         <li>
                             <button onClick={this.displaySearch}>
-                                <img src={IconeSearch} alt="" />
+                                <img src={IconeSearch} alt="  " />
                             </button>
                         </li>
                         <li >
