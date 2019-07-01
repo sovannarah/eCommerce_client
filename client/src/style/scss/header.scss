@@ -19,6 +19,20 @@ header {
     background-color: #181818;
 }
 
+#cho-cat {
+    width: 100%;
+
+    .cach {
+        height: 1020%;
+        overflow-y: scroll;
+
+    }
+
+    li{
+        width: 100%;
+    }
+}
+
 .sroll {
     overflow: hidden;
     height: 60% !important;
