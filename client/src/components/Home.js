@@ -1,11 +1,10 @@
 import React from 'react';
 import Slider from './Slider';
 import axios from 'axios';
-import IconPc from '../images/icon/icone-pc-wi-hee.png';
-import IconCG from '../images/icon/icone-cgi-hee.png';
-import IconACC from '../images/icon/icone-acc-wi-hee.png';
-import IconMouse from '../images/icon/icone-mouse-wi-hee.png';
-import {Link} from 'react-router-dom';
+import IconPc from '../images/icon/icone-pc-wi-he.png';
+import IconCG from '../images/icon/icone-cgi-he.png';
+import IconMouse from '../images/icon/icone-mouse-wi-he.png';
+import { Link } from 'react-router-dom';
 import '../style/css/home.css';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -49,7 +48,7 @@ class Home extends React.Component {
                         <div id="ctn-iconCat" className="row d-flex col-md-9 justify-content-center">
                             <div>
                                 <Link to={`/category/1`} className="d-flex flex-column ctn-categorie">
-                                    <img src={IconCG}/>
+                                    <img src={ IconCG } alt=""/>
                                 </Link>
                                 <span className="span-none d-flex flex-column ctn-categorie">
                                 </span>
@@ -58,12 +57,12 @@ class Home extends React.Component {
                                 <span className="d-flex flex-column ctn-categorie ">
                                 </span>
                                 <Link to={`/category/2`} className="d-flex flex-column ctn-categorie">
-                                    <img className="align-r" src={IconMouse}/>
+                                    <img className="align-r" src={ IconMouse } alt=""/>
                                 </Link>
                             </div>
                             <div>
                                 <Link to={`/category/3`} className="d-flex flex-column ctn-categorie">
-                                    <img src={IconPc}/>
+                                    <img src={ IconPc } alt=""/>
                                 </Link>
                                 <span className="d-flex flex-column ctn-categorie ">
                                 </span>
@@ -72,7 +71,7 @@ class Home extends React.Component {
                                 <span className=" span-none d-flex flex-column ctn-categorie">
                                 </span>
                                 <Link to={`/category/4`} className="d-flex flex-column ctn-categorie">
-                                    <img className="align-r" src={IconACC}/>
+                                    <img className="align-r" src={ IconCG } alt=""/>
                                 </Link>
                             </div>
                         </div>
@@ -85,8 +84,7 @@ class Home extends React.Component {
                                     <Link to={`/article/${item.id}`}>
                                         <CardActionArea className="h-100">
                                             <div className="ctn-img d-flex">
-                                                <img id="popular-img" className="m-auto"
-                                                     src={ip + "/uploads/images/" + item.images[0]}/>
+                                                <img id="popular-img" className="m-auto" src={ip + "/uploads/images/" + item.images[0]} alt=""/>
                                             </div>
                                             <CardContent className="mt-auto">
                                                 <Typography>

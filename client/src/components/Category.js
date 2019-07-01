@@ -85,7 +85,7 @@ class Category extends React.Component {
                                 <Link className="d-flex h-100" to={`/article/${item.id}`}>
                                     <div className="ctn-image h-100 mt-auto mb-auto col-3 d-flex">
                                         <img id="popular-img" className="m-auto"
-                                             src={this.ip + "/uploads/images/" + item.images[0]}/>
+                                             src={this.ip + "/uploads/images/" + item.images[0]} alt=""/>
                                     </div>
                                     <div className="p-3">
                                         <h5>{item.title}</h5>
