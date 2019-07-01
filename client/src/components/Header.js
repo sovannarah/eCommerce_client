@@ -220,13 +220,14 @@ class Header extends React.Component {
                     timeout={500}
                     classNames="display-search">
                     <div id="ctn-search-barre" className="d-flex justify-content-end w-100 open">
-                        <select  className="mt-auto mb-auto" select={this.state.value} onChange={this.handleSelect}>
-                            <option>Select</option>
-                            <option select="title">Title</option>
-                            <option select="description">Description</option>
-                        </select>
-                        <div className="category-box h-100 d-flex">
-                            <div id="cho-cat" className="sroll  bg-light mt-auto mb-auto">
+                        <div className="d-flex">
+                            <select  className="mt-auto mb-auto" select={this.state.value} onChange={this.handleSelect}>
+                                <option>Select</option>
+                                <option select="title">Title</option>
+                                <option select="description">Description</option>
+                            </select>
+                            <div className="category-box h-100 d-flex">
+                            <div id="cho-cat" className="sroll border bg-light mt-auto mb-auto">
                                 <div className="p-2 bg-light d-flex justify-content-between">
                                     <p>Categorie</p>
                                     <button className="btn-none mb-auto" onClick={this.displayScroll}>
@@ -248,10 +249,11 @@ class Header extends React.Component {
                                 ))}
                             </div>
                         </div>
-                        <input id="search-barre" className="mt-auto mb-auto mr-5" ref={put => this.search = put} onChange={this.filterSearch} type="text" placeholder="Search" />
-                        <div className="results-search">
+                            <input id="search-barre" className="mt-auto mb-auto mr-5" ref={put => this.search = put} onChange={this.filterSearch} type="text" placeholder="Search" />
+                        </div>
+                        <div className="results-search d-flex flex-column">
                             {this.state.results.length >= 1 ? this.state.results.map((elem, i) => (
-                                <li key={i}>
+                                <li className="border bg-light" key={i}>
                                     <Link to={"/article/" + elem.id}>
                                         {elem.title}
                                         {this.state.value === "title" ? elem.title : this.state.value === "description" ? elem.description : ''}
