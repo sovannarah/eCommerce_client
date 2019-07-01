@@ -149,8 +149,34 @@ class Header extends React.Component {
      *  - add function to check if user is log or not
      *  - create login route instead of register
      */
-    handleShowCart() {
+    async handleShowCart() {
         let isLog = false;
+        let token = localStorage.getItem('token');
+        console.log(token);
+        if (token) {
+            await axios
+                .get(
+                    this.ip+'/user/checkuser',
+                    {
+                        "headers" : {
+                            "token": token
+                        }
+                    }
+                )
+                .then((res) => {
+                    console.log(res.status);
+                    if (res.status === 200)
+                        isLog = true;
+                    // console.log("===== Welcome ========");
+                })
+                .catch((err) => {
+                    console.log(err);
+                    // window.location.replace('/');
+                })
+        }
+        else
+            console.log("No token");
+
         if (isLog || window.confirm(
             "Vous n'etes pas connectes, voulez vous commander sans compte?\n" +
             "[OK] pour continuer\n[Cancel] pour annuler")
