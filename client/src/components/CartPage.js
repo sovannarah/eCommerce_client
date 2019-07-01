@@ -4,6 +4,8 @@ import Axios from 'axios';
 import {Link} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
+import AddressForm from './Addresse/AddressForm';
+
 import {FormControl} from 'react-bootstrap';
 import '../style/css/cartPage.css';
 
@@ -105,6 +107,7 @@ class Cart extends Component {
 							</tr>
 						</thead>
 						<tbody>
+
 						{this.state.articles.map((article, index) => 
 						<>
 							<Article key={index} article={article}
@@ -114,8 +117,17 @@ class Cart extends Component {
 						</>
 						)}
 						</tbody>
+
 						
 					</Table>
+					<div className="container">
+						<div className="row">
+							<h2>HERE Geocoder Autocomplete Validation</h2>
+						</div>
+
+						<AddressForm />
+
+					</div>
 					<div className="d-flex bg-grey2 justify-content-between w-100">
 						<h5 className="text-light mt-auto mb-auto ml-3">SOUS TOTAL : {this.state.HT}</h5>
 					</div>
