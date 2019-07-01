@@ -17,7 +17,7 @@ class Admin extends React.Component {
 
     async componentDidMount() {
         if (!localStorage.getItem('token'))
-            window.location.replace('/');
+            window.location.replace('/account');
         else {
             await axios.get(this.ip + '/user/' + localStorage.getItem('token') +
                 '/check').then(

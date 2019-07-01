@@ -37,6 +37,7 @@ class UserCtrl extends React.Component {
                 const user = res.data;
                 console.log(res.data);
                 if (user.token) {
+                    localStorage.setItem('roles', user.roles);
                     localStorage.setItem('token', user.token);
                     localStorage.setItem('email', user.email);
                     window.location.replace('/');
@@ -50,13 +51,16 @@ class UserCtrl extends React.Component {
     }
 
     render() {
-
         const responseFacebook = (response) => {
-            console.log(response);
+            if(response) {
+                for( let [key, value] of Object.entries(response)) {
+                    // console.log(key, value);
+                    localStorage.setItem(key, value);
+                    window.location.replace('/');
+                }
+            }
         }
-
-
-        if (this.props.user) {
+        if (this.props.user || localStorage.getItem("userID")) {
             return (
                 <div id="menu-user" className="d-flex flex-column justify-content-around bg-light open">
                     <Link to="/admin">My Account</Link>

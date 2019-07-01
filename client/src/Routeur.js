@@ -8,6 +8,7 @@ import Search from './components/Search';
 import CartPage from './components/CartPage';
 import Payment from './components/Payment';
 import Checkin from './components/Chekin';
+import Account from './components/Account';
 import { Switch, Route } from 'react-router';
 import Category from './components/Category';
 
@@ -29,6 +30,7 @@ class Routeur extends React.Component {
                 <Route path="/cartPage" component={ CartPage } />
                 <Route path="/payment" component={ Payment } />  
                 <Route path="/checkin" component={ Checkin } /> 
+                <Route path="/account" component={ Account } />
             </Switch>
         );
     }
