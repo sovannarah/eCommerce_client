@@ -88,6 +88,11 @@ class Menu extends React.Component {
                                     <p className="m-auto">Menu</p>
                                 </li>
                             </a>
+                            <a className="m-auto" href={"/articles"}>
+                                <li className="list-menu d-flex justify-content-center">
+                                    <p className="m-auto">All articles</p>
+                                </li>
+                            </a>
                             {this.state.data.map((elem, i) => (
                                 <a key={i} className="m-auto" href={"/category/" + elem.id}>
                                     <li className="list-menu d-flex justify-content-center" key={i}>

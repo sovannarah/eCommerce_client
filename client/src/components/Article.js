@@ -45,7 +45,8 @@ class Article extends React.Component {
             <section id="stn-article" className="d-flex row">
                 <div id="ctn-carousel" className="d-flex col-lg-6 h-100 w-100">
                     <Carousel className="w-100 h-100 m-auto">
-                        {article.images.map((item, index) => (
+                        {article.images.length > 0 ? 
+                        article.images.map((item, index) => (
                             <Carousel.Item key={index}
                                            className="h-100 w-100">
                                 <div className="d-flex row w-100 h-100">
@@ -54,7 +55,11 @@ class Article extends React.Component {
                                     </div>
                                 </div>
                             </Carousel.Item>
-                        ))}
+                        ))
+                        :
+                        <img id="car-img" className="m-auto mw-100 mh-100"
+                                                src={require("../images/icon/none.png")} />
+                        }
                     </Carousel>
                 </div>
                 <div id="ctn-infoArticle" className="col-lg-6 bg-light m-auto d-flex flex-column">
