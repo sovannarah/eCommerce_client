@@ -169,7 +169,6 @@ class Header extends React.Component {
 
     render() {
         // console.log(this.state.categories);
-
         const userToken = localStorage.getItem('token');
         return (
             <header className="container-fluid">

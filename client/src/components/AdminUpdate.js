@@ -47,13 +47,14 @@ class Admin extends React.Component {
         if (!localStorage.getItem('token'))
             window.location.replace('/account');
         else {
-            await axios.get(this.ip + '/user/' + localStorage.getItem('token') +
-                '/check').then(
+            await axios.get(this.ip + '/user/isAdmin',
+            { headers: { token: localStorage.getItem('token')}}
+            ).then(
                 () => {
                     // console.log("===== Welcome ========");
                 },
                 () => {
-                    window.location.replace('/');
+                    // window.location.replace('/');
                 })
         }
         axios.get(this.ip + '/article')
