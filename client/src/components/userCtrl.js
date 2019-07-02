@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import FacebookLogin from 'react-facebook-login';
 
-let ip = 'http://127.0.0.1:8000';
+let ip = 'http://10.34.7.0:8001';
 
 class UserCtrl extends React.Component {
 
@@ -19,7 +19,7 @@ class UserCtrl extends React.Component {
         this.changePassword = this.changePassword.bind(this);
         this.login = this.login.bind(this);
         this.disconnect = this.disconnect.bind(this);
-        this.ip = 'http://127.0.0.1:8000';
+        this.ip = 'http://10.34.7.0:8001';
     }
 
     changeEmail(e) {
@@ -37,7 +37,6 @@ class UserCtrl extends React.Component {
                 const user = res.data;
                 if (user.token) {
                     for( let [key, value] of Object.entries(user)) {
-
                         localStorage.setItem(key, value);
                         window.location.replace('/');
                     }
@@ -51,7 +50,6 @@ class UserCtrl extends React.Component {
     }
 
     render() {
-        console.log(localStorage)
         const responseFacebook = (response) => {
             if(response) {
                 for( let [key, value] of Object.entries(response)) {
@@ -93,6 +91,7 @@ class UserCtrl extends React.Component {
                         appId="1117381818464159" //APP ID NOT CREATED YET
                         fields="name,email,picture"
                         callback={responseFacebook}
+                        className="btn-facebook"
                     />
                     <p>Not registered? <Link to="/register">Sign In</Link></p>
                 </div>

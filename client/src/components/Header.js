@@ -30,7 +30,7 @@ class Header extends React.Component {
             category: [],
             getCategory: []
         };
-        this.ip = 'http://10.34.6.23:8000';
+        this.ip = 'http://127.0.0.1:8000';
 
         this.displayScroll = this.displayScroll.bind(this);     
         this.displaySearch = this.displaySearch.bind(this);
@@ -249,13 +249,13 @@ class Header extends React.Component {
                     timeout={500}
                     classNames="display-search">
                     <div id="ctn-search-barre" className="d-flex justify-content-end w-100 open">
-                        <div className="d-flex">
-                            <select  className="mt-auto mb-auto" select={this.state.value} onChange={this.handleSelect}>
+                        <div className="d-flex block-search bg-light col-5 mr-5">
+                            <select  className="mt-auto mb-auto col-3" select={this.state.value} onChange={this.handleSelect}>
                                 <option>Select</option>
                                 <option select="title">title</option>
                                 <option select="description">description</option>
                             </select>
-                            <div className="category-box h-100 d-flex">
+                            <div className="category-box h-100 d-flex col-3">
                             <ul id="cho-cat" className="sroll border bg-light mt-auto mb-auto">
                                 
                                 <li className="p-2 bg-light d-flex justify-content-between">
@@ -282,7 +282,7 @@ class Header extends React.Component {
                                 </div>
                             </ul>
                         </div>
-                        <input id="search-barre" className="mt-auto mb-auto mr-5" ref={put => this.search = put} onChange={this.filterSearch} type="text" placeholder="Search" />
+                        <input id="search-barre" className="mt-auto mb-auto mr-5 col-6 " ref={put => this.search = put} onChange={this.filterSearch} type="text" placeholder="Search" />
                         <div className="results-search">
                             {this.state.results.length >= 1 ? this.state.results.map((elem, i) => (
                                 <li key={i}>
