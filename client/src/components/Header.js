@@ -148,11 +148,7 @@ class Header extends React.Component {
         this.setState({ cart: !this.state.cart });
     }
 
-    /**
-     * TODO:
-     *  - add function to check if user is log or not
-     *  - create login route instead of register
-     */
+    
     async handleShowCart() {
         let isLog = false;
         let token = localStorage.getItem('token');
