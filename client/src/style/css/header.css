@@ -666,6 +666,7 @@ span {
   display: flex; }
 
 .block-search {
-  width: 45%; }
+  width: 45%;
+  min-height: 80px; }
 
 /*# sourceMappingURL=header.css.map */
