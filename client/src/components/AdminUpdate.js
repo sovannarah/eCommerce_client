@@ -58,20 +58,27 @@ class Admin extends React.Component {
         }
         axios.get(this.ip + '/article')
             .then(res => {
-                // console.log('======= get article ========');
-                // console.log(res.data);
-                // console.log("=============================");
                 this.setState({data: res.data})
             })
             .catch(err => {
                 console.log(err);
             })
         let data2 = await this.getCategory();
-        // console.log('===== get rec category ======');
-        // console.log(data2);
-        // console.log("=============================");
         this.parseCategory(data2);
-        this.forceUpdate()
+        this.forceUpdate();
+
+        let restock = false;
+        let $str = "Restock info: maybe you sould reorder those products:\n";
+        this.state.data.forEach((data) =>
+        {
+            if(data.stock <= 10) {
+                restock = true;
+                $str += "- "+data.title+" ("+data.stock+")\n";
+            }
+        });
+        if (restock) {
+            window.alert($str);
+        }
     }
 
     passCommand(event) {
