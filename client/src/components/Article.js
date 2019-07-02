@@ -70,12 +70,13 @@ class Article extends React.Component {
                         </div>
                         <div>
                             <p>stock : {article.stock}</p>
-                            <button className="d-flex" onClick={this.addCart}>
+                            <input type="number" name="quantity" max={article.stock} onChange={this.setQuantity}/>
+                            <button className="d-flex mt-3" onClick={this.addCart}>
                                 <p className="m-auto">ADD TO CARD</p>
                             </button>
                         </div>
-                        <div className="mt-5 mb-4">
-                            <input type="number" name="quantity" max={article.stock} onChange={this.setQuantity}/>
+                        <div className="mt-3 mb-4">
+                            
                             <h5 className="mt-5">DESCRIPTION</h5>
                             <p className="col-8">{article.description}</p>
                         </div>

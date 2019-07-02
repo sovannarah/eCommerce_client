@@ -4,7 +4,9 @@ class Account extends React.Component {
     render() {
         return (
             <section>
-                blblblb
+                <label>Email : 
+                    <input type="email" value={localStorage.getItem("email")}/>
+                </label>
             </section>
         );
     }

@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import FacebookLogin from 'react-facebook-login';
 
-let ip = 'http://127.0.0.1:8000';
+let ip = 'http://10.34.7.0:8001';
 
 class UserCtrl extends React.Component {
 
@@ -19,7 +19,7 @@ class UserCtrl extends React.Component {
         this.changePassword = this.changePassword.bind(this);
         this.login = this.login.bind(this);
         this.disconnect = this.disconnect.bind(this);
-        this.ip = 'http://127.0.0.1:8000';
+        this.ip = 'http://10.34.7.0:8001';
     }
 
     changeEmail(e) {
@@ -35,12 +35,11 @@ class UserCtrl extends React.Component {
         axios.post(ip + '/login', {email: this.state.email, password: this.state.password})
             .then(res => {
                 const user = res.data;
-                console.log(res.data);
                 if (user.token) {
-                    localStorage.setItem('roles', user.roles);
-                    localStorage.setItem('token', user.token);
-                    localStorage.setItem('email', user.email);
-                    window.location.replace('/');
+                    for( let [key, value] of Object.entries(user)) {
+                        localStorage.setItem(key, value);
+                        window.location.replace('/');
+                    }
                 }
             })
     }
@@ -63,7 +62,8 @@ class UserCtrl extends React.Component {
         if (this.props.user || localStorage.getItem("userID")) {
             return (
                 <div id="menu-user" className="d-flex flex-column justify-content-around bg-light open">
-                    <Link to="/admin">My Account</Link>
+                    <Link to="/admin">Admin Space</Link>
+                    <Link to="/account">My Account</Link>
                     <button className="btn-mainly ml-auto mr-auto" onClick={this.disconnect}>Disconnect</button>
                 </div>
             )
@@ -91,6 +91,7 @@ class UserCtrl extends React.Component {
                         appId="1117381818464159" //APP ID NOT CREATED YET
                         fields="name,email,picture"
                         callback={responseFacebook}
+                        className="btn-facebook"
                     />
                     <p>Not registered? <Link to="/register">Sign In</Link></p>
                 </div>

@@ -1,9 +1,10 @@
 import React from 'react';
 import Slider from './Slider';
 import axios from 'axios';
-import IconPc from '../images/icon/icone-pc-wi-he.png';
-import IconCG from '../images/icon/icone-cgi-he.png';
-import IconMouse from '../images/icon/icone-mouse-wi-he.png';
+import IconPc from '../images/icon/icone-pc-wi-hee.png';
+import IconCG from '../images/icon/icone-cgi-hee.png';
+import IconMouse from '../images/icon/icone-mouse-wi-hee.png';
+import IconAcc from '../images/icon/icone-acc-wi-hee.png';
 import { Link } from 'react-router-dom';
 import '../style/css/home.css';
 import Card from '@material-ui/core/Card';
@@ -71,7 +72,7 @@ class Home extends React.Component {
                                 <span className=" span-none d-flex flex-column ctn-categorie">
                                 </span>
                                 <Link to={`/category/4`} className="d-flex flex-column ctn-categorie">
-                                    <img className="align-r" src={ IconCG } alt=""/>
+                                    <img className="align-r" src={ IconAcc } alt=""/>
                                 </Link>
                             </div>
                         </div>

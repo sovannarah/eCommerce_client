@@ -9,7 +9,7 @@ class Admin extends React.Component {
         this.state = {
             category: []
         };
-        this.ip = 'http://127.0.0.1:8000';
+        this.ip = 'http://127.0.0.1:8001';
         this.parseCategory = this.parseCategory.bind(this);
         this.getCategory = this.getCategory.bind(this);
         this.addItem = this.addItem.bind(this);
