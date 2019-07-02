@@ -28,11 +28,13 @@ class Header extends React.Component {
             put: '',
             value: '',
             category: [],
-            getCategory: []
+            token: localStorage.getItem('token'),
+            getCategory: [],
+            adminPanel: null
         };
-        this.ip = 'http://10.34.6.23:8000';
+        this.ip = 'http://127.0.0.1:8000';
 
-        this.displayScroll = this.displayScroll.bind(this);     
+        this.displayScroll = this.displayScroll.bind(this);
         this.displaySearch = this.displaySearch.bind(this);
         this.displayUser = this.displayUser.bind(this);
         this.displayCart = this.displayCart.bind(this);
@@ -107,7 +109,9 @@ class Header extends React.Component {
                 },
                 (err) => {
                     console.log(err);
-                })
+                });
+        console.log(this.state.token);
+
     }
 
     onChange = (e) => {
@@ -294,6 +298,7 @@ class Header extends React.Component {
                             )) : ""}
                         </div>
                     </div>
+                </div>
                 </CSSTransition>
                 <CSSTransition
                     in={this.state.user}

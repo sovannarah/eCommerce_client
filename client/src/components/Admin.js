@@ -16,15 +16,18 @@ class Admin extends React.Component {
     }
 
     async componentDidMount() {
-        if (!localStorage.getItem('token'))
+        if (!localStorage.getItem('token')) {
+        	console.log(localStorage.getItem('token'));
             window.location.replace('/');
+        }
         else {
             await axios.get(this.ip + '/user/' + localStorage.getItem('token') +
                 '/check').then(
                 () => {
                     // console.log("===== Welcome ========");
                 },
-                () => {
+                (error) => {
+                    console.log(error);
                     window.location.replace('/');
                 })
         }
@@ -48,6 +51,8 @@ class Admin extends React.Component {
     getCategory() {
         return axios.get(this.ip + '/category')
             .then(res => {
+                console.log("==== date =====");
+                console.log(res.data);
                 return (res.data)
             })
             .catch(err => {
