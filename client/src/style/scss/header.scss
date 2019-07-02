@@ -7,10 +7,46 @@ header {
     background-color: #181818;
 }
 
+@for $i from 1 through 50 {
+    .h-#{$i} {
+        height: 1%*$i !important;
+    }
+}
+
 #ctn-header {
     // border-bottom : 1px solid #f0f0f0;
     background-color: white;
     background-color: #181818;
+}
+
+#cho-cat {
+    width: 100%;
+
+    .cach {
+        height: 1020%;
+        overflow-y: scroll;
+
+    }
+
+    li{
+        width: 100%;
+    }
+}
+
+.sroll {
+    overflow: hidden;
+    height: 60% !important;
+}
+
+.dis {
+    overflow: visible !important;
+}
+
+
+@for $i from 1 through 100 {
+    .w-#{$i} {
+        width: 1%*$i;
+    }
 }
 
 #button-menu {
@@ -24,6 +60,15 @@ header {
     min-width: 30px;
 }
 
+.btn-none {
+    background-color: transparent;
+    border: none;
+}
+
+.size-icn {
+    height: 20px;
+    width: 20px;
+}
 #ctn-icon-menu {
     width: 300px;
 }
@@ -63,7 +108,11 @@ li{
     height: 100%;
     position: absolute;
     top: -10%;
-    z-index: -99;    
+    z-index: -99;   
+    select {
+        height: 60%;
+        background-color: white;
+    }
 }
 
 .open {
@@ -108,8 +157,9 @@ li{
 
 #search-barre {
     height: 60%;
-    width: 40%;
     z-index: 0;
+    padding-left: 15px;
+    padding-right: 10px;
 }
 
 .display-user-enter {
@@ -198,15 +248,26 @@ li{
 }
 
 #menu-cart {
-    height: 200px;
-    width: 300px;
+    min-height: 400px;
+    width: 400px;
+    padding: 15px;
     border-radius: 10px;
     position: absolute;
     right: 0.5%;
-    top:-300%;
+    top:-500%;
     z-index: -99;
 }
 
 #input-username, #input-password {
     max-height: 30px;
+}
+
+.btn-mainly {
+    border: 1px solid #ef464b;
+    background-color: #ef464b;
+    color: white;
+    font-weight: bold;
+    border-radius: 25px;
+    height: 50px;
+    width: 200px;
 }

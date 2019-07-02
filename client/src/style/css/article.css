@@ -3,58 +3,52 @@
   background-color: black;
   max-width: 100%;
   max-height: 100%;
-  margin: 0;
-}
-#stn-article #ctn-infoArticle {
-  padding-top: 4%;
-  margin: 0;
-  min-height: 100%;
-}
-#stn-article .carousel-inner {
-  width: 100%;
-  height: 100% !important;
-  margin: 0;
-}
-#stn-article .carousel {
-  margin: 0;
-}
-#stn-article #ctn-carousel {
-  background-image: url("../../images/slider/black-bg.png");
-  background-size: 100% 100%;
-  margin: 0;
-  width: 100% !important;
-}
-#stn-article #ctn-img-car {
-  max-height: 70%;
-  max-width: 70%;
-}
-#stn-article .margin-art h1 {
-  font-size: 90px;
-  font-family: "Abril Fatface", cursive;
-}
-#stn-article .margin-art h2 {
-  font-size: 40px;
-  font-family: "Playfair Display SC", serif;
-}
-#stn-article .margin-art h5 {
-  font-weight: bold;
-}
-#stn-article .margin-art button {
-  background-color: #ef464b;
-  border-color: #ef464b;
-  height: 60px;
-  width: 40%;
-}
-#stn-article .margin-art button p {
-  font-weight: bold;
-  color: white;
-}
-#stn-article .margin-art p {
-  color: #696969;
-}
-#stn-article .carousel-control-next-icon, #stn-article .carousel-control-prev-icon {
-  position: absolute;
-  bottom: 3%;
-}
+  margin: 0; }
+  #stn-article #ctn-infoArticle {
+    padding-top: 4%;
+    padding-left: 2%;
+    margin: 0;
+    min-height: 100%;
+    max-height: 100%;
+    width: 100%;
+    overflow: hidden; }
+  #stn-article .scroll {
+    overflow-y: scroll;
+    width: 104%; }
+  #stn-article .carousel-inner {
+    width: 100%;
+    height: 100% !important;
+    margin: 0; }
+  #stn-article .carousel {
+    margin: 0; }
+  #stn-article #ctn-carousel {
+    background-image: url("../../images/slider/black-bg.png");
+    background-size: 100% 100%;
+    margin: 0;
+    width: 100% !important; }
+  #stn-article #ctn-img-car {
+    max-height: 70%;
+    max-width: 70%; }
+  #stn-article .margin-art h1 {
+    font-size: 65px;
+    font-family: 'Abril Fatface', cursive; }
+  #stn-article .margin-art h2 {
+    font-size: 40px;
+    font-family: 'Playfair Display SC', serif; }
+  #stn-article .margin-art h5 {
+    font-weight: bold; }
+  #stn-article .margin-art button {
+    background-color: #ef464b;
+    border-color: #ef464b;
+    height: 60px;
+    width: 40%; }
+    #stn-article .margin-art button p {
+      font-weight: bold;
+      color: white; }
+  #stn-article .margin-art p {
+    color: #696969; }
+  #stn-article .carousel-control-next-icon, #stn-article .carousel-control-prev-icon {
+    position: absolute;
+    bottom: 3%; }
 
 /*# sourceMappingURL=article.css.map */

@@ -10,6 +10,8 @@
     background-color: #f7f7f7;
 }
 
+
+
 #home-stn {
 }
 
@@ -25,6 +27,16 @@
 #ctn-iconCat {
     margin-top: 1.5%;
     margin-bottom: 1.5%;
+
+    @media screen and (max-width: 390px){
+        .span-none {
+            display: none !important;
+        }
+
+        .align-r {
+            top: -46%;
+        }
+    }
 }
 
 .ctn-categorie {
@@ -44,6 +56,7 @@
         transition: 0.3s all ease;
         &:hover {
             transform: scale(1.1);
+            z-index: 20;
         }
     }
 
@@ -98,6 +111,10 @@
         }
         
     }
+}
+
+.MuiCard-root {
+    min-width: 300px;
 }
 
 .detail 

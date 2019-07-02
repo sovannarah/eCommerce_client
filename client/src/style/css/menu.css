@@ -1,35 +1,38 @@
 #menu {
   height: 100%;
-  width: 100%;
-}
+  width: 100%; }
 
 .MuiDrawer-paper {
+  width: 100%; }
+  @media (min-width: 1200px) {
+    .MuiDrawer-paper {
+      width: 19%; } }
+  @media (min-width: 768px) and (max-width: 1200px) {
+    .MuiDrawer-paper {
+      width: 22.5%; } }
+  @media (min-width: 576px) and (max-width: 768px) {
+    .MuiDrawer-paper {
+      width: 40%; } }
+
+.list-menu {
+  border: 3px solid white;
   width: 100%;
-}
-@media (min-width: 1200px) {
-  .MuiDrawer-paper {
-    width: 19%;
-  }
-}
-@media (min-width: 768px) and (max-width: 1200px) {
-  .MuiDrawer-paper {
-    width: 22.5%;
-  }
-}
-@media (min-width: 576px) and (max-width: 768px) {
-  .MuiDrawer-paper {
-    width: 40%;
-  }
-}
+  height: 70px;
+  background-color: whitesmoke;
+  vertical-align: center; }
+  .list-menu p, .list-menu a {
+    font-weight: bold; }
+
+ul {
+  margin: 0;
+  padding: 0; }
 
 #ctn-logo-menu {
   height: 8vh;
-  min-height: 60px;
-}
+  min-height: 60px; }
 
 .exit-menu {
   left: 0 !important;
-  transition: left 500ms ease-in;
-}
+  transition: left 500ms ease-in; }
 
 /*# sourceMappingURL=menu.css.map */

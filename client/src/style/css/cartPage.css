@@ -1,0 +1,17 @@
+#ctn-cartPage {
+  background-color: #1e1e1e;
+  min-height: 100%; }
+
+#ctn-cart {
+  height: 75vh; }
+
+.bg-grey2 {
+  background-color: #343a40; }
+
+.card {
+  background-color: #343a40 !important; }
+
+.display-adress {
+  display: none !important; }
+
+/*# sourceMappingURL=cartPage.css.map */
