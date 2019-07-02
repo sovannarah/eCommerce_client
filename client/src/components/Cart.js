@@ -43,27 +43,6 @@ class Cart extends Component {
 			});
 		this.setState({updated: allUpdated});
 	}
-    componentDidMount() {
-        let allUpdated = true;
-        getCart().forEach(
-            (article) => {
-                Axios.get(apiArticleURI + article.id)
-                    .then((res) => {
-                        const updatedArticle = {...article, erased: false, ...res.data};
-                        this.updateArticle(updatedArticle);
-                    })
-                    .catch((error) => {
-                        if (error.response && error.response.status === 404) {
-                            article.erased = true;
-                        } else {
-                            console.error(error);
-                            allUpdated = false;
-                        }
-                        this.updateArticle(article);
-                    });
-            });
-        this.setState({updated: allUpdated});
-    }
 
 
     /**
