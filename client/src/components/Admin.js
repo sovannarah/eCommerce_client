@@ -9,7 +9,7 @@ class Admin extends React.Component {
         this.state = {
             category: []
         };
-        this.ip = 'http://127.0.0.1:8001';
+        this.ip = 'http://127.0.0.1:8000';
         this.parseCategory = this.parseCategory.bind(this);
         this.getCategory = this.getCategory.bind(this);
         this.addItem = this.addItem.bind(this);
@@ -19,13 +19,13 @@ class Admin extends React.Component {
         if (!localStorage.getItem('token'))
             window.location.replace('/account');
         else {
-            await axios.get(this.ip + '/user/' + localStorage.getItem('token') +
-                '/check').then(
+            await axios.get(this.ip + '/user/isAdmin', {headers: {token: localStorage.getItem('token')}}
+                ).then(
                 () => {
                     // console.log("===== Welcome ========");
                 },
                 () => {
-                    window.location.replace('/');
+                    // window.location.replace('/');
                 })
         }
 
@@ -37,12 +37,14 @@ class Admin extends React.Component {
     parseCategory(data) {
         let c = -1;
         console.log(data)
+        if (data)
+        {
         while (data[++c]) {
             this.state.category.push(data[c])
             if (data[c].sub && data[c].sub.length > 0)
                 this.parseCategory(data[c].sub);
         }
-
+    }
     }
 
     getCategory() {
@@ -68,7 +70,7 @@ class Admin extends React.Component {
             .then((res) => {
                 console.log(res.data);
                 if (res.data) {
-                    window.location.replace('/admin/create');
+                    window.location.replace('/admin');
                 }
             });
     }
