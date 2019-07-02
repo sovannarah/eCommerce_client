@@ -1,6 +1,6 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import {addToCart} from './Cart';
+import { addToCart } from './Cart';
 import axios from 'axios';
 import '../style/css/article.css';
 
@@ -14,29 +14,41 @@ class Article extends React.Component {
         this.state = {
             article: {},
             add: '',
-            quantity: 0
+            quantity: 0,
+            showME: false
         };
+
+
+    }
+    async componentDidMount() {
         let id = this.props.match.params.id;
-        axios.get(ip + '/article/' + id)
+        await axios.get(ip + '/article/' + id)
             .then(res => {
-                this.setState({article: res.data})
+                this.setState({ article: res.data })
+                let variant = res.data.variants.couleur;
+                if (variant != undefined && variant.length >= 1) {
+                    this.setState({
+                        showME: true
+                    });
+                }
+                 // console.log(this.state.article.variants.couleur);
             });
-        axios.put(ip + '/article/' + id + '/increment');
+        await axios.put(ip + '/article/' + id + '/increment');
         this.setQuantity = this.setQuantity.bind(this);
     }
-
     addCart = (event) => {
         addToCart(this.state.article, this.state.quantity);
         console.log(this.state.article);
     };
 
-    async setQuantity(event) {
+    async setQuantity(event) {  
         if (event.target.name === 'quantity')
-            await this.setState({quantity: event.target.valueAsNumber});
+            await this.setState({ quantity: event.target.valueAsNumber });
     }
 
 
     render() {
+        //console.log(Object.keys(this.state.article.variants));
         const article = this.state.article;
         if (Object.keys(article).length === 0) {
             return null;
@@ -45,20 +57,20 @@ class Article extends React.Component {
             <section id="stn-article" className="d-flex row">
                 <div id="ctn-carousel" className="d-flex col-lg-6 h-100 w-100">
                     <Carousel className="w-100 h-100 m-auto">
-                        {article.images.length > 0 ? 
-                        article.images.map((item, index) => (
-                            <Carousel.Item key={index}
-                                           className="h-100 w-100">
-                                <div className="d-flex row w-100 h-100">
-                                    <div id="ctn-img-car" className="col-md-12 m-auto mh-100 mw-100 d-flex">
-                                        <img id="car-img" className="m-auto mw-100 mh-100" src={ip + "/uploads/images/" + article.images[index]} alt=""/>
+                        {article.images.length > 0 ?
+                            article.images.map((item, index) => (
+                                <Carousel.Item key={index}
+                                    className="h-100 w-100">
+                                    <div className="d-flex row w-100 h-100">
+                                        <div id="ctn-img-car" className="col-md-12 m-auto mh-100 mw-100 d-flex">
+                                            <img id="car-img" className="m-auto mw-100 mh-100" src={ip + "/uploads/images/" + article.images[index]} alt="" />
+                                        </div>
                                     </div>
-                                </div>
-                            </Carousel.Item>
-                        ))
-                        :
-                        <img id="car-img" className="m-auto mw-100 mh-100"
-                                                src={require("../images/icon/none.png")} />
+                                </Carousel.Item>
+                            ))
+                            :
+                            <img id="car-img" className="m-auto mw-100 mh-100"
+                                src={require("../images/icon/none.png")} />
                         }
                     </Carousel>
                 </div>
@@ -68,6 +80,19 @@ class Article extends React.Component {
                             <h1>{article.title}</h1>
                             <h2>$ {article.price}</h2>
                         </div>
+                        <div className="variant">
+                            {
+                                this.state.showME ?
+                                    <select>
+                                        {this.state.article.variants.couleur.map((elem, index) => (
+                                            <option key={index}>
+                                                {elem.spec}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    : null
+                            }
+                        </div>
                         <div>
                             <p>stock : {article.stock}</p>
                             <button className="d-flex" onClick={this.addCart}>
@@ -75,7 +100,7 @@ class Article extends React.Component {
                             </button>
                         </div>
                         <div className="mt-5 mb-4">
-                            <input type="number" name="quantity" max={article.stock} onChange={this.setQuantity}/>
+                            <input type="number" name="quantity" max={article.stock} onChange={this.setQuantity} />
                             <h5 className="mt-5">DESCRIPTION</h5>
                             <p className="col-8">{article.description}</p>
                         </div>
