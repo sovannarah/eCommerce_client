@@ -136,6 +136,9 @@ class Admin extends React.Component {
                 // console.log("===============================");
                 let data2 = await this.getCategory();
                 this.parseCategory(data2);
+                if(res.data) {
+                    window.location.replace("/admin");
+                }
             })
             .catch(err => {
                 this.setState({'errorCat': err.response.data})
