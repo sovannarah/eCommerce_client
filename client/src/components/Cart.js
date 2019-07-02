@@ -20,6 +20,29 @@ class Cart extends Component {
         };
     }
 
+	componentDidMount() {
+		const articles = getArticles();
+		this.setState({articles});
+		let allUpdated = true;
+		articles.forEach(
+			(article) => {
+				Axios.get(apiArticleURI + article.id)
+					.then((res) => {
+						const updatedArticle = {...article, erased: false, ...res.data};
+						this.updateArticle(updatedArticle);
+					})
+					.catch((error) => {
+						if (error.response && error.response.status === 404) {
+							article.erased = true;
+						} else {
+							console.error(error);
+							allUpdated = false;
+						}
+						this.updateArticle(article);
+					});
+			});
+		this.setState({updated: allUpdated});
+	}
     componentDidMount() {
         let allUpdated = true;
         getCart().forEach(
@@ -74,7 +97,6 @@ class Cart extends Component {
     };
 
     render() {
-        console.log(this.state.articles)
         return (
             <div className='cart w-100'>
                 <h3 className="text-secondary">My Cart</h3>
@@ -158,9 +180,9 @@ function Article(props) {
 /**
  * @returns {Array}
  */
-function getCart() {
-    const json = sessionStorage.getItem(storageKey);
-    return json ? JSON.parse(json) : [];
+function getArticles() {
+	const json = sessionStorage.getItem(storageKey);
+	return json ? JSON.parse(json) : [];
 }
 
 /**
@@ -169,15 +191,15 @@ function getCart() {
  * @param quantity
  */
 function addToCart(article, quantity) {
-    const cart = getCart();
-    let existing = cart.find(oldArticle => oldArticle.id === article.id);
-    if (!existing) {
-        existing = article;
-        existing.quantity = 0;
-        cart.push(existing);
-    }
-    existing.quantity += quantity;
-    sessionStorage.setItem(storageKey, JSON.stringify(cart));
+	const cart = getArticles();
+	let existing = cart.find(oldArticle => oldArticle.id === article.id);
+	if (!existing) {
+		existing = article;
+		existing.quantity = 0;
+		cart.push(existing);
+	}
+	existing.quantity += quantity;
+	sessionStorage.setItem(storageKey, JSON.stringify(cart));
 }
 
 export {Cart as default, addToCart};
