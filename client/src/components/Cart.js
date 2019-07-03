@@ -138,8 +138,7 @@ function Article(props) {
             <td>
                 <FormControl type='number'
                              className="text-dark"
-                             placeholder={quantity}
-                             min='0' max={stock}
+                             value={quantity}
                              disabled={outOfStock || erased}
                              onChange={(ev) => {
                                  props.update({...props.article, quantity: ev.target.value});

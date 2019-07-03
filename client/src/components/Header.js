@@ -149,7 +149,7 @@ class Header extends React.Component {
     }
 
     outsideCat() {
-        document.getElementById("cho-cat").classList.remove('dis')
+        document.getElementById("cho-cat").classList.remove('dis');
     }
     
     async handleShowCart() {
