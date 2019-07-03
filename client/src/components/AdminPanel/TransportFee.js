@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {Promise} from "q";
+import {instanceOf} from "prop-types";
 
 class transportFee extends React.Component
 {
@@ -19,11 +20,14 @@ class transportFee extends React.Component
 		this.getTransport = this.getTransport.bind(this);
 		this.addTransport = this.addTransport.bind(this);
 		this.updTransport = this.updTransport.bind(this);
-		this.moreOffer = this.moreOffer.bind(this);
 		this.updOffer = this.updOffer.bind(this);
-		this.delTransport = this.delTransport.bind(this);
 		this.requestTransport = this.requestTransport.bind(this);
+		this.delTransport = this.delTransport.bind(this);
 		this.deleteOffer = this.deleteOffer.bind(this);
+		this.delteSpec = this.delteSpec.bind(this);
+		this.moreOffer = this.moreOffer.bind(this);
+		this.addSpec = this.addSpec.bind(this);
+		this.addOffer = this.addOffer.bind(this);
 	}
 
 	async componentDidMount()
@@ -35,17 +39,17 @@ class transportFee extends React.Component
 
 	requestTransport()
 	{
-		return (new Promise (async (res) =>
+		return (new Promise ((resolve) =>
 		{
-			await axios.get(this.state.ip +  '/transport',
+			axios.get(this.state.ip +  '/transport',
 				{ headers: this.state.header }).then(
 				(res) =>
 				{
 					console.log("===== rres =====");
 					this.setState({offeritems: res.data});
+					resolve("ok");
 				}
 			);
-			res("ok");
 		}));
 	}
 
@@ -171,6 +175,42 @@ class transportFee extends React.Component
 		this.setState({offer: offert})
 	}
 
+	addOffer(event)
+	{
+		let tkey = event.target.id.split('-')[1];
+		let offer = {
+			name: '',
+			specs: [{
+				name: '',
+				unity: '',
+				minValue: 0,
+				price: 0
+			}]
+		};
+		let transport = this.state.offeritems;
+		transport[tkey].offers.push(offer);
+		this.setState({ offeritems: transport});
+		console.log(this.state.offeritems);
+		this.updOffer();
+	}
+	addSpec(event)
+	{
+		let keys = event.target.id.split('-');
+		let tkey = keys[1];
+		let transport = this.state.offeritems;
+		let okey = keys[2];
+		let spec = {
+			name: '',
+			unity: '',
+			minValue: 0,
+			price: 0
+		};
+		transport[tkey].offers[okey].specs.push(spec);
+		this.setState({ offeritems: transport });
+		console.log(this.state.offeritems);
+		this.updOffer()
+	}
+
 	async delTransport(event)
 	{
 		let key = parseInt(event.target.id.split('-')[1]);
@@ -193,60 +233,48 @@ class transportFee extends React.Component
 		let okey = keys[2];
 		let skey = keys[3];
 		let id = this.state.offeritems[tkey].offers[okey].specs[skey].id;
-		await axios.delete(this.ip + '/transport/' + id +'/spec',
+		await axios.delete(this.state.ip + '/transport/' + id +'/spec',
 			{headers: this.state.header}).then(
 			async (res) =>
 			{
-				console.log("=== del offer ===");
-				console.log(res);
-				// await this.requestTransport();
-				// this.moreOffer();
-				// this.updOffer();
-			},
-			(err)=>
-			{
-				console.log("=== del offer err ===");
-				console.log(err);
+				// console.log("=== del offer ===");
+				// console.log(res);
+				await this.requestTransport();
+				this.moreOffer();
+				this.updOffer();
 			}
 		)
 	}
+
 	async deleteOffer(event)
 	{
 		let keys = event.target.id.split('-');
 		let tkey = keys[1];
 		let okey = keys[2];
 		let id = this.state.offeritems[tkey].offers[okey].id;
-		await axios.delete(this.ip + '/transport/' + id +'/offer',
+		await axios.delete(this.state.ip + '/transport/' + id +'/offer',
 			{headers: this.state.header}).then(
 			async (res) =>
 			{
 				console.log("=== del offer ===");
 				console.log(res);
-				// await this.requestTransport();
-				// this.moreOffer();
-				// this.updOffer();
-			},
-			(err)=>
-			{
-				console.log("=== del offer err ===");
-				console.log(err);
+				await this.requestTransport();
+				this.moreOffer();
+				this.updOffer();
 			}
 		)
 	}
 
 	async updateTransport(transport, id)
 	{
+		console.log(transport);
 		await axios.put(this.state.ip + '/transport/' + id, transport,
 			{headers: this.state.header}).then(
-			(res) =>
+			async (res) =>
 			{
-				console.log("===== res ======")
-				console.log(res);
-			},
-			(err) =>
-			{
-				console.log("===== err ======")
-				console.log(err);
+				await this.requestTransport();
+				this.moreOffer();
+				this.updOffer();
 			}
 		)
 	}
@@ -258,7 +286,7 @@ class transportFee extends React.Component
 		titem.name = document.getElementById('titem' + key).value;
 		let c1 = -1;
 		let oitem;
-		let str = 'oitem' + key + "-";
+		let str = 'oitem-' + key + "-";
 		while ((oitem = document.getElementById(str + (++c1))))
 		{
 			let offer = titem.offers[c1];
@@ -268,11 +296,11 @@ class transportFee extends React.Component
 			let str2 = key + '-' + c1 + '-';
 			while ((spec = document.getElementById('spec-' + str2 + (++c2))))
 			{
-				let spec = offer.specs[c2];
-				spec.name = document.getElementById('sitemName-' + str2 + c2).value;
-				spec.unity = document.getElementById('sitemUnity' + str2 + c2).value;
-				spec.minValue = document.getElementById('sitemMinValue' + str2 + c2).value;
-				spec.price = document.getElementById( 'sitemPrice' + str2 + c2).value;
+				let specs = offer.specs[c2];
+				specs.name = document.getElementById('sitemName-' + str2 + c2).value;
+				specs.unity = document.getElementById('sitemUnity-' + str2 + c2).value;
+				specs.minValue = document.getElementById('sitemMinValue-' + str2 + c2).value;
+				specs.price = document.getElementById( 'sitemPrice-' + str2 + c2).value;
 			}
 		}
 		this.updateTransport(titem, titem.id);
@@ -292,17 +320,19 @@ class transportFee extends React.Component
 						</label>
 						<input type={"text"} id={"titem" + i1}
 						       defaultValue={datatransport.name}/>
+						<button id={'addOffer-' + i1} onClick={this.addOffer}>Add Offer</button>
 						{datatransport.offers.map((dataoffer, i2) =>
 							<ul key={'offer-' + i1 + '-' + i2}>
 								<button id={'deleteOffer-' + i1 + '-' + i2} onClick={this.deleteOffer}>Delete</button>
 								<label htmlFor={"oitem-" + i1 + "-" + i2}>
 									Offer:
 								</label>
-								<input id={"oitem" + i1 + "-" + i2} type={"text"}
+								<input id={"oitem-" + i1 + "-" + i2} type={"text"}
 								       defaultValue={dataoffer.name}/>
+								<button id={'addSpec-' + i1 + '-' + i2} onClick={this.addSpec}>Add Spec</button>
 								{ dataoffer.specs.map((dataspec, i3) =>
-									<ul key={'spec-'+ i1 + '-' + i2 + '-'+ i3}>
-										<button id={'deleteSpec-' + i1 + '-' + i2 + '-' + i3 }>Delete</button>
+									<ul key={'speckey-'+ i1 + '-' + i2 + '-'+ i3} id={'spec-'+ i1 + '-' + i2 + '-'+ i3}>
+										<button id={'deleteSpec-' + i1 + '-' + i2 + '-' + i3 } onClick={this.delteSpec}>Delete</button>
 										<label htmlFor={'sitemName-' + i1 + '-' + i2 + "-" + i3}>
 											Name:
 										</label>
