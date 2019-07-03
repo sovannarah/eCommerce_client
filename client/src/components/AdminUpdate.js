@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import MaterialTable from 'material-table';
 import Transport from './AdminPanel/TransportFee'
+import PromotionCode from './AdminPanel/CodePromo';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
@@ -151,7 +152,7 @@ class Admin extends React.Component {
 
 
     changeDisplay(event) {
-        let tDisplay = ['command', 'article', 'transport'];
+        let tDisplay = ['command', 'article', 'transport', 'codePromo'];
         //,'commandStatus'
         document.getElementById('display' + event.target.id).hidden = false;
         let c = -1;
@@ -215,8 +216,11 @@ class Admin extends React.Component {
     render() {
         return (
             <div>
-                <div id="displaytransport">
+                <div id="displaytransport" hidden>
                     <Transport></Transport>
+                </div>
+                <div id="dispaycodePromo">
+                    <PromotionCode></PromotionCode>
                 </div>
                 <div id="displaycommand" className="mt-5 mb-5" hidden={true}>
                     <h2>{"Total:  " + this.state.commandPrice}</h2>
