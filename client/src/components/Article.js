@@ -51,10 +51,11 @@ class Article extends React.Component {
 
     variantePrice = (event) => {
         let colorPrice = event.target.value;
-        let newPrice = this.state.article.price + colorPrice;
-        this.setState({ price: newPrice }, () => {
-            console.log(this.state.price);
-        });
+        let oldPrice = this.state.article.price;
+
+
+        let newPrice = parseInt(oldPrice) + parseInt(colorPrice);
+        this.setState({ price: newPrice });
     }
 
 
@@ -96,7 +97,7 @@ class Article extends React.Component {
                             {
                                 this.state.showME ?
                                     <select onChange={this.variantePrice}>
-                                            <option value={0}>original</option>
+                                        <option value={0}>original</option>
                                         {this.state.article.variants.couleur.map((elem, index) => (
                                             <option key={index} value={elem.var_price}>
                                                 {elem.spec}
