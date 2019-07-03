@@ -28,7 +28,9 @@ class Header extends React.Component {
             put: '',
             value: '',
             category: [],
-            getCategory: []
+            token: localStorage.getItem('token'),
+            getCategory: [],
+            adminPanel: null
         };
         this.ip = 'http://127.0.0.1:8000';
 
@@ -107,7 +109,9 @@ class Header extends React.Component {
                 },
                 (err) => {
                     console.log(err);
-                })
+                });
+        console.log(this.state.token);
+
     }
 
     onChange = (e) => {
@@ -292,6 +296,7 @@ class Header extends React.Component {
                             </div>
                         </div>
                     </div>
+                </div>
                 </CSSTransition>
                 <CSSTransition
                     in={this.state.user}

@@ -66,6 +66,7 @@ class UserCtrl extends React.Component {
                     <Link to="/account">My Account</Link>
                     <button className="btn-mainly ml-auto mr-auto" onClick={this.disconnect}>Disconnect</button>
                 </div>
+
             )
         } else {
             return (
