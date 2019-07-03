@@ -14,7 +14,7 @@ class Article extends React.Component {
         this.state = {
             article: {},
             add: '',
-            quantity: 0
+            quantity: 1
         };
         let id = this.props.match.params.id;
         axios.get(ip + '/article/' + id)
@@ -27,7 +27,7 @@ class Article extends React.Component {
 
     addCart = (event) => {
         addToCart(this.state.article, this.state.quantity);
-        console.log(this.state.article);
+        window.location.replace("/article/" + this.props.match.params.id)
     };
 
     async setQuantity(event) {
@@ -37,6 +37,7 @@ class Article extends React.Component {
 
 
     render() {
+        console.log(this.state.quantity)
         const article = this.state.article;
         if (Object.keys(article).length === 0) {
             return null;
@@ -70,7 +71,7 @@ class Article extends React.Component {
                         </div>
                         <div>
                             <p>stock : {article.stock}</p>
-                            <input type="number" name="quantity"  value="1" max={article.stock} onChange={this.setQuantity}/>
+                            <input type="number" name="quantity" min="1" value={this.state.quantity} max={article.stock} onChange={this.setQuantity}/>
                             <button className="d-flex mt-3" onClick={this.addCart}>
                                 <p className="m-auto">ADD TO CARD</p>
                             </button>

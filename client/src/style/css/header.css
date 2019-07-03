@@ -161,7 +161,8 @@ header {
   background-color: #181818; }
 
 #cho-cat {
-  width: 100%; }
+  width: 100%;
+  z-index: 2; }
   #cho-cat .cach {
     height: 1020%;
     overflow-y: scroll; }
@@ -638,7 +639,7 @@ li {
 
 #menu-cart {
   min-height: 400px;
-  width: 400px;
+  width: 550px;
   padding: 15px;
   border-radius: 10px;
   position: absolute;

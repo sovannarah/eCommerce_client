@@ -7,9 +7,27 @@ import './App.css';
 
 class App extends React.Component {
 
+
+    constructor(props) {
+        super(props);
+        this.handleClickOutside = this.handleClickOutside.bind(this);
+    }
+
+    handleClickOutside(e) {
+        let except = ['menu-user', 'menu-cart', 'ctn-search-barre'];
+        let exceptClass = ['user', 'cart', 'search'];
+        except.forEach(element => {
+            if(e.target.matches(`#${element}`) === false) {
+                exceptClass.forEach(ele => {
+                    document.getElementById(element).classList.remove(`display-${ele}-exit-done`); 
+                });
+            } 
+        });
+    }
+
     render() {
         return (
-            <div id="main-div" className="">
+            <div onClick={this.handleClickOutside} id="main-div" className="">
                 <BrowserRouter>
                     <Header />
                     <div id="margin"></div>
