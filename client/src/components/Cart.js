@@ -20,9 +20,11 @@ class Cart extends Component {
         };
     }
 
+    
+
 	componentDidMount() {
 		const articles = getArticles();
-		this.setState({articles});
+        this.setState({articles});
 		let allUpdated = true;
 		articles.forEach(
 			(article) => {
@@ -41,7 +43,8 @@ class Cart extends Component {
 						this.updateArticle(article);
 					});
 			});
-		this.setState({updated: allUpdated});
+        this.setState({updated: allUpdated});
+
 	}
 
 
@@ -76,6 +79,7 @@ class Cart extends Component {
     };
 
     render() {
+        
         return (
             <div className='cart w-100'>
                 <h3 className="text-secondary">My Cart</h3>
@@ -171,14 +175,14 @@ function getArticles() {
  */
 function addToCart(article, quantity) {
 	const cart = getArticles();
-	let existing = cart.find(oldArticle => oldArticle.id === article.id);
+    let existing = cart.find(oldArticle => oldArticle.id === article.id);
 	if (!existing) {
 		existing = article;
 		existing.quantity = 0;
 		cart.push(existing);
 	}
 	existing.quantity += quantity;
-	sessionStorage.setItem(storageKey, JSON.stringify(cart));
+    sessionStorage.setItem(storageKey, JSON.stringify(cart));
 }
 
 export {Cart as default, addToCart};

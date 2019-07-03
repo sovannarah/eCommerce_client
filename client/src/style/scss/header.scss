@@ -21,7 +21,8 @@ header {
 
 #cho-cat {
     width: 100%;
-
+    // position: absolute;
+    z-index: 2;
     .cach {
         height: 1020%;
         overflow-y: scroll;

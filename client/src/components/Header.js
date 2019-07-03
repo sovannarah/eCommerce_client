@@ -40,6 +40,7 @@ class Header extends React.Component {
         this.makeStr = this.makeStr.bind(this);
     }
 
+    
 
     parseCategory(data) {
         let c = -1;
@@ -147,6 +148,9 @@ class Header extends React.Component {
         this.setState({cart: !this.state.cart});
     }
 
+    outsideCat() {
+        document.getElementById("cho-cat").classList.remove('dis')
+    }
     
     async handleShowCart() {
         let isLog = false;
@@ -168,7 +172,6 @@ class Header extends React.Component {
     };
 
     render() {
-        // console.log(this.state.categories);
         const userToken = localStorage.getItem('token');
         return (
             <header className="container-fluid">
@@ -225,7 +228,7 @@ class Header extends React.Component {
                             </select>
                             <div className="category-box h-100 col-3 d-flex">
                                 <ul id="cho-cat" className="sroll border bg-light mt-auto mb-auto">
-                                    
+ 
                                     <li className="p-2 bg-light d-flex justify-content-between">
                                         <p>Categorie</p>
                                         <button className="btn-none mb-auto" onClick={this.displayScroll}>
@@ -251,7 +254,7 @@ class Header extends React.Component {
                                 </ul>
                             </div>
                             <input id="search-barre" className="mt-auto mb-auto col-5 mr-5" ref={put => this.search = put}
-                               onChange={this.filterSearch} type="text" placeholder="Search"/>
+                               onClick={this.outsideCat} onChange={this.filterSearch} type="text" placeholder="Search"/>
                         </div>
                         <div className="results-search ml-auto col-5">
                             {this.state.results.length >= 1 ? this.state.results.map((elem, i) => (

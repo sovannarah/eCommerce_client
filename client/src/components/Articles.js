@@ -22,7 +22,6 @@ class Articles extends React.Component {
     }
 
     render() {
-        console.log(this.state.articles);
         return (
             <section id="ctn-articles" className="container-fluid d-flex">
                 <div id="ctn-filter">
