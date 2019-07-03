@@ -15,23 +15,26 @@ class Article extends React.Component {
             article: {},
             add: '',
             quantity: 0,
-            showME: false
+            showME: false,
+            price: 0
         };
 
 
     }
     async componentDidMount() {
         let id = this.props.match.params.id;
+
         await axios.get(ip + '/article/' + id)
             .then(res => {
-                this.setState({ article: res.data })
+                this.setState({ article: res.data });
+                this.setState({ price: res.data.price });
                 let variant = res.data.variants.couleur;
                 if (variant != undefined && variant.length >= 1) {
                     this.setState({
                         showME: true
                     });
                 }
-                 // console.log(this.state.article.variants.couleur);
+                // console.log(this.state.article.variants.couleur);
             });
         await axios.put(ip + '/article/' + id + '/increment');
         this.setQuantity = this.setQuantity.bind(this);
@@ -41,15 +44,24 @@ class Article extends React.Component {
         console.log(this.state.article);
     };
 
-    async setQuantity(event) {  
+    async setQuantity(event) {
         if (event.target.name === 'quantity')
             await this.setState({ quantity: event.target.valueAsNumber });
+    }
+
+    variantePrice = (event) => {
+        let colorPrice = event.target.value;
+        let newPrice = this.state.article.price + colorPrice;
+        this.setState({ price: newPrice }, () => {
+            console.log(this.state.price);
+        });
     }
 
 
     render() {
         //console.log(Object.keys(this.state.article.variants));
         const article = this.state.article;
+        const price = this.state.price;
         if (Object.keys(article).length === 0) {
             return null;
         }
@@ -78,14 +90,15 @@ class Article extends React.Component {
                     <div className="scroll margin-art ml-auto d-flex flex-column mr-auto">
                         <div className="mt-5 mb-5">
                             <h1>{article.title}</h1>
-                            <h2>$ {article.price}</h2>
+                            <h2>$ {price}</h2>
                         </div>
                         <div className="variant">
                             {
                                 this.state.showME ?
-                                    <select>
+                                    <select onChange={this.variantePrice}>
+                                            <option value={0}>original</option>
                                         {this.state.article.variants.couleur.map((elem, index) => (
-                                            <option key={index}>
+                                            <option key={index} value={elem.var_price}>
                                                 {elem.spec}
                                             </option>
                                         ))}
