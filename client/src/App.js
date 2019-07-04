@@ -17,7 +17,7 @@ class App extends React.Component {
         let except = ['menu-user', 'menu-cart', 'ctn-search-barre'];
         let exceptClass = ['user', 'cart', 'search'];
         except.forEach(element => {
-            if(e.target.matches(`#${element}`) === false) {
+            if(e.target.matches(`#${element} *`) === false) {
                 exceptClass.forEach(ele => {
                     document.getElementById(element).classList.remove(`display-${ele}-exit-done`); 
                 });

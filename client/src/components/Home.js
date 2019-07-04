@@ -12,6 +12,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
 
+// const ip = 'http://10.34.7.68:8001';
 const ip = 'http://127.0.0.1:8000';
 
 class Home extends React.Component {

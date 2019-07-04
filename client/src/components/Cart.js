@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import {FormControl} from 'react-bootstrap';
 
-
+// const apiArticleURI = 'http://10.34.7.68:8001/article/';
 const apiArticleURI = 'http://127.0.0.1:8000/article/';
 const storageKey = 'cart';
 

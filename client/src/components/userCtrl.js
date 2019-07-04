@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import FacebookLogin from 'react-facebook-login';
 
+// let ip = 'http://10.34.7.68:8001';
 let ip = 'http://127.0.0.1:8000';
 
 class UserCtrl extends React.Component {
@@ -12,12 +13,14 @@ class UserCtrl extends React.Component {
 
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            roles: ["ROLE_USER"]
         };
         this.changeEmail = this.changeEmail.bind(this);
         this.changePassword = this.changePassword.bind(this);
         this.login = this.login.bind(this);
         this.disconnect = this.disconnect.bind(this);
+        // this.ip = 'http://10.34.7.68:8001';
         this.ip = 'http://127.0.0.1:8000';
     }
 
@@ -49,16 +52,30 @@ class UserCtrl extends React.Component {
         window.location.replace('/')
     }
 
-    render() {
-        const responseFacebook = (response) => {
-            if(response) {
-                for( let [key, value] of Object.entries(response)) {
-                    // console.log(key, value);
-                    localStorage.setItem(key, value);
+    responseFacebook = (response) => {
+        if(response) {
+            for( let [key, value] of Object.entries(response)) {
+                console.log(key, value);
+                localStorage.setItem(key, value);
+                this.setState({
+                    email: response.email,
+                    password: 'none'
+                })
+                // window.location.replace('/');
+            }
+            axios.post(ip + '/register', this.state)
+            .then(res => {
+                if (res.data) {
                     window.location.replace('/');
                 }
-            }
+            })
+            .catch(err => {
+                console.log(err);
+            })
         }
+    }
+
+    render() {
         if (this.props.user || localStorage.getItem("userID")) {
             return (
                 <div id="menu-user" className="d-flex flex-column justify-content-around bg-light open">
@@ -91,7 +108,7 @@ class UserCtrl extends React.Component {
                     <FacebookLogin
                         appId="1117381818464159" //APP ID NOT CREATED YET
                         fields="name,email,picture"
-                        callback={responseFacebook}
+                        callback={this.responseFacebook}
                         className="btn-facebook"
                     />
                     <p>Not registered? <Link to="/register">Sign In</Link></p>
