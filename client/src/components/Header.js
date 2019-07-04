@@ -1,6 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import {CSSTransition} from 'react-transition-group';
+import { Link } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
 import Drawer from '@material-ui/core/Drawer';
 import Menu from '../components/Menu';
 import axios from 'axios';
@@ -42,7 +42,7 @@ class Header extends React.Component {
         this.makeStr = this.makeStr.bind(this);
     }
 
-    
+
 
     parseCategory(data) {
         let c = -1;
@@ -82,8 +82,8 @@ class Header extends React.Component {
             console.log("===== request =====");
             console.log(this.state.value);
             axios.get(this.ip + '/search?' + this.state.value + '=' + this.state.put + res)
-                .then(({data}) => {
-                    this.setState({results: data})
+                .then(({ data }) => {
+                    this.setState({ results: data })
                 })
         });
     };
@@ -135,27 +135,27 @@ class Header extends React.Component {
     }
 
     displaySearch() {
-        this.setState({user: true})
-        this.setState({search: !this.state.search})
-        this.setState({cart: true})
+        this.setState({ user: true })
+        this.setState({ search: !this.state.search })
+        this.setState({ cart: true })
     }
 
     displayUser() {
-        this.setState({user: !this.state.user})
-        this.setState({search: true})
-        this.setState({cart: true})
+        this.setState({ user: !this.state.user })
+        this.setState({ search: true })
+        this.setState({ cart: true })
     }
 
     displayCart() {
-        this.setState({user: true});
-        this.setState({search: true});
-        this.setState({cart: !this.state.cart});
+        this.setState({ user: true });
+        this.setState({ search: true });
+        this.setState({ cart: !this.state.cart });
     }
 
     outsideCat() {
         document.getElementById("cho-cat").classList.remove('dis');
     }
-    
+
     async handleShowCart() {
         let isLog = false;
         let token = localStorage.getItem('token');
@@ -198,7 +198,7 @@ class Header extends React.Component {
             return;
         }
 
-        this.setState({...this.state, [side]: open});
+        this.setState({ ...this.state, [side]: open });
     };
 
     render() {
@@ -206,7 +206,7 @@ class Header extends React.Component {
         return (
             <header className="container-fluid">
                 <Drawer className="" open={this.state.left} onClose={this.toggleDrawer('left', false)}>
-                    <Menu/>
+                    <Menu />
                 </Drawer>
                 <div id="ctn-header" className="h-100 d-flex justify-content-between">
                     <div id="ctn-icon-menu" className="d-flex justify-content-between">
@@ -296,30 +296,29 @@ class Header extends React.Component {
                             </div>
                         </div>
                     </div>
+                </CSSTransition>
+            <CSSTransition
+                in={this.state.user}
+                timeout={500}
+                classNames="display-user">
+                <UserCtrl user={userToken} />
+
+
+            </CSSTransition>
+            <CSSTransition
+                in={this.state.cart}
+                timeout={500}
+                classNames="display-cart"
+            >
+                <div id="menu-cart" className="d-flex flex-column bg-dark open">
+                    <Cart></Cart>
+                    {/* <Link className="mt-auto ml-auto mr-auto" to="/cartPage"> */}
+                    <button className="btn-mainly" onClick={this.handleShowCart.bind(this)}>Access to cart</button>
+                    {/* </Link> */}
                 </div>
-                </CSSTransition>
-                <CSSTransition
-                    in={this.state.user}
-                    timeout={500}
-                    classNames="display-user">
-                    <UserCtrl user={userToken} />
 
-
-                </CSSTransition>
-                <CSSTransition
-                    in={this.state.cart}
-                    timeout={500}
-                    classNames="display-cart"
-                >
-                    <div id="menu-cart" className="d-flex flex-column bg-dark open">
-                        <Cart></Cart>
-                        {/* <Link className="mt-auto ml-auto mr-auto" to="/cartPage"> */}
-                        <button className="btn-mainly" onClick={this.handleShowCart.bind(this)}>Access to cart</button>
-                        {/* </Link> */}
-                    </div>
-
-                </CSSTransition>
-            </header>
+            </CSSTransition>
+            </header >
         );
     }
 }
