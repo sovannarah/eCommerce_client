@@ -329,7 +329,7 @@ class transportFee extends React.Component
 	updOffer()
 	{
 		let Offers =
-			<div>
+			<div className="mt-5">
 				{this.state.offeritems.map((datatransport, i1) =>
 					<ul key={"transport-" + i1} style={{ border: 2 + "px red solid"}}>
 						<br />

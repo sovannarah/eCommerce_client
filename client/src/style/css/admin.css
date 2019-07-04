@@ -9,13 +9,17 @@
     height: 50%;
     border-radius: 20px; }
 
-#command {
+#command, #transport, #article, #codePromo {
+  background-color: transparent;
+  border: none;
   border: 1px solid #ef464b;
-  background-color: #ef464b;
-  color: white;
   font-weight: bold;
   border-radius: 25px;
   height: 50px;
   width: 200px; }
+
+.onglet {
+  background-color: #ef464b !important;
+  color: white; }
 
 /*# sourceMappingURL=admin.css.map */

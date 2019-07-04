@@ -155,7 +155,7 @@ class CodePromo extends React.Component
 	render()
 	{
 		return (
-			<div>
+			<div className="mt-5">
 				<div>
 					<button onClick={this.sendCode}>Create</button>
 					<button onClick={this.addCode}>Add Codes</button>
@@ -163,10 +163,12 @@ class CodePromo extends React.Component
 						<ul key={'Code' + i}>
 							<button id={"promotionCode-" + i} onClick={this.rmCode}>Remove</button>
 							<button id={"randomPromotion-" + i} onClick={this.randomString}>Random</button>
-							<label htmlFor={"code"}> Code Promo: </label>
-							<input type="text" id={'code-' + i} value={data.code} onChange={this.changeCodePromo}/>
-							<label htmlFor={'reduction-' + i}> Pomotion: </label>
-							<input type="number" value={data.reduction} max={100} id={'reduction-' + i} onChange={this.changeCodePromo}/>
+							<label htmlFor={"code"}> Code Promo:
+								<input type="text" id={'code-' + i} value={data.code} onChange={this.changeCodePromo}/>
+							</label>
+							<label htmlFor={'reduction-' + i}> Pomotion: 
+								<input type="number" value={data.reduction} max={100} id={'reduction-' + i} onChange={this.changeCodePromo}/>
+							</label>
 						</ul>
 					)}
 				</div>

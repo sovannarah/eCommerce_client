@@ -60,7 +60,7 @@ class Admin extends React.Component {
                 },
                 () =>
                 {
-                    window.location.replace('/');
+                    // window.location.replace('/');
                 })
         }
         axios.get(this.ip + '/article')
@@ -158,16 +158,24 @@ class Admin extends React.Component {
             })
     }
 
+    // changeOnglet (event) {
+    //     document.getElementById("onglets").classList.toggle("onglet");
+    // }
+
     changeDisplay(event) {
         let tDisplay = ['command', 'article', 'transport', 'codePromo'];
         //,'commandStatus'
+        
         document.getElementById("display" + event.target.id).hidden = false;
         let c = -1;
         let flagChange = false;
         while (tDisplay[++c]) {
             if (tDisplay[c] === event.target.id) {
+                document.getElementById(tDisplay[c]).classList.add("onglet")
                 flagChange = true;
                 // console.log(event.target.id);
+            } else {
+                document.getElementById(tDisplay[c]).classList.remove("onglet")
             }
         }
         if (flagChange === true) {
@@ -238,10 +246,16 @@ class Admin extends React.Component {
     render() {
         return (
             <div>
-                <div id="displaytransport" hidden>
+                <div style={{marginTop: 130}} id="onglets" onClick={this.changeOnglet} className="d-flex justify-content-around col-6 ml-auto mr-auto mb-5 ">
+                    <button id="article" className="onglet" onClick={this.changeDisplay}>Article</button>
+                    <button id="command" onClick={this.changeDisplay}>make command</button>
+                    <button id="transport" onClick={this.changeDisplay}>Transport</button>
+                    <button id="codePromo" onClick={this.changeDisplay}>Code Promo</button>
+                </div>
+                <div id="displaytransport" style={{marginTop: 120}} hidden>
                     <Transport></Transport>
                 </div>
-                <div id="displaycodePromo" hidden>
+                <div id="displaycodePromo" style={{marginTop: 120}} hidden>
                     <PromotionCode></PromotionCode>
                 </div>
                 <div id="displaycommand" className="mt-5 mb-5" hidden={true}>
@@ -379,10 +393,6 @@ class Admin extends React.Component {
                         </div>
                     </section>
                 </div>
-                <button id="command" onClick={this.changeDisplay}>make command</button>
-                <button id="transport" onClick={this.changeDisplay}>Transport</button>
-                <button id="article" onClick={this.changeDisplay}>Article</button>
-                <button id="codePromo" onClick={this.changeDisplay}>Code Promo</button>
             </div>
         );
     }
