@@ -24,6 +24,7 @@ class CodePromo extends React.Component
 		this.changeCodePromo = this.changeCodePromo.bind(this);
 		this.getCode = this.getCode.bind(this);
 		this.removeCode = this.removeCode.bind(this);
+		this.randomString = this.randomString.bind(this);
 	}
 
 	componentDidMount()
@@ -31,9 +32,9 @@ class CodePromo extends React.Component
 		this.getCode();
 	}
 
-	async 	getCode()
+	getCode()
 	{
-		await axios.get(this.ip + '/promotionCode',
+		axios.get(this.ip + '/promotionCode',
 			{headers: this.state.header}).then(
 			(res) =>
 			{
@@ -45,12 +46,12 @@ class CodePromo extends React.Component
 	removeCode(event)
 	{
 		let key = event.target.id.split('-')[1];
-		let id = this.state.getCode[parseInt(key)];
+		let id = this.state.getCode[parseInt(key)].id;
 		axios.delete(this.ip + '/promotionCode/' + id,
-			{headers: this.state.header}).then(
-			(res) =>
+			{headers: this.state.header}).then((res) =>
 			{
 				console.log(res);
+				this.getCode();
 			},
 			(err) =>
 			{
@@ -65,7 +66,7 @@ class CodePromo extends React.Component
 			<div>
 				{this.state.getCode.map((data, i) =>
 					<ul key={"getCode" + i}>
-						<button id={"deleteCode-" + i}>Delete</button>
+						<button id={"deleteCode-" + i} onClick={this.removeCode}>Delete</button>
 						<p>code: {data.code}</p>
 						<p>Reduction: {data.reduction}</p>
 					</ul>
@@ -112,13 +113,14 @@ class CodePromo extends React.Component
 		}))
 	}
 
-	async sendCode()
+	sendCode()
 	{
-		axios.post(this.ip + '/promotionCode', await this.tamereConstruct(),
+		axios.post(this.ip + '/promotionCode', this.state.addCodes,
 			{headers: this.state.header}).then(
 			(res) =>
 			{
 				console.log(res);
+				this.getCode();
 			}
 		)
 	}
@@ -132,6 +134,24 @@ class CodePromo extends React.Component
 		console.log(this.state.addCodes);
 	}
 
+	randomString(event)
+	{
+		let c = -1;
+		let codes = this.state.addCodes;
+		let key = parseInt(event.target.id.split('-')[1]);
+		let str = '';
+		while (++c < 9)
+		{
+			let rand = Math.floor(Math.random() * Math.floor(90) + 48);
+			if ((rand > 47 && rand < 58) || (rand > 64 && rand < 91))
+				str = str + String.fromCharCode(rand);
+			else
+				c = c - 1;
+		}
+		codes[key].code = str;
+		this.setState({addCodes: codes});
+	}
+
 	render()
 	{
 		return (
@@ -142,6 +162,7 @@ class CodePromo extends React.Component
 					{this.state.addCodes.map((data, i) =>
 						<ul key={'Code' + i}>
 							<button id={"promotionCode-" + i} onClick={this.rmCode}>Remove</button>
+							<button id={"randomPromotion-" + i} onClick={this.randomString}>Random</button>
 							<label htmlFor={"code"}> Code Promo: </label>
 							<input type="text" id={'code-' + i} value={data.code} onChange={this.changeCodePromo}/>
 							<label htmlFor={'reduction-' + i}> Pomotion: </label>
