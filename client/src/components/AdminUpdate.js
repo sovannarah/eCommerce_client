@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import MaterialTable from 'material-table';
+import Transport from './AdminPanel/TransportFee'
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
@@ -50,11 +51,13 @@ class Admin extends React.Component {
             await axios.get(this.ip + '/user/isAdmin',
             { headers: { token: localStorage.getItem('token')}}
             ).then(
-                () => {
-                    // console.log("===== Welcome ========");
-                },
+
                 () => {
                     // window.location.replace('/');
+                },
+                () =>
+                {
+                    window.location.replace('/');
                 })
         }
         axios.get(this.ip + '/article')
@@ -139,9 +142,9 @@ class Admin extends React.Component {
         };
         await axios.post(this.ip + '/category', data, {headers: {'token': this.state.headers['token']}})
             .then(async (res) => {
-                // console.log("======== get category ===========");
-                // console.log(res.data);
-                // console.log("===============================");
+                console.log("======== get category ===========");
+                console.log(res.data);
+                console.log("===============================");
                 let data2 = await this.getCategory();
                 this.parseCategory(data2);
                 if(res.data) {
@@ -155,7 +158,7 @@ class Admin extends React.Component {
 
 
     changeDisplay(event) {
-        let tDisplay = ['command', 'article'];
+        let tDisplay = ['command', 'article', 'transport'];
         //,'commandStatus'
         document.getElementById('display' + event.target.id).hidden = false;
         let c = -1;
@@ -219,6 +222,9 @@ class Admin extends React.Component {
     render() {
         return (
             <div>
+                <div id="displaytransport">
+                    <Transport></Transport>
+                </div>
                 <div id="displaycommand" className="mt-5 mb-5" hidden={true}>
                     <h2>{"Total:  " + this.state.commandPrice}</h2>
                     <table>
@@ -353,6 +359,7 @@ class Admin extends React.Component {
                             </Button>
                         </div>
                         <button id="command" onClick={this.changeDisplay}>make command</button>
+                        <button id="transport" onClick={this.changeDisplay}>Transport</button>
                     </section>
                 </div>
             </div>

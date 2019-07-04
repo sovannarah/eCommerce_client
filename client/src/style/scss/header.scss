@@ -21,7 +21,8 @@ header {
 
 #cho-cat {
     width: 100%;
-
+    // position: absolute;
+    z-index: 2;
     .cach {
         height: 1020%;
         overflow-y: scroll;
@@ -249,7 +250,7 @@ li{
 
 #menu-cart {
     min-height: 400px;
-    width: 400px;
+    width: 550px;
     padding: 15px;
     border-radius: 10px;
     position: absolute;

@@ -24,8 +24,10 @@ class Admin extends React.Component {
                 () => {
                     // console.log("===== Welcome ========");
                 },
-                () => {
-                    // window.location.replace('/');
+
+                (error) => {
+                    console.log(error);
+                    window.location.replace('/');
                 })
         }
 
@@ -50,6 +52,8 @@ class Admin extends React.Component {
     getCategory() {
         return axios.get(this.ip + '/category')
             .then(res => {
+                console.log("==== date =====");
+                console.log(res.data);
                 return (res.data)
             })
             .catch(err => {

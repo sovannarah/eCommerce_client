@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-
 import FacebookLogin from 'react-facebook-login';
 
 let ip = 'http://127.0.0.1:8000';
@@ -67,6 +66,7 @@ class UserCtrl extends React.Component {
                     <Link to="/account">My Account</Link>
                     <button className="btn-mainly ml-auto mr-auto" onClick={this.disconnect}>Disconnect</button>
                 </div>
+
             )
         } else {
             return (

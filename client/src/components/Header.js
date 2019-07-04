@@ -28,7 +28,9 @@ class Header extends React.Component {
             put: '',
             value: '',
             category: [],
-            getCategory: []
+            token: localStorage.getItem('token'),
+            getCategory: [],
+            adminPanel: null
         };
         this.ip = 'http://127.0.0.1:8000';
 
@@ -40,6 +42,7 @@ class Header extends React.Component {
         this.makeStr = this.makeStr.bind(this);
     }
 
+    
 
     parseCategory(data) {
         let c = -1;
@@ -106,7 +109,9 @@ class Header extends React.Component {
                 },
                 (err) => {
                     console.log(err);
-                })
+                });
+        console.log(this.state.token);
+
     }
 
     onChange = (e) => {
@@ -118,7 +123,7 @@ class Header extends React.Component {
             if (tIndex !== -1)
                 sCategory.splice(tIndex, 1);
         }
-        this.setState({category: sCategory});
+        this.setState({ category: sCategory });
         this.itemSearch();
         console.log(this.state.category);
     };
@@ -147,9 +152,38 @@ class Header extends React.Component {
         this.setState({cart: !this.state.cart});
     }
 
+    outsideCat() {
+        document.getElementById("cho-cat").classList.remove('dis');
+    }
     
     async handleShowCart() {
         let isLog = false;
+        let token = localStorage.getItem('token');
+        console.log(token);
+        if (token) {
+            await axios
+                .get(
+                    this.ip + '/user/checkuser',
+                    {
+                        "headers": {
+                            "token": token
+                        }
+                    }
+                )
+                .then((res) => {
+                    console.log(res.status);
+                    if (res.status === 200)
+                        isLog = true;
+                    // console.log("===== Welcome ========");
+                })
+                .catch((err) => {
+                    console.log(err);
+                    // window.location.replace('/');
+                })
+        }
+        else
+            console.log("No token");
+
         if (isLog || window.confirm(
             "Vous n'etes pas connectes, voulez vous commander sans compte?\n" +
             "[OK] pour continuer\n[Cancel] pour annuler")
@@ -168,7 +202,6 @@ class Header extends React.Component {
     };
 
     render() {
-        // console.log(this.state.categories);
         const userToken = localStorage.getItem('token');
         return (
             <header className="container-fluid">
@@ -178,11 +211,11 @@ class Header extends React.Component {
                 <div id="ctn-header" className="h-100 d-flex justify-content-between">
                     <div id="ctn-icon-menu" className="d-flex justify-content-between">
                         <button id="button-menu" onClick={this.toggleDrawer('left', true)}>
-                            <img id="icone-menu" className="mt-auto mb-auto" src={IconMenu}/>
+                            <img id="icone-menu" className="mt-auto mb-auto" src={IconMenu} alt="" />
                         </button>
                     </div>
                     <Link to="/" id="ctn-logo" className="d-flex mt-2">
-                        <img src={Logo}/>
+                        <img src={Logo} alt="" />
                     </Link>
                     <ul className="d-flex justify-content-between mt-auto h-100">
                         <li>
@@ -192,14 +225,14 @@ class Header extends React.Component {
                         </li>
                         <li>
                             <button onClick={this.displayUser}>
-                                <img src={IconeUser}></img>
-                            </button>
+                                <img src={IconeUser} alt="" />
+                            </button >
 
 
                         </li>
                         <li>
                             <button onClick={this.displayCart}>
-                                <img src={IconeCart}></img>
+                                <img src={IconeCart} alt="" />
                             </button>
                             <CSSTransition
                                 in={this.state.cart}
@@ -216,20 +249,20 @@ class Header extends React.Component {
                     in={this.state.search}
                     timeout={500}
                     classNames="display-search">
-                    <div id="ctn-search-barre" className="d-flex  flex-column w-100 open">
-                        <div className="d-flex ml-auto block-search col-md-5">
-                            <select  className="mt-auto mb-auto col-md-3" select={this.state.value} onChange={this.handleSelect}>
+                    <div id="ctn-search-barre" className="d-flex justify-content-end w-100 open">
+                        <div className="d-flex">
+                            <select className="mt-auto mb-auto" select={this.state.value} onChange={this.handleSelect}>
                                 <option>Select</option>
                                 <option select="title">title</option>
                                 <option select="description">description</option>
                             </select>
-                            <div className="category-box h-100 col-3 d-flex">
+                            <div className="category-box h-100 d-flex">
                                 <ul id="cho-cat" className="sroll border bg-light mt-auto mb-auto">
-                                    
+
                                     <li className="p-2 bg-light d-flex justify-content-between">
                                         <p>Categorie</p>
                                         <button className="btn-none mb-auto" onClick={this.displayScroll}>
-                                            <img className="size-icn" src={require('../images/icon/chevron.png')}/>
+                                            <img className="size-icn" src={require('../images/icon/chevron.png')} />
                                         </button>
                                     </li>
                                     <div className="cach">
@@ -250,27 +283,28 @@ class Header extends React.Component {
                                     </div>
                                 </ul>
                             </div>
-                            <input id="search-barre" className="mt-auto mb-auto col-5 mr-5" ref={put => this.search = put}
-                               onChange={this.filterSearch} type="text" placeholder="Search"/>
+                            <input id="search-barre" className="mt-auto mb-auto mr-5" ref={put => this.search = put} onChange={this.filterSearch} type="text" placeholder="Search" />
+                            <div className="results-search">
+                                {this.state.results.length >= 1 ? this.state.results.map((elem, i) => (
+                                    <li key={i}>
+                                        <Link to={"/article/" + elem.id}>
+                                            {elem.title}
+                                            {this.state.value === "title" ? elem.title : this.state.value === "description" ? elem.description : ''}
+                                        </Link>
+                                    </li>
+                                )) : ""}
+                            </div>
                         </div>
-                        <div className="results-search ml-auto col-5">
-                            {this.state.results.length >= 1 ? this.state.results.map((elem, i) => (
-                                <li className="border bg-light col-11" key={i}>
-                                    <Link to={"/article/" + elem.id}>
-                                        {elem.title}
-                                        {this.state.value === "title" ? elem.title : this.state.value === "description" ? elem.description : ''}
-                                    </Link>
-                                </li>
-                            )) : ""}
-                        </div>
-                    
                     </div>
+                </div>
                 </CSSTransition>
                 <CSSTransition
                     in={this.state.user}
                     timeout={500}
                     classNames="display-user">
-                    <UserCtrl user={userToken}/>
+                    <UserCtrl user={userToken} />
+
+
                 </CSSTransition>
                 <CSSTransition
                     in={this.state.cart}
@@ -280,9 +314,7 @@ class Header extends React.Component {
                     <div id="menu-cart" className="d-flex flex-column bg-dark open">
                         <Cart></Cart>
                         {/* <Link className="mt-auto ml-auto mr-auto" to="/cartPage"> */}
-                        <button className="btn-mainly mt-auto mr-auto ml-auto"
-                                onClick={this.handleShowCart.bind(this)}>Access to cart
-                        </button>
+                        <button className="btn-mainly" onClick={this.handleShowCart.bind(this)}>Access to cart</button>
                         {/* </Link> */}
                     </div>
 
