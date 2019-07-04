@@ -152,9 +152,9 @@ class Admin extends React.Component {
 
 
     changeDisplay(event) {
-        let tDisplay = ['command', 'article', 'transport', 'codePromo'];
+        let tDisplay = ['command', 'article', 'transport'/*, 'codePromo'*/];
         //,'commandStatus'
-        document.getElementById('display' + event.target.id).hidden = false;
+        document.getElementById("display" + event.target.id).hidden = false;
         let c = -1;
         let flagChange = false;
         while (tDisplay[++c]) {
@@ -357,6 +357,7 @@ class Admin extends React.Component {
                         </div>
                         <button id="command" onClick={this.changeDisplay}>make command</button>
                         <button id="transport" onClick={this.changeDisplay}>Transport</button>
+                        <button id="codePromo" onClick={this.changeDisplay}>Code Promo</button>
                     </section>
                 </div>
             </div>
