@@ -28,6 +28,8 @@ class transportFee extends React.Component
 		this.moreOffer = this.moreOffer.bind(this);
 		this.addSpec = this.addSpec.bind(this);
 		this.addOffer = this.addOffer.bind(this);
+		this.delOffer = this.delOffer.bind(this);
+		this.delSpec = this.delSpec.bind(this);
 	}
 
 	async componentDidMount()
@@ -114,12 +116,28 @@ class transportFee extends React.Component
 		})));
 	}
 
+	delOffer(event)
+	{
+		let key = event.target.id.split('-')[0];
+		let offers = this.state.offer;
+		offers.splice(key, 1);
+		this.setState({offer: offers});
+	}
+	delSpec(event)
+	{
+		let keys = event.target.id.split('-');
+		let offers = this.state.offer;
+		console.log(offers[parseInt(keys[1])]);
+		offers[parseInt(keys[1])].spec.splice(parseInt(keys[2]), 1);
+		this.setState({offer: offers});
+	}
 	async moreOffer()
 	{
 		let offert = this.state.offer;
 		let len  = offert.length;
 		let specHtml =
 			<div id={"spec-" + len + "-0"} style={{ border: 2 + "px green solid"}}>
+				<button id={"specDel-" + len + "-0"} onClick={this.delSpec}>Remove</button>
 				<p>Ex: distance, Km, 0.5/Km at 250 Km </p>
 				<label htmlFor={"specName-" + len + "-0"}>
 					Name:
@@ -134,6 +152,7 @@ class transportFee extends React.Component
 			</div>;
 		let offerHtml =
 			<div id={ "offer" + len } style={{ border: 2 + "px red solid"}}>
+				<button id={ "offerDel-" + len } onClick={this.delOffer}>Remove</button>
 				<label htmlFor={"offerName" + len }>
 					Oferr Name:
 				</label>
@@ -152,6 +171,7 @@ class transportFee extends React.Component
 		let specHtml =
 			<div id={"spec-" + len + "-" + offert[len].length}
 			     style={{ border: 2 + "px green solid"}}>
+				<button id={ "offerDel-" + len } onClick={this.delSpec}>Remove</button>
 				<p>Ex: distance, Km, 0.5/Km at 250 Km </p>
 				<label htmlFor={"specName-" + len + "-" + offert[len].length}>
 					Name:
@@ -312,6 +332,7 @@ class transportFee extends React.Component
 			<div>
 				{this.state.offeritems.map((datatransport, i1) =>
 					<ul key={"transport-" + i1} style={{ border: 2 + "px red solid"}}>
+						<br />
 						<button id={"delTransport-" + i1} onClick={this.delTransport}>Delete </button>
 						<button id={"updateTransport-" + i1} onClick={this.updTransport}>Update </button>
 						<br />
@@ -374,6 +395,7 @@ class transportFee extends React.Component
 						Update
 					</button>
 					<button onClick={this.addTransport}>Create Transport</button>
+					<br />
 					<label htmlFor="transportName">Name: </label>
 					<input type="text" id="transportName"/>
 					<button onClick={this.moreOffer}>Add offer</button>

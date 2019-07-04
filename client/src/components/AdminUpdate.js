@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import MaterialTable from 'material-table';
 import Transport from './AdminPanel/TransportFee'
+import PromotionCode from './AdminPanel/CodePromo';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
@@ -51,7 +52,7 @@ class Admin extends React.Component {
             window.location.replace('/account');
         else {
             await axios.get(this.ip + '/user/isAdmin',
-            { headers: { token: localStorage.getItem('token')}}
+                { headers: { token: localStorage.getItem('token')}}
             ).then(
 
                 () => {
@@ -104,21 +105,21 @@ class Admin extends React.Component {
         )
     }
 
-	parseCategory (data)
-	{
-		let c = -1;
-		let copy;
-		while (data[++c])
-		{
-			copy = this.state.columns;
-			copy[0].lookup[data[c].id] = data[c].name;
-			this.setState({columns: copy});
-			// this.state.columns[0].lookup[data[c].id] = data[c].name;
-			this.state.category.push(data[c])
-			if (data[c].sub && data[c].sub.length > 0)
-				this.parseCategory(data[c].sub);
-		}
-	}
+    parseCategory (data)
+    {
+        let c = -1;
+        let copy;
+        while (data[++c])
+        {
+            copy = this.state.columns;
+            copy[0].lookup[data[c].id] = data[c].name;
+            this.setState({columns: copy});
+            // this.state.columns[0].lookup[data[c].id] = data[c].name;
+            this.state.category.push(data[c])
+            if (data[c].sub && data[c].sub.length > 0)
+                this.parseCategory(data[c].sub);
+        }
+    }
 
     getCategory() {
         return axios.get(this.ip + '/category')
@@ -158,9 +159,9 @@ class Admin extends React.Component {
     }
 
     changeDisplay(event) {
-        let tDisplay = ['command', 'article', 'transport'];
+        let tDisplay = ['command', 'article', 'transport', 'codePromo'];
         //,'commandStatus'
-        document.getElementById('display' + event.target.id).hidden = false;
+        document.getElementById("display" + event.target.id).hidden = false;
         let c = -1;
         let flagChange = false;
         while (tDisplay[++c]) {
@@ -237,8 +238,11 @@ class Admin extends React.Component {
     render() {
         return (
             <div>
-                <div id="displaytransport">
+                <div id="displaytransport" hidden>
                     <Transport></Transport>
+                </div>
+                <div id="displaycodePromo" hidden>
+                    <PromotionCode></PromotionCode>
                 </div>
                 <div id="displaycommand" className="mt-5 mb-5" hidden={true}>
                     <h2>{"Total:  " + this.state.commandPrice}</h2>
@@ -373,11 +377,12 @@ class Admin extends React.Component {
                                 Create Category
                             </Button>
                         </div>
-                        <button id="command" onClick={this.changeDisplay}>make command</button>
-                        <button id="excel" onClick={this.createExcel}>Create an excel file</button>
-                        <button id="transport" onClick={this.changeDisplay}>Transport</button>
                     </section>
                 </div>
+                <button id="command" onClick={this.changeDisplay}>make command</button>
+                <button id="transport" onClick={this.changeDisplay}>Transport</button>
+                <button id="article" onClick={this.changeDisplay}>Article</button>
+                <button id="codePromo" onClick={this.changeDisplay}>Code Promo</button>
             </div>
         );
     }
