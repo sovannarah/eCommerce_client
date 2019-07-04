@@ -42,6 +42,7 @@ class Admin extends React.Component {
         this.passCommand = this.passCommand.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.parseCategory = this.parseCategory.bind(this)
+        this.createExcel = this.createExcel.bind(this)
     }
 
     async componentDidMount() {
@@ -128,7 +129,6 @@ class Admin extends React.Component {
             })
     }
 
-
     handleChange(event) {
         // console.log(event);
         this.setState({parent_name: event._targetInst.stateNode.innerText});
@@ -155,7 +155,6 @@ class Admin extends React.Component {
                 this.setState({'errorCat': err.response.data})
             })
     }
-
 
     changeDisplay(event) {
         let tDisplay = ['command', 'article', 'transport'];
@@ -217,6 +216,21 @@ class Admin extends React.Component {
     addStock(i, price) {
         let quantity = parseInt(document.getElementById(i).value);
         document.getElementById('total' + i).innerText = (quantity * parseInt(price).toString())
+    }
+
+    async createExcel() {
+        await axios.get(this.ip + '/excel',
+            {
+                headers: {
+                    'token': this.state.headers['token']
+                }
+            })
+            .then(res => {
+                window.location.href = this.ip + '/' + res.data.file;
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     render() {
@@ -359,6 +373,7 @@ class Admin extends React.Component {
                             </Button>
                         </div>
                         <button id="command" onClick={this.changeDisplay}>make command</button>
+                        <button id="excel" onClick={this.createExcel}>Create an excel file</button>
                         <button id="transport" onClick={this.changeDisplay}>Transport</button>
                     </section>
                 </div>
