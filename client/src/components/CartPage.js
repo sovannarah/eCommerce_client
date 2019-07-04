@@ -9,6 +9,7 @@ import AddressForm from './Addresse/AddressForm';
 import {FormControl} from 'react-bootstrap';
 import '../style/css/cartPage.css';
 
+// const apiArticleURI = 'http://10.34.7.68:8001/article/';
 const apiArticleURI = 'http://127.0.0.1:8000/article/';
 const storageKey = 'cart';
 // let FullUrl = window.location.pathname;
