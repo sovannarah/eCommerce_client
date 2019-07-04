@@ -96,7 +96,7 @@ class Article extends React.Component {
                         <div className="variant">
                             {
                                 this.state.showME ?
-                                    <select onChange={this.variantePrice}>
+                                    <select className="form-control col-sm-2" onChange={this.variantePrice}>
                                         <option value={0}>original</option>
                                         {this.state.article.variants.couleur.map((elem, index) => (
                                             <option key={index} value={elem.var_price}>
