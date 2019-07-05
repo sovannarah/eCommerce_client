@@ -13,7 +13,9 @@ import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
 
 // const ip = 'http://10.34.7.68:8001';
-const ip = 'http://127.0.0.1:8000';
+//const ip = 'http://127.0.0.1:8000';
+const ip = 'http://10.34.7.0:8000';
+
 
 class Home extends React.Component {
 
@@ -86,7 +88,7 @@ class Home extends React.Component {
                                     <Link to={`/article/${item.id}`}>
                                         <CardActionArea className="h-100">
                                             <div className="ctn-img d-flex">
-                                            {item.images.length > 0 ? 
+                                             {item.images&&item.images.length > 0 ?
                                                 <img id="popular-img" className="m-auto"
                                                 src={ip + "/uploads/images/" + item.images[0]}/>
                                             :

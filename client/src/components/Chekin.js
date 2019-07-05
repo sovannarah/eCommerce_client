@@ -18,9 +18,11 @@ class Checkin extends React.Component {
         this.changeEmail = this.changeEmail.bind(this);
         this.changePassword = this.changePassword.bind(this);
         this.login = this.login.bind(this);
-        this.ip = "127.0.0.1:8000"; 
+       // this.ip = "127.0.0.1:8000";
         // this.ip = 'http://10.34.7.68:8001';
         // this.ip = 'http://10.34.7.0:8001'
+        const ip = 'http://10.34.7.0:8000';
+
     }
 
     changeEmail(e) {

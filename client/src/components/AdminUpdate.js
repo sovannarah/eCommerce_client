@@ -38,7 +38,9 @@ class Admin extends React.Component {
             commandPrice: 0
         };
         // this.ip = 'http://10.34.7.68:8001';
-        this.ip = 'http://127.0.0.1:8000';
+     //   this.ip = 'http://127.0.0.1:8000';
+        const ip = 'http://10.34.7.0:8000';
+
         this.changeDisplay = this.changeDisplay.bind(this);
         this.updatePrice = this.updatePrice.bind(this);
         this.passCommand = this.passCommand.bind(this);
