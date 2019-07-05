@@ -3,6 +3,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import { addToCart } from './Cart';
 import axios from 'axios';
 import '../style/css/article.css';
+import { log } from 'util';
 
 const ip = 'http://127.0.0.1:8000';
 
@@ -16,7 +17,8 @@ class Article extends React.Component {
             add: '',
             quantity: 0,
             showME: false,
-            price: 0
+            price: 0,
+            variantId: null
         };
 
 
@@ -29,19 +31,33 @@ class Article extends React.Component {
                 this.setState({ article: res.data });
                 this.setState({ price: res.data.price });
                 let variant = res.data.variants.couleur;
+                console.log(variant);
+
                 if (variant != undefined && variant.length >= 1) {
                     this.setState({
                         showME: true
                     });
+
                 }
-                // console.log(this.state.article.variants.couleur);
             });
+
         await axios.put(ip + '/article/' + id + '/increment');
         this.setQuantity = this.setQuantity.bind(this);
     }
     addCart = (event) => {
-        addToCart(this.state.article, this.state.quantity);
-        window.location.replace("/article/" + this.props.match.params.id)
+        let variant = this.state.article.variants.couleur;
+        console.log(variant);
+
+        let variantSelected = variant.find(item => item.id == this.state.variantId);
+        alert(JSON.stringify(variantSelected));
+
+        if (variant !== undefined && variant.length >= 1 && variantSelected !== undefined) {
+            addToCart(this.state.article, this.state.quantity, variantSelected);
+            window.location.replace("/article/" + this.props.match.params.id);
+        } else {
+            addToCart(this.state.article, this.state.quantity);
+            window.location.replace("/article/" + this.props.match.params.id);
+        }
     };
 
     async setQuantity(event) {
@@ -53,9 +69,13 @@ class Article extends React.Component {
         let colorPrice = event.target.value;
         let oldPrice = this.state.article.price;
 
-
         let newPrice = parseInt(oldPrice) + parseInt(colorPrice);
         this.setState({ price: newPrice });
+        this.setState({ variantId: event.target.options[event.target.selectedIndex].dataset.id })
+        console.log(this.state.variantId);
+
+
+        // console.log(event.target.options[event.target.selectedIndex].dataset.id);
     }
 
 
@@ -99,9 +119,7 @@ class Article extends React.Component {
                                     <select className="form-control col-sm-2" onChange={this.variantePrice}>
                                         <option value={0}>original</option>
                                         {this.state.article.variants.couleur.map((elem, index) => (
-                                            <option key={index} value={elem.var_price}>
-                                                {elem.spec}
-                                            </option>
+                                            <option data-id={elem.id} key={index} value={elem.var_price}>{elem.spec}</option>
                                         ))}
                                     </select>
                                     : null
@@ -109,7 +127,7 @@ class Article extends React.Component {
                         </div>
                         <div>
                             <p>stock : {article.stock}</p>
-                            <input type="number" name="quantity" min="1" value={this.state.quantity} max={article.stock} onChange={this.setQuantity}/>
+                            <input type="number" name="quantity" min="1" value={this.state.quantity} max={article.stock} onChange={this.setQuantity} />
                             <button className="d-flex mt-3" onClick={this.addCart}>
                                 <p className="m-auto">ADD TO CARD</p>
                             </button>
