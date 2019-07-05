@@ -3,6 +3,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import { addToCart } from './Cart';
 import axios from 'axios';
 import '../style/css/article.css';
+import Scrapper from './Scrapper';
 
 // const ip = 'http://10.34.7.68:8001';
 const ip = 'http://127.0.0.1:8000';
@@ -17,10 +18,17 @@ class Article extends React.Component {
             add: '',
             quantity: 0,
             showME: false,
-            price: 0
+            price: 0,
+            scrap: []
         };
-
-
+        this.getScrapper = this.getScrapper.bind(this);
+    }
+    async getScrapper()
+    {
+        let scraps =  await Scrapper.getBetter(
+            this.state.article.title, this.state.article.price);
+        this.setState({ scrap: scraps});
+        console.log(this.state.scrap);
     }
     async componentDidMount() {
         let id = this.props.match.params.id;
@@ -34,11 +42,14 @@ class Article extends React.Component {
                     this.setState({
                         showME: true
                     });
+
                 }
                 // console.log(this.state.article.variants.couleur);
             });
+        this.getScrapper();
         await axios.put(ip + '/article/' + id + '/increment');
         this.setQuantity = this.setQuantity.bind(this);
+
     }
     addCart = (event) => {
         addToCart(this.state.article, this.state.quantity);
@@ -67,6 +78,7 @@ class Article extends React.Component {
         if (Object.keys(article).length === 0) {
             return null;
         }
+
         return (
             <section id="stn-article" className="d-flex row">
                 <div id="ctn-carousel" className="d-flex col-lg-6 h-100 w-100">
@@ -74,7 +86,7 @@ class Article extends React.Component {
                         {article.images.length > 0 ?
                             article.images.map((item, index) => (
                                 <Carousel.Item key={index}
-                                    className="h-100 w-100">
+                                               className="h-100 w-100">
                                     <div className="d-flex row w-100 h-100">
                                         <div id="ctn-img-car" className="col-md-12 m-auto mh-100 mw-100 d-flex">
                                             <img id="car-img" className="m-auto mw-100 mh-100" src={ip + "/uploads/images/" + article.images[index]} alt="" />
@@ -84,12 +96,18 @@ class Article extends React.Component {
                             ))
                             :
                             <img id="car-img" className="m-auto mw-100 mh-100"
-                                src={require("../images/icon/none.png")} />
+                                 src={require("../images/icon/none.png")} />
                         }
                     </Carousel>
                 </div>
                 <div id="ctn-infoArticle" className="col-lg-6 bg-light m-auto d-flex flex-column">
                     <div className="scroll margin-art ml-auto d-flex flex-column mr-auto">
+                        <p>Better on: </p>
+                        {this.state.scrap.map((data, i) =>
+                            <ul key={'scrap' + i}>
+                                <pre>{data}</pre>
+                            </ul>
+                        )}
                         <div className="mt-5 mb-5">
                             <h1>{article.title}</h1>
                             <h2>$ {price}</h2>
