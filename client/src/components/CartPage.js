@@ -5,7 +5,8 @@ import {Link} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import AddressForm from './Addresse/AddressForm';
-
+import AddressInput from './Addresse/AddressInput';
+import AddressItem from './Addresse/AddressItem';
 import {FormControl} from 'react-bootstrap';
 import '../style/css/cartPage.css';
 
@@ -15,6 +16,7 @@ const storageKey = 'cart';
 // let FullUrl = window.location.pathname;
 // const url = FullUrl.split("/")[2];
 // const urlPos = FullUrl.split("/")[1];
+const ip = 'http://10.34.7.0:8000';
 
 class Cart extends Component {
 
@@ -98,8 +100,22 @@ class Cart extends Component {
 	calculateTranFee = () => {
 		// $this.setState({fee: 20});
 		return (20);
-	}
-
+	};
+    sendAddress() {
+        const headers = {
+            'Content-Type': 'multipart/form-data',
+            'token': localStorage.getItem('token'),
+            'Access-Control-Allow-Credentials': true
+        };
+        const location ={
+        	'street':this.props.street,
+			'pc':this.props.postalCode,
+		};
+        Axios.post(this.ip + '/address', {headers: headers,body:location})
+            .then((res) => {
+                console.log(res.data);
+            });
+    }
 	render() {
 		return (
 			<section id="ctn-cartPage" className=" min-vh-100 flex-column container-fluid d-flex">
@@ -145,7 +161,7 @@ class Cart extends Component {
 					<div className="d-flex bg-grey2 justify-content-between w-100">
 						<h5 className="text-light mt-auto mb-auto ml-3">TOTAL PRICE : {this.state.ht}</h5>
 						<Link to="/checkin">
-							<button className="btn-mainly mr-2 mt-2 mb-2">PAY</button>
+							<button className="btn-mainly mr-2 mt-2 mb-2" onClick={this.sendAddress()}>PAY</button>
 						</Link>
 					</div>
 				</div>
