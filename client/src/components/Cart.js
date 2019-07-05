@@ -20,7 +20,6 @@ class Cart extends Component {
         };
     }
 
-    
 
 	componentDidMount() {
 		const articles = getArticles();
@@ -44,9 +43,7 @@ class Cart extends Component {
 					});
 			});
         this.setState({updated: allUpdated});
-
 	}
-
 
     /**
      * Replaces article in state with newArticle (by id), or adds if doesn't exist yet
@@ -113,7 +110,7 @@ class Cart extends Component {
 }
 
 function Article(props) {
-    const {id, stock, title, price, erased, quantity} = props.article;
+    const {id, stock, title, price, variante, erased, quantity} = props.article;
     const outOfStock = stock === 0;
     const stockStr = erased ?
         'NaN' :
@@ -134,7 +131,7 @@ function Article(props) {
 					</span>
                 }
             </td>
-            <td>{price}</td>
+            <td>{price + variante.var_price}</td>
             <td>
                 <FormControl type='number'
                              className="text-dark"
@@ -172,15 +169,17 @@ function getArticles() {
  * @param article
  * @param quantity
  */
-function addToCart(article, quantity) {
+function addToCart(article, quantity, variante)
+{
 	const cart = getArticles();
-    let existing = cart.find(oldArticle => oldArticle.id === article.id);
+	let existing = cart.find(oldArticle => oldArticle.id === article.id);
 	if (!existing) {
 		existing = article;
 		existing.quantity = 0;
+		existing.variante = variante;
 		cart.push(existing);
 	}
-	existing.quantity += quantity;
+	existing.quantity = quantity;
     sessionStorage.setItem(storageKey, JSON.stringify(cart));
 }
 
