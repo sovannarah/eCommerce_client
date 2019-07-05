@@ -14,6 +14,7 @@ class Account extends React.Component {
         }
         axios.get(ip + "/user", {headers: {token: localStorage.getItem('token')}})
         .then(res => {
+            console.log(res.data)
             this.setState({ userData : res.data });
         })
 
@@ -56,6 +57,7 @@ class Account extends React.Component {
     render() {
         let user = this.state.userData;
         let adress = this.state.address;
+        console.log(this.state.userData)
         return (
             <section>
                 <label>Email
@@ -65,7 +67,7 @@ class Account extends React.Component {
                     <input name="street" value={adress.street || ''} onChange={this.changeStreet}/>
                 </label>
                 <label>PC
-                    <input name="cp" value={adress.pc || ''} onChange={this.changePC}/>
+                    <input name="pc" value={adress.pc || ''} onChange={this.changePC}/>
                 </label>
                 <input type="submit" onClick={this.updateUser} />
             </section>
