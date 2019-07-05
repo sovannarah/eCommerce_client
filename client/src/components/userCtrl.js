@@ -4,7 +4,8 @@ import axios from 'axios';
 import FacebookLogin from 'react-facebook-login';
 
 // let ip = 'http://10.34.7.68:8001';
-let ip = 'http://127.0.0.1:8000';
+let ip = 'http://10.34.7.0:8000';
+// let ip = 'http:/ /127.0.0.1:8000';
 
 class UserCtrl extends React.Component {
 
@@ -21,7 +22,8 @@ class UserCtrl extends React.Component {
         this.login = this.login.bind(this);
         this.disconnect = this.disconnect.bind(this);
         // this.ip = 'http://10.34.7.68:8001';
-        this.ip = 'http://127.0.0.1:8000';
+        this.ip = 'http://10.34.7.0:8000'; 
+        // this.ip = 'http://127.0.0.1:8000';
     }
 
     changeEmail(e) {

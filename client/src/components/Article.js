@@ -16,13 +16,15 @@ class Article extends React.Component {
         this.state = {
             article: {},
             add: '',
-            quantity: 0,
+            quantity: 1,
             showME: false,
             price: 0,
             scrap: []
         };
         this.getScrapper = this.getScrapper.bind(this);
+        this.setQuantity = this.setQuantity.bind(this)
     }
+    
     async getScrapper()
     {
         let scraps =  await Scrapper.getBetter(
@@ -30,6 +32,7 @@ class Article extends React.Component {
         this.setState({ scrap: scraps});
         console.log(this.state.scrap);
     }
+
     async componentDidMount() {
         let id = this.props.match.params.id;
 
@@ -134,7 +137,6 @@ class Article extends React.Component {
                             </button>
                         </div>
                         <div className="mt-5 mb-4">
-                            <input type="number" name="quantity" max={article.stock} onChange={this.setQuantity} />
                             <h5 className="mt-5">DESCRIPTION</h5>
                             <p className="col-8">{article.description}</p>
                         </div>
