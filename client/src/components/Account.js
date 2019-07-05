@@ -12,10 +12,10 @@ class Account extends React.Component {
             userData : {},
             address: {}
         }
-        // axios.get(ip + "/user", {headers: {token: localStorage.getItem('token')}})
-        // .then(res => {
-        //     this.setState({ userData : res.data });
-        // })
+        axios.get(ip + "/user", {headers: {token: localStorage.getItem('token')}})
+        .then(res => {
+            this.setState({ userData : res.data });
+        })
 
         axios.get(ip + "/address", {headers: {token: localStorage.getItem('token')}})
         .then(res => {
@@ -31,14 +31,14 @@ class Account extends React.Component {
     }
 
     updateUser() {
-        // axios.post(ip + "/user", this.state.userData, {headers: {token: localStorage.getItem('token')}})
-        // .then(res => {
-        //     console.log(res.data)
-        // })
-        // axios.post(ip + "/address", this.state.address, {headers: {token: localStorage.getItem('token')}})
-        // .then(res => {
-        //     console.log(res.data)
-        // })
+        axios.post(ip + "/user", this.state.userData, {headers: {token: localStorage.getItem('token')}})
+        .then(res => {
+            console.log(res.data)
+        })
+        axios.post(ip + "/address", this.state.address, {headers: {token: localStorage.getItem('token')}})
+        .then(res => {
+            console.log(res.data)
+        })
     }
 
     changeMail(e) {
