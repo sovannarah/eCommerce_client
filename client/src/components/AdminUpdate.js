@@ -247,8 +247,8 @@ class Admin extends React.Component {
         return (
             <div>
                 <div style={{marginTop: 130}} id="onglets" onClick={this.changeOnglet} className="d-flex justify-content-around col-6 ml-auto mr-auto mb-5 ">
-                    <button id="article" className="onglet" onClick={this.changeDisplay}>Article</button>
-                    <button id="command" onClick={this.changeDisplay}>make command</button>
+                    <button id="article" className="onglet" onClick={this.changeDisplay}>Articles</button>
+                    <button id="command" onClick={this.changeDisplay}>Make Command</button>
                     <button id="transport" onClick={this.changeDisplay}>Transport</button>
                     <button id="codePromo" onClick={this.changeDisplay}>Code Promo</button>
                 </div>
