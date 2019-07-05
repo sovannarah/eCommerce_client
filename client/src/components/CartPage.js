@@ -5,7 +5,8 @@ import {Link} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import AddressForm from './Addresse/AddressForm';
-
+import AddressInput from './Addresse/AddressInput';
+import AddressItem from './Addresse/AddressItem';
 import {FormControl} from 'react-bootstrap';
 import '../style/css/cartPage.css';
 
@@ -100,7 +101,6 @@ class Cart extends Component {
 		// $this.setState({fee: 20});
 		return (20);
 	};
-
     sendAddress() {
         const headers = {
             'Content-Type': 'multipart/form-data',
@@ -108,8 +108,8 @@ class Cart extends Component {
             'Access-Control-Allow-Credentials': true
         };
         const location ={
-        	'street':this.state.address.street,
-			'pc':this.state.address.postalCode,
+        	'street':this.props.street,
+			'pc':this.props.postalCode,
 		};
         Axios.post(this.ip + '/address', {headers: headers,body:location})
             .then((res) => {
