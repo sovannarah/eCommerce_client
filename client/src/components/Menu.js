@@ -101,6 +101,11 @@ class Menu extends React.Component {
                                     </li>
                                 </a>
                             ))}
+                            <a className="m-auto" href={"/category/6"}>
+                                <li className="list-menu d-flex justify-content-center">
+                                    <p className="m-auto">Used Products & Reconditioned</p>
+                                </li>
+                            </a>
                         </ul>
                     </div>
                 </div>
