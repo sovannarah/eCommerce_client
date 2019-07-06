@@ -1,6 +1,6 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import { addToCart } from './Cart';
+import {addToCart} from './Cart';
 import axios from 'axios';
 import '../style/css/article.css';
 import Scrapper from './Scrapper';
@@ -8,7 +8,6 @@ import Scrapper from './Scrapper';
 // const ip = 'http://10.34.7.68:8001';
 //const ip = 'http://127.0.0.1:8000';
 const ip = 'http://10.34.7.0:8000';
-
 
 
 class Article extends React.Component {
@@ -26,20 +25,21 @@ class Article extends React.Component {
         };
         this.getScrapper = this.getScrapper.bind(this);
     }
-    async getScrapper()
-    {
-        let scraps =  await Scrapper.getBetter(
+
+    async getScrapper() {
+        let scraps = await Scrapper.getBetter(
             this.state.article.title, this.state.article.price);
-        this.setState({ scrap: scraps});
+        this.setState({scrap: scraps});
         console.log(this.state.scrap);
     }
+
     async componentDidMount() {
         let id = this.props.match.params.id;
 
         await axios.get(ip + '/article/' + id)
             .then(res => {
-                this.setState({ article: res.data });
-                this.setState({ price: res.data.price });
+                this.setState({article: res.data});
+                this.setState({price: res.data.price});
                 let variant = res.data.variants.couleur;
                 console.log(variant);
 
@@ -55,6 +55,7 @@ class Article extends React.Component {
         this.setQuantity = this.setQuantity.bind(this);
 
     }
+
     addCart = (event) => {
         let variant = this.state.article.variants.couleur;
         console.log(variant);
@@ -73,7 +74,7 @@ class Article extends React.Component {
 
     async setQuantity(event) {
         if (event.target.name === 'quantity')
-            await this.setState({ quantity: event.target.valueAsNumber });
+            await this.setState({quantity: event.target.valueAsNumber});
     }
 
     variantePrice = (event) => {
@@ -81,8 +82,8 @@ class Article extends React.Component {
         let oldPrice = this.state.article.price;
 
         let newPrice = parseInt(oldPrice) + parseInt(colorPrice);
-        this.setState({ price: newPrice });
-        this.setState({ variantId: event.target.options[event.target.selectedIndex].dataset.id })
+        this.setState({price: newPrice});
+        this.setState({variantId: event.target.options[event.target.selectedIndex].dataset.id})
         console.log(this.state.variantId);
 
 
@@ -108,14 +109,15 @@ class Article extends React.Component {
                                                className="h-100 w-100">
                                     <div className="d-flex row w-100 h-100">
                                         <div id="ctn-img-car" className="col-md-12 m-auto mh-100 mw-100 d-flex">
-                                            <img id="car-img" className="m-auto mw-100 mh-100" src={ip + "/uploads/images/" + article.images[index]} alt="" />
+                                            <img id="car-img" className="m-auto mw-100 mh-100"
+                                                 src={ip + "/uploads/images/" + article.images[index]} alt=""/>
                                         </div>
                                     </div>
                                 </Carousel.Item>
                             ))
                             :
                             <img id="car-img" className="m-auto mw-100 mh-100"
-                                 src={require("../images/icon/none.png")} />
+                                 src={require("../images/icon/none.png")}/>
                         }
                     </Carousel>
                 </div>
@@ -137,7 +139,8 @@ class Article extends React.Component {
                                     <select className="form-control col-sm-2" onChange={this.variantePrice}>
                                         <option value={0}>original</option>
                                         {this.state.article.variants.couleur.map((elem, index) => (
-                                            <option data-id={elem.id} key={index} value={elem.var_price}>{elem.spec}</option>
+                                            <option data-id={elem.id} key={index}
+                                                    value={elem.var_price}>{elem.spec}</option>
                                         ))}
                                     </select>
                                     : null
@@ -145,13 +148,14 @@ class Article extends React.Component {
                         </div>
                         <div>
                             <p>stock : {article.stock}</p>
-                            <input type="number" name="quantity" min="1" value={this.state.quantity} max={article.stock} onChange={this.setQuantity} />
+                            <input type="number" name="quantity" min="1" value={this.state.quantity} max={article.stock}
+                                   onChange={this.setQuantity}/>
                             <button className="d-flex mt-3" onClick={this.addCart}>
                                 <p className="m-auto">ADD TO CARD</p>
                             </button>
                         </div>
                         <div className="mt-5 mb-4">
-                            <input type="number" name="quantity" max={article.stock} onChange={this.setQuantity} />
+                            <input type="number" name="quantity" max={article.stock} onChange={this.setQuantity}/>
                             <h5 className="mt-5">DESCRIPTION</h5>
                             <p className="col-8">{article.description}</p>
                         </div>

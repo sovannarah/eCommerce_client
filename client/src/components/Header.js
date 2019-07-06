@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { CSSTransition } from 'react-transition-group';
+import {Link} from 'react-router-dom';
+import {CSSTransition} from 'react-transition-group';
 import Drawer from '@material-ui/core/Drawer';
 import Menu from '../components/Menu';
 import axios from 'axios';
@@ -34,7 +34,7 @@ class Header extends React.Component {
         };
         // this.ip = 'http://10.34.7.68:8001';
         //this.ip = 'http://127.0.0.1:8000';
-        const ip = 'http://10.34.7.0:8000';
+        this.ip = 'http://10.34.7.0:8000';
 
 
         this.displayScroll = this.displayScroll.bind(this);
@@ -44,7 +44,6 @@ class Header extends React.Component {
         this.parseCategory = this.parseCategory.bind(this);
         this.makeStr = this.makeStr.bind(this);
     }
-
 
 
     parseCategory(data) {
@@ -85,8 +84,8 @@ class Header extends React.Component {
             console.log("===== request =====");
             console.log(this.state.value);
             axios.get(this.ip + '/search?' + this.state.value + '=' + this.state.put + res)
-                .then(({ data }) => {
-                    this.setState({ results: data })
+                .then(({data}) => {
+                    this.setState({results: data})
                 })
         });
     };
@@ -126,7 +125,7 @@ class Header extends React.Component {
             if (tIndex !== -1)
                 sCategory.splice(tIndex, 1);
         }
-        this.setState({ category: sCategory });
+        this.setState({category: sCategory});
         this.itemSearch();
         console.log(this.state.category);
     };
@@ -138,21 +137,21 @@ class Header extends React.Component {
     }
 
     displaySearch() {
-        this.setState({ user: true })
-        this.setState({ search: !this.state.search })
-        this.setState({ cart: true })
+        this.setState({user: true})
+        this.setState({search: !this.state.search})
+        this.setState({cart: true})
     }
 
     displayUser() {
-        this.setState({ user: !this.state.user })
-        this.setState({ search: true })
-        this.setState({ cart: true })
+        this.setState({user: !this.state.user})
+        this.setState({search: true})
+        this.setState({cart: true})
     }
 
     displayCart() {
-        this.setState({ user: true });
-        this.setState({ search: true });
-        this.setState({ cart: !this.state.cart });
+        this.setState({user: true});
+        this.setState({search: true});
+        this.setState({cart: !this.state.cart});
     }
 
     outsideCat() {
@@ -183,8 +182,7 @@ class Header extends React.Component {
                     console.log(err);
                     // window.location.replace('/');
                 })
-        }
-        else
+        } else
             console.log("No token");
 
         if (isLog || window.confirm(
@@ -201,7 +199,7 @@ class Header extends React.Component {
             return;
         }
 
-        this.setState({ ...this.state, [side]: open });
+        this.setState({...this.state, [side]: open});
     };
 
     render() {
@@ -209,16 +207,16 @@ class Header extends React.Component {
         return (
             <header className="container-fluid">
                 <Drawer className="" open={this.state.left} onClose={this.toggleDrawer('left', false)}>
-                    <Menu />
+                    <Menu/>
                 </Drawer>
                 <div id="ctn-header" className="h-100 d-flex justify-content-between">
                     <div id="ctn-icon-menu" className="d-flex justify-content-between">
                         <button id="button-menu" onClick={this.toggleDrawer('left', true)}>
-                            <img id="icone-menu" className="mt-auto mb-auto" src={IconMenu} alt="" />
+                            <img id="icone-menu" className="mt-auto mb-auto" src={IconMenu} alt=""/>
                         </button>
                     </div>
                     <Link to="/" id="ctn-logo" className="d-flex mt-2">
-                        <img src={Logo} alt="" />
+                        <img src={Logo} alt=""/>
                     </Link>
                     <ul className="d-flex justify-content-between mt-auto h-100">
                         <li>
@@ -228,14 +226,14 @@ class Header extends React.Component {
                         </li>
                         <li>
                             <button onClick={this.displayUser}>
-                                <img src={IconeUser} alt="" />
-                            </button >
+                                <img src={IconeUser} alt=""/>
+                            </button>
 
 
                         </li>
                         <li>
                             <button onClick={this.displayCart}>
-                                <img src={IconeCart} alt="" />
+                                <img src={IconeCart} alt=""/>
                             </button>
                             <CSSTransition
                                 in={this.state.cart}
@@ -265,14 +263,14 @@ class Header extends React.Component {
                                     <li className="p-2 bg-light d-flex justify-content-between">
                                         <p>Categorie</p>
                                         <button className="btn-none mb-auto" onClick={this.displayScroll}>
-                                            <img className="size-icn" src={require('../images/icon/chevron.png')} />
+                                            <img className="size-icn" src={require('../images/icon/chevron.png')}/>
                                         </button>
                                     </li>
                                     <div className="cach">
                                         {this.state.getCategory.map((category, index) => (
                                             <li className="bg-light p-2 d-flex justify-content-between" key={index}>
                                                 <label className="bg-light mt-auto mb-auto"
-                                                    htmlFor={category.id}>{category.name}</label>
+                                                       htmlFor={category.id}>{category.name}</label>
                                                 <input
                                                     type="checkbox"
                                                     className="mt-auto mb-auto"
@@ -286,7 +284,8 @@ class Header extends React.Component {
                                     </div>
                                 </ul>
                             </div>
-                            <input id="search-barre" className="mt-auto mb-auto mr-5" ref={put => this.search = put} onChange={this.filterSearch} type="text" placeholder="Search" />
+                            <input id="search-barre" className="mt-auto mb-auto mr-5" ref={put => this.search = put}
+                                   onChange={this.filterSearch} type="text" placeholder="Search"/>
                             <div className="results-search">
                                 {this.state.results.length >= 1 ? this.state.results.map((elem, i) => (
                                     <li key={i}>
@@ -300,28 +299,28 @@ class Header extends React.Component {
                         </div>
                     </div>
                 </CSSTransition>
-            <CSSTransition
-                in={this.state.user}
-                timeout={500}
-                classNames="display-user">
-                <UserCtrl user={userToken} />
+                <CSSTransition
+                    in={this.state.user}
+                    timeout={500}
+                    classNames="display-user">
+                    <UserCtrl user={userToken}/>
 
 
-            </CSSTransition>
-            <CSSTransition
-                in={this.state.cart}
-                timeout={500}
-                classNames="display-cart"
-            >
-                <div id="menu-cart" className="d-flex flex-column bg-dark open">
-                    <Cart></Cart>
-                    {/* <Link className="mt-auto ml-auto mr-auto" to="/cartPage"> */}
-                    <button className="btn-mainly" onClick={this.handleShowCart.bind(this)}>Access to cart</button>
-                    {/* </Link> */}
-                </div>
+                </CSSTransition>
+                <CSSTransition
+                    in={this.state.cart}
+                    timeout={500}
+                    classNames="display-cart"
+                >
+                    <div id="menu-cart" className="d-flex flex-column bg-dark open">
+                        <Cart></Cart>
+                        {/* <Link className="mt-auto ml-auto mr-auto" to="/cartPage"> */}
+                        <button className="btn-mainly" onClick={this.handleShowCart.bind(this)}>Access to cart</button>
+                        {/* </Link> */}
+                    </div>
 
-            </CSSTransition>
-            </header >
+                </CSSTransition>
+            </header>
         );
     }
 }

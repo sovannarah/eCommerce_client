@@ -22,7 +22,8 @@ class UserCtrl extends React.Component {
         this.login = this.login.bind(this);
         this.disconnect = this.disconnect.bind(this);
         // this.ip = 'http://10.34.7.68:8001';
-        this.ip = 'http://127.0.0.1:8000';
+        //this.ip = 'http://127.0.0.1:8000';
+        this.ip = 'http://10.34.7.0:8000';
     }
 
     changeEmail(e) {
@@ -40,7 +41,7 @@ class UserCtrl extends React.Component {
                 const user = res.data;
                 console.log(user.token)
                 if (user.token) {
-                    for( let [key, value] of Object.entries(user)) {
+                    for (let [key, value] of Object.entries(user)) {
                         localStorage.setItem(key, value);
                         window.location.replace('/');
                     }
@@ -54,8 +55,8 @@ class UserCtrl extends React.Component {
     }
 
     responseFacebook = (response) => {
-        if(response) {
-            for( let [key, value] of Object.entries(response)) {
+        if (response) {
+            for (let [key, value] of Object.entries(response)) {
                 console.log(key, value);
                 localStorage.setItem(key, value);
                 this.setState({
@@ -65,16 +66,16 @@ class UserCtrl extends React.Component {
                 // window.location.replace('/');
             }
             axios.post(ip + '/register', this.state)
-            .then(res => {
-                if (res.data) {
-                    window.location.replace('/');
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            })
+                .then(res => {
+                    if (res.data) {
+                        window.location.replace('/');
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                })
         }
-    }
+    };
 
     render() {
         if (this.props.user || localStorage.getItem("userID")) {

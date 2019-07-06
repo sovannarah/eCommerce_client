@@ -6,10 +6,9 @@ import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import {FormControl} from 'react-bootstrap';
 
-// const apiArticleURI = 'http://10.34.7.68:8001/article/';
-const apiArticleURI = 'http://127.0.0.1:8000/article/';
+const apiArticleURI = 'http://10.34.7.0:8000/article/';
+//const apiArticleURI = 'http://127.0.0.1:8000/article/';
 const storageKey = 'cart';
-const ip = 'http://10.34.7.0:8000';
 
 class Cart extends Component {
 
@@ -21,32 +20,31 @@ class Cart extends Component {
         };
     }
 
-    
 
-	componentDidMount() {
-		const articles = getArticles();
+    componentDidMount() {
+        const articles = getArticles();
         this.setState({articles});
-		let allUpdated = true;
-		articles.forEach(
-			(article) => {
-				Axios.get(apiArticleURI + article.id)
-					.then((res) => {
-						const updatedArticle = {...article, erased: false, ...res.data};
-						this.updateArticle(updatedArticle);
-					})
-					.catch((error) => {
-						if (error.response && error.response.status === 404) {
-							article.erased = true;
-						} else {
-							console.error(error);
-							allUpdated = false;
-						}
-						this.updateArticle(article);
-					});
-			});
+        let allUpdated = true;
+        articles.forEach(
+            (article) => {
+                Axios.get(apiArticleURI + article.id)
+                    .then((res) => {
+                        const updatedArticle = {...article, erased: false, ...res.data};
+                        this.updateArticle(updatedArticle);
+                    })
+                    .catch((error) => {
+                        if (error.response && error.response.status === 404) {
+                            article.erased = true;
+                        } else {
+                            console.error(error);
+                            allUpdated = false;
+                        }
+                        this.updateArticle(article);
+                    });
+            });
         this.setState({updated: allUpdated});
 
-	}
+    }
 
 
     /**
@@ -80,7 +78,7 @@ class Cart extends Component {
     };
 
     render() {
-        
+
         return (
             <div className='cart w-100'>
                 <h3 className="text-secondary">My Cart</h3>
@@ -164,8 +162,8 @@ function Article(props) {
  * @returns {Array}
  */
 function getArticles() {
-	const json = sessionStorage.getItem(storageKey);
-	return json ? JSON.parse(json) : [];
+    const json = sessionStorage.getItem(storageKey);
+    return json ? JSON.parse(json) : [];
 }
 
 /**
@@ -174,14 +172,14 @@ function getArticles() {
  * @param quantity
  */
 function addToCart(article, quantity) {
-	const cart = getArticles();
+    const cart = getArticles();
     let existing = cart.find(oldArticle => oldArticle.id === article.id);
-	if (!existing) {
-		existing = article;
-		existing.quantity = 0;
-		cart.push(existing);
-	}
-	existing.quantity += quantity;
+    if (!existing) {
+        existing = article;
+        existing.quantity = 0;
+        cart.push(existing);
+    }
+    existing.quantity += quantity;
     sessionStorage.setItem(storageKey, JSON.stringify(cart));
 }
 

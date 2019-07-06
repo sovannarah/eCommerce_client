@@ -25,17 +25,17 @@ class Articles extends React.Component {
                 this.getScrapper(res.data);
             })
     }
-    async getScrapper(tarticle)
-    {
+
+    async getScrapper(tarticle) {
         let c = -1;
-        while (tarticle[++c])
-        {
-            let scrapget =  await Scrapper.getBetter(tarticle[c].title, tarticle[c].price);
+        while (tarticle[++c]) {
+            let scrapget = await Scrapper.getBetter(tarticle[c].title, tarticle[c].price);
             let scrapst = this.state.scraps;
             scrapst[c] = scrapget;
-            this.setState({ scraps: scrapst});
+            this.setState({scraps: scrapst});
         }
     }
+
     render() {
         return (
             <section id="ctn-articles" className="container-fluid d-flex">
@@ -51,7 +51,7 @@ class Articles extends React.Component {
                                              src={ip + "/uploads/images/" + item.images[0]}/>
                                         :
                                         <img id="popular-img" className="m-auto"
-                                             src={require("../images/icon/none.png")} />
+                                             src={require("../images/icon/none.png")}/>
                                     }
                                 </div>
                                 <div className="p-3">
@@ -59,7 +59,7 @@ class Articles extends React.Component {
                                     <p>${item.price}</p>
                                     <p>{item.description}</p>
                                 </div>
-                                { this.state.scraps[index].length > 0 ?
+                                {this.state.scraps[index].length > 0 ?
                                     this.state.scraps[index].map((conc, i) =>
                                         <ul key={'getscrap' + i} className={"bg-light"}>
                                             <p>{conc}</p>

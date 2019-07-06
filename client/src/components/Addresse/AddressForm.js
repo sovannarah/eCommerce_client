@@ -163,31 +163,29 @@ class AddressForm extends Component {
     }
 
 
-  
-
-  render() {
-    let result = this.alert();
-    return (
-        <div id="ctn-adress" className="container pt-5 display-adress">
-          <AddressSuggest
-            query={this.state.query}
-            onChange={this.onQuery}
-             />
-          <AddressInput
-            street={this.state.address.street}
-            city={this.state.address.city}
-            state={this.state.address.state}
-            postalCode={this.state.address.postalCode}
-            country={this.state.address.country}
-            onChange={this.onAddressChange}
-            />
-          <br/>
-          { result }
-          <button type="submit" className="btn btn-primary" onClick={this.onCheck}>Check</button>
-          <button type="submit" className="btn btn-outline-secondary" onClick={this.onClear}>Clear</button>
-        </div>
-      );
-  }
+    render() {
+        let result = this.alert();
+        return (
+            <div id="ctn-adress" className="container pt-5 display-adress">
+                <AddressSuggest
+                    query={this.state.query}
+                    onChange={this.onQuery}
+                />
+                <AddressInput
+                    street={this.state.address.street}
+                    city={this.state.address.city}
+                    state={this.state.address.state}
+                    postalCode={this.state.address.postalCode}
+                    country={this.state.address.country}
+                    onChange={this.onAddressChange}
+                />
+                <br/>
+                {result}
+                <button type="submit" className="btn btn-primary" onClick={this.onCheck}>Check</button>
+                <button type="submit" className="btn btn-outline-secondary" onClick={this.onClear}>Clear</button>
+            </div>
+        );
+    }
 }
 
 export default AddressForm;

@@ -6,17 +6,17 @@ const ip = 'http://10.34.7.0:8000';
 
 
 class Account extends React.Component {
-    
+
     constructor(props) {
         super(props);
 
         this.state = {
-            userData : {},
+            userData: {},
         }
         axios.get(ip + "/user", {headers: {token: localStorage.getItem('token')}})
-        .then(res => {
-            this.setState({ userData : res.data });
-        })
+            .then(res => {
+                this.setState({userData: res.data});
+            })
 
         this.updateUser = this.updateUser.bind(this);
         this.changeMail = this.changeMail.bind(this);
@@ -24,13 +24,13 @@ class Account extends React.Component {
 
     updateUser() {
         axios.post(ip + "/user", this.state.userData, {headers: {token: localStorage.getItem('token')}})
-        .then(res => {
-            console.log(res.data)
-        })
+            .then(res => {
+                console.log(res.data)
+            })
     }
 
     changeMail(e) {
-        this.setState({ userData : {email : e.target.value} })
+        this.setState({userData: {email: e.target.value}})
     }
 
     render() {
@@ -44,7 +44,7 @@ class Account extends React.Component {
                 <label>Email
                     <input name="email" value={user.email || ''} onChange={this.changeMail}/>
                 </label>
-                <input type="submit" onClick={this.updateUser} />
+                <input type="submit" onClick={this.updateUser}/>
             </section>
         );
     }

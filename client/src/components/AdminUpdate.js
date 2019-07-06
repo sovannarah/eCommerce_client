@@ -38,8 +38,8 @@ class Admin extends React.Component {
             commandPrice: 0
         };
         // this.ip = 'http://10.34.7.68:8001';
-     //   this.ip = 'http://127.0.0.1:8000';
-        const ip = 'http://10.34.7.0:8000';
+        //   this.ip = 'http://127.0.0.1:8000';
+        this.ip = 'http://10.34.7.0:8000';
 
         this.changeDisplay = this.changeDisplay.bind(this);
         this.updatePrice = this.updatePrice.bind(this);
@@ -54,14 +54,12 @@ class Admin extends React.Component {
             window.location.replace('/account');
         else {
             await axios.get(this.ip + '/user/isAdmin',
-                { headers: { token: localStorage.getItem('token')}}
+                {headers: {token: localStorage.getItem('token')}}
             ).then(
-
                 () => {
                     // window.location.replace('/');
                 },
-                () =>
-                {
+                () => {
                     // window.location.replace('/');
                 })
         }
@@ -78,11 +76,10 @@ class Admin extends React.Component {
 
         let restock = false;
         let $str = "Restock info: maybe you sould reorder those products:\n";
-        this.state.data.forEach((data) =>
-        {
-            if(data.stock <= 10) {
+        this.state.data.forEach((data) => {
+            if (data.stock <= 10) {
                 restock = true;
-                $str += "- "+data.title+" ("+data.stock+")\n";
+                $str += "- " + data.title + " (" + data.stock + ")\n";
             }
         });
         if (restock) {
@@ -107,12 +104,10 @@ class Admin extends React.Component {
         )
     }
 
-    parseCategory (data)
-    {
+    parseCategory(data) {
         let c = -1;
         let copy;
-        while (data[++c])
-        {
+        while (data[++c]) {
             copy = this.state.columns;
             copy[0].lookup[data[c].id] = data[c].name;
             this.setState({columns: copy});
@@ -151,7 +146,7 @@ class Admin extends React.Component {
                 console.log("===============================");
                 let data2 = await this.getCategory();
                 this.parseCategory(data2);
-                if(res.data) {
+                if (res.data) {
                     window.location.replace("/admin");
                 }
             })
@@ -167,7 +162,7 @@ class Admin extends React.Component {
     changeDisplay(event) {
         let tDisplay = ['command', 'article', 'transport', 'codePromo'];
         //,'commandStatus'
-        
+
         document.getElementById("display" + event.target.id).hidden = false;
         let c = -1;
         let flagChange = false;
@@ -248,7 +243,8 @@ class Admin extends React.Component {
     render() {
         return (
             <div>
-                <div style={{marginTop: 130}} id="onglets" onClick={this.changeOnglet} className="d-flex justify-content-around col-6 ml-auto mr-auto mb-5 ">
+                <div style={{marginTop: 130}} id="onglets" onClick={this.changeOnglet}
+                     className="d-flex justify-content-around col-6 ml-auto mr-auto mb-5 ">
                     <button id="article" className="onglet" onClick={this.changeDisplay}>Articles</button>
                     <button id="command" onClick={this.changeDisplay}>Make Command</button>
                     <button id="transport" onClick={this.changeDisplay}>Transport</button>

@@ -17,9 +17,8 @@ class Menu extends React.Component {
             curr_category: []
         };
         // this.ip = 'http://10.34.7.68:8001';
-       // this.ip = 'http://127.0.0.1:8000';
-        const ip = 'http://10.34.7.0:8000';
-
+        // this.ip = 'http://127.0.0.1:8000';
+        this.ip = 'http://10.34.7.0:8000';
         this.parseCategory = this.parseCategory.bind(this);
         this.getCategory = this.getCategory.bind(this);
     }
@@ -29,7 +28,7 @@ class Menu extends React.Component {
         let data2 = await this.getCategory();
         this.setState({curr_category: [data2]})
         this.parseCategory(this.state.curr_category);
-        this.forceUpdate()
+        this.forceUpdate();
 
         /**
          * @param get all the categories
@@ -40,7 +39,7 @@ class Menu extends React.Component {
                     let cat = this.state.category;
                     if (urlPos === "category") {
                         for (let i = 0; i < cat.length; i++) {
-                            console.log(res.data)
+                            console.log(res.data);
                             this.state.data.push(cat[i])
                         }
 
