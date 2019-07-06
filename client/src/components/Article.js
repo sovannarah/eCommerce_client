@@ -7,7 +7,8 @@ import Scrapper from './Scrapper';
 
 // const ip = 'http://10.34.7.68:8001';
 //const ip = 'http://127.0.0.1:8000';
-const ip = 'http://10.34.7.0:8000';
+//const ip = 'http://10.34.7.0:8000';
+const ip = 'http://10.41.176.52:8000';
 
 
 class Article extends React.Component {

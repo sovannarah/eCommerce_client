@@ -10,7 +10,8 @@ class transportFee extends React.Component {
             {
                 header: {token: localStorage.getItem('token')},
                 //ip: 'http://127.0.0.1:8000',
-                ip: 'http://10.34.7.0:8000',
+                //ip: 'http://10.34.7.0:8000',
+                ip: 'http://10.41.176.52:8000',
                 offer: [],
                 offeritems: [],
                 upOffer: ''
