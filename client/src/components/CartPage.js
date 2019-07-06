@@ -25,7 +25,7 @@ class Cart extends Component {
             TTC: 0,
             fee: 0
         };
-
+        this.ip = 'http://10.41.176.52:8000';
         this.displayAdress = this.displayAdress.bind(this);
     }
 
