@@ -9,7 +9,8 @@ import {FormControl} from 'react-bootstrap';
 // const apiArticleURI = 'http://10.34.7.68:8001/article/';
 const apiArticleURI = 'http://127.0.0.1:8000/article/';
 const storageKey = 'cart';
-const ip = 'http://10.34.7.0:8000';
+// const ip = 'http://10.34.7.0:8000';
+const ip = 'http://127.0.0.1:8000';
 
 class Cart extends Component {
 
@@ -111,7 +112,7 @@ class Cart extends Component {
 }
 
 function Article(props) {
-    const {id, stock, title, price, variante, erased, quantity} = props.article;
+    const {id, stock, title, price/*, variante*/, erased, quantity} = props.article;
     const outOfStock = stock === 0;
     const stockStr = erased ?
         'NaN' :
@@ -132,7 +133,7 @@ function Article(props) {
 					</span>
                 }
             </td>
-            <td>{price + variante.var_price}</td>
+            <td>{price /*+ variante.var_price*/}</td>
             <td>
                 <FormControl type='number'
                              className="text-dark"
@@ -170,14 +171,14 @@ function getArticles() {
  * @param article
  * @param quantity
  */
-function addToCart(article, quantity, variante)
+function addToCart(article, quantity/*, variante*/)
 {
 	const cart = getArticles();
 	let existing = cart.find(oldArticle => oldArticle.id === article.id);
 	if (!existing) {
 		existing = article;
 		existing.quantity = 0;
-		existing.variante = variante;
+		// existing.variante = variante;
 		cart.push(existing);
 	}
 	existing.quantity = quantity;

@@ -3,6 +3,8 @@ import axios from 'axios';
 import MaterialTable from 'material-table';
 import Transport from './AdminPanel/TransportFee'
 import PromotionCode from './AdminPanel/CodePromo';
+import ArticleDetail, {addDetail} from './AdminPanel/ArticleDetail';
+// import { add } from './AdminPanel/ArticleDetail'
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
@@ -22,7 +24,7 @@ class Admin extends React.Component {
                     title: 'Description',
                     field: 'description',
                 },
-                {title: 'Visiteur', field: 'nb_views', editable: 'never'}
+                {title: 'Visiteur', field: 'nb_views', editable: 'never'},
             ],
             data: [],
             headers: {
@@ -35,11 +37,12 @@ class Admin extends React.Component {
             category_name: '',
             parent_name: 'None',
             addArticle: [],
-            commandPrice: 0
+            commandPrice: 0,
+            tmpArticle: ''
         };
         // this.ip = 'http://10.34.7.68:8001';
-     //   this.ip = 'http://127.0.0.1:8000';
-        const ip = 'http://10.34.7.0:8000';
+        this.ip = 'http://127.0.0.1:8000';
+        // const ip = 'http://10.34.7.0:8000';
 
         this.changeDisplay = this.changeDisplay.bind(this);
         this.updatePrice = this.updatePrice.bind(this);
@@ -164,26 +167,28 @@ class Admin extends React.Component {
     //     document.getElementById("onglets").classList.toggle("onglet");
     // }
 
-    changeDisplay(event) {
+    changeDisplay(event, flag = false) {
         let tDisplay = ['command', 'article', 'transport', 'codePromo'];
         //,'commandStatus'
-        
-        document.getElementById("display" + event.target.id).hidden = false;
-        let c = -1;
+
         let flagChange = false;
+        let c = -1;
+	    if (flag === false)
+        {
+        document.getElementById("display" + event.target.id).hidden = false;
         while (tDisplay[++c]) {
             if (tDisplay[c] === event.target.id) {
-                document.getElementById(tDisplay[c]).classList.add("onglet")
+                document.getElementById(tDisplay[c]).classList.add("onglet");
                 flagChange = true;
                 // console.log(event.target.id);
             } else {
                 document.getElementById(tDisplay[c]).classList.remove("onglet")
             }
-        }
-        if (flagChange === true) {
+        }}
+        if (flagChange === true || flag === true) {
             c = -1;
             while (tDisplay[++c]) {
-                if (event.target.id !== tDisplay[c])
+                if (flag === true || event.target.id !== tDisplay[c])
                     document.getElementById("display" + tDisplay[c]).hidden = true;
             }
         }
@@ -304,6 +309,7 @@ class Admin extends React.Component {
                         Pass Command
                     </Button>
                 </div>
+                {this.state.tmpArticle}
                 <div id="displayarticle">
                     <MaterialTable
                         style={{marginTop: 120}}
@@ -318,8 +324,17 @@ class Admin extends React.Component {
                                 onClick: () => {
                                     this.props.history.push('/admin/create')
                                 }
-                            }
+                            },
                         ]}
+                        onRowClick={
+                            (event) =>
+                            {
+                            	let index = event.target['parentElement']['rowIndex'] - 1;
+                            	let id = this.state.data[index];
+                            	addDetail(id);
+                                this.setState({tmpArticle: <div><ArticleDetail article={id}></ArticleDetail></div>})
+                            }
+                        }
                         editable={{
                             onRowUpdate: (newData, oldData) =>
                                 new Promise(resolve => {
@@ -332,7 +347,7 @@ class Admin extends React.Component {
                                         const formData = new FormData();
                                         Object.keys(this.state.data[data.indexOf(newData)]).forEach((v) => formData.append(v, this.state.data[data.indexOf(newData)][v]));
                                         this.setState({data});
-                                        formData.append('category', this.state.data[data.indexOf(newData)].category.id)
+                                        formData.append('category', this.state.data[data.indexOf(newData)].category.id);
                                         axios.post(this.ip + '/article/' + data[data.indexOf(newData)].id, formData, {headers: this.state.headers})
                                             .then(res => {
                                                 // console.log(res.data)

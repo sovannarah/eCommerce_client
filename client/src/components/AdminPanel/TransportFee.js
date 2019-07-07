@@ -72,6 +72,7 @@ class transportFee extends React.Component
 	{
 		let transport = await this.getTransport();
 		let flag = false;
+		console.log(transport);
 		await axios.post(this.state.ip + '/transport',
 			transport ,
 			{ headers: this.state.header }).then(
@@ -106,6 +107,7 @@ class transportFee extends React.Component
 						name: document.getElementById('specName' + pos).value,
 						unity: document.getElementById('unity' + pos).value,
 						minValue: document.getElementById('minValue' + pos).value,
+						minPrice: document.getElementById('minPrice' + pos).value,
 						price: document.getElementById('price' + pos).value
 					};
 					offerItem.spec.push(specItem);
@@ -147,6 +149,8 @@ class transportFee extends React.Component
 				<input type="text" id={"unity-" + len + "-0"}/>
 				<label htmlFor={"minValue-" + len + "-0"}>Min Value: </label>
 				<input type="number" id={"minValue-" + len + '-0'}/>
+				<label htmlFor={'minPrice-' + len + '-0'}>Min Price: </label>
+				<input type="number" id={"minPrice-" + len + '-0'}/>
 				<label htmlFor={"price-" + len + "-0"}>Price per unity: </label>
 				<input type="number" id={'price-' + len + '-0'}/>
 			</div>;
@@ -169,27 +173,31 @@ class transportFee extends React.Component
 	{
 		let offert = this.state.offer;
 		let specHtml =
-			<div id={"spec-" + len + "-" + offert[len].length}
+			<div id={"spec-" + len + "-" + offert[len].spec.length}
 			     style={{ border: 2 + "px green solid"}}>
 				<button id={ "offerDel-" + len } onClick={this.delSpec}>Remove</button>
 				<p>Ex: distance, Km, 0.5/Km at 250 Km </p>
-				<label htmlFor={"specName-" + len + "-" + offert[len].length}>
+				<label htmlFor={"specName-" + len + "-" + offert[len].spec.length}>
 					Name:
 				</label>
 				<input type="text" id={"specName-" + len + "-" +
-				offert[len].length}/>
+				offert[len].spec.length}/>
 				<label htmlFor={"unity-" + len + "-" +
-				offert[len].length}>Unity: </label>
+				offert[len].spec.length}>Unity: </label>
 				<input type="text" id={"unity-" + len + "-" +
-				offert[len].length}/>
+				offert[len].spec.length}/>
 				<label htmlFor={"minValue-" + len + "-" +
-				offert[len].length}>Min Value: </label>
+				offert[len].spec.length}>Min Value: </label>
 				<input type="number" id={"minValue-" + len + "-" +
-				offert[len].length}/>
+				offert[len].spec.length}/>
+				<label htmlFor={"minPrice-" + len + "-" +
+				offert[len].spec.length}>Min Price: </label>
+				<input type="text" id={"minPrice-" + len + "-" +
+				offert[len].spec.length}/>
 				<label htmlFor={"price-" + len + "-" +
-				offert[len].length}>Price per unity: </label>
+				offert[len].spec.length}>Price per unity: </label>
 				<input type="number" id={"price-" + len + "-" +
-				offert[len].length}/>
+				offert[len].spec.length}/>
 			</div>;
 		offert[len].spec.push(specHtml);
 		this.setState({offer: offert})
@@ -204,6 +212,7 @@ class transportFee extends React.Component
 				name: '',
 				unity: '',
 				minValue: 0,
+				minPrice: 0,
 				price: 0
 			}]
 		};
@@ -223,6 +232,7 @@ class transportFee extends React.Component
 			name: '',
 			unity: '',
 			minValue: 0,
+			minPrice: 0,
 			price: 0
 		};
 		transport[tkey].offers[okey].specs.push(spec);

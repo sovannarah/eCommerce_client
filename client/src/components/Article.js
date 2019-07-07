@@ -6,8 +6,8 @@ import '../style/css/article.css';
 import Scrapper from './Scrapper';
 
 // const ip = 'http://10.34.7.68:8001';
-//const ip = 'http://127.0.0.1:8000';
-const ip = 'http://10.34.7.0:8000';
+const ip = 'http://127.0.0.1:8000';
+// const ip = 'http://10.34.7.0:8000';
 
 
 
@@ -56,19 +56,19 @@ class Article extends React.Component {
 
     }
     addCart = (event) => {
-        let variant = this.state.article.variants.couleur;
-        console.log(variant);
+        // let variant = this.state.article.variants.couleur;
+        // console.log(variant);
 
-        let variantSelected = variant.find(item => item.id == this.state.variantId);
-        alert(JSON.stringify(variantSelected));
+        // let variantSelected = variant.find(item => item.id == this.state.variantId);
+        // alert(JSON.stringify(variantSelected));
 
-        if (variant !== undefined && variant.length >= 1 && variantSelected !== undefined) {
-            addToCart(this.state.article, this.state.quantity, variantSelected);
-            window.location.replace("/article/" + this.props.match.params.id);
-        } else {
+        // if (variant !== undefined && variant.length >= 1 && variantSelected !== undefined) {
+        //     addToCart(this.state.article/*, this.state.quantity, variantSelected*/);
+        //     window.location.replace("/article/" + this.props.match.params.id);
+        // } else {
             addToCart(this.state.article, this.state.quantity);
             window.location.replace("/article/" + this.props.match.params.id);
-        }
+        // }
     };
 
     async setQuantity(event) {
@@ -145,13 +145,12 @@ class Article extends React.Component {
                         </div>
                         <div>
                             <p>stock : {article.stock}</p>
-                            <input type="number" name="quantity" min="1" value={this.state.quantity} max={article.stock} onChange={this.setQuantity} />
+                            <input type="number" name="quantity" max={article.stock} defaultValue={1} min="1" onChange={this.setQuantity} />
                             <button className="d-flex mt-3" onClick={this.addCart}>
                                 <p className="m-auto">ADD TO CARD</p>
                             </button>
                         </div>
                         <div className="mt-5 mb-4">
-                            <input type="number" name="quantity" max={article.stock} onChange={this.setQuantity} />
                             <h5 className="mt-5">DESCRIPTION</h5>
                             <p className="col-8">{article.description}</p>
                         </div>

@@ -16,7 +16,8 @@ const storageKey = 'cart';
 // let FullUrl = window.location.pathname;
 // const url = FullUrl.split("/")[2];
 // const urlPos = FullUrl.split("/")[1];
-const ip = 'http://10.34.7.0:8000';
+// const ip = 'http://10.34.7.0:8000';
+const ip = 'http://127.0.0.1:8000';
 
 class Cart extends Component {
 
