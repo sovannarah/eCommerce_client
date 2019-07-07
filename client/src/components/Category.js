@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 /**
@@ -29,7 +29,7 @@ class Category extends React.Component {
 
     async componentDidMount() {
         let data2 = await this.getCategory();
-        this.setState({curr_category: [data2]})
+        this.setState({ curr_category: [data2] })
         this.parseCategory(this.state.curr_category);
         this.forceUpdate();
 
@@ -46,7 +46,7 @@ class Category extends React.Component {
                         for (let y = 0; y < res.data.length; y++) {
                             this.state.data.push(res.data[y])
                         }
-                        this.setState({check: true})
+                        this.setState({ check: true })
 
                     },
                     (err) => {
@@ -87,12 +87,12 @@ class Category extends React.Component {
                             <div key={index} className=" ctn-art bg-light mt-4 mb-4 w-100">
                                 <Link className="d-flex h-100" to={`/article/${item.id}`}>
                                     <div className="ctn-image h-100 mt-auto mb-auto col-3 d-flex">
-                                            {item.images.length > 0 ? 
+                                        {item.images.length > 0 ?
                                             <img id="popular-img" className="m-auto"
-                                            src={this.ip + "/uploads/images/" + item.images[0]}/>
-                                        :
+                                                src={this.ip + "/uploads/images/" + item.images[0]} alt="" />
+                                            :
                                             <img id="popular-img" className="m-auto"
-                                            src={require("../images/icon/none.png")} />    
+                                                src={require("../images/icon/none.png")} alt="" />
                                         }
                                     </div>
                                     <div className="p-3">

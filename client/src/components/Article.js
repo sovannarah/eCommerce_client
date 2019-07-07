@@ -4,7 +4,6 @@ import {addToCart} from './Cart';
 import axios from 'axios';
 import '../style/css/article.css';
 import Scrapper from './Scrapper';
-import { Alert } from 'react-bootstrap';
 
 // const ip = 'http://10.34.7.68:8001';
 const ip = 'http://127.0.0.1:8000';
