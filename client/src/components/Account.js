@@ -3,10 +3,7 @@ import axios from 'axios';
 import '../style/css/account.css';
 
 
-//const ip = 'http://127.0.0.1:8000';
 const ip = "http://10.41.176.52:8001";
-//const ip = 'http://127.0.0.1:8000';
-// const ip = 'http://10.34.7.0:8000';
 
 
 class Account extends React.Component {

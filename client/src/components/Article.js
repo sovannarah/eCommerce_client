@@ -4,13 +4,9 @@ import {addToCart} from './Cart';
 import axios from 'axios';
 import '../style/css/article.css';
 import Scrapper from './Scrapper';
-import { Alert } from 'react-bootstrap';
+import {Alert} from 'react-bootstrap';
 
-// const ip = 'http://10.34.7.68:8001';
-//const ip = 'http://127.0.0.1:8000';
-//const ip = 'http://10.34.7.0:8000';
 const ip = 'http://10.41.176.52:8001';
-// const ip = 'http://10.41.176.52:8000';
 
 
 class Article extends React.Component {
@@ -29,10 +25,9 @@ class Article extends React.Component {
         this.getScrapper = this.getScrapper.bind(this);
         this.setQuantity = this.setQuantity.bind(this)
     }
-    
-    async getScrapper()
-    {
-        let scraps =  await Scrapper.getBetter(
+
+    async getScrapper() {
+        let scraps = await Scrapper.getBetter(
             this.state.article.title, this.state.article.price);
         this.setState({scrap: scraps});
         console.log(this.state.scrap);
@@ -46,7 +41,6 @@ class Article extends React.Component {
                 this.setState({article: res.data});
                 this.setState({price: res.data.price});
                 let variant = res.data.variants.couleur;
-                // console.log(variant);
 
                 if (variant !== undefined && variant.length >= 1) {
                     this.setState({
@@ -94,12 +88,10 @@ class Article extends React.Component {
         console.log(this.state.variantId);
 
 
-        // console.log(event.target.options[event.target.selectedIndex].dataset.id);
     }
 
 
     render() {
-        //console.log(Object.keys(this.state.article.variants));
         const article = this.state.article;
         const price = this.state.price;
         if (Object.keys(article).length === 0) {
@@ -124,7 +116,7 @@ class Article extends React.Component {
                             ))
                             :
                             <img id="car-img" className="m-auto mw-100 mh-100"
-                                src={require("../images/icon/none.png")} alt="" />
+                                 src={require("../images/icon/none.png")} alt=""/>
                         }
                     </Carousel>
                 </div>

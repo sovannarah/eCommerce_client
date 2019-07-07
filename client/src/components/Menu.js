@@ -16,11 +16,7 @@ class Menu extends React.Component {
             category: [],
             curr_category: []
         };
-        // this.ip = 'http://10.34.7.68:8001';
-       // this.ip = 'http://127.0.0.1:8000';
-        //this.ip = 'http://10.34.7.0:8000';
         this.ip = 'http://10.41.176.52:8001';
-        // this.ip = 'http://10.41.176.52:8000';
 
         this.parseCategory = this.parseCategory.bind(this);
         this.getCategory = this.getCategory.bind(this);
@@ -28,7 +24,7 @@ class Menu extends React.Component {
 
 
     async componentDidMount() {
-        if(urlPos === "category") {
+        if (urlPos === "category") {
             let data2 = await this.getCategory();
             this.setState({curr_category: [data2]})
             this.parseCategory(this.state.curr_category);
@@ -53,7 +49,6 @@ class Menu extends React.Component {
                     this.setState({check: true});
                 },
                 (err) => {
-                    // console.log(err);
                 })
 
 
@@ -74,7 +69,6 @@ class Menu extends React.Component {
 
         return axios.get(this.ip + '/category/' + url)
             .then(res => {
-                // console.log(res.data)
                 return (res.data)
             })
             .catch(err => {

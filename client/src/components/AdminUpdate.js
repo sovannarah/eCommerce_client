@@ -4,7 +4,6 @@ import MaterialTable from 'material-table';
 import Transport from './AdminPanel/TransportFee'
 import PromotionCode from './AdminPanel/CodePromo';
 import ArticleDetail, {addDetail} from './AdminPanel/ArticleDetail';
-// import { add } from './AdminPanel/ArticleDetail'
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
@@ -38,13 +37,9 @@ class Admin extends React.Component {
             parent_name: 'None',
             addArticle: [],
             commandPrice: 0,
-            // tmpArticle: ''
         };
-        // this.ip = 'http://10.34.7.68:8001';
-       //   this.ip = 'http://127.0.0.1:8000';
-        //this.ip = 'http://10.34.7.0:8000';
+
         this.ip = 'http://10.41.176.52:8001';
-        // this.ip = 'http://10.41.176.52:8000';
 
         this.changeDisplay = this.changeDisplay.bind(this);
         this.updatePrice = this.updatePrice.bind(this);
@@ -118,7 +113,6 @@ class Admin extends React.Component {
             copy = this.state.columns;
             copy[0].lookup[data[c].id] = data[c].name;
             this.setState({columns: copy});
-            // this.state.columns[0].lookup[data[c].id] = data[c].name;
             this.state.category.push(data[c])
             if (data[c].sub && data[c].sub.length > 0)
                 this.parseCategory(data[c].sub);
@@ -136,7 +130,6 @@ class Admin extends React.Component {
     }
 
     handleChange(event) {
-        // console.log(event);
         this.setState({parent_name: event._targetInst.stateNode.innerText});
         this.setState({category_id: event._targetInst.stateNode.id})
     }
@@ -162,9 +155,6 @@ class Admin extends React.Component {
             })
     }
 
-    // changeOnglet (event) {
-    //     document.getElementById("onglets").classList.toggle("onglet");
-    // }
 
     changeDisplay(event, flag = false) {
         let tDisplay = ['command', 'article', 'transport', 'codePromo'];
@@ -172,18 +162,17 @@ class Admin extends React.Component {
 
         let flagChange = false;
         let c = -1;
-	    if (flag === false)
-        {
-        document.getElementById("display" + event.target.id).hidden = false;
-        while (tDisplay[++c]) {
-            if (tDisplay[c] === event.target.id) {
-                document.getElementById(tDisplay[c]).classList.add("onglet");
-                flagChange = true;
-                // console.log(event.target.id);
-            } else {
-                document.getElementById(tDisplay[c]).classList.remove("onglet")
+        if (flag === false) {
+            document.getElementById("display" + event.target.id).hidden = false;
+            while (tDisplay[++c]) {
+                if (tDisplay[c] === event.target.id) {
+                    document.getElementById(tDisplay[c]).classList.add("onglet");
+                    flagChange = true;
+                } else {
+                    document.getElementById(tDisplay[c]).classList.remove("onglet")
+                }
             }
-        }}
+        }
         if (flagChange === true || flag === true) {
             c = -1;
             while (tDisplay[++c]) {
@@ -194,7 +183,6 @@ class Admin extends React.Component {
     }
 
     addItem(id, itemPrice, name, nb) {
-        // console.log(parseInt(document.getElementById(nb).value));
         let items = this.state.addArticle;
         let price = parseInt(document.getElementById(nb).value);
         let c = -1;
@@ -219,12 +207,10 @@ class Admin extends React.Component {
 
     updatePrice() {
         let data = this.state.addArticle;
-        // console.log(data);
         let c = -1;
         let total = 0;
         while (data[++c]) {
             total = total + data[c].price;
-            // console.log(data[c].price);
         }
         this.setState({commandPrice: total});
     }
@@ -250,7 +236,7 @@ class Admin extends React.Component {
     }
 
     outputEvent(event) {
-        this.setState({ tmpArticle: '' });
+        this.setState({tmpArticle: ''});
     }
 
     render() {
@@ -309,7 +295,8 @@ class Admin extends React.Component {
                         )}
                         </tbody>
                     </table>
-                    <Button className="w-25 mr-3 ml-auto" variant="contained" color="primary" onClick={this.passCommand}>
+                    <Button className="w-25 mr-3 ml-auto" variant="contained" color="primary"
+                            onClick={this.passCommand}>
                         Pass Command
                     </Button>
                 </div>
@@ -331,12 +318,14 @@ class Admin extends React.Component {
                             },
                         ]}
                         onRowClick={
-                            (event) =>
-                            {
-                            	let index = event.target['parentElement']['rowIndex'] - 1;
-                            	let id = this.state.data[index];
-                            	addDetail(id);
-                                this.setState({tmpArticle: <div id="artR"><ArticleDetail clickHandler={this.outputEvent} article={id}></ArticleDetail></div>})
+                            (event) => {
+                                let index = event.target['parentElement']['rowIndex'] - 1;
+                                let id = this.state.data[index];
+                                addDetail(id);
+                                this.setState({
+                                    tmpArticle: <div id="artR"><ArticleDetail clickHandler={this.outputEvent}
+                                                                              article={id}></ArticleDetail></div>
+                                })
                             }
                         }
                         editable={{
@@ -344,17 +333,14 @@ class Admin extends React.Component {
                                 new Promise(resolve => {
                                     setTimeout(() => {
                                         resolve();
-                                        // console.log(newData)
                                         const data = this.state.data;
                                         data[data.indexOf(oldData)] = newData;
-                                        // console.log(data[data.indexOf(oldData)] = newData);
                                         const formData = new FormData();
                                         Object.keys(this.state.data[data.indexOf(newData)]).forEach((v) => formData.append(v, this.state.data[data.indexOf(newData)][v]));
                                         this.setState({data});
                                         formData.append('category', this.state.data[data.indexOf(newData)].category.id);
                                         axios.post(this.ip + '/article/' + data[data.indexOf(newData)].id, formData, {headers: this.state.headers})
                                             .then(res => {
-                                                // console.log(res.data)
                                             })
                                             .catch(console.log)
                                     }, 600);
@@ -367,13 +353,9 @@ class Admin extends React.Component {
                                         const remain = data.splice(data.indexOf(oldData), 1);
                                         axios.delete(this.ip + '/article/' + remain[0].id, {headers: this.state.headers})
                                             .then(res => {
-                                                // console.log("======= delete article =======");
-                                                // console.log(res);
-                                                // console.log("==============================");
                                             })
                                             .catch(console.log)
                                         this.setState({data});
-                                        // console.log(this.state.category);
                                     }, 600);
                                 }),
                         }}

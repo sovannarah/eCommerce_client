@@ -19,11 +19,8 @@ class Category extends React.Component {
             category: [],
             curr_category: []
         };
-        // this.ip = 'http://10.34.7.68:8001';
-        // this.ip = 'http://127.0.0.1:8000';
+
         this.ip = 'http://10.41.176.52:8001';
-//        this.ip = 'http://127.0.0.1:8000';
-        // this.ip = 'http://10.41.176.52:8000';
 
         this.parseCategory = this.parseCategory.bind(this);
         this.getCategory = this.getCategory.bind(this);
@@ -80,7 +77,6 @@ class Category extends React.Component {
 
 
     render() {
-        // console.log(this.state.data)
         if (this.state.check) {
             return (
                 <section id="ctn-articles" className="container-fluid justify-content-center d-flex">
@@ -89,12 +85,12 @@ class Category extends React.Component {
                             <div key={index} className=" ctn-art bg-light mt-4 mb-4 w-100">
                                 <Link className="d-flex h-100" to={`/article/${item.id}`}>
                                     <div className="ctn-image h-100 mt-auto mb-auto col-3 d-flex">
-                                            {item.images.length > 0 ? 
+                                        {item.images.length > 0 ?
                                             <img id="popular-img" className="m-auto"
-                                            src={this.ip + "/uploads/images/" + item.images[0]}/>
-                                        :
+                                                 src={this.ip + "/uploads/images/" + item.images[0]}/>
+                                            :
                                             <img id="popular-img" className="m-auto"
-                                            src={require("../images/icon/none.png")} />    
+                                                 src={require("../images/icon/none.png")}/>
                                         }
                                     </div>
                                     <div className="p-3">

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {CSSTransition} from 'react-transition-group';
@@ -33,11 +32,7 @@ class Header extends React.Component {
             getCategory: [],
             adminPanel: null
         };
-        // this.ip = 'http://10.34.7.68:8001';
         this.ip = 'http://10.41.176.52:8001';
-        //this.ip = 'http://10.34.7.0:8000';
-        // this.ip = 'http://10.41.176.52:8000';
-
 
 
         this.displayScroll = this.displayScroll.bind(this);
@@ -81,11 +76,7 @@ class Header extends React.Component {
     };
 
     itemSearch = () => {
-        // title=....&category[]=1&category[]=2&category[]=3....
         this.makeStr(this.state.category).then(res => {
-            // console.log(res);
-            // console.log("===== request =====");
-            // console.log(this.state.value);
             axios.get(this.ip + '/search?' + this.state.value + '=' + this.state.put + res)
                 .then(({data}) => {
                     this.setState({results: data})
@@ -115,10 +106,8 @@ class Header extends React.Component {
                 (err) => {
                     console.log(err);
                 });
-        // console.log(this.state.token);
 
     }
-
 
 
     onChange = (e) => {
@@ -132,7 +121,6 @@ class Header extends React.Component {
         }
         this.setState({category: sCategory});
         this.itemSearch();
-        // console.log(this.state.category);
     };
 
 
@@ -166,7 +154,6 @@ class Header extends React.Component {
     async handleShowCart() {
         let isLog = false;
         let token = localStorage.getItem('token');
-        // console.log(token);
         if (token) {
             await axios
                 .get(
@@ -181,11 +168,9 @@ class Header extends React.Component {
                     console.log(res.status);
                     if (res.status === 200)
                         isLog = true;
-                    // console.log("===== Welcome ========");
                 })
                 .catch((err) => {
                     console.log(err);
-                    // window.location.replace('/');
                 })
         } else
             console.log("No token");
@@ -258,7 +243,8 @@ class Header extends React.Component {
                     <div id="ctn-search-barre" className="d-flex justify-content-end w-100 open">
                         <div className="d-flex flex-column">
                             <div className="d-flex ntm">
-                                <select className="mt-auto mb-auto" select={this.state.value} onChange={this.handleSelect}>
+                                <select className="mt-auto mb-auto" select={this.state.value}
+                                        onChange={this.handleSelect}>
                                     <option>Select</option>
                                     <option select="title">title</option>
                                     <option select="description">description</option>
@@ -276,7 +262,7 @@ class Header extends React.Component {
                                             {this.state.getCategory.map((category, index) => (
                                                 <li className="bg-light p-2 d-flex justify-content-between" key={index}>
                                                     <label className="bg-light mt-auto mb-auto"
-                                                        htmlFor={category.id}>{category.name}</label>
+                                                           htmlFor={category.id}>{category.name}</label>
                                                     <input
                                                         type="checkbox"
                                                         className="mt-auto mb-auto"
@@ -291,7 +277,7 @@ class Header extends React.Component {
                                     </ul>
                                 </div>
                                 <input id="search-barre" className="mt-auto mb-auto mr-5" ref={put => this.search = put}
-                                    onChange={this.filterSearch} type="text" placeholder="Search"/>
+                                       onChange={this.filterSearch} type="text" placeholder="Search"/>
                             </div>
                             <div className="results-search bg-light mr-5">
                                 {this.state.results.length >= 1 ? this.state.results.map((elem, i) => (
@@ -319,9 +305,7 @@ class Header extends React.Component {
                 >
                     <div id="menu-cart" className="d-flex flex-column bg-dark open">
                         <Cart></Cart>
-                        {/* <Link className="mt-auto ml-auto mr-auto" to="/cartPage"> */}
                         <button className="btn-mainly" onClick={this.handleShowCart.bind(this)}>Access to cart</button>
-                        {/* </Link> */}
                     </div>
 
                 </CSSTransition>
