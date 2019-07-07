@@ -119,7 +119,7 @@ class Header extends React.Component {
     }
 
 
-    
+
     onChange = (e) => {
         let sCategory = this.state.category;
         if (e.target.checked === true)
@@ -225,7 +225,7 @@ class Header extends React.Component {
                     <ul className="d-flex justify-content-between mt-auto h-100">
                         <li>
                             <button onClick={this.displaySearch}>
-                                <img src={IconeSearch} alt=""></img>
+                                <img src={IconeSearch} alt="search"/>
                             </button>
                         </li>
                         <li>
@@ -255,44 +255,46 @@ class Header extends React.Component {
                     timeout={500}
                     classNames="display-search">
                     <div id="ctn-search-barre" className="d-flex justify-content-end w-100 open">
-                        <div className="d-flex">
-                            <select className="mt-auto mb-auto" select={this.state.value} onChange={this.handleSelect}>
-                                <option>Select</option>
-                                <option select="title">title</option>
-                                <option select="description">description</option>
-                            </select>
-                            <div className="category-box h-100 d-flex">
-                                <ul id="cho-cat" className="sroll border bg-light mt-auto mb-auto">
+                        <div className="d-flex flex-column">
+                            <div className="d-flex ntm">
+                                <select className="mt-auto mb-auto" select={this.state.value} onChange={this.handleSelect}>
+                                    <option>Select</option>
+                                    <option select="title">title</option>
+                                    <option select="description">description</option>
+                                </select>
+                                <div className="category-box h-100 d-flex">
+                                    <ul id="cho-cat" className="sroll border bg-light mt-auto mb-auto">
 
-                                    <li className="p-2 bg-light d-flex justify-content-between">
-                                        <p>Categorie</p>
-                                        <button className="btn-none mb-auto" onClick={this.displayScroll}>
-                                            <img className="size-icn" src={require('../images/icon/chevron.png')} alt=""/>
-                                        </button>
-                                    </li>
-                                    <div className="cach">
-                                        {this.state.getCategory.map((category, index) => (
-                                            <li className="bg-light p-2 d-flex justify-content-between" key={index}>
-                                                <label className="bg-light mt-auto mb-auto"
-                                                       htmlFor={category.id}>{category.name}</label>
-                                                <input
-                                                    type="checkbox"
-                                                    className="mt-auto mb-auto"
-                                                    name={category.name}
-                                                    select={category.id}
-                                                    id={category.id}
-                                                    onChange={this.onChange}
-                                                />
-                                            </li>
-                                        ))}
-                                    </div>
-                                </ul>
+                                        <li className="p-2 bg-light d-flex justify-content-between">
+                                            <p>Categorie</p>
+                                            <button className="btn-none mb-auto" onClick={this.displayScroll}>
+                                                <img className="size-icn" src={require('../images/icon/chevron.png')}/>
+                                            </button>
+                                        </li>
+                                        <div className="cach">
+                                            {this.state.getCategory.map((category, index) => (
+                                                <li className="bg-light p-2 d-flex justify-content-between" key={index}>
+                                                    <label className="bg-light mt-auto mb-auto"
+                                                        htmlFor={category.id}>{category.name}</label>
+                                                    <input
+                                                        type="checkbox"
+                                                        className="mt-auto mb-auto"
+                                                        name={category.name}
+                                                        select={category.id}
+                                                        id={category.id}
+                                                        onChange={this.onChange}
+                                                    />
+                                                </li>
+                                            ))}
+                                        </div>
+                                    </ul>
+                                </div>
+                                <input id="search-barre" className="mt-auto mb-auto mr-5" ref={put => this.search = put}
+                                    onChange={this.filterSearch} type="text" placeholder="Search"/>
                             </div>
-                            <input id="search-barre" className="mt-auto mb-auto mr-5" ref={put => this.search = put}
-                                   onChange={this.filterSearch} type="text" placeholder="Search"/>
-                            <div className="results-search">
+                            <div className="results-search bg-light mr-5">
                                 {this.state.results.length >= 1 ? this.state.results.map((elem, i) => (
-                                    <li key={i}>
+                                    <li className="border pt-3 pb-3 w-100 pl-2" key={i}>
                                         <Link to={"/article/" + elem.id}>
                                             {elem.title}
                                             {this.state.value === "title" ? elem.title : this.state.value === "description" ? elem.description : ''}
