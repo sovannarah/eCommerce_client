@@ -84,7 +84,7 @@ class Menu extends React.Component {
                 <div id="menu" className="wrapper">
                     <div className="wrapper">
                         <ul className="w-100">
-                            <a className="m-auto" href={"/category/" + this.state.data[0].parent.id }>
+                            <a className="m-auto" href={"/"}>
                                 <li className="list-menu d-flex justify-content-center">
                                     <p className="m-auto">Menu</p>
                                 </li>
