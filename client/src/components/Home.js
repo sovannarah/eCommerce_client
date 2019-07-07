@@ -87,10 +87,10 @@ class Home extends React.Component {
                                             <div className="ctn-img d-flex">
                                             {item.images.length > 0 ? 
                                                 <img id="popular-img" className="m-auto"
-                                                src={ip + "/uploads/images/" + item.images[0]}/>
+                                                src={ip + "/uploads/images/" + item.images[0]} alt=""/>
                                             :
                                                 <img id="popular-img" className="m-auto"
-                                                src={require("../images/icon/none.png")} />    
+                                                src={require("../images/icon/none.png")} alt=""/>    
                                             }
                                             </div>
                                             <CardContent className="mt-auto">
