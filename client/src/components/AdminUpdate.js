@@ -96,12 +96,13 @@ class Admin extends React.Component {
     passCommand(event) {
         console.log("========= Array Article ========");
         console.log(this.state.addArticle);
-        axios.post(this.ip + "/order",
-            {articles: this.state.addArticle},
+        axios.post(this.ip + "/stock/order",
+            this.state.addArticle,
             {headers: {token: this.state.headers.token}}).then(
             (result) => {
                 console.log('======== Result ======');
                 console.log(result);
+                window.location.replace("/admin")
             },
             (error) => {
                 console.log("====== Error =======");
@@ -204,11 +205,11 @@ class Admin extends React.Component {
         }
         if (flagAdd === true) {
             items[c].price = parseInt(itemPrice) * price;
-            items[c].number = price;
+            items[c].quantity = price;
         } else
             items.push({
                 id: id,
-                number: price,
+                quantity: price,
                 price: (parseInt(itemPrice) * price),
                 name: name
             });
