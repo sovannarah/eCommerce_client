@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import {Promise} from "q";
 import {instanceOf} from "prop-types";
+import '../../style/css/trnasportfee.css';
 
 class transportFee extends React.Component {
     constructor(props) {
@@ -9,9 +10,9 @@ class transportFee extends React.Component {
         this.state =
             {
                 header: {token: localStorage.getItem('token')},
-                //ip: 'http://127.0.0.1:8000',
+                ip: 'http://127.0.0.1:8000',
                 //ip: 'http://10.34.7.0:8000',
-                ip: 'http://10.41.176.52:8000',
+                // ip: 'http://10.41.176.52:8000',
                 offer: [],
                 offeritems: [],
                 upOffer: ''
@@ -172,30 +173,35 @@ class transportFee extends React.Component {
         let offert = this.state.offer;
         let len = offert.length;
         let specHtml =
-            <div id={"spec-" + len + "-0"} style={{border: 2 + "px green solid"}}>
-                <button id={"specDel-" + len + "-0"} onClick={this.delSpec}>Remove</button>
+            <div id={"spec-" + len + "-0"} className="w-100 flex-column d-flex p-3" style={{border: 2 + "px green solid"}}>
+                <button id={"specDel-" + len + "-0"} className="w-25" onClick={this.delSpec}>Remove</button>
                 <p>Ex: distance, Km, 0.5/Km at 250 Km </p>
                 <label htmlFor={"specName-" + len + "-0"}>
                     Name:
+                    <input type="text" id={"specName-" + len + "-0"}/>
                 </label>
-                <input type="text" id={"specName-" + len + "-0"}/>
-                <label htmlFor={"unity-" + len + "-0"}>Unity: </label>
-                <input type="text" id={"unity-" + len + "-0"}/>
-                <label htmlFor={"minValue-" + len + "-0"}>Min Value: </label>
-                <input type="number" id={"minValue-" + len + '-0'}/>
-                <label htmlFor={"price-" + len + "-0"}>Price per unity: </label>
-                <input type="number" id={'price-' + len + '-0'}/>
+                <label htmlFor={"unity-" + len + "-0"}>Unity: 
+                    <input type="text" id={"unity-" + len + "-0"}/>
+                </label>
+                <label htmlFor={"minValue-" + len + "-0"}>Min Value: 
+                    <input type="number" id={"minValue-" + len + '-0'}/>
+                </label>
+                <label htmlFor={"price-" + len + "-0"}>Price per unity: 
+                    <input type="number" id={'price-' + len + '-0'}/>
+                </label>
             </div>;
         let offerHtml =
-            <div id={"offer" + len} style={{border: 2 + "px red solid"}}>
+            <div id={"offer" + len} className="ml-auto mr-auto w-100 p-3" style={{border: 2 + "px red solid"}}>
                 <button id={"offerDel-" + len} onClick={this.delOffer}>Remove</button>
-                <label htmlFor={"offerName" + len}>
-                    Oferr Name:
-                </label>
-                <input type="text" id={"offerName" + len}/>
-                <button onClick={this.moreSpec.bind(this, len)}>
-                    Add Spec
-                </button>
+                <div className="d-flex">
+                    <label htmlFor={"offerName" + len}>
+                        Oferr Name:
+                    </label>
+                    <input type="text" id={"offerName" + len}/>
+                    <button onClick={this.moreSpec.bind(this, len)}>
+                        Add Spec
+                    </button>
+                </div>
             </div>;
         offert.push({offer: offerHtml, spec: [specHtml]});
         this.setState({offer: offert});
@@ -204,7 +210,7 @@ class transportFee extends React.Component {
     moreSpec(len) {
         let offert = this.state.offer;
         let specHtml =
-            <div id={"spec-" + len + "-" + offert[len].length}
+            <div className="w-100" id={"spec-" + len + "-" + offert[len].length}
                  style={{border: 2 + "px green solid"}}>
                 <button id={"offerDel-" + len} onClick={this.delSpec}>Remove</button>
                 <p>Ex: distance, Km, 0.5/Km at 250 Km </p>
@@ -233,7 +239,7 @@ class transportFee extends React.Component {
 	{
 		let offert = this.state.offer;
 		let specHtml =
-			<div id={"spec-" + len + "-" + offert[len].spec.length}
+			<div className="w-100" id={"spec-" + len + "-" + offert[len].spec.length}
 			     style={{ border: 2 + "px green solid"}}>
 				<button id={ "offerDel-" + len } onClick={this.delSpec}>Remove</button>
 				<p>Ex: distance, Km, 0.5/Km at 250 Km </p>
@@ -435,7 +441,7 @@ class transportFee extends React.Component {
                                defaultValue={datatransport.name}/>
                         <button id={'addOffer-' + i1} onClick={this.addOffer}>Add Offer</button>
                         {datatransport.offers.map((dataoffer, i2) =>
-                            <ul key={'offer-' + i1 + '-' + i2}>
+                            <ul className="w-100 popo" key={'offer-' + i1 + '-' + i2}>
                                 <button id={'deleteOffer-' + i1 + '-' + i2} onClick={this.deleteOffer}>Delete</button>
                                 <label htmlFor={"oitem-" + i1 + "-" + i2}>
                                     Offer:
@@ -444,7 +450,7 @@ class transportFee extends React.Component {
                                        defaultValue={dataoffer.name}/>
                                 <button id={'addSpec-' + i1 + '-' + i2} onClick={this.addSpec}>Add Spec</button>
                                 {dataoffer.specs.map((dataspec, i3) =>
-                                    <ul key={'speckey-' + i1 + '-' + i2 + '-' + i3}
+                                    <ul className="w-100 tro" key={'speckey-' + i1 + '-' + i2 + '-' + i3}
                                         id={'spec-' + i1 + '-' + i2 + '-' + i3}>
                                         <button id={'deleteSpec-' + i1 + '-' + i2 + '-' + i3}
                                                 onClick={this.delteSpec}>Delete
@@ -483,29 +489,37 @@ class transportFee extends React.Component {
 
     render() {
         return (
-            <div>
-                <div id={"create"} hidden>
-                    <button id="updateTransport" onClick={this.changeDisplay}>
-                        Update
-                    </button>
-                    <button onClick={this.addTransport}>Create Transport</button>
+            <div className="d-flex mb-5 justify-content-center">
+                <div id={"create"} className="col-md-5" hidden>
+                    <div className="d-flex justify-content-between">
+                        <button id="updateTransport" className="btn-mainly" onClick={this.changeDisplay}>
+                            Update
+                        </button>
+                        <button onClick={this.addTransport} className="btn-mainly">
+                            Create Transport
+                        </button>
+                    </div>
                     <br/>
-                    <label htmlFor="transportName">Name: </label>
-                    <input type="text" id="transportName"/>
-                    <button onClick={this.moreOffer}>Add offer</button>
-                    {this.state.offer.map((data, i) =>
-                        <ul key={"offer" + i}>
-                            {data.offer}
-                            {data.spec.map((spec, y) =>
-                                <ul key={'spec' + i + y}>
-                                    {spec}
-                                </ul>
-                            )}
-                        </ul>
-                    )}
+                    <div className="d-flex mb-4 justify-content-around">
+                        <label htmlFor="transportName">Name: </label>
+                        <input type="text" id="transportName"/>
+                        <button onClick={this.moreOffer}>Add offer</button>
+                    </div>
+                    <div className="d-flex justify-content-center">
+                        {this.state.offer.map((data, i) =>
+                            <ul className="w-100 trolo" key={"offer" + i}>
+                                {data.offer}
+                                {data.spec.map((spec, y) =>
+                                    <ul className="w-100 tilo" key={'spec' + i + y}>
+                                        {spec}
+                                    </ul>
+                                )}
+                            </ul>
+                        )}
+                    </div>
                 </div>
                 <div id={"update"}>
-                    <button id="createTransport" onClick={this.changeDisplay}>
+                    <button id="createTransport" className="btn-mainly" onClick={this.changeDisplay}>
                         Create
                     </button>
                     {this.state.upOffer}

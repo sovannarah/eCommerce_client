@@ -2,4 +2,8 @@
   margin-top: 0 !important;
   margin-bottom: 0 !important; }
 
+#displaytransport, #displayCodePromo, #displaycommand {
+  display: flex;
+  flex-direction: column; }
+
 /*# sourceMappingURL=adminupdate.css.map */

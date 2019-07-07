@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-
-//const ip = 'http://127.0.0.1:8000';
-const ip = 'http://10.34.7.0:8000';
+import '../style/css/account.css';
+const ip = 'http://127.0.0.1:8000';
+// const ip = 'http://10.34.7.0:8000';
 
 
 class Account extends React.Component {
@@ -71,17 +71,34 @@ class Account extends React.Component {
         let user = this.state.userData;
         let adress = this.state.address;
         return (
-            <section>
-                <label>Email
-                    <input name="email" value={user.email || ''} onChange={this.changeMail}/>
-                </label>
-                <label>Street
-                    <input name="street" value={adress === null ? '' : adress.street || ''} onChange={this.changeStreet}/>
-                </label>
-                <label>PC
-                    <input name="pc" value={adress === null ? '' : adress.pc || ''} onChange={this.changePC}/>
-                </label>
-                <input type="submit" onClick={this.updateUser} />
+            <section className="d-flex justify-content-center mb-5">
+                <div className="d-flex flex-column bg-grey col-3 justify-content-center p-5 orund" style={{marginTop: 130}}>
+                    <label>Email: <br />
+                        <input 
+                        name="email" 
+                        className="ipt-upd"
+                        value={user.email || ''} 
+                        onChange={this.changeMail}/>
+                    </label>
+                    <label>Street: <br />
+                        <input 
+                        name="street" 
+                        className="ipt-upd"
+                        value={adress === null ? '' : adress.street || ''} 
+                        onChange={this.changeStreet}/>
+                    </label>
+                    <label>PC: <br />
+                        <input 
+                        name="pc" 
+                        className="ipt-upd"
+                        value={adress === null ? '' : adress.pc || ''} 
+                        onChange={this.changePC}/>
+                    </label>
+                    <input 
+                    type="submit" 
+                    className="btn-mainly mt-5" 
+                    onClick={this.updateUser} />
+                </div>
             </section>
         );
     }
