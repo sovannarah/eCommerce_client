@@ -41,12 +41,13 @@ class UserCtrl extends React.Component {
         axios.post(ip + '/login', {email: this.state.email, password: this.state.password})
             .then(res => {
                 const user = res.data;
-                console.log(user.token)
+                // console.log(user.token)
                 if (user.token) {
                     for (let [key, value] of Object.entries(user)) {
                         localStorage.setItem(key, value);
-                        window.location.replace('/');
                     }
+                    localStorage.setItem('role', user.role[0])
+                    window.location.replace('/');
                 }
             })
     }
@@ -57,9 +58,9 @@ class UserCtrl extends React.Component {
     }
 
     responseFacebook = (response) => {
-        if (response) {
-            for (let [key, value] of Object.entries(response)) {
-                console.log(key, value);
+        if(response) {
+            for( let [key, value] of Object.entries(response)) {
+                // console.log(key, value);
                 localStorage.setItem(key, value);
                 this.setState({
                     email: response.email,
@@ -80,10 +81,13 @@ class UserCtrl extends React.Component {
     };
 
     render() {
+        // console.log(localStorage)
         if (this.props.user || localStorage.getItem("userID")) {
             return (
                 <div id="menu-user" className="d-flex flex-column justify-content-around bg-light open">
-                    <Link to="/admin">Admin Space</Link>
+                    {localStorage.getItem('role') === 'ROLE_ADMIN' ? 
+                        <Link to="/admin">Admin Space</Link>
+                    : ''}
                     <Link to="/account">My Account</Link>
                     <button className="btn-mainly ml-auto mr-auto" onClick={this.disconnect}>Disconnect</button>
                 </div>
