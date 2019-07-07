@@ -20,8 +20,13 @@ class Category extends React.Component {
             curr_category: []
         };
         // this.ip = 'http://10.34.7.68:8001';
+<<<<<<< HEAD
         // this.ip = 'http://127.0.0.1:8000';
         this.ip = 'http://10.41.176.52:8001';
+=======
+        this.ip = 'http://127.0.0.1:8000';
+        // this.ip = 'http://10.41.176.52:8000';
+>>>>>>> 6d0242da9e285d828366c9e5705abbae8b1a7d84
 
         this.parseCategory = this.parseCategory.bind(this);
         this.getCategory = this.getCategory.bind(this);

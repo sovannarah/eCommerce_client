@@ -15,9 +15,15 @@ class CodePromo extends React.Component {
             }],
             header: {token: localStorage.getItem('token')},
         };
+<<<<<<< HEAD
         //this.ip = 'http://127.0.0.1:8000';
         // this.ip = 'http://10.34.7.0:8000';
         this.ip="http://10.41.176.52:8001";
+=======
+        this.ip = 'http://127.0.0.1:8000';
+       // this.ip = 'http://10.34.7.0:8000';
+        // this.ip = 'http://10.41.176.52:8000';
+>>>>>>> 6d0242da9e285d828366c9e5705abbae8b1a7d84
 
         this.sendCode = this.sendCode.bind(this);
         this.addCode = this.addCode.bind(this);
@@ -138,21 +144,25 @@ class CodePromo extends React.Component {
 
     render() {
         return (
-            <div className="mt-5">
+            <div className="mt-5 mb-5">
                 <div>
-                    <button onClick={this.sendCode}>Create</button>
-                    <button onClick={this.addCode}>Add Codes</button>
+                    <div className="mb-5">
+                        <button className="btn-mainly mr-4" onClick={this.sendCode}>Create</button>
+                        <button className="btn-mainly" onClick={this.addCode}>Add Codes</button>
+                    </div>
                     {this.state.addCodes.map((data, i) =>
-                        <ul key={'Code' + i}>
-                            <button id={"promotionCode-" + i} onClick={this.rmCode}>Remove</button>
-                            <button id={"randomPromotion-" + i} onClick={this.randomString}>Random</button>
+                        <ul className="mt-3 mb-5" key={'Code' + i}>
                             <label htmlFor={"code"}> Code Promo:
                                 <input type="text" id={'code-' + i} value={data.code} onChange={this.changeCodePromo}/>
                             </label>
-                            <label htmlFor={'reduction-' + i}> Pomotion:
+                            <label htmlFor={'reduction-' + i}> Promotion:
                                 <input type="number" value={data.reduction} max={100} id={'reduction-' + i}
                                        onChange={this.changeCodePromo}/>
                             </label>
+                            <div className="mt-3 d-flex flex-column">
+                                <button id={"randomPromotion-" + i} className="btn btn-info" onClick={this.randomString}>Random</button>
+                                <button id={"promotionCode-" + i} className="btn btn-danger" onClick={this.rmCode}>Remove</button>
+                            </div>
                         </ul>
                     )}
                 </div>
