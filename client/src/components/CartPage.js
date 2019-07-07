@@ -6,7 +6,8 @@ import Button from 'react-bootstrap/Button';
 import AddressForm from './Addresse/AddressForm';
 import {FormControl} from 'react-bootstrap';
 import '../style/css/cartPage.css';
-const apiArticleURI  = 'http://10.41.176.52:8000/article/';
+
+const apiArticleURI = 'http://10.41.176.52:8001/article/';
 //const apiArticleURI = 'http://10.34.7.0:8000/article/';
 //const apiArticleURI = 'http://127.0.0.1:8000/article/';
 const storageKey = 'cart';
@@ -16,143 +17,162 @@ const storageKey = 'cart';
 
 class Cart extends Component {
 
-	constructor(props, context) {
-		super(props, context);
-		this.state = {
-			articles: [],
-			updated: false,
-			HT: 0,
-			TTC: 0,
-			fee: 0
-		};
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            articles: [],
+            updated: false,
+            HT: 0,
+            TTC: 0,
+            fee: 0
+        };
 
-		this.displayAdress = this.displayAdress.bind(this);
-	}
+        this.displayAdress = this.displayAdress.bind(this);
+        this.ip="http://10.41.176.52:8001";
 
-	componentDidMount() {
-		let allUpdated = true;
-		let copyPrice = this.state.HT;
-		getCart().forEach(
-			(article) => {
-				Axios.get(apiArticleURI + article.id)
-					.then((res) => {
-						const updatedArticle = {...article, erased: false, ...res.data};
-						this.updateArticle(updatedArticle);
-					})
-					.catch((error) => {
-						if (error.response && error.response.status === 404) {
-							article.erased = true;
-						} else {
-							console.error(error);
-							allUpdated = false;
-						}
-						this.updateArticle(article);
-					});
-				copyPrice += (article.price*article.quantity)
-			}
-		);
-		this.setState({updated: allUpdated});
-		this.setState({HT: copyPrice});
-	}
+    }
+
+    componentDidMount() {
+        let allUpdated = true;
+        let copyPrice = this.state.HT;
+        getCart().forEach(
+            (article) => {
+                Axios.get(apiArticleURI + article.id)
+                    .then((res) => {
+                        const updatedArticle = {...article, erased: false, ...res.data};
+                        this.updateArticle(updatedArticle);
+                    })
+                    .catch((error) => {
+                        if (error.response && error.response.status === 404) {
+                            article.erased = true;
+                        } else {
+                            console.error(error);
+                            allUpdated = false;
+                        }
+                        this.updateArticle(article);
+                    });
+                copyPrice += (article.price * article.quantity)
+            }
+        );
+        this.setState({updated: allUpdated});
+        this.setState({HT: copyPrice});
+    }
 
 
+    displayAdress() {
+        document.getElementById("ctn-adress").classList.toggle('display-adress');
+    }
 
-	displayAdress() {
-		document.getElementById("ctn-adress").classList.toggle('display-adress');
-	}
-	/**
-	 * Replaces article in state with newArticle (by id), or adds if doesn't exist yet
-	 * @param newArticle
-	 */
-	updateArticle = (newArticle) => {
-		this.setState((state) => {
-			const copy = state.articles.slice();
-			const idx = copy.findIndex(old => old.id === newArticle.id);
-			if (idx !== -1) {
-				copy[idx] = newArticle;
-			} else {
-				copy.push(newArticle);
-			}
-			sessionStorage.setItem(storageKey, JSON.stringify(copy));
-			return {articles: copy};
-		});
-	};
+    /**
+     * Replaces article in state with newArticle (by id), or adds if doesn't exist yet
+     * @param newArticle
+     */
+    updateArticle = (newArticle) => {
+        this.setState((state) => {
+            const copy = state.articles.slice();
+            const idx = copy.findIndex(old => old.id === newArticle.id);
+            if (idx !== -1) {
+                copy[idx] = newArticle;
+            } else {
+                copy.push(newArticle);
+            }
+            sessionStorage.setItem(storageKey, JSON.stringify(copy));
+            return {articles: copy};
+        });
+    };
 
-	/**
-	 * Removes article from state by id, and updates sessionStorage
-	 * @param id
-	 */
-	removeArticle = (id) => {
-		this.setState((prevState) => {
-			const articles = prevState.articles.filter(article => article.id !== id);
-			sessionStorage.setItem(storageKey, JSON.stringify(articles));
-			return {articles};
-		});
-	};
+    /**
+     * Removes article from state by id, and updates sessionStorage
+     * @param id
+     */
+    removeArticle = (id) => {
+        this.setState((prevState) => {
+            const articles = prevState.articles.filter(article => article.id !== id);
+            sessionStorage.setItem(storageKey, JSON.stringify(articles));
+            return {articles};
+        });
+    };
 
-	/**
-	 * TODO: understand how transport fee will work
-	 */
-	calculateTranFee = () => {
-		// $this.setState({fee: 20});
-		return (20);
-	}
+    /**
+     * TODO: understand how transport fee will work
+     */
+    calculateTranFee = () => {
+        // $this.setState({fee: 20});
+        return (20);
+    }
 
-	render() {
-		return (
-			<section id="ctn-cartPage" className=" min-vh-100 flex-column container-fluid d-flex">
-				<div id="ctn-cart" className="col-md-9 m-auto ">
-					<Table variant='dark'>
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Unit Price</th>
-								<th>Qt.</th>
-								<th>Stock</th>
-							</tr>
-						</thead>
-						<tbody>
 
-						{this.state.articles.map((article, index) => 
-						<>
-							<Article key={index} article={article}
-								delete={this.removeArticle}
-								update={this.updateArticle}
-							/>
-						</>
-						)}
-						</tbody>
+    sendAddress() {
+        const headers = {
+            'Content-Type': 'multipart/form-data',
+            'token': localStorage.getItem('token'),
+            'Access-Control-Allow-Credentials': true
+        };
+        const location = {
+            'street': this.props.street,
+            'pc': this.props.postalCode,
+        };
+        Axios.post(this.ip + '/address', {headers: headers, body: location})
+            .then((res) => {
+                console.log(res.data);
+            });
+    }
 
-						
-					</Table>
-					<div className="col-md-12 vf mb-3 text-light bg-grey2 p-3">
-						<div className="d-flex justify-content-between pl-2 pr-2 border-bottom">
-							<h2>Localisation</h2>
-							<h4 onClick={this.displayAdress} className="btn-mainly d-flex">
-								<p className="m-auto">Add Adress</p>
-							</h4>
-						</div>
+    render() {
+        return (
+            <section id="ctn-cartPage" className=" min-vh-100 flex-column container-fluid d-flex">
+                <div id="ctn-cart" className="col-md-9 m-auto ">
+                    <Table variant='dark'>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Unit Price</th>
+                            <th>Qt.</th>
+                            <th>Stock</th>
+                        </tr>
+                        </thead>
+                        <tbody>
 
-						<AddressForm />
+                        {this.state.articles.map((article, index) =>
+                            <>
+                                <Article key={index} article={article}
+                                         delete={this.removeArticle}
+                                         update={this.updateArticle}
+                                />
+                            </>
+                        )}
+                        </tbody>
 
-					</div>
-					<div className="d-flex bg-grey2 justify-content-between w-100">
-						<h5 className="text-light mt-auto mb-auto ml-3">SOUS TOTAL : {this.state.HT}</h5>
-					</div>
-					<div className="d-flex bg-grey2 justify-content-between w-100">
-						<h5 className="text-light mt-auto mb-auto ml-3">TRANSPORT FEE : </h5>
-					</div>
-					<div className="d-flex bg-grey2 justify-content-between w-100">
-						<h5 className="text-light mt-auto mb-auto ml-3">TOTAL PRICE : {this.state.ht}</h5>
-						<Link to="/checkin">
-							<button className="btn-mainly mr-2 mt-2 mb-2">PAY</button>
-						</Link>
-					</div>
-				</div>
-				
-			</section>
-		);
-	}
+
+                    </Table>
+                    <div className="col-md-12 vf mb-3 text-light bg-grey2 p-3">
+                        <div className="d-flex justify-content-between pl-2 pr-2 border-bottom">
+                            <h2>Localisation</h2>
+                            <h4 onClick={this.displayAdress} className="btn-mainly d-flex">
+                                <p className="m-auto">Add Adress</p>
+                            </h4>
+                        </div>
+
+                        <AddressForm/>
+
+                    </div>
+                    <div className="d-flex bg-grey2 justify-content-between w-100">
+                        <h5 className="text-light mt-auto mb-auto ml-3">SOUS TOTAL : {this.state.HT}</h5>
+                    </div>
+                    <div className="d-flex bg-grey2 justify-content-between w-100">
+                        <h5 className="text-light mt-auto mb-auto ml-3">TRANSPORT FEE : </h5>
+                    </div>
+                    <div className="d-flex bg-grey2 justify-content-between w-100">
+                        <h5 className="text-light mt-auto mb-auto ml-3">TOTAL PRICE : {this.state.ht}</h5>
+                        <Link to="/checkin">
+                            <button className="btn-mainly mr-2 mt-2 mb-2" onClick={this.sendAddress}>PAY</button>
+                        </Link>
+                    </div>
+                </div>
+
+            </section>
+        );
+    }
 }
 
 

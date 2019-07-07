@@ -12,7 +12,7 @@ class Admin extends React.Component {
         };
         // this.ip = 'http://10.34.7.68:8001';
         //this.ip = 'http://127.0.0.1:8000';
-        const ip = 'http://10.34.7.0:8000';
+         this.ip = "http://10.41.176.52:8001";
 
         this.parseCategory = this.parseCategory.bind(this);
         this.getCategory = this.getCategory.bind(this);
@@ -86,8 +86,7 @@ class Admin extends React.Component {
             });
     }
 
-    addVariant(event)
-    {
+    addVariant(event) {
         event.preventDefault();
         let variant = {
             spec: '',
@@ -98,16 +97,14 @@ class Admin extends React.Component {
         variants.push(variant);
         this.setState({variants: variants});
     }
-    changeVarientPrice(event)
-    {
-    	let keys = event.target.id.split('-');
+
+    changeVarientPrice(event) {
+        let keys = event.target.id.split('-');
         let variants = this.state.variants;
-    	if (keys[0] === 'var_price')
-        {
+        if (keys[0] === 'var_price') {
             variants[keys[1]].var_price = parseFloat(event.target.value);
-        }
-    	else
-    	    variants[keys[1]][keys[0]] = event.target.value;
+        } else
+            variants[keys[1]][keys[0]] = event.target.value;
         this.setState({variants: variants});
     }
 
@@ -143,24 +140,25 @@ class Admin extends React.Component {
                                     />
                                 </label>
                             </div>
-	                        <div
+                            <div
                                 className="col-6 d-flex justify-content-around flex-column">
-                                <button onClick={this.addVariant}> add Variant </button>
+                                <button onClick={this.addVariant}> add Variant</button>
                                 {this.state.variants.map((data, i) =>
-                                <ul key={"variant" + i}>
-                                    <li>
-                                    <label htmlFor={"spec-" + i}>Spec: </label>
-                                    <input type={"text"} id={'spec-' + i} onChange={this.changeVarientPrice}/>
-                                    </li>
-                                    <li>
-                                    <label htmlFor={"type-" + i}>Type: </label>
-                                    <input type={"text"} id={'type-' + i} onChange={this.changeVarientPrice}/>
-                                    </li>
-                                    <li>
-                                    <label htmlFor={"var_price-" + i}>variation </label>
-                                    <input type={"number"} step={"0.1"} id={"var_price-" + i} onChange={this.changeVarientPrice}/>
-                                    </li>
-                                </ul>)}
+                                    <ul key={"variant" + i}>
+                                        <li>
+                                            <label htmlFor={"spec-" + i}>Spec: </label>
+                                            <input type={"text"} id={'spec-' + i} onChange={this.changeVarientPrice}/>
+                                        </li>
+                                        <li>
+                                            <label htmlFor={"type-" + i}>Type: </label>
+                                            <input type={"text"} id={'type-' + i} onChange={this.changeVarientPrice}/>
+                                        </li>
+                                        <li>
+                                            <label htmlFor={"var_price-" + i}>variation </label>
+                                            <input type={"number"} step={"0.1"} id={"var_price-" + i}
+                                                   onChange={this.changeVarientPrice}/>
+                                        </li>
+                                    </ul>)}
                             </div>
                             <div
                                 className="col-6 d-flex justify-content-around flex-column">

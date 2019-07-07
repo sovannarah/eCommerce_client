@@ -11,7 +11,7 @@ class transportFee extends React.Component {
                 header: {token: localStorage.getItem('token')},
                 //ip: 'http://127.0.0.1:8000',
                 //ip: 'http://10.34.7.0:8000',
-                ip: 'http://10.41.176.52:8000',
+                ip: 'http://10.41.176.52:8001',
                 offer: [],
                 offeritems: [],
                 upOffer: ''
@@ -76,22 +76,21 @@ class transportFee extends React.Component {
         if (flag === true)
             this.forceUpdate();
     }
-	async addTransport()
-	{
-		let transport = await this.getTransport();
-		let flag = false;
-		console.log(transport);
-		await axios.post(this.state.ip + '/transport',
-			transport ,
-			{ headers: this.state.header }).then(
-			() =>
-			{
-				flag = true;
-			}
-		);
-		if (flag === true)
-			this.forceUpdate();
-	}
+
+    async addTransport() {
+        let transport = await this.getTransport();
+        let flag = false;
+        console.log(transport);
+        await axios.post(this.state.ip + '/transport',
+            transport,
+            {headers: this.state.header}).then(
+            () => {
+                flag = true;
+            }
+        );
+        if (flag === true)
+            this.forceUpdate();
+    }
 
     getTransport() {
         return (new Promise((resolve => {
@@ -120,38 +119,35 @@ class transportFee extends React.Component {
             resolve(transport);
         })));
     }
-	getTransport()
-	{
-		return (new Promise((resolve =>
-		{
-			let c1 = -1;
-			let transport = {
-				name: document.getElementById('transportName').value,
-				offer: []
-			};
-			let offer;
-			while ((offer = document.getElementById('offerName' + (++c1))))
-			{
-				let offerItem = {name: offer.value, spec: []};
-				let c2 = -1;
-				let spect;
-				while ((spect = document.getElementById('spec-' + c1 + '-' + (++c2))))
-				{
-					let pos = '-' + c1 + '-' + c2;
-					let specItem = {
-						name: document.getElementById('specName' + pos).value,
-						unity: document.getElementById('unity' + pos).value,
-						minValue: document.getElementById('minValue' + pos).value,
-						minPrice: document.getElementById('minPrice' + pos).value,
-						price: document.getElementById('price' + pos).value
-					};
-					offerItem.spec.push(specItem);
-				}
-				transport.offer.push(offerItem);
-			}
-			resolve(transport);
-		})));
-	}
+
+    getTransport() {
+        return (new Promise((resolve => {
+            let c1 = -1;
+            let transport = {
+                name: document.getElementById('transportName').value,
+                offer: []
+            };
+            let offer;
+            while ((offer = document.getElementById('offerName' + (++c1)))) {
+                let offerItem = {name: offer.value, spec: []};
+                let c2 = -1;
+                let spect;
+                while ((spect = document.getElementById('spec-' + c1 + '-' + (++c2)))) {
+                    let pos = '-' + c1 + '-' + c2;
+                    let specItem = {
+                        name: document.getElementById('specName' + pos).value,
+                        unity: document.getElementById('unity' + pos).value,
+                        minValue: document.getElementById('minValue' + pos).value,
+                        minPrice: document.getElementById('minPrice' + pos).value,
+                        price: document.getElementById('price' + pos).value
+                    };
+                    offerItem.spec.push(specItem);
+                }
+                transport.offer.push(offerItem);
+            }
+            resolve(transport);
+        })));
+    }
 
     delOffer(event) {
         let key = event.target.id.split('-')[0];
@@ -229,39 +225,39 @@ class transportFee extends React.Component {
         offert[len].spec.push(specHtml);
         this.setState({offer: offert})
     }
-	moreSpec(len)
-	{
-		let offert = this.state.offer;
-		let specHtml =
-			<div id={"spec-" + len + "-" + offert[len].spec.length}
-			     style={{ border: 2 + "px green solid"}}>
-				<button id={ "offerDel-" + len } onClick={this.delSpec}>Remove</button>
-				<p>Ex: distance, Km, 0.5/Km at 250 Km </p>
-				<label htmlFor={"specName-" + len + "-" + offert[len].spec.length}>
-					Name:
-				</label>
-				<input type="text" id={"specName-" + len + "-" +
-				offert[len].spec.length}/>
-				<label htmlFor={"unity-" + len + "-" +
-				offert[len].spec.length}>Unity: </label>
-				<input type="text" id={"unity-" + len + "-" +
-				offert[len].spec.length}/>
-				<label htmlFor={"minValue-" + len + "-" +
-				offert[len].spec.length}>Min Value: </label>
-				<input type="number" id={"minValue-" + len + "-" +
-				offert[len].spec.length}/>
-				<label htmlFor={"minPrice-" + len + "-" +
-				offert[len].spec.length}>Min Price: </label>
-				<input type="text" id={"minPrice-" + len + "-" +
-				offert[len].spec.length}/>
-				<label htmlFor={"price-" + len + "-" +
-				offert[len].spec.length}>Price per unity: </label>
-				<input type="number" id={"price-" + len + "-" +
-				offert[len].spec.length}/>
-			</div>;
-		offert[len].spec.push(specHtml);
-		this.setState({offer: offert})
-	}
+
+    moreSpec(len) {
+        let offert = this.state.offer;
+        let specHtml =
+            <div id={"spec-" + len + "-" + offert[len].spec.length}
+                 style={{border: 2 + "px green solid"}}>
+                <button id={"offerDel-" + len} onClick={this.delSpec}>Remove</button>
+                <p>Ex: distance, Km, 0.5/Km at 250 Km </p>
+                <label htmlFor={"specName-" + len + "-" + offert[len].spec.length}>
+                    Name:
+                </label>
+                <input type="text" id={"specName-" + len + "-" +
+                offert[len].spec.length}/>
+                <label htmlFor={"unity-" + len + "-" +
+                offert[len].spec.length}>Unity: </label>
+                <input type="text" id={"unity-" + len + "-" +
+                offert[len].spec.length}/>
+                <label htmlFor={"minValue-" + len + "-" +
+                offert[len].spec.length}>Min Value: </label>
+                <input type="number" id={"minValue-" + len + "-" +
+                offert[len].spec.length}/>
+                <label htmlFor={"minPrice-" + len + "-" +
+                offert[len].spec.length}>Min Price: </label>
+                <input type="text" id={"minPrice-" + len + "-" +
+                offert[len].spec.length}/>
+                <label htmlFor={"price-" + len + "-" +
+                offert[len].spec.length}>Price per unity: </label>
+                <input type="number" id={"price-" + len + "-" +
+                offert[len].spec.length}/>
+            </div>;
+        offert[len].spec.push(specHtml);
+        this.setState({offer: offert})
+    }
 
     addOffer(event) {
         let tkey = event.target.id.split('-')[1];
@@ -297,43 +293,43 @@ class transportFee extends React.Component {
         console.log(this.state.offeritems);
         this.updOffer()
     }
-	addOffer(event)
-	{
-		let tkey = event.target.id.split('-')[1];
-		let offer = {
-			name: '',
-			specs: [{
-				name: '',
-				unity: '',
-				minValue: 0,
-				minPrice: 0,
-				price: 0
-			}]
-		};
-		let transport = this.state.offeritems;
-		transport[tkey].offers.push(offer);
-		this.setState({ offeritems: transport});
-		console.log(this.state.offeritems);
-		this.updOffer();
-	}
-	addSpec(event)
-	{
-		let keys = event.target.id.split('-');
-		let tkey = keys[1];
-		let transport = this.state.offeritems;
-		let okey = keys[2];
-		let spec = {
-			name: '',
-			unity: '',
-			minValue: 0,
-			minPrice: 0,
-			price: 0
-		};
-		transport[tkey].offers[okey].specs.push(spec);
-		this.setState({ offeritems: transport });
-		console.log(this.state.offeritems);
-		this.updOffer()
-	}
+
+    addOffer(event) {
+        let tkey = event.target.id.split('-')[1];
+        let offer = {
+            name: '',
+            specs: [{
+                name: '',
+                unity: '',
+                minValue: 0,
+                minPrice: 0,
+                price: 0
+            }]
+        };
+        let transport = this.state.offeritems;
+        transport[tkey].offers.push(offer);
+        this.setState({offeritems: transport});
+        console.log(this.state.offeritems);
+        this.updOffer();
+    }
+
+    addSpec(event) {
+        let keys = event.target.id.split('-');
+        let tkey = keys[1];
+        let transport = this.state.offeritems;
+        let okey = keys[2];
+        let spec = {
+            name: '',
+            unity: '',
+            minValue: 0,
+            minPrice: 0,
+            price: 0
+        };
+        transport[tkey].offers[okey].specs.push(spec);
+        this.setState({offeritems: transport});
+        console.log(this.state.offeritems);
+        this.updOffer()
+    }
 
     async delTransport(event) {
         let key = parseInt(event.target.id.split('-')[1]);

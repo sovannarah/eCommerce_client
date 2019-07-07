@@ -104,8 +104,7 @@ class AddressForm extends Component {
         const self = this;
         axios.get('https://geocoder.api.here.com/6.2/geocode.json',
             {'params': params}
-        ).then(function (response)
-        {
+        ).then(function (response) {
             const view = response.data.Response.View
             if (view.length > 0 && view[0].Result.length > 0) {
                 const location = view[0].Result[0].Location;
