@@ -17,7 +17,7 @@ class Cart extends Component {
         super(props, context);
         this.state = {
             articles: [],
-            updated: false,
+            updated: true,
         };
     }
 
@@ -25,7 +25,6 @@ class Cart extends Component {
     componentDidMount() {
         const articles = getArticles();
         this.setState({articles});
-        let allUpdated = true;
         articles.forEach(
             (article) => {
                 Axios.get(apiArticleURI + article.id)
@@ -36,15 +35,14 @@ class Cart extends Component {
                     .catch((error) => {
                         if (error.response && error.response.status === 404) {
                             article.erased = true;
+                            article.stock = 0;
                         } else {
                             console.error(error);
-                            allUpdated = false;
+                            this.setState({updated: false});
                         }
                         this.updateArticle(article);
                     });
             });
-        this.setState({updated: allUpdated});
-
     }
 
 
@@ -79,7 +77,6 @@ class Cart extends Component {
     };
 
     render() {
-
         return (
             <div className='cart w-100'>
                 <h3 className="text-secondary">My Cart</h3>
@@ -114,38 +111,28 @@ class Cart extends Component {
 
 function Article(props) {
     const {id, stock, title, price, erased, quantity} = props.article;
-    const outOfStock = stock === 0;
-    const stockStr = erased ?
-        'NaN' :
-        stock !== null ?
-            stock :
-            'unknown';
+
     return (
-        <tr className={outOfStock ? 'disabled text-muted' : ''}>
+        <tr className={!stock ? 'disabled text-muted' : ''}>
             <td>
-                {!erased ?
-                    <Link className="text-light" to={`/article/${id}`}
-                          disabled={outOfStock}
-                    >
-                        {title}
-                    </Link> :
-                    <span className='text-muted'>
-						(No longer available) {title}
-					</span>
-                }
+                {!erased ? (
+                    <Link className="text-light" to={`/article/${id}`}>{title}</Link>
+                ) : (
+                    <span className='text-muted'>(No longer available) {title}</span>
+                )}
             </td>
             <td>{price}</td>
             <td>
                 <FormControl type='number'
                              className="text-dark"
-                             value={quantity}
-                             disabled={outOfStock || erased}
+                             disabled={erased || !stock}
                              onChange={(ev) => {
                                  props.update({...props.article, quantity: ev.target.value});
                              }}
-                             value={quantity}/>
+                             value={quantity}
+                             max={stock} min='0'/>
             </td>
-            <td>{stockStr}</td>
+            <td>{stock}</td>
             <td>
                 <Button variant='danger'
                         className='material-icons'
@@ -184,4 +171,4 @@ function addToCart(article, quantity) {
     sessionStorage.setItem(storageKey, JSON.stringify(cart));
 }
 
-export {Cart as default, addToCart};
+export {Cart as default, addToCart, getArticles};
