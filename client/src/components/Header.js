@@ -223,7 +223,7 @@ class Header extends React.Component {
                     <ul className="d-flex justify-content-between mt-auto h-100">
                         <li>
                             <button onClick={this.displaySearch}>
-                                <img src={IconeSearch}></img>
+                                <img src={IconeSearch} alt=""></img>
                             </button>
                         </li>
                         <li>
@@ -265,7 +265,11 @@ class Header extends React.Component {
                                     <li className="p-2 bg-light d-flex justify-content-between">
                                         <p>Categorie</p>
                                         <button className="btn-none mb-auto" onClick={this.displayScroll}>
+<<<<<<< HEAD
                                             <img className="size-icn" src={require('../images/icon/chevron.png')}/>
+=======
+                                            <img className="size-icn" src={require('../images/icon/chevron.png')} alt=""/>
+>>>>>>> variant
                                         </button>
                                     </li>
                                     <div className="cach">
@@ -305,7 +309,11 @@ class Header extends React.Component {
                     in={this.state.user}
                     timeout={500}
                     classNames="display-user">
+<<<<<<< HEAD
                     <UserCtrl user={userToken}/>
+=======
+                    <UserCtrl user={userToken} />
+>>>>>>> variant
 
 
                 </CSSTransition>
@@ -322,7 +330,11 @@ class Header extends React.Component {
                     </div>
 
                 </CSSTransition>
+<<<<<<< HEAD
             </header>
+=======
+            </header >
+>>>>>>> variant
         );
     }
 }

@@ -4,6 +4,7 @@ import {addToCart} from './Cart';
 import axios from 'axios';
 import '../style/css/article.css';
 import Scrapper from './Scrapper';
+import { Alert } from 'react-bootstrap';
 
 // const ip = 'http://10.34.7.68:8001';
 //const ip = 'http://127.0.0.1:8000';
@@ -44,9 +45,9 @@ class Article extends React.Component {
                 this.setState({article: res.data});
                 this.setState({price: res.data.price});
                 let variant = res.data.variants.couleur;
-                console.log(variant);
+                // console.log(variant);
 
-                if (variant != undefined && variant.length >= 1) {
+                if (variant !== undefined && variant.length >= 1) {
                     this.setState({
                         showME: true
                     });
@@ -60,19 +61,21 @@ class Article extends React.Component {
     }
 
     addCart = (event) => {
-        let variant = this.state.article.variants.couleur;
-        console.log(variant);
 
-        let variantSelected = variant.find(item => item.id == this.state.variantId);
-        alert(JSON.stringify(variantSelected));
+        if (this.state.article.variants.couleur !== undefined) {
+            let variant = this.state.article.variants.couleur;
+            let variantSelected = variant.find(item => item.id == this.state.variantId);
 
-        if (variant !== undefined && variant.length >= 1 && variantSelected !== undefined) {
-            addToCart(this.state.article, this.state.quantity, variantSelected);
-            window.location.replace("/article/" + this.props.match.params.id);
+            alert(JSON.stringify(variantSelected));
+            if (variant !== undefined && variant.length >= 1 && variantSelected !== undefined) {
+                addToCart(this.state.article, this.state.quantity, variantSelected);
+                window.location.replace("/article/" + this.props.match.params.id);
+            }
         } else {
             addToCart(this.state.article, this.state.quantity);
             window.location.replace("/article/" + this.props.match.params.id);
         }
+
     };
 
     async setQuantity(event) {
@@ -120,7 +123,7 @@ class Article extends React.Component {
                             ))
                             :
                             <img id="car-img" className="m-auto mw-100 mh-100"
-                                 src={require("../images/icon/none.png")}/>
+                                src={require("../images/icon/none.png")} alt="" />
                         }
                     </Carousel>
                 </div>
