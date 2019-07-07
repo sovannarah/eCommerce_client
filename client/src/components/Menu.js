@@ -41,7 +41,7 @@ class Menu extends React.Component {
                     let cat = this.state.category;
                     if (urlPos === "category") {
                         for (let i = 0; i < cat.length; i++) {
-                            console.log(res.data);
+                            console.log(res.data)
                             this.state.data.push(cat[i])
                         }
 

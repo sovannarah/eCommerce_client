@@ -121,7 +121,7 @@ function Article(props) {
                     <span className='text-muted'>(No longer available) {title}</span>
                 )}
             </td>
-            <td>{price}</td>
+            <td>{price /*+ variante.var_price*/}</td>
             <td>
                 <FormControl type='number'
                              className="text-dark"

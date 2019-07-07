@@ -16,18 +16,18 @@ const storageKey = 'cart';
 
 class Cart extends Component {
 
-    constructor(props, context) {
-        super(props, context);
-        this.state = {
-            articles: [],
-            updated: false,
-            HT: 0,
-            TTC: 0,
-            fee: 0
-        };
-        this.ip = 'http://10.41.176.52:8000';
-        this.displayAdress = this.displayAdress.bind(this);
-    }
+	constructor(props, context) {
+		super(props, context);
+		this.state = {
+			articles: [],
+			updated: false,
+			HT: 0,
+			TTC: 0,
+			fee: 0
+		};
+
+		this.displayAdress = this.displayAdress.bind(this);
+	}
 
     componentDidMount() {
         let allUpdated = true;
