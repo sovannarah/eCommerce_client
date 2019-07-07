@@ -38,11 +38,12 @@ class Admin extends React.Component {
             parent_name: 'None',
             addArticle: [],
             commandPrice: 0,
-            tmpArticle: ''
+            // tmpArticle: ''
         };
         // this.ip = 'http://10.34.7.68:8001';
-          this.ip = 'http://127.0.0.1:8000';
+       //   this.ip = 'http://127.0.0.1:8000';
         //this.ip = 'http://10.34.7.0:8000';
+        this.ip = 'http://10.41.176.52:8001';
         // this.ip = 'http://10.41.176.52:8000';
 
         this.changeDisplay = this.changeDisplay.bind(this);
@@ -51,6 +52,7 @@ class Admin extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.parseCategory = this.parseCategory.bind(this)
         this.createExcel = this.createExcel.bind(this)
+        this.outputEvent = this.outputEvent.bind(this);
     }
 
     async componentDidMount() {
@@ -94,12 +96,13 @@ class Admin extends React.Component {
     passCommand(event) {
         console.log("========= Array Article ========");
         console.log(this.state.addArticle);
-        axios.post(this.ip + "/order",
-            {articles: this.state.addArticle},
+        axios.post(this.ip + "/stock/order",
+            this.state.addArticle,
             {headers: {token: this.state.headers.token}}).then(
             (result) => {
                 console.log('======== Result ======');
                 console.log(result);
+                window.location.replace("/admin")
             },
             (error) => {
                 console.log("====== Error =======");
@@ -202,11 +205,11 @@ class Admin extends React.Component {
         }
         if (flagAdd === true) {
             items[c].price = parseInt(itemPrice) * price;
-            items[c].number = price;
+            items[c].quantity = price;
         } else
             items.push({
                 id: id,
-                number: price,
+                quantity: price,
                 price: (parseInt(itemPrice) * price),
                 name: name
             });
@@ -244,6 +247,10 @@ class Admin extends React.Component {
             .catch(err => {
                 console.log(err);
             })
+    }
+
+    outputEvent(event) {
+        this.setState({ tmpArticle: '' });
     }
 
     render() {
@@ -329,7 +336,7 @@ class Admin extends React.Component {
                             	let index = event.target['parentElement']['rowIndex'] - 1;
                             	let id = this.state.data[index];
                             	addDetail(id);
-                                this.setState({tmpArticle: <div><ArticleDetail article={id}></ArticleDetail></div>})
+                                this.setState({tmpArticle: <div id="artR"><ArticleDetail clickHandler={this.outputEvent} article={id}></ArticleDetail></div>})
                             }
                         }
                         editable={{

@@ -1,6 +1,7 @@
+
 import React from 'react';
-import {Link} from 'react-router-dom';
-import {CSSTransition} from 'react-transition-group';
+import { Link } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
 import Drawer from '@material-ui/core/Drawer';
 import Menu from '../components/Menu';
 import axios from 'axios';
@@ -33,7 +34,7 @@ class Header extends React.Component {
             adminPanel: null
         };
         // this.ip = 'http://10.34.7.68:8001';
-        this.ip = 'http://127.0.0.1:8000';
+        this.ip = 'http://10.41.176.52:8001';
         //this.ip = 'http://10.34.7.0:8000';
         // this.ip = 'http://10.41.176.52:8000';
 
@@ -86,8 +87,8 @@ class Header extends React.Component {
             // console.log("===== request =====");
             // console.log(this.state.value);
             axios.get(this.ip + '/search?' + this.state.value + '=' + this.state.put + res)
-                .then(({data}) => {
-                    this.setState({results: data})
+                .then(({ data }) => {
+                    this.setState({ results: data })
                 })
         });
     };
@@ -118,6 +119,8 @@ class Header extends React.Component {
 
     }
 
+
+
     onChange = (e) => {
         let sCategory = this.state.category;
         if (e.target.checked === true)
@@ -127,7 +130,7 @@ class Header extends React.Component {
             if (tIndex !== -1)
                 sCategory.splice(tIndex, 1);
         }
-        this.setState({category: sCategory});
+        this.setState({ category: sCategory });
         this.itemSearch();
         // console.log(this.state.category);
     };
@@ -139,21 +142,21 @@ class Header extends React.Component {
     }
 
     displaySearch() {
-        this.setState({user: true})
-        this.setState({search: !this.state.search})
-        this.setState({cart: true})
+        this.setState({ user: true })
+        this.setState({ search: !this.state.search })
+        this.setState({ cart: true })
     }
 
     displayUser() {
-        this.setState({user: !this.state.user})
-        this.setState({search: true})
-        this.setState({cart: true})
+        this.setState({ user: !this.state.user })
+        this.setState({ search: true })
+        this.setState({ cart: true })
     }
 
     displayCart() {
-        this.setState({user: true});
-        this.setState({search: true});
-        this.setState({cart: !this.state.cart});
+        this.setState({ user: true });
+        this.setState({ search: true });
+        this.setState({ cart: !this.state.cart });
     }
 
     outsideCat() {
@@ -201,7 +204,7 @@ class Header extends React.Component {
             return;
         }
 
-        this.setState({...this.state, [side]: open});
+        this.setState({ ...this.state, [side]: open });
     };
 
     render() {
@@ -209,33 +212,33 @@ class Header extends React.Component {
         return (
             <header className="container-fluid">
                 <Drawer className="" open={this.state.left} onClose={this.toggleDrawer('left', false)}>
-                    <Menu/>
+                    <Menu />
                 </Drawer>
                 <div id="ctn-header" className="h-100 d-flex justify-content-between">
                     <div id="ctn-icon-menu" className="d-flex justify-content-between">
                         <button id="button-menu" onClick={this.toggleDrawer('left', true)}>
-                            <img id="icone-menu" className="mt-auto mb-auto" src={IconMenu} alt=""/>
+                            <img id="icone-menu" className="mt-auto mb-auto" src={IconMenu} alt="" />
                         </button>
                     </div>
                     <Link to="/" id="ctn-logo" className="d-flex mt-2">
-                        <img src={Logo} alt=""/>
+                        <img src={Logo} alt="" />
                     </Link>
                     <ul className="d-flex justify-content-between mt-auto h-100">
                         <li>
                             <button onClick={this.displaySearch}>
-                                <img src={IconeSearch} alt=""></img>
+                                <img src={IconeSearch} alt="search" />
                             </button>
                         </li>
                         <li>
                             <button onClick={this.displayUser}>
-                                <img src={IconeUser} alt=""/>
+                                <img src={IconeUser} alt="" />
                             </button>
 
 
                         </li>
                         <li>
                             <button onClick={this.displayCart}>
-                                <img src={IconeCart} alt=""/>
+                                <img src={IconeCart} alt="" />
                             </button>
                             <CSSTransition
                                 in={this.state.cart}
@@ -253,44 +256,46 @@ class Header extends React.Component {
                     timeout={500}
                     classNames="display-search">
                     <div id="ctn-search-barre" className="d-flex justify-content-end w-100 open">
-                        <div className="d-flex">
-                            <select className="mt-auto mb-auto" select={this.state.value} onChange={this.handleSelect}>
-                                <option>Select</option>
-                                <option select="title">title</option>
-                                <option select="description">description</option>
-                            </select>
-                            <div className="category-box h-100 d-flex">
-                                <ul id="cho-cat" className="sroll border bg-light mt-auto mb-auto">
+                        <div className="d-flex flex-column">
+                            <div className="d-flex ntm">
+                                <select className="mt-auto mb-auto" select={this.state.value} onChange={this.handleSelect}>
+                                    <option>Select</option>
+                                    <option select="title">title</option>
+                                    <option select="description">description</option>
+                                </select>
+                                <div className="category-box h-100 d-flex">
+                                    <ul id="cho-cat" className="sroll border bg-light mt-auto mb-auto">
 
-                                    <li className="p-2 bg-light d-flex justify-content-between">
-                                        <p>Categorie</p>
-                                        <button className="btn-none mb-auto" onClick={this.displayScroll}>
-                                            <img className="size-icn" src={require('../images/icon/chevron.png')} alt=""/>
-                                        </button>
-                                    </li>
-                                    <div className="cach">
-                                        {this.state.getCategory.map((category, index) => (
-                                            <li className="bg-light p-2 d-flex justify-content-between" key={index}>
-                                                <label className="bg-light mt-auto mb-auto"
-                                                       htmlFor={category.id}>{category.name}</label>
-                                                <input
-                                                    type="checkbox"
-                                                    className="mt-auto mb-auto"
-                                                    name={category.name}
-                                                    select={category.id}
-                                                    id={category.id}
-                                                    onChange={this.onChange}
-                                                />
-                                            </li>
-                                        ))}
-                                    </div>
-                                </ul>
+                                        <li className="p-2 bg-light d-flex justify-content-between">
+                                            <p>Categorie</p>
+                                            <button className="btn-none mb-auto" onClick={this.displayScroll}>
+                                                <img className="size-icn" src={require('../images/icon/chevron.png')} />
+                                            </button>
+                                        </li>
+                                        <div className="cach">
+                                            {this.state.getCategory.map((category, index) => (
+                                                <li className="bg-light p-2 d-flex justify-content-between" key={index}>
+                                                    <label className="bg-light mt-auto mb-auto"
+                                                        htmlFor={category.id}>{category.name}</label>
+                                                    <input
+                                                        type="checkbox"
+                                                        className="mt-auto mb-auto"
+                                                        name={category.name}
+                                                        select={category.id}
+                                                        id={category.id}
+                                                        onChange={this.onChange}
+                                                    />
+                                                </li>
+                                            ))}
+                                        </div>
+                                    </ul>
+                                </div>
+                                <input id="search-barre" className="mt-auto mb-auto mr-5" ref={put => this.search = put}
+                                    onChange={this.filterSearch} type="text" placeholder="Search" />
                             </div>
-                            <input id="search-barre" className="mt-auto mb-auto mr-5" ref={put => this.search = put}
-                                   onChange={this.filterSearch} type="text" placeholder="Search"/>
-                            <div className="results-search">
+                            <div className="results-search bg-light mr-5">
                                 {this.state.results.length >= 1 ? this.state.results.map((elem, i) => (
-                                    <li key={i}>
+                                    <li className="border pt-3 pb-3 w-100 pl-2" key={i}>
                                         <Link to={"/article/" + elem.id}>
                                             {elem.title}
                                             {this.state.value === "title" ? elem.title : this.state.value === "description" ? elem.description : ''}
@@ -305,7 +310,7 @@ class Header extends React.Component {
                     in={this.state.user}
                     timeout={500}
                     classNames="display-user">
-                    <UserCtrl user={userToken}/>
+                    <UserCtrl user={userToken} />
 
 
                 </CSSTransition>
