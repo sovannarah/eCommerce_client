@@ -4,13 +4,10 @@ import axios from 'axios';
 import FacebookLogin from 'react-facebook-login';
 
 // let ip = 'http://10.34.7.68:8001';
-<<<<<<< HEAD
 //let ip = 'http://127.0.0.1:8000';
 const ip = 'http://10.41.176.52:8001';
-=======
-let ip = 'http://127.0.0.1:8000';
+// let ip = 'http://127.0.0.1:8000';
 // const ip = 'http://10.34.7.0:8000';
->>>>>>> 6d0242da9e285d828366c9e5705abbae8b1a7d84
 
 class UserCtrl extends React.Component {
 
@@ -27,13 +24,10 @@ class UserCtrl extends React.Component {
         this.login = this.login.bind(this);
         this.disconnect = this.disconnect.bind(this);
         // this.ip = 'http://10.34.7.68:8001';
-        this.ip = 'http://127.0.0.1:8000';
+       // this.ip = 'http://127.0.0.1:8000';
         // this.ip = 'http://10.34.7.0:8000';
-<<<<<<< HEAD
         this.ip = 'http://10.41.176.52:8001';
-=======
         // this.ip = 'http://10.41.176.52:8000';
->>>>>>> 6d0242da9e285d828366c9e5705abbae8b1a7d84
 
     }
 

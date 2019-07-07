@@ -6,14 +6,11 @@ import Button from 'react-bootstrap/Button';
 import AddressForm from './Addresse/AddressForm';
 import {FormControl} from 'react-bootstrap';
 import '../style/css/cartPage.css';
-<<<<<<< HEAD
 
 const apiArticleURI = 'http://10.41.176.52:8001/article/';
-=======
 // const apiArticleURI  = 'http://10.41.176.52:8000/article/';
->>>>>>> 6d0242da9e285d828366c9e5705abbae8b1a7d84
 //const apiArticleURI = 'http://10.34.7.0:8000/article/';
-const apiArticleURI = 'http://127.0.0.1:8000/article/';
+//const apiArticleURI = 'http://127.0.0.1:8000/article/';
 const storageKey = 'cart';
 // let FullUrl = window.location.pathname;
 // const url = FullUrl.split("/")[2];

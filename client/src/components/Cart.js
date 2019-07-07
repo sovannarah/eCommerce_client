@@ -5,14 +5,11 @@ import {Link} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import {FormControl} from 'react-bootstrap';
-<<<<<<< HEAD
 const apiArticleURI  = 'http://10.41.176.52:8001/article/';
-=======
 // const apiArticleURI  = 'http://10.41.176.52:8000/article/';
->>>>>>> 6d0242da9e285d828366c9e5705abbae8b1a7d84
 
 //const apiArticleURI = 'http://10.34.7.0:8000/article/';
-const apiArticleURI = 'http://127.0.0.1:8000/article/';
+//const apiArticleURI = 'http://127.0.0.1:8000/article/';
 const storageKey = 'cart';
 
 class Cart extends Component {

@@ -144,7 +144,6 @@ class ArticleDetail extends React.Component {
         this.setState({variantsT: tmp});
     }
 
-<<<<<<< HEAD
     changeImput(event) {
         let tmp = this.state.variantsT;
         let keys = event.target.id.split('-');
@@ -153,57 +152,6 @@ class ArticleDetail extends React.Component {
         this.setState({variantsT: tmp});
     }
 
-    render() {
-        return (
-            <div>
-                <button>Back</button>
-                <form>
-                    <label htmlFor={'articleTile'}>Title</label>
-                    <input type={"text"} value={this.article.title} name={"title"} id={"articleTitle"}/>
-                    <label htmlFor={"articleDescription"}>Description</label>
-                    <input type={"text"} value={this.article.description} name={"description"}
-                           id={"articleDescription"}/>
-                    <button type={"submit"} onClick={this.sendSave}>Save</button>
-                    <button onClick={this.addVariant}>Add Variant</button>
-                    {this.state.variantsT.map((data, i) =>
-                        <ul key={"variant-" + i}>
-                            {data.spec.map((spec, i2) =>
-                                <ul key={"varitant-" + i + '-' + i2}>
-                                    <li>
-                                        <button id={'variant-' + i + '-' + i2} onClick={this.deleteVariant}>Delete
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <label htmlFor={"spec-" + i + '-' + i2}>
-                                            Spec:
-                                        </label>
-                                        <input type={"text"} id={"spec-" + i + '-' + i2} value={spec.spec}
-                                               onChange={this.changeImput}/>
-                                    </li>
-                                    <li>
-                                        <label htmlFor={'type-' + i + "-" + i2}>
-                                            Type
-                                        </label>
-                                        <input type={"text"} value={spec.type} id={"type-" + i + '-' + i2}
-                                               onChange={this.changeImput}/>
-                                    </li>
-                                    <li>
-                                        <label htmlFor={'type-' + i + "-" + i2}>
-                                            Var Price
-                                        </label>
-                                        <input type={"number"} id={'var_price-' + i + '-' + i2}
-                                               value={spec.var_price} step={"0.1"} onKeyDown={this.changePrice}/>
-                                    </li>
-                                </ul>
-                            )}
-                        </ul>)
-                    }
-                </form>
-            </div>
-        );
-    }
-=======
-	
 
 	render()
 	{
@@ -250,7 +198,6 @@ class ArticleDetail extends React.Component {
 			</div>
 		);
 	}
->>>>>>> 6d0242da9e285d828366c9e5705abbae8b1a7d84
 }
 
 function addDetail(articleob) {
