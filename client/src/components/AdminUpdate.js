@@ -109,6 +109,8 @@ class Admin extends React.Component {
     parseCategory(data) {
         let c = -1;
         let copy;
+        if (data)
+        {
         while (data[++c]) {
             copy = this.state.columns;
             copy[0].lookup[data[c].id] = data[c].name;
@@ -116,6 +118,7 @@ class Admin extends React.Component {
             this.state.category.push(data[c])
             if (data[c].sub && data[c].sub.length > 0)
                 this.parseCategory(data[c].sub);
+        }
         }
     }
 
