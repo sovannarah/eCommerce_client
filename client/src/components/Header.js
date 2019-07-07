@@ -118,6 +118,8 @@ class Header extends React.Component {
 
     }
 
+
+    
     onChange = (e) => {
         let sCategory = this.state.category;
         if (e.target.checked === true)
