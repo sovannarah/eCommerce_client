@@ -1,6 +1,5 @@
 import React from 'react';
 import Axios from 'axios';
-import {forEach} from "react-bootstrap/es/utils/ElementChildren";
 
 let article = null;
 
