@@ -220,7 +220,7 @@ class Header extends React.Component {
                     <ul className="d-flex justify-content-between mt-auto h-100">
                         <li>
                             <button onClick={this.displaySearch}>
-                                <img src={IconeSearch}></img>
+                                <img src={IconeSearch} alt=""></img>
                             </button>
                         </li>
                         <li>
@@ -262,7 +262,7 @@ class Header extends React.Component {
                                     <li className="p-2 bg-light d-flex justify-content-between">
                                         <p>Categorie</p>
                                         <button className="btn-none mb-auto" onClick={this.displayScroll}>
-                                            <img className="size-icn" src={require('../images/icon/chevron.png')} />
+                                            <img className="size-icn" src={require('../images/icon/chevron.png')} alt=""/>
                                         </button>
                                     </li>
                                     <div className="cach">
@@ -297,27 +297,27 @@ class Header extends React.Component {
                         </div>
                     </div>
                 </CSSTransition>
-            <CSSTransition
-                in={this.state.user}
-                timeout={500}
-                classNames="display-user">
-                <UserCtrl user={userToken} />
+                <CSSTransition
+                    in={this.state.user}
+                    timeout={500}
+                    classNames="display-user">
+                    <UserCtrl user={userToken} />
 
 
-            </CSSTransition>
-            <CSSTransition
-                in={this.state.cart}
-                timeout={500}
-                classNames="display-cart"
-            >
-                <div id="menu-cart" className="d-flex flex-column bg-dark open">
-                    <Cart></Cart>
-                    {/* <Link className="mt-auto ml-auto mr-auto" to="/cartPage"> */}
-                    <button className="btn-mainly" onClick={this.handleShowCart.bind(this)}>Access to cart</button>
-                    {/* </Link> */}
-                </div>
+                </CSSTransition>
+                <CSSTransition
+                    in={this.state.cart}
+                    timeout={500}
+                    classNames="display-cart"
+                >
+                    <div id="menu-cart" className="d-flex flex-column bg-dark open">
+                        <Cart></Cart>
+                        {/* <Link className="mt-auto ml-auto mr-auto" to="/cartPage"> */}
+                        <button className="btn-mainly" onClick={this.handleShowCart.bind(this)}>Access to cart</button>
+                        {/* </Link> */}
+                    </div>
 
-            </CSSTransition>
+                </CSSTransition>
             </header >
         );
     }

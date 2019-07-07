@@ -3,7 +3,6 @@ import Carousel from 'react-bootstrap/Carousel';
 import { addToCart } from './Cart';
 import axios from 'axios';
 import '../style/css/article.css';
-import { log } from 'util';
 
 const ip = 'http://127.0.0.1:8000';
 
@@ -103,7 +102,7 @@ class Article extends React.Component {
                             ))
                             :
                             <img id="car-img" className="m-auto mw-100 mh-100"
-                                src={require("../images/icon/none.png")} />
+                                src={require("../images/icon/none.png")} alt=""/>
                         }
                     </Carousel>
                 </div>
