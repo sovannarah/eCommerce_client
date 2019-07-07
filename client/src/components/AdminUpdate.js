@@ -38,7 +38,7 @@ class Admin extends React.Component {
             parent_name: 'None',
             addArticle: [],
             commandPrice: 0,
-            tmpArticle: ''
+            // tmpArticle: ''
         };
         // this.ip = 'http://10.34.7.68:8001';
           this.ip = 'http://127.0.0.1:8000';
@@ -51,6 +51,7 @@ class Admin extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.parseCategory = this.parseCategory.bind(this)
         this.createExcel = this.createExcel.bind(this)
+        this.outputEvent = this.outputEvent.bind(this);
     }
 
     async componentDidMount() {
@@ -246,6 +247,10 @@ class Admin extends React.Component {
             })
     }
 
+    outputEvent(event) {
+        this.setState({ tmpArticle: '' });
+    }
+
     render() {
         return (
             <div>
@@ -329,7 +334,7 @@ class Admin extends React.Component {
                             	let index = event.target['parentElement']['rowIndex'] - 1;
                             	let id = this.state.data[index];
                             	addDetail(id);
-                                this.setState({tmpArticle: <div><ArticleDetail article={id}></ArticleDetail></div>})
+                                this.setState({tmpArticle: <div id="artR"><ArticleDetail clickHandler={this.outputEvent} article={id}></ArticleDetail></div>})
                             }
                         }
                         editable={{

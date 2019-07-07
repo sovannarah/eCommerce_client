@@ -174,12 +174,15 @@ class ArticleDetail extends React.Component
 		this.setState({variantsT: tmp});
 	}
 
+	
+
 	render()
 	{
+		console.log(this.props.rem)
 		return(
-			<div>
-				<button>Back</button>
-				<form>
+			<div className="ml-3 col-md-3">
+				<button onClick={this.props.clickHandler}>Back</button>
+				<form className="d-flex flex-column">
 					<label htmlFor={'articleTile'}>Title</label>
 					<input type={"text"} value={this.article.title} name={"title"} id={"articleTitle"}/>
 					<label htmlFor={"articleDescription"}>Description</label>
