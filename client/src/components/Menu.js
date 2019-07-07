@@ -24,10 +24,12 @@ class Menu extends React.Component {
 
 
     async componentDidMount() {
-        let data2 = await this.getCategory();
-        this.setState({curr_category: [data2]})
-        this.parseCategory(this.state.curr_category);
-        this.forceUpdate()
+        if(urlPos === "category") {
+            let data2 = await this.getCategory();
+            this.setState({curr_category: [data2]})
+            this.parseCategory(this.state.curr_category);
+            this.forceUpdate()
+        }
 
         /**
          * @param get all the categories
@@ -38,7 +40,6 @@ class Menu extends React.Component {
                     let cat = this.state.category;
                     if (urlPos === "category") {
                         for (let i = 0; i < cat.length; i++) {
-                            console.log(res.data)
                             this.state.data.push(cat[i])
                         }
 
@@ -69,7 +70,7 @@ class Menu extends React.Component {
 
         return axios.get(this.ip + '/category/' + url)
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 return (res.data)
             })
             .catch(err => {
@@ -78,13 +79,12 @@ class Menu extends React.Component {
     }
 
     render() {
-        console.log(this.state.category)
         if (this.state.check) {
             return (
                 <div id="menu" className="wrapper">
                     <div className="wrapper">
                         <ul className="w-100">
-                            <a className="m-auto" href={"/"}>
+                            <a className="m-auto" href={"/category/" + this.state.data[0].parent.id }>
                                 <li className="list-menu d-flex justify-content-center">
                                     <p className="m-auto">Menu</p>
                                 </li>

@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
-// const ip = 'http://127.0.0.1:8000';
-const ip = 'http://10.34.7.0:8000';
+const ip = 'http://127.0.0.1:8000';
+// const ip = 'http://10.34.7.0:8000';
 class Account extends React.Component {
     
     constructor(props) {
@@ -10,20 +10,11 @@ class Account extends React.Component {
 
         this.state = {
             userData : {},
-            address: {}
+            address: {
+                street: '', 
+                pc: ''
+            }
         }
-        axios.get(ip + "/user", {headers: {token: localStorage.getItem('token')}})
-        .then(res => {
-            console.log(res.data)
-            this.setState({ userData : res.data });
-        })
-
-        axios.get(ip + "/address", {headers: {token: localStorage.getItem('token')}})
-        .then(res => {
-            console.log("=====ADDRESS=====");
-            console.log(res.data)
-            this.setState({ address: res.data })
-        })
 
         this.updateUser = this.updateUser.bind(this);
         this.changeMail = this.changeMail.bind(this);
@@ -31,7 +22,27 @@ class Account extends React.Component {
         this.changePC = this.changePC.bind(this);
     }
 
+    async componentDidMount() {
+        await axios.get(ip + "/user", {headers: {token: localStorage.getItem('token')}})
+        .then(res => {
+            console.log(res.data)
+            this.setState({ userData : res.data });
+        })
+
+        await axios.get(ip + "/address", {headers: {token: localStorage.getItem('token')}})
+        .then(res => {
+            console.log("=====ADDRESS=====");
+            console.log(res.data)
+            if (res.data !== null) {
+                this.setState({ address: res.data })
+            } else {
+                this.setState({ address: {street : '', pc : ''} })
+            }
+        })
+    }
+
     updateUser() {
+        console.log(this.state.address)
         axios.post(ip + "/user", this.state.userData, {headers: {token: localStorage.getItem('token')}})
         .then(res => {
             console.log(res.data)
@@ -57,17 +68,16 @@ class Account extends React.Component {
     render() {
         let user = this.state.userData;
         let adress = this.state.address;
-        console.log(this.state.userData)
         return (
             <section>
                 <label>Email
                     <input name="email" value={user.email || ''} onChange={this.changeMail}/>
                 </label>
                 <label>Street
-                    <input name="street" value={adress.street || ''} onChange={this.changeStreet}/>
+                    <input name="street" value={adress === null ? '' : adress.street || ''} onChange={this.changeStreet}/>
                 </label>
                 <label>PC
-                    <input name="pc" value={adress.pc || ''} onChange={this.changePC}/>
+                    <input name="pc" value={adress === null ? '' : adress.pc || ''} onChange={this.changePC}/>
                 </label>
                 <input type="submit" onClick={this.updateUser} />
             </section>

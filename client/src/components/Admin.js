@@ -28,7 +28,7 @@ class Admin extends React.Component {
 
                 (error) => {
                     console.log(error);
-                    window.location.replace('/');
+                    // window.location.replace('/');
                 })
         }
 

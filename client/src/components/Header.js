@@ -63,7 +63,7 @@ class Header extends React.Component {
                 if (this.state.put.length % 2 === 0) {
                     this.itemSearch()
                 } else if (!this.state.put) {
-                    console.log('not ok');
+                    // console.log('not ok');
                 }
 
             }
@@ -79,9 +79,9 @@ class Header extends React.Component {
     itemSearch = () => {
         // title=....&category[]=1&category[]=2&category[]=3....
         this.makeStr(this.state.category).then(res => {
-            console.log(res);
-            console.log("===== request =====");
-            console.log(this.state.value);
+            // console.log(res);
+            // console.log("===== request =====");
+            // console.log(this.state.value);
             axios.get(this.ip + '/search?' + this.state.value + '=' + this.state.put + res)
                 .then(({ data }) => {
                     this.setState({ results: data })
@@ -111,7 +111,7 @@ class Header extends React.Component {
                 (err) => {
                     console.log(err);
                 });
-        console.log(this.state.token);
+        // console.log(this.state.token);
 
     }
 
@@ -126,7 +126,7 @@ class Header extends React.Component {
         }
         this.setState({ category: sCategory });
         this.itemSearch();
-        console.log(this.state.category);
+        // console.log(this.state.category);
     };
 
 
@@ -160,7 +160,7 @@ class Header extends React.Component {
     async handleShowCart() {
         let isLog = false;
         let token = localStorage.getItem('token');
-        console.log(token);
+        // console.log(token);
         if (token) {
             await axios
                 .get(
