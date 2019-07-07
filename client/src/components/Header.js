@@ -311,8 +311,6 @@ class Header extends React.Component {
                     timeout={500}
                     classNames="display-user">
                     <UserCtrl user={userToken}/>
-
-
                 </CSSTransition>
                 <CSSTransition
                     in={this.state.cart}
