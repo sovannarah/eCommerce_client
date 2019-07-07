@@ -8,7 +8,7 @@ class Admin extends React.Component {
         super(props);
         this.state = {
             category: [],
-            variants: []
+            variants: [],
         };
 
         this.ip = "http://10.41.176.52:8001";
@@ -126,7 +126,6 @@ class Admin extends React.Component {
                                         className="outlined-name"
                                         name="description"
                                         type="string"
-
                                     />
                                 </label>
                                 <label className="d-flex flex-column">Price
@@ -134,6 +133,7 @@ class Admin extends React.Component {
                                         className="outlined-name"
                                         name="price"
                                         type="number"
+                                        min='0'
 
                                     />
                                 </label>
@@ -173,6 +173,7 @@ class Admin extends React.Component {
                                         className="outlined-name"
                                         name="stock"
                                         type="number"
+                                        min='0'
                                     />
                                 </label>
                                 <label className="d-flex flex-column">Category
@@ -184,6 +185,15 @@ class Admin extends React.Component {
                                         )}
                                     </select>
                                 </label>
+                                <div className="form-check">
+                                    <input
+                                        className="outlined-name form-check-input"
+                                        name="showOnSlider"
+                                        type="checkbox"
+                                        id='showOnSlider'
+                                    />
+                                    <label htmlFor="showOnSlider" className='form-check-label'>Show on slider</label>
+                                </div>
                             </div>
                         </div>
                         <Fab id="button-add"
