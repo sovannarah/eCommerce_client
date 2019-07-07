@@ -1,0 +1,17 @@
+.ipt-upd {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid grey;
+  background: transparent;
+  color: white;
+  width: 90%; }
+
+.orund {
+  border-radius: 20px; }
+  .orund label {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: white; }
+
+/*# sourceMappingURL=account.css.map */

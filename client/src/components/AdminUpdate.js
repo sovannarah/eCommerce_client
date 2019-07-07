@@ -41,9 +41,9 @@ class Admin extends React.Component {
             tmpArticle: ''
         };
         // this.ip = 'http://10.34.7.68:8001';
-        //   this.ip = 'http://127.0.0.1:8000';
+          this.ip = 'http://127.0.0.1:8000';
         //this.ip = 'http://10.34.7.0:8000';
-        this.ip = 'http://10.41.176.52:8000';
+        // this.ip = 'http://10.41.176.52:8000';
 
         this.changeDisplay = this.changeDisplay.bind(this);
         this.updatePrice = this.updatePrice.bind(this);
@@ -256,15 +256,15 @@ class Admin extends React.Component {
                     <button id="transport" onClick={this.changeDisplay}>Transport</button>
                     <button id="codePromo" onClick={this.changeDisplay}>Code Promo</button>
                 </div>
-                <div id="displaytransport" style={{marginTop: 120}} hidden>
+                <div id="displaytransport" className="justify-content-center" style={{marginTop: 120}} hidden>
                     <Transport></Transport>
                 </div>
-                <div id="displaycodePromo" style={{marginTop: 120}} hidden>
+                <div id="displaycodePromo" className="pl-5" style={{marginTop: 120}} hidden>
                     <PromotionCode></PromotionCode>
                 </div>
-                <div id="displaycommand" className="mt-5 mb-5" hidden={true}>
-                    <h2>{"Total:  " + this.state.commandPrice}</h2>
-                    <table>
+                <div id="displaycommand" className="mt-5 mb-5 justify-content-center" hidden={true}>
+                    <h2 className="border pt-3 pb-3">{"Total:  " + this.state.commandPrice}</h2>
+                    <table className="mb-5 border">
                         <thead>
                         <tr>
                             <th>title</th>
@@ -302,7 +302,7 @@ class Admin extends React.Component {
                         )}
                         </tbody>
                     </table>
-                    <Button variant="contained" color="primary" onClick={this.passCommand}>
+                    <Button className="w-25 mr-3 ml-auto" variant="contained" color="primary" onClick={this.passCommand}>
                         Pass Command
                     </Button>
                 </div>
