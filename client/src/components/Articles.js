@@ -43,7 +43,6 @@ class Articles extends React.Component {
                 <div id="ctn-filter">
                 </div>
                 <ul className="container-fluid ml-auto mr-auto col-lg-8">
-<<<<<<< HEAD
                     {this.state.articles.map((item, index) => (
                         <div key={index} className=" ctn-art bg-light mt-4 mb-4 w-100">
                             <Link className="d-flex h-100" to={`/article/${item.id}`}>
@@ -73,29 +72,6 @@ class Articles extends React.Component {
                         </div>
                     ))}
                 </ul>
-=======
-                        {this.state.articles.map((item, index) => (
-                            <div key={index} className=" ctn-art bg-light mt-4 mb-4 w-100">
-                                <Link className="d-flex h-100" to={`/article/${item.id}`}>
-                                    <div className="ctn-image h-100 mt-auto mb-auto col-3 d-flex">
-                                        {item.images.length > 0 ? 
-                                            <img id="popular-img" className="m-auto"
-                                                src={ip + "/uploads/images/" + item.images[0]} alt=""/>
-                                        : 
-                                            <img id="popular-img" className="m-auto"
-                                            src={require("../images/icon/none.png")} alt=""/> 
-                                        }
-                                    </div>
-                                    <div className="p-3">
-                                        <h5>{item.title}</h5>
-                                        <p>${item.price}</p>
-                                        <p>{item.description}</p>
-                                    </div>
-                                </Link>
-                            </div>
-                        ))}
-                    </ul>
->>>>>>> variant
             </section>
         );
     }

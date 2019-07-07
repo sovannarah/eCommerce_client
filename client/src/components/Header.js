@@ -33,9 +33,9 @@ class Header extends React.Component {
             adminPanel: null
         };
         // this.ip = 'http://10.34.7.68:8001';
-        this.ip = 'http://127.0.0.1:8000';
+        //this.ip = 'http://127.0.0.1:8000';
         //this.ip = 'http://10.34.7.0:8000';
-        // this.ip = 'http://10.41.176.52:8000';
+        this.ip = 'http://10.41.176.52:8000';
 
 
 
@@ -253,7 +253,6 @@ class Header extends React.Component {
                     timeout={500}
                     classNames="display-search">
                     <div id="ctn-search-barre" className="d-flex justify-content-end w-100 open">
-<<<<<<< HEAD
                         <div className="d-flex">
                             <select className="mt-auto mb-auto" select={this.state.value} onChange={this.handleSelect}>
                                 <option>Select</option>
@@ -266,11 +265,7 @@ class Header extends React.Component {
                                     <li className="p-2 bg-light d-flex justify-content-between">
                                         <p>Categorie</p>
                                         <button className="btn-none mb-auto" onClick={this.displayScroll}>
-<<<<<<< HEAD
-                                            <img className="size-icn" src={require('../images/icon/chevron.png')}/>
-=======
                                             <img className="size-icn" src={require('../images/icon/chevron.png')} alt=""/>
->>>>>>> variant
                                         </button>
                                     </li>
                                     <div className="cach">
@@ -290,48 +285,12 @@ class Header extends React.Component {
                                         ))}
                                     </div>
                                 </ul>
-=======
-                        <div className="d-flex flex-column">
-                            <div className="d-flex ntm">
-                                <select className="mt-auto mb-auto" select={this.state.value} onChange={this.handleSelect}>
-                                    <option>Select</option>
-                                    <option select="title">title</option>
-                                    <option select="description">description</option>
-                                </select>
-                                <div className="category-box h-100 d-flex">
-                                    <ul id="cho-cat" className="sroll border bg-light mt-auto mb-auto">
-
-                                        <li className="p-2 bg-light d-flex justify-content-between">
-                                            <p>Categorie</p>
-                                            <button className="btn-none mb-auto" onClick={this.displayScroll}>
-                                                <img className="size-icn" src={require('../images/icon/chevron.png')}/>
-                                            </button>
-                                        </li>
-                                        <div className="cach">
-                                            {this.state.getCategory.map((category, index) => (
-                                                <li className="bg-light p-2 d-flex justify-content-between" key={index}>
-                                                    <label className="bg-light mt-auto mb-auto"
-                                                        htmlFor={category.id}>{category.name}</label>
-                                                    <input
-                                                        type="checkbox"
-                                                        className="mt-auto mb-auto"
-                                                        name={category.name}
-                                                        select={category.id}
-                                                        id={category.id}
-                                                        onChange={this.onChange}
-                                                    />
-                                                </li>
-                                            ))}
-                                        </div>
-                                    </ul>
-                                </div>
-                                <input id="search-barre" className="mt-auto mb-auto mr-5" ref={put => this.search = put}
-                                    onChange={this.filterSearch} type="text" placeholder="Search"/>
->>>>>>> finalbranch
                             </div>
-                            <div className="results-search bg-light mr-5">
+                            <input id="search-barre" className="mt-auto mb-auto mr-5" ref={put => this.search = put}
+                                   onChange={this.filterSearch} type="text" placeholder="Search"/>
+                            <div className="results-search">
                                 {this.state.results.length >= 1 ? this.state.results.map((elem, i) => (
-                                    <li className="border pt-3 pb-3 w-100 pl-2" key={i}>
+                                    <li key={i}>
                                         <Link to={"/article/" + elem.id}>
                                             {elem.title}
                                             {this.state.value === "title" ? elem.title : this.state.value === "description" ? elem.description : ''}
@@ -346,11 +305,7 @@ class Header extends React.Component {
                     in={this.state.user}
                     timeout={500}
                     classNames="display-user">
-<<<<<<< HEAD
                     <UserCtrl user={userToken}/>
-=======
-                    <UserCtrl user={userToken} />
->>>>>>> variant
 
 
                 </CSSTransition>
@@ -367,11 +322,7 @@ class Header extends React.Component {
                     </div>
 
                 </CSSTransition>
-<<<<<<< HEAD
             </header>
-=======
-            </header >
->>>>>>> variant
         );
     }
 }
