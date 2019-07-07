@@ -25,6 +25,7 @@ class Admin extends React.Component {
                     field: 'description',
                 },
                 {title: 'Visiteur', field: 'nb_views', editable: 'never'},
+                {title: 'Slider', field: 'showOnSlider', type: 'checkbox'},
             ],
             data: [],
             headers: {

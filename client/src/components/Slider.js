@@ -4,10 +4,11 @@ import {Link} from 'react-router-dom';
 import Rtx from '../images/slider/dims.png';
 import Chg90 from '../images/slider/GTX.png';
 import Apex from '../images/slider/x570.png';
-
+import Axios from 'axios';
 import '../style/css/article.css';
 import '../style/css/slider.css';
 
+const ip = 'https://127.0.0.1:8000';
 
 const product = [
     {
@@ -28,15 +29,35 @@ const product = [
 ];
 
 class Slider extends React.Component {
+
+
+    constructor(props, context) {
+        super(props, context);
+        this.state = {chosen: []};
+    }
+
+    componentDidMount() {
+        Axios.get(ip + '/article/slider')
+            .then(res => this.setState({chosen: res.data || product}));
+    }
+
+    getImgSrc(item) {
+        if (this.state.chosen){
+            return  item.images[0] ? `${ip}/uploads/images/${item.images[0]}` : '';
+        }
+        return item.image;
+    }
+
     render() {
         return (
             <Carousel className="col-12">
-                {product.map((item, index) => (
+                {this.state.chosen.map((item, index) => (
                     <Carousel.Item key={index}
                                    className="h-100">
                         <div className="d-flex row h-100">
                             <div className="col-md-6 h-100 d-flex">
-                                <img id="car-img" className="m-auto" src={item.image} alt=""/>
+                                <img id="car-img" className="m-auto" alt=" "
+                                     src={this.getImgSrc(item)}/>
                             </div>
                             <div className="col-md-6 h-100 d-flex">
                                 <div className="col-10 mh-75 m-auto">
