@@ -4,7 +4,6 @@ import MaterialTable from 'material-table';
 import Transport from './AdminPanel/TransportFee'
 import PromotionCode from './AdminPanel/CodePromo';
 import ArticleDetail, {addDetail} from './AdminPanel/ArticleDetail';
-// import { add } from './AdminPanel/ArticleDetail'
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
@@ -16,10 +15,10 @@ class Admin extends React.Component {
         super(props);
         this.state = {
             columns: [
-                {title: 'Category', field: 'category.id', lookup: {}},
-                {title: 'Name', field: 'title'},
-                {title: 'Price', field: 'price', type: 'numeric'},
-                {title: 'Stock', field: 'stock', type: 'numeric'},
+                { title: 'Category', field: 'category.id', lookup: {} },
+                { title: 'Name', field: 'title' },
+                { title: 'Price', field: 'price', type: 'numeric' },
+                { title: 'Stock', field: 'stock', type: 'numeric' },
                 {
                     title: 'Description',
                     field: 'description',
@@ -39,12 +38,8 @@ class Admin extends React.Component {
             parent_name: 'None',
             addArticle: [],
             commandPrice: 0,
-            tmpArticle: ''
         };
-        // this.ip = 'http://10.34.7.68:8001';
-          this.ip = 'http://127.0.0.1:8000';
-        //this.ip = 'http://10.34.7.0:8000';
-        // this.ip = 'http://10.41.176.52:8000';
+        this.ip = 'http://10.41.176.52:8001';
 
         this.changeDisplay = this.changeDisplay.bind(this);
         this.updatePrice = this.updatePrice.bind(this);
@@ -52,6 +47,7 @@ class Admin extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.parseCategory = this.parseCategory.bind(this)
         this.createExcel = this.createExcel.bind(this)
+        this.outputEvent = this.outputEvent.bind(this);
     }
 
     async componentDidMount() {
@@ -59,7 +55,7 @@ class Admin extends React.Component {
             window.location.replace('/account');
         else {
             await axios.get(this.ip + '/user/isAdmin',
-                {headers: {token: localStorage.getItem('token')}}
+                { headers: { token: localStorage.getItem('token') } }
             ).then(
                 () => {
                     // window.location.replace('/');
@@ -70,7 +66,7 @@ class Admin extends React.Component {
         }
         axios.get(this.ip + '/article')
             .then(res => {
-                this.setState({data: res.data})
+                this.setState({ data: res.data })
             })
             .catch(err => {
                 console.log(err);
@@ -95,31 +91,34 @@ class Admin extends React.Component {
     passCommand(event) {
         console.log("========= Array Article ========");
         console.log(this.state.addArticle);
-        axios.post(this.ip + "/order",
-            {articles: this.state.addArticle},
-            {headers: {token: this.state.headers.token}}).then(
-            (result) => {
-                console.log('======== Result ======');
-                console.log(result);
-            },
-            (error) => {
-                console.log("====== Error =======");
-                console.log(error)
-            }
-        )
+        axios.post(this.ip + "/stock/order",
+            this.state.addArticle,
+            { headers: { token: this.state.headers.token } }).then(
+                (result) => {
+                    console.log('======== Result ======');
+                    console.log(result);
+                    window.location.replace("/admin")
+                },
+                (error) => {
+                    console.log("====== Error =======");
+                    console.log(error)
+                }
+            )
     }
 
     parseCategory(data) {
         let c = -1;
         let copy;
+        if (data)
+        {
         while (data[++c]) {
             copy = this.state.columns;
             copy[0].lookup[data[c].id] = data[c].name;
             this.setState({columns: copy});
-            // this.state.columns[0].lookup[data[c].id] = data[c].name;
             this.state.category.push(data[c])
             if (data[c].sub && data[c].sub.length > 0)
                 this.parseCategory(data[c].sub);
+        }
         }
     }
 
@@ -134,7 +133,6 @@ class Admin extends React.Component {
     }
 
     handleChange(event) {
-        // console.log(event);
         this.setState({parent_name: event._targetInst.stateNode.innerText});
         this.setState({category_id: event._targetInst.stateNode.id})
     }
@@ -144,7 +142,7 @@ class Admin extends React.Component {
             parentId: this.state.category_id,
             name: this.state.category_name
         };
-        await axios.post(this.ip + '/category', data, {headers: {'token': this.state.headers['token']}})
+        await axios.post(this.ip + '/category', data, { headers: { 'token': this.state.headers['token'] } })
             .then(async (res) => {
                 console.log("======== get category ===========");
                 console.log(res.data);
@@ -156,13 +154,10 @@ class Admin extends React.Component {
                 }
             })
             .catch(err => {
-                this.setState({'errorCat': err.response.data})
+                this.setState({ 'errorCat': err.response.data })
             })
     }
 
-    // changeOnglet (event) {
-    //     document.getElementById("onglets").classList.toggle("onglet");
-    // }
 
     changeDisplay(event, flag = false) {
         let tDisplay = ['command', 'article', 'transport', 'codePromo'];
@@ -170,18 +165,17 @@ class Admin extends React.Component {
 
         let flagChange = false;
         let c = -1;
-	    if (flag === false)
-        {
-        document.getElementById("display" + event.target.id).hidden = false;
-        while (tDisplay[++c]) {
-            if (tDisplay[c] === event.target.id) {
-                document.getElementById(tDisplay[c]).classList.add("onglet");
-                flagChange = true;
-                // console.log(event.target.id);
-            } else {
-                document.getElementById(tDisplay[c]).classList.remove("onglet")
+        if (flag === false) {
+            document.getElementById("display" + event.target.id).hidden = false;
+            while (tDisplay[++c]) {
+                if (tDisplay[c] === event.target.id) {
+                    document.getElementById(tDisplay[c]).classList.add("onglet");
+                    flagChange = true;
+                } else {
+                    document.getElementById(tDisplay[c]).classList.remove("onglet")
+                }
             }
-        }}
+        }
         if (flagChange === true || flag === true) {
             c = -1;
             while (tDisplay[++c]) {
@@ -192,7 +186,6 @@ class Admin extends React.Component {
     }
 
     addItem(id, itemPrice, name, nb) {
-        // console.log(parseInt(document.getElementById(nb).value));
         let items = this.state.addArticle;
         let price = parseInt(document.getElementById(nb).value);
         let c = -1;
@@ -203,28 +196,26 @@ class Admin extends React.Component {
         }
         if (flagAdd === true) {
             items[c].price = parseInt(itemPrice) * price;
-            items[c].number = price;
+            items[c].quantity = price;
         } else
             items.push({
                 id: id,
-                number: price,
+                quantity: price,
                 price: (parseInt(itemPrice) * price),
                 name: name
             });
-        this.setState({addArticle: items});
+        this.setState({ addArticle: items });
         this.updatePrice();
     }
 
     updatePrice() {
         let data = this.state.addArticle;
-        // console.log(data);
         let c = -1;
         let total = 0;
         while (data[++c]) {
             total = total + data[c].price;
-            // console.log(data[c].price);
         }
-        this.setState({commandPrice: total});
+        this.setState({ commandPrice: total });
     }
 
     addStock(i, price) {
@@ -232,6 +223,14 @@ class Admin extends React.Component {
         document.getElementById('total' + i).innerText = (quantity * parseInt(price).toString())
     }
 
+    exel = () => {
+        axios.get(this.ip + "/excel")
+            .then(res => {
+                // console.log(res.data.file);
+                window.location.href = this.ip+"/"+res.data.file;
+            });
+
+    }
     async createExcel() {
         await axios.get(this.ip + '/excel',
             {
@@ -247,70 +246,76 @@ class Admin extends React.Component {
             })
     }
 
+    outputEvent(event) {
+        this.setState({tmpArticle: ''});
+    }
+
     render() {
         return (
             <div>
-                <div style={{marginTop: 130}} id="onglets" onClick={this.changeOnglet}
-                     className="d-flex justify-content-around col-6 ml-auto mr-auto mb-5 ">
+                <div style={{ marginTop: 130 }} id="onglets" onClick={this.changeOnglet}
+                    className="d-flex justify-content-around col-6 ml-auto mr-auto mb-5 ">
                     <button id="article" className="onglet" onClick={this.changeDisplay}>Articles</button>
                     <button id="command" onClick={this.changeDisplay}>Make Command</button>
                     <button id="transport" onClick={this.changeDisplay}>Transport</button>
                     <button id="codePromo" onClick={this.changeDisplay}>Code Promo</button>
+                    <button id="" className="btn btn-primary" onClick={this.exel}>Exel</button>
                 </div>
-                <div id="displaytransport" className="justify-content-center" style={{marginTop: 120}} hidden>
+                <div id="displaytransport" className="justify-content-center" style={{ marginTop: 120 }} hidden>
                     <Transport></Transport>
                 </div>
-                <div id="displaycodePromo" className="pl-5" style={{marginTop: 120}} hidden>
+                <div id="displaycodePromo" className="pl-5" style={{ marginTop: 120 }} hidden>
                     <PromotionCode></PromotionCode>
                 </div>
                 <div id="displaycommand" className="mt-5 mb-5 justify-content-center" hidden={true}>
                     <h2 className="border pt-3 pb-3">{"Total:  " + this.state.commandPrice}</h2>
                     <table className="mb-5 border">
                         <thead>
-                        <tr>
-                            <th>title</th>
-                            <th>Price</th>
-                            <th>stock</th>
-                            <th>Total</th>
-                        </tr>
+                            <tr>
+                                <th>title</th>
+                                <th>Price</th>
+                                <th>stock</th>
+                                <th>Total</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        {this.state.data.map((data, i) =>
-                            <tr key={i}>
-                                <td>
-                                    {data.title}
-                                </td>
-                                <td>
-                                    {data.price}
-                                </td>
-                                <td>
-                                    {data.stock}
-                                </td>
-                                <td>
-                                    <input type="number" defaultValue="0" id={i}
-                                           onChange={this.addStock.bind(this, i, data.price)}/>
-                                </td>
-                                <td>
-                                    <button variant="contained" color="primary"
+                            {this.state.data.map((data, i) =>
+                                <tr key={i}>
+                                    <td>
+                                        {data.title}
+                                    </td>
+                                    <td>
+                                        {data.price}
+                                    </td>
+                                    <td>
+                                        {data.stock}
+                                    </td>
+                                    <td>
+                                        <input type="number" defaultValue="0" id={i}
+                                            onChange={this.addStock.bind(this, i, data.price)} />
+                                    </td>
+                                    <td>
+                                        <button variant="contained" color="primary"
                                             onClick={this.addItem.bind(this, data.id, data.price, data.name, i)}>
-                                        Add
+                                            Add
                                     </button>
-                                </td>
-                                <td>
-                                    <p id={"total" + i}>0</p>
-                                </td>
-                            </tr>
-                        )}
+                                    </td>
+                                    <td>
+                                        <p id={"total" + i}>0</p>
+                                    </td>
+                                </tr>
+                            )}
                         </tbody>
                     </table>
-                    <Button className="w-25 mr-3 ml-auto" variant="contained" color="primary" onClick={this.passCommand}>
+                    <Button className="w-25 mr-3 ml-auto" variant="contained" color="primary"
+                            onClick={this.passCommand}>
                         Pass Command
                     </Button>
                 </div>
                 {this.state.tmpArticle}
                 <div id="displayarticle">
                     <MaterialTable
-                        style={{marginTop: 120}}
+                        style={{ marginTop: 120 }}
                         title="Products"
                         columns={this.state.columns}
                         data={this.state.data}
@@ -325,12 +330,11 @@ class Admin extends React.Component {
                             },
                         ]}
                         onRowClick={
-                            (event) =>
-                            {
-                            	let index = event.target['parentElement']['rowIndex'] - 1;
-                            	let id = this.state.data[index];
-                            	addDetail(id);
-                                this.setState({tmpArticle: <div><ArticleDetail article={id}></ArticleDetail></div>})
+                            (event) => {
+                                let index = event.target['parentElement']['rowIndex'] - 1;
+                                let id = this.state.data[index];
+                                addDetail(id);
+                                this.setState({ tmpArticle: <div id="artR"><ArticleDetail clickHandler={this.outputEvent} article={id}></ArticleDetail></div> })
                             }
                         }
                         editable={{
@@ -338,17 +342,14 @@ class Admin extends React.Component {
                                 new Promise(resolve => {
                                     setTimeout(() => {
                                         resolve();
-                                        // console.log(newData)
                                         const data = this.state.data;
                                         data[data.indexOf(oldData)] = newData;
-                                        // console.log(data[data.indexOf(oldData)] = newData);
                                         const formData = new FormData();
                                         Object.keys(this.state.data[data.indexOf(newData)]).forEach((v) => formData.append(v, this.state.data[data.indexOf(newData)][v]));
-                                        this.setState({data});
+                                        this.setState({ data });
                                         formData.append('category', this.state.data[data.indexOf(newData)].category.id);
-                                        axios.post(this.ip + '/article/' + data[data.indexOf(newData)].id, formData, {headers: this.state.headers})
+                                        axios.post(this.ip + '/article/' + data[data.indexOf(newData)].id, formData, { headers: this.state.headers })
                                             .then(res => {
-                                                // console.log(res.data)
                                             })
                                             .catch(console.log)
                                     }, 600);
@@ -359,14 +360,11 @@ class Admin extends React.Component {
                                         resolve();
                                         const data = this.state.data;
                                         const remain = data.splice(data.indexOf(oldData), 1);
-                                        axios.delete(this.ip + '/article/' + remain[0].id, {headers: this.state.headers})
+                                        axios.delete(this.ip + '/article/' + remain[0].id, { headers: this.state.headers })
                                             .then(res => {
-                                                // console.log("======= delete article =======");
-                                                // console.log(res);
-                                                // console.log("==============================");
                                             })
                                             .catch(console.log)
-                                        this.setState({data});
+                                        this.setState({ data });
                                         // console.log(this.state.category);
                                     }, 600);
                                 }),
@@ -398,7 +396,7 @@ class Admin extends React.Component {
                                 label="Name"
                                 value={this.state.category_name}
                                 onChange={(event) => {
-                                    this.setState({category_name: event.target.value})
+                                    this.setState({ category_name: event.target.value })
                                 }}
                                 margin="normal"
                             />

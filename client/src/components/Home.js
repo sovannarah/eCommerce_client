@@ -12,10 +12,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
 
-// const ip = 'http://10.34.7.68:8001';
-const ip = 'http://127.0.0.1:8000';
-//const ip = 'http://10.34.7.0:8000';
-// const ip = 'http://10.41.176.52:8000';
+const ip = 'http://10.41.176.52:8001';
 
 
 class Home extends React.Component {
@@ -89,13 +86,13 @@ class Home extends React.Component {
                                     <Link to={`/article/${item.id}`}>
                                         <CardActionArea className="h-100">
                                             <div className="ctn-img d-flex">
-                                            {item.images.length > 0 ? 
-                                                <img id="popular-img" className="m-auto"
-                                                src={ip + "/uploads/images/" + item.images[0]} alt=""/>
-                                            :
-                                                <img id="popular-img" className="m-auto"
-                                                src={require("../images/icon/none.png")} alt=""/>    
-                                            }
+                                                {item.images.length > 0 ?
+                                                    <img id="popular-img" className="m-auto"
+                                                         src={ip + "/uploads/images/" + item.images[0]} alt=""/>
+                                                    :
+                                                    <img id="popular-img" className="m-auto"
+                                                         src={require("../images/icon/none.png")} alt=""/>
+                                                }
                                             </div>
                                             <CardContent className="mt-auto">
                                                 <Typography>

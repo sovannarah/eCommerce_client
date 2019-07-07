@@ -3,9 +3,7 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import FacebookLogin from 'react-facebook-login';
 
-// let ip = 'http://10.34.7.68:8001';
-let ip = 'http://127.0.0.1:8000';
-// const ip = 'http://10.34.7.0:8000';
+const ip = 'http://10.41.176.52:8001';
 
 class UserCtrl extends React.Component {
 
@@ -21,10 +19,7 @@ class UserCtrl extends React.Component {
         this.changePassword = this.changePassword.bind(this);
         this.login = this.login.bind(this);
         this.disconnect = this.disconnect.bind(this);
-        // this.ip = 'http://10.34.7.68:8001';
-        this.ip = 'http://127.0.0.1:8000';
-        // this.ip = 'http://10.34.7.0:8000';
-        // this.ip = 'http://10.41.176.52:8000';
+        this.ip = 'http://10.41.176.52:8001';
 
     }
 
@@ -58,15 +53,13 @@ class UserCtrl extends React.Component {
     }
 
     responseFacebook = (response) => {
-        if(response) {
-            for( let [key, value] of Object.entries(response)) {
-                // console.log(key, value);
+        if (response) {
+            for (let [key, value] of Object.entries(response)) {
                 localStorage.setItem(key, value);
                 this.setState({
                     email: response.email,
                     password: 'none'
                 })
-                // window.location.replace('/');
             }
             axios.post(ip + '/register', this.state)
                 .then(res => {
@@ -81,13 +74,12 @@ class UserCtrl extends React.Component {
     };
 
     render() {
-        // console.log(localStorage)
         if (this.props.user || localStorage.getItem("userID")) {
             return (
                 <div id="menu-user" className="d-flex flex-column justify-content-around bg-light open">
-                    {localStorage.getItem('role') === 'ROLE_ADMIN' ? 
+                    {localStorage.getItem('role') === 'ROLE_ADMIN' ?
                         <Link to="/admin">Admin Space</Link>
-                    : ''}
+                        : ''}
                     <Link to="/account">My Account</Link>
                     <button className="btn-mainly ml-auto mr-auto" onClick={this.disconnect}>Disconnect</button>
                 </div>
