@@ -6,7 +6,7 @@ import '../style/css/article.css';
 import Scrapper from './Scrapper';
 import {Alert} from 'react-bootstrap';
 
-const ip = 'http://10.41.176.52:8001';
+const ip = 'http://127.0.0.1:8000';
 
 
 class Article extends React.Component {

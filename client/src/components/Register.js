@@ -4,7 +4,7 @@ import Fab from '@material-ui/core/Fab';
 
 import '../style/css/register.css';
 
-const ip = 'http://10.41.176.52:8001';
+const ip = 'https://127.0.0.1:8000';
 
 
 class Register extends React.Component {

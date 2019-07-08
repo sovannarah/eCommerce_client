@@ -7,7 +7,7 @@ import AddressForm from './Addresse/AddressForm';
 import {FormControl} from 'react-bootstrap';
 import '../style/css/cartPage.css';
 
-const apiArticleURI = 'http://10.41.176.52:8001/article/';
+const apiArticleURI = 'http://127.0.0.1:8000/article/';
 const storageKey = 'cart';
 
 class Cart extends Component {
@@ -23,7 +23,7 @@ class Cart extends Component {
         };
 
         this.displayAdress = this.displayAdress.bind(this);
-        this.ip = "http://10.41.176.52:8001";
+        this.ip = 'https://127.0.0.1:8000';
 
     }
 

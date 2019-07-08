@@ -15,7 +15,7 @@ class CodePromo extends React.Component {
             header: {token: localStorage.getItem('token')},
         };
 
-        this.ip = "http://10.41.176.52:8001";
+        this.ip = 'http://127.0.0.1:8000';
 
         this.sendCode = this.sendCode.bind(this);
         this.addCode = this.addCode.bind(this);

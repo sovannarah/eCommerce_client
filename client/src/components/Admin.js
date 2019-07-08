@@ -11,7 +11,7 @@ class Admin extends React.Component {
             variants: [],
         };
 
-        this.ip = "http://10.41.176.52:8001";
+        this.ip = 'http://127.0.0.1:8000';
 
 
         this.parseCategory = this.parseCategory.bind(this);

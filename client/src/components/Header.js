@@ -32,7 +32,7 @@ class Header extends React.Component {
             getCategory: [],
             adminPanel: null
         };
-        this.ip = 'http://10.41.176.52:8001';
+        this.ip = 'https://127.0.0.1:8000';
 
 
         this.displayScroll = this.displayScroll.bind(this);

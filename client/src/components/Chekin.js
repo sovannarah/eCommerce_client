@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import '../style/css/checkin.css';
 
-let ip = 'http://10.41.176.52:8001';
+const ip = 'https://127.0.0.1:8000';
 
 class Checkin extends React.Component {
 
@@ -17,7 +17,7 @@ class Checkin extends React.Component {
         this.changeEmail = this.changeEmail.bind(this);
         this.changePassword = this.changePassword.bind(this);
         this.login = this.login.bind(this);
-        this.ip = 'http://10.41.176.52:8001';
+        this.ip = 'https://127.0.0.1:8000';
 
     }
 
